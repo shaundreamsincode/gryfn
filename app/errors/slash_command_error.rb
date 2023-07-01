@@ -1,2 +1,0 @@
-class SlashCommandError < StandardError
-end
