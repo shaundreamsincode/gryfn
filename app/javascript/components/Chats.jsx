@@ -9,7 +9,7 @@ const Chats = () => {
     const jwtToken = localStorage.getItem('token');
 
     const onCreateChat = () => {
-        axios.post('/api/v1/chats', {}, { headers: { Authorization: `Bearer ${jwtToken}`} }).then((response) => {
+        ApiService.post('/api/v1/chats').then((response) => {
             const newChats = [...chats]
             newChats.push(response.data)
             setChats(newChats)
