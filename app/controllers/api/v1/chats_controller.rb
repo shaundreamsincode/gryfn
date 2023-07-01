@@ -9,6 +9,7 @@ module Api
         if chat.nil?
           render json: { error: "Chat not found" }, status: :not_found
         else
+          # todo - possibly filter out system messages here...?
           render json: chat.to_json(include: [:messages])
         end
       end
