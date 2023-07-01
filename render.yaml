@@ -1,18 +1,18 @@
 databases:
-  - name: rootly_project_production
-    databaseName: rootly_project_production
+  - name: docbot_production
+    databaseName: docbot_production
     user: shaun
 
 services:
   - type: web
-    name: rootly_challenge
+    name: docbot
     env: ruby
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: rootly_challenge_production
+          name: docbot_production
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
