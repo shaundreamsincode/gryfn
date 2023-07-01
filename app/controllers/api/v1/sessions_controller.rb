@@ -1,0 +1,31 @@
+module Api
+  module V1
+    class SessionsController < ApplicationController
+      def create
+        user = User.find_by(email: params[:email])
+        if user&.authenticate(params[:password])
+          token = user.generate_jwt
+          render json: { token: token }
+        else
+          render json: { error: 'Invalid email or password' }, status: :unauthorized
+        end
+      end
+
+      def verify_token
+        token = request.headers['Authorization']&.split&.last
+        if token
+          begin
+            JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
+            # Additional validation checks if necessary
+
+            render json: { valid: true }, status: :ok
+          rescue JWT::DecodeError, JWT::ExpiredSignature
+            render json: { valid: false }, status: :unauthorized
+          end
+        else
+          render json: { valid: false }, status: :unauthorized
+        end
+      end
+    end
+  end
+end

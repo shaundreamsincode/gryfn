@@ -49,6 +49,10 @@ gem 'slack-ruby-client'
 # for .env
 gem 'dotenv-rails'
 
+# for encryption
+gem 'bcrypt', '~> 3.1.7'
+gem 'jwt'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
