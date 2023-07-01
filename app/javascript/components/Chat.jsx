@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios'
 
-const Chat = ({ match }) => {
+const Chat = () => {
     debugger
     // todo - use token instead...?
     const currentUrl = window.location.href
