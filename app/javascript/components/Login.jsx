@@ -39,6 +39,10 @@ const Login = () => {
             });
     };
 
+    const handleSignUp = () => {
+        navigate('/signup')
+    }
+
     useEffect(() => {
         checkTokenValidity()
     }, [jwtToken])
@@ -50,14 +54,17 @@ const Login = () => {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-            />
+            /> <br/>
             <input
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-            />
+            /><br/>
             <button onClick={handleLogin}>Login</button>
+            <br/>
+
+            <button onClick={handleSignUp}>Sign up</button>
         </div>
     );
 };

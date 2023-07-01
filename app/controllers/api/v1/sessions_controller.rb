@@ -16,7 +16,9 @@ module Api
         token = request.headers['Authorization']&.split&.last
         if token
           begin
-            JWT.decode(token, ENV['SECRET_KEY_BASE'], true, algorithm: 'HS256')
+            foo = JWT.decode(token, ENV['SECRET_KEY_BASE'], true, algorithm: 'HS256')
+            puts "foo #{foo}"
+
             # Additional validation checks if necessary
 
             render json: { valid: true }, status: :ok

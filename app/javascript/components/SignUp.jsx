@@ -58,35 +58,35 @@ const SignUp = () => {
                 placeholder="First Name"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-            />
+            /> <br/>
 
             <input
                 type="last_name"
                 placeholder="Last Name"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-            />
+            /> <br/>
 
             <input
                 type="email"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-            />
+            /> <br/>
 
             <input
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-            />
+            /> <br/>
 
             <input
                 type="password_confirmation"
                 placeholder="Password Confirmation"
                 value={passwordConfirmation}
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
-            />
+            /> <br/>
 
             <button onClick={handleSubmit}>Submit</button>
         </div>

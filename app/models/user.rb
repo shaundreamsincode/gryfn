@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, on: :create
 
+  has_many :chats
+
   def generate_jwt
     JWT.encode({ id: id, email: email }, ENV['SECRET_KEY_BASE'], 'HS256')
   end

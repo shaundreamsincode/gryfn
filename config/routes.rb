@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :chats, only: %i(index)
+      resources :chats, only: %i(index create)
       resources :users, only: %i(create)
       resources :sessions, only: %i(create)
 

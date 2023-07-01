@@ -4,12 +4,21 @@ import axios from 'axios'
 const Chats = () => {
     const [loading, setLoading] = useState(true)
     const [chats, setChats] = useState([])
+    const jwtToken = localStorage.getItem('token');
+
+    const onCreateChat = () => {
+        axios.post('/api/v1/chats', {}, { headers: { Authorization: `Bearer ${jwtToken}`} }).then((response) => {
+            debugger
+            const newChats = [...chats]
+            newChats.push(response.data)
+            setChats(newChats)
+        })
+    }
 
     useEffect(() => {
         const url = '/api/v1/chats'
 
-        axios.get(url).then((response) => {
-            debugger
+        axios.get(url, { headers: { Authorization: `Bearer ${jwtToken}` } }).then((response) => {
             setChats(response.data)
             setLoading(false)
         })
@@ -26,10 +35,12 @@ const Chats = () => {
             }
 
             {
-                chats.length > 1 && chats.map((chat) => {
-                    return <div> chat { chat.id } </div>
+                chats.length > 0 && chats.map((chat) => {
+                    return <div> chat { chat.id } (user id: { chat.user_id } ) </div>
                 })
             }
+
+            <button onClick={onCreateChat}>Create A Chat</button>
         </div>
     )
 }
