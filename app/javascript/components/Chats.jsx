@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import axios from 'axios'
 
 const Chats = () => {
@@ -35,10 +36,18 @@ const Chats = () => {
             }
 
             {
-                chats.length > 0 && chats.map((chat) => {
-                    return <div> chat { chat.id } (user id: { chat.user_id } ) </div>
-                })
+                chats.length > 0 && chats.map(chat => (
+                    <div key={chat.id}>
+                        <Link to={`/chats/${chat.id}`}>Chat {chat.id}</Link>
+                    </div>
+                ))
             }
+
+            {/*{*/}
+            {/*    chats.length > 0 && chats.map((chat) => {*/}
+            {/*        return <div> chat { chat.id } (user id: { chat.user_id } ) </div>*/}
+            {/*    })*/}
+            {/*}*/}
 
             <button onClick={onCreateChat}>Create A Chat</button>
         </div>
