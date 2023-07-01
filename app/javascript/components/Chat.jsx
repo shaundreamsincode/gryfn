@@ -55,7 +55,7 @@ const Chat = () => {
 
             {
                 chat && <div>
-                    <Messages chat={chat} sendMessage={onSendMessage}/>
+                    <Messages messages={chat.messages} sendMessage={onSendMessage}/>
                 </div>
             }
         </div>

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 
 const Messages = ( props ) => {
     const [content, setContent] = useState('')
-    const { chat, sendMessage } = props;
-    const messages = chat.messages;
+    const { messages, sendMessage } = props;
+    const viewableMessages = messages.filter(message => message.role !== "system");
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -13,11 +13,7 @@ const Messages = ( props ) => {
 
     return(<div>
         {
-            messages.length === 0 && <div>No messages</div>
-        }
-
-        {
-            messages.length > 0 && messages.map((message) => {
+            viewableMessages.map((message) => {
                     return(
                         <div key={message.id}>
                             { message.role }: { message.content }

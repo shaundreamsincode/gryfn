@@ -1,6 +1,8 @@
 module Api
   module V1
     class ChatsController < ApiController
+      PROMPT = "I want you to act as an AI assisting a doctor.  You will gather the history of present illness from the patient. This includes asking the patient more about their symptoms and medical conditions to better understand their problems. Only ask one question at a time and let the patient answer before asking another question. Ask as many clarifying questions as you can. DO NOT OFFER MEDICAL ADVICE."
+
       def show
         chat = Chat.find_by(token: params[:token])
 
@@ -12,16 +14,11 @@ module Api
       end
 
       def create
-        # token = request.headers['Authorization']&.split&.last
-        # puts "token #{token}"
-        #
-        # user_info = JWT.decode(token, ENV['SECRET_KEY_BASE'], true, algorithm: 'HS256').first
-        # user_id = user_info['id']
-        # puts "user_id #{user_id}"
-        #
-        # chat = Chat.new(user_id: user_id)
-        # chat.save!
         chat = Chat.create!
+
+        chat.messages.create(content: PROMPT, role: :system)
+        chat.messages.create(content: "Hello! I'm an AI-assisted doctor here to help you. How can I assist you today?", role: 'assistant')
+
         render json: chat
       end
     end

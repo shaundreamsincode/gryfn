@@ -5,7 +5,7 @@ class CreateMessage
     ActiveRecord::Base.transaction do
       chat = Chat.find_by!(token: context.chat_token)
 
-      user_message = chat.messages.create(
+      user_message = chat.messages.create!(
         content: context.message_content,
         role: :user
       )
@@ -24,7 +24,7 @@ class CreateMessage
         }
       )
 
-      assistant_message = chat.messages.create(
+      assistant_message = chat.messages.create!(
         role: "assistant",
         content: response.dig("choices", 0, "message", "content")
       )
