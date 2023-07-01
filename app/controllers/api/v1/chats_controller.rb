@@ -16,7 +16,7 @@ module Api
       def create
         chat = Chat.create!
 
-        chat.messages.create(content: PROMPT, role: :system)
+        chat.messages.create(content: PROMPT, role: 'system')
         chat.messages.create(content: "Hello! I'm an AI-assisted doctor here to help you. How can I assist you today?", role: 'assistant')
 
         render json: chat.to_json(include: [:messages])
