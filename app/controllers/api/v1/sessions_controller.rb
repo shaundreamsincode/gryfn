@@ -16,7 +16,7 @@ module Api
         token = request.headers['Authorization']&.split&.last
         if token
           begin
-            JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
+            JWT.decode(token, ENV['SECRET_KEY_BASE'], true, algorithm: 'HS256')
             # Additional validation checks if necessary
 
             render json: { valid: true }, status: :ok
