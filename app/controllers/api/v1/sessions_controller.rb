@@ -12,6 +12,7 @@ module Api
       end
 
       def verify_token
+        puts "verifying..."
         token = request.headers['Authorization']&.split&.last
         if token
           begin
