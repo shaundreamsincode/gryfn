@@ -1,16 +1,7 @@
 import React, { Fragment } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import ProtectedRoute from "../components/ProtectedRoute";
-import PrivateRoute from "../components/PrivateRoute";
-
-// Public Routes
-import Login from "../components/Login";
-import SignUp from "../components/SignUp";
-
-// Private Routes
 import Home from "../components/Home";
-import Chats from "../components/Chats";
 import Chat from "../components/Chat";
 
 export default (
