@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 
 const Messages = ( props ) => {
     const [content, setContent] = useState('')
-    const { messages, sendMessage } = props;
-    const viewableMessages = messages.filter(message => message.role !== "system");
+    const { chat, sendMessage } = props;
+
+    debugger
+    const viewableMessages = (chat.messages).filter(message => message.role !== "system");
 
     const handleSubmit = (event) => {
         event.preventDefault();
