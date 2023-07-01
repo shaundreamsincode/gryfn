@@ -16,6 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_01_204916) do
 
   create_table "chats", force: :cascade do |t|
     t.bigint "user_id"
+    t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_chats_on_user_id"

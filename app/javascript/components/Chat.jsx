@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 const Chat = () => {
     const [chat, setChat] = useState(null)
+    const [errorMessage, setErrorMessage] = useState(null)
 
     const currentUrl = window.location.href
-    const urlId = currentUrl.split("/")[4]
-    const chatIsNew = urlId === 'new'
+    const urlToken = currentUrl.split("/")[4]
+    const chatIsNew = urlToken === 'new'
 
     const navigate = useNavigate()
 
@@ -17,15 +18,20 @@ const Chat = () => {
                 setChat(response.data)
             })
         } else {
-            ApiService.get(`/api/v1/chat/${urlId}`).then((response) => {
+            ApiService.get(`/api/v1/chats/${urlToken}`).then((response) => {
                 setChat(response.data)
+            }).catch((error) => {
+                setErrorMessage(error.response.data.error)
             })
         }
-    }, [''])
-    // todo - use token instead...?
+    }, [])
 
     if (chat && chatIsNew) {
-        navigate(`/chats/${chat.id}`)
+        navigate(`/chats/${chat.token}`)
+    }
+
+    if (errorMessage) {
+        return (<div>{ errorMessage }</div>)
     }
 
     return(

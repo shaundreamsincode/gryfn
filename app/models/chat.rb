@@ -1,6 +1,6 @@
 class Chat < ApplicationRecord
-  belongs_to :user
+  has_secure_token
+
+  belongs_to :user, optional: :true
   has_many :messages
 end
-# chat = Chat.new
-# chat.messages
