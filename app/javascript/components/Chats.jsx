@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import axios from 'axios'
+import ApiService from "../services/ApiService";
 
 const Chats = () => {
     const [loading, setLoading] = useState(true)
@@ -9,7 +10,6 @@ const Chats = () => {
 
     const onCreateChat = () => {
         axios.post('/api/v1/chats', {}, { headers: { Authorization: `Bearer ${jwtToken}`} }).then((response) => {
-            debugger
             const newChats = [...chats]
             newChats.push(response.data)
             setChats(newChats)
@@ -17,9 +17,7 @@ const Chats = () => {
     }
 
     useEffect(() => {
-        const url = '/api/v1/chats'
-
-        axios.get(url, { headers: { Authorization: `Bearer ${jwtToken}` } }).then((response) => {
+        ApiService.get('/api/v1/chats').then((response) => {
             setChats(response.data)
             setLoading(false)
         })
