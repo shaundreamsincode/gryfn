@@ -1,6 +1,6 @@
 module Api
   module V1
-    class UsersController < ApplicationController
+    class UsersController < ApiController
       def create
         puts "params: #{params.inspect}"
         puts "~~"

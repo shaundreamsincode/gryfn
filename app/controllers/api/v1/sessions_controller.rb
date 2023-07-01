@@ -1,6 +1,6 @@
 module Api
   module V1
-    class SessionsController < ApplicationController
+    class SessionsController < ApiController
       def create
         user = User.find_by(email: params[:email])
         if user&.authenticate(params[:password])
