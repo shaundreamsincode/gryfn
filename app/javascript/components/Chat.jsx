@@ -16,7 +16,10 @@ const Chat = () => {
     const onSendMessage = (messageContent) => {
         ApiService.post(`/api/v1/chats/${chat.token}/messages`, { content:  messageContent }).then((response) => {
             const updatedChat = { ...chat }
-            updatedChat.messages.push(response.data)
+
+            updatedChat.messages.push(response.data.user_message)
+            updatedChat.messages.push(response.data.assistant_message)
+
             setChat(updatedChat)
         });
     };
