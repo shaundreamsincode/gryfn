@@ -2,17 +2,19 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :chats, only: [], param: :token do
+        resources :messages, only: %i(create)
+
         collection do
           post '', action: :create
         end
+
         member do
           get '', action: :show
         end
       end
 
-      # resources :chats, only: %i(create show)
-      resources :users, only: %i(create)
-      resources :sessions, only: %i(create)
+      # resources :users, only: %i(create)
+      # resources :sessions, only: %i(create)
 
       get 'verify_token', to: 'sessions#verify_token'
     end

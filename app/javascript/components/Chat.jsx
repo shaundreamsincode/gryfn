@@ -13,9 +13,13 @@ const Chat = () => {
 
     const navigate = useNavigate()
 
-    const onSendMessage = () => {
-
-    }
+    const onSendMessage = (messageContent) => {
+        ApiService.post(`/api/v1/chats/${chat.token}/messages`, { content:  messageContent }).then((response) => {
+            const updatedChat = { ...chat }
+            updatedChat.messages.push(response.data)
+            setChat(updatedChat)
+        });
+    };
 
     useEffect(() => {
         if (chatIsNew) {
@@ -48,8 +52,6 @@ const Chat = () => {
 
             {
                 chat && <div>
-                    ID { chat.id }
-
                     <Messages chat={chat} sendMessage={onSendMessage}/>
                 </div>
             }

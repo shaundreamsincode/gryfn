@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 
 const Messages = ( props ) => {
+    const [content, setContent] = useState('')
     const { chat, sendMessage } = props;
     const messages = chat.messages;
-    debugger
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        sendMessage(content);
+        setContent(""); // Clear the input after sending the message
+    };
 
     return(<div>
         {
@@ -12,9 +18,22 @@ const Messages = ( props ) => {
 
         {
             messages.length > 0 && messages.map((message) => {
-                    return(<div> { message.id } </div>)
+                    return(
+                        <div key={message.id}>
+                            { message.role }: { message.content }
+                        </div>
+                    )
                 })
         }
+
+        <form onSubmit={handleSubmit}>
+            <textarea
+                value={content}
+                onChange={(event) => setContent(event.target.value)}
+                placeholder="Type your message..."
+            />
+            <button type="submit">Send</button>
+        </form>
     </div>)
 }
 
