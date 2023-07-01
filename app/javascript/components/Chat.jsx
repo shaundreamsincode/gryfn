@@ -1,16 +1,43 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios'
+import ApiService from "../services/ApiService";
+import { useNavigate } from "react-router-dom";
 
 const Chat = () => {
-    debugger
-    // todo - use token instead...?
+    const [chat, setChat] = useState(null)
+
     const currentUrl = window.location.href
-    const chatId = currentUrl.split("/")[4]
+    const urlId = currentUrl.split("/")[4]
+    const chatIsNew = urlId === 'new'
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (chatIsNew) {
+            ApiService.post('/api/v1/chats').then((response) => {
+                setChat(response.data)
+            })
+        } else {
+            ApiService.get(`/api/v1/chat/${urlId}`).then((response) => {
+                setChat(response.data)
+            })
+        }
+    }, [''])
+    // todo - use token instead...?
+
+    if (chat && chatIsNew) {
+        navigate(`/chats/${chat.id}`)
+    }
 
     return(
         <div>
             <h2>Chat</h2>
-            <p>ID { chatId }</p>
+            {
+                !chat && <p>Loading...</p>
+            }
+
+            {
+                chat && <p>ID { chat.id }</p>
+            }
         </div>
     )
 }

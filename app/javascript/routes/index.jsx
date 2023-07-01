@@ -17,6 +17,7 @@ export default (
     <Router>
         <Fragment>
             <Routes>
+
                 <Route exact path='/' element={<PrivateRoute/>}>
                     <Route exact path='/' element={<Home/>}/>
                 </Route>
