@@ -7,7 +7,7 @@ module Api
         if chat.nil?
           render json: { error: "Chat not found" }, status: :not_found
         else
-          render json: chat
+          render json: chat.to_json(include: [:messages])
         end
       end
 

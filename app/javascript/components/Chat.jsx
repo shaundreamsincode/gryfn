@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ApiService from "../services/ApiService";
 import { useNavigate } from "react-router-dom";
+import Messages from "./Messages";
 
 const Chat = () => {
     const [chat, setChat] = useState(null)
@@ -11,6 +12,10 @@ const Chat = () => {
     const chatIsNew = urlToken === 'new'
 
     const navigate = useNavigate()
+
+    const onSendMessage = () => {
+
+    }
 
     useEffect(() => {
         if (chatIsNew) {
@@ -42,7 +47,11 @@ const Chat = () => {
             }
 
             {
-                chat && <p>ID { chat.id }</p>
+                chat && <div>
+                    ID { chat.id }
+
+                    <Messages chat={chat} sendMessage={onSendMessage}/>
+                </div>
             }
         </div>
     )
