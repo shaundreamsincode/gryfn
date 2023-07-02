@@ -8,6 +8,8 @@ module Api
 
         if chat.nil?
           render json: { error: "Chat not found" }, status: :not_found
+        elsif chat.closed_at.present?
+          render json: { error: "Chat has been closed" }, status: :unprocessable_entity
         else
           # todo - possibly filter out system messages here...?
           render json: chat.to_json(include: [:messages])
@@ -21,6 +23,17 @@ module Api
         chat.messages.create!(content: "Hello! I'm an AI-assisted doctor here to help you. How can I assist you today?", role: "assistant")
 
         render json: chat.to_json(include: [:messages])
+      end
+
+      def close
+        chat = Chat.find_by!(token: params[:token])
+
+        if chat.closed_at.present?
+          render json: { error: "Chat already closed" }, status: :unprocessable_entity
+        else
+          chat.update!(closed_at: Time.zone.now)
+          render json: chat.to_json(include: [:messages])
+        end
       end
     end
   end

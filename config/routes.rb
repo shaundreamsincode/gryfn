@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :chats, only: [], param: :token do
         resources :messages, only: %i(create)
+        resources :summaries, only: %i(create)
 
         collection do
           post '', action: :create
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
       # resources :users, only: %i(create)
       # resources :sessions, only: %i(create)
 
+      post 'chats/:token/close', to: 'chats#close'
       get 'verify_token', to: 'sessions#verify_token'
     end
   end

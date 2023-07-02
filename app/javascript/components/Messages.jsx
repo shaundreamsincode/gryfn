@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const Messages = ( props ) => {
+    const { chat, sendMessage, closeChat } = props;
     const [content, setContent] = useState('')
-    const { chat, sendMessage } = props;
 
-    debugger
     const viewableMessages = (chat.messages).filter(message => message.role !== "system");
 
     const handleSubmit = (event) => {
@@ -29,9 +28,13 @@ const Messages = ( props ) => {
                 value={content}
                 onChange={(event) => setContent(event.target.value)}
                 placeholder="Type your message..."
-            />
+            /> <br/>
             <button type="submit">Send</button>
         </form>
+
+        <br/>
+        <br/>
+        <button onClick={closeChat}>Close Chat</button>
     </div>)
 }
 

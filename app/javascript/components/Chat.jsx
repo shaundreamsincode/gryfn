@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import ApiService from "../services/ApiService";
 import { useNavigate } from "react-router-dom";
 import Messages from "./Messages";
+import ClosedChat from "./ClosedChat";
 
 const Chat = () => {
     const [chat, setChat] = useState(null)
     const [errorMessage, setErrorMessage] = useState(null)
+    const [userClosedChat, setUserClosedChat] = useState(null)
 
     const currentUrl = window.location.href
     const urlToken = currentUrl.split("/")[4]
@@ -24,6 +26,12 @@ const Chat = () => {
         });
     };
 
+    const onCloseChat = () => {
+        ApiService.post(`/api/v1/chats/${chat.token}/close`).then((response) => {
+            setUserClosedChat(true)
+        })
+    }
+
     useEffect(() => {
         if (chatIsNew) {
             ApiService.post('/api/v1/chats').then((response) => {
@@ -38,12 +46,16 @@ const Chat = () => {
         }
     }, [])
 
+    if (errorMessage) {
+        return (<div>{ errorMessage }</div>)
+    }
+
     if (chat && chatIsNew) {
         navigate(`/chats/${chat.token}`)
     }
 
-    if (errorMessage) {
-        return (<div>{ errorMessage }</div>)
+    if (chat && userClosedChat) {
+        return(<ClosedChat chat={chat}/>)
     }
 
     return(
@@ -55,7 +67,7 @@ const Chat = () => {
 
             {
                 chat && <div>
-                    <Messages chat={chat} sendMessage={onSendMessage}/>
+                    <Messages chat={chat} sendMessage={onSendMessage} closeChat={onCloseChat}/>
                 </div>
             }
         </div>
