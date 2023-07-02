@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Messages = ( props ) => {
-    const { chat, sendMessage, closeChat } = props;
+    const { chat, sendMessageLoading, sendMessage, closeChat } = props;
     const [content, setContent] = useState('')
 
     const viewableMessages = (chat.messages).filter(message => message.role !== "system");
@@ -29,7 +29,9 @@ const Messages = ( props ) => {
                 onChange={(event) => setContent(event.target.value)}
                 placeholder="Type your message..."
             /> <br/>
-            <button type="submit">Send</button>
+            <button type="submit" disabled={sendMessageLoading}>
+                { sendMessageLoading ? 'Loading' : 'Send' }
+            </button>
         </form>
 
         <br/>

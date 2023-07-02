@@ -8,6 +8,7 @@ const Chat = () => {
     const [chat, setChat] = useState(null)
     const [errorMessage, setErrorMessage] = useState(null)
     const [userClosedChat, setUserClosedChat] = useState(null)
+    const [sendMessageLoading, setSendMessageLoading] = useState(false)
 
     const currentUrl = window.location.href
     const urlToken = currentUrl.split("/")[4]
@@ -16,6 +17,7 @@ const Chat = () => {
     const navigate = useNavigate()
 
     const onSendMessage = (messageContent) => {
+        setSendMessageLoading(true)
         ApiService.post(`/api/v1/chats/${chat.token}/messages`, { content:  messageContent }).then((response) => {
             const updatedChat = { ...chat }
 
@@ -23,6 +25,7 @@ const Chat = () => {
             updatedChat.messages.push(response.data.assistant_message)
 
             setChat(updatedChat)
+            setSendMessageLoading(false)
         });
     };
 
@@ -67,7 +70,7 @@ const Chat = () => {
 
             {
                 chat && <div>
-                    <Messages chat={chat} sendMessage={onSendMessage} closeChat={onCloseChat}/>
+                    <Messages chat={chat} sendMessageLoading={sendMessageLoading} sendMessage={onSendMessage} closeChat={onCloseChat}/>
                 </div>
             }
         </div>
