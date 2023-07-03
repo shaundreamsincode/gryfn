@@ -28,7 +28,7 @@ const Chat = () => {
             const updatedChat = { ...chat }
 
             // remove the pending chat items
-            updatedChat.messages = updatedChat.messages.slice(0,  updatedChat.messages.length - 2)
+            updatedChat.messages = updatedChat.messages.slice(0, updatedChat.messages.length - 2)
 
             // add in the messages hydrated from the FE
             updatedChat.messages.push(response.data.user_message)
