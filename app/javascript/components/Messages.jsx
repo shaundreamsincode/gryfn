@@ -21,6 +21,7 @@ const Messages = (props) => {
                         viewableMessages.map((message) => {
                             const displayedRole = message.role === 'user' ? 'PATIENT' : 'DOCTOR'
                             const displayedContent = `${displayedRole}: ${message.content}`
+                            const backgroundColor = message.role === 'user' ? '#ffffff' : '#B8B8B8'
                             return(
                                 <ListItem key={message.id}>
                                     <Grid container>
@@ -30,9 +31,9 @@ const Messages = (props) => {
                                                 style={
                                                     {
                                                         whiteSpace: 'pre-line',
-                                                        border: '1px solid grey',
+                                                        backgroundColor: backgroundColor,
                                                         borderRadius: '5px',
-                                                        padding: '5px'
+                                                        padding: '10px'
                                                     }
                                                 }
                                             >
