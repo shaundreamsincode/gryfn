@@ -24,13 +24,10 @@ class GenerateChatSummary
 
   private def build_summary_chat_prompt(chat)
     combined_msgs = combine_messages(chat)
-
-    prompt = "please summarize the chat in the format of a history of present illness with bullet points: #{combined_msgs}"
-    prompt += '. Make sure to write this summary in Spanish.' if chat.language == 'es'
-
-    prompt
+    prompt = Prompts::SUMMARY_PROMPT
+    prompt += ' Make sure to write this summary in Spanish.' if chat.language == 'es'
+    prompt + " #{combined_msgs}"
   end
-
 
   private def combine_messages(chat)
     messages_content = ''

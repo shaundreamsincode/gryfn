@@ -11,7 +11,7 @@ class CreateChat
   end
 
   private def system_prompt
-    prompt = "I want you to act as an AI assisting a doctor.  You will gather the history of present illness from the patient. This includes asking the patient more about their symptoms and medical conditions to better understand their problems. Only ask one question at a time and let the patient answer before asking another question. Ask as many clarifying questions as you can. DO NOT OFFER MEDICAL ADVICE."
+    prompt = Prompts::INITIAL_PROMPT
 
     if context.language == 'es'
       prompt += ". The patient speaks Spanish so make sure you only speak spanish to them."
