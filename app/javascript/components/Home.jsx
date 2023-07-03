@@ -7,10 +7,6 @@ import { Button, Typography } from '@material-ui/core';
 const Home = () => {
     const navigate = useNavigate()
 
-    const onNewChatClick = () => {
-        navigate('/chats/new')
-    }
-
     return(
         <>
             <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
@@ -23,7 +19,7 @@ const Home = () => {
             </Typography>
 
             <Typography color="text.secondary" align="center" component="h1" variant="h4" gutterBottom>
-                <Button onClick={onNewChatClick} color="primary">Create a New Chat</Button>
+                <Button onClick={() => navigate('/chats/new')} color="primary">Create a New Chat</Button>
             </Typography>
         </>
     )

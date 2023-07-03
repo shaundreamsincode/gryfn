@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import ApiService from "../services/ApiService";
 import { useNavigate } from "react-router-dom";
 import Messages from "./Messages";
-import ClosedChat from "./ClosedChat";
-import {Typography, Divider, CardContent} from "@material-ui/core";
+import ChatSummary from "./ChatSummary";
+import {Typography, Divider, Button} from "@material-ui/core";
 
 const Chat = () => {
     const [chat, setChat] = useState(null)
@@ -61,9 +61,15 @@ const Chat = () => {
 
     if (errorMessage) {
         return (
-            <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
-                { errorMessage }
-            </Typography>
+            <>
+                <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
+                    { errorMessage }
+                </Typography>
+
+                <Button onClick={() => navigate('/')} style={{ marginTop: '10px' }} align="right" color="primary">
+                    Home
+                </Button>
+            </>
 
         )
     }
@@ -73,15 +79,11 @@ const Chat = () => {
     }
 
     if (chat && userClosedChat) {
-        return(<ClosedChat chat={chat}/>)
+        return(<ChatSummary chat={chat}/>)
     }
 
     return(
         <>
-            <Typography variant="body2" color="text.secondary" align="center" gutterBottom>
-                Please describe your symptoms to DocBot. At the end of your chat, click “finish” and a summary of your conversation will be generated. You can send this information to your doctor for them to review.
-            </Typography>
-            <Divider/>
             {
                 !chat && <Typography component="h1" variant="h4" align="center">
                     Loading...
@@ -90,6 +92,11 @@ const Chat = () => {
 
             {
                 chat && <div>
+                    <Typography variant="body2" color="text.secondary" align="center" gutterBottom>
+                        Please describe your symptoms to DocBot. At the end of your chat, click “finish” and a
+                        summary of your conversation will be generated. You can send this information to your doctor for them to review.
+                    </Typography>
+                    <Divider/>
                     <Messages chat={chat} sendMessageLoading={sendMessageLoading} sendMessage={onSendMessage} closeChat={onCloseChat}/>
                 </div>
             }

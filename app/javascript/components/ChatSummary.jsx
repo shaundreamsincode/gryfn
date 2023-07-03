@@ -1,14 +1,17 @@
 import React, { useState, useRef } from "react";
 import ApiService from "../services/ApiService";
 import { Button, Typography, Snackbar } from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
 
-const ClosedChat = (props) => {
+const ChatSummary = (props) => {
     const { chat } = props;
+
     const [summary, setSummary] = useState(null);
     const [summaryLoading, setSummaryLoading] = useState(false);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
 
     const summaryContentRef = useRef(null);
+    const navigate = useNavigate()
 
     const onGenerateSummary = () => {
         setSummaryLoading(true);
@@ -21,6 +24,15 @@ const ClosedChat = (props) => {
         );
     };
 
+    const onCopySummary = () => {
+        const summaryContent = summaryContentRef.current.innerText;
+        navigator.clipboard.writeText(summaryContent).then(() => {
+            console.log("Summary copied to clipboard!");
+        });
+
+        setSnackbarOpen(true)
+    };
+
     const getGenerateSummaryButtonText = () => {
         if (summaryLoading) {
             return "Loading";
@@ -29,15 +41,6 @@ const ClosedChat = (props) => {
         } else {
             return "Generate Summary";
         }
-    };
-
-    const onCopySummary = () => {
-        const summaryContent = summaryContentRef.current.innerText;
-        navigator.clipboard.writeText(summaryContent).then(() => {
-            console.log("Summary content copied to clipboard!");
-        });
-
-        setSnackbarOpen(true)
     };
 
     return (
@@ -79,12 +82,15 @@ const ClosedChat = (props) => {
                         open={snackbarOpen}
                         autoHideDuration={6000}
                         onClose={() => setSnackbarOpen(false)}
-                        message="Text Copied to Clipboard!"
+                        message="Summary Copied to Clipboard!"
                     />
                 </>
             )}
+            <Button onClick={() => navigate('/')} style={{ marginTop: '10px' }} align="right" color="primary">
+                Home
+            </Button>
         </>
     );
 };
 
-export default ClosedChat;
+export default ChatSummary;

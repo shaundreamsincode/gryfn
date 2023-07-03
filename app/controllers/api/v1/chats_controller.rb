@@ -7,9 +7,9 @@ module Api
         chat = Chat.find_by(token: params[:token])
 
         if chat.nil?
-          render json: { error: "Chat not found" }, status: :not_found
+          render json: { error: "Chat not found." }, status: :not_found
         elsif chat.closed_at.present?
-          render json: { error: "Chat has been closed" }, status: :unprocessable_entity
+          render json: { error: "Chat has been closed." }, status: :unprocessable_entity
         else
           # todo - possibly filter out system messages here...?
           render json: chat.to_json(include: [:messages])
