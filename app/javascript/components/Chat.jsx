@@ -63,7 +63,6 @@ const Chat = () => {
 
     return(
         <div>
-            <h2>Chat</h2>
             {
                 !chat && <p>Loading...</p>
             }

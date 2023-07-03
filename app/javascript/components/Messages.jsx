@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { Grid, List, ListItem, ListItemText, Divider, TextField, Paper, Button } from '@material-ui/core';
 
-const Messages = ( props ) => {
+const Messages = (props) => {
     const { chat, sendMessageLoading, sendMessage, closeChat } = props;
     const [content, setContent] = useState('')
 
@@ -12,32 +13,43 @@ const Messages = ( props ) => {
         setContent(""); // Clear the input after sending the message
     };
 
-    return(<div>
-        {
-            viewableMessages.map((message) => {
-                    return(
-                        <div key={message.id}>
-                            { message.role }: { message.content }
-                        </div>
-                    )
-                })
-        }
-
-        <form onSubmit={handleSubmit}>
-            <textarea
-                value={content}
-                onChange={(event) => setContent(event.target.value)}
-                placeholder="Type your message..."
-            /> <br/>
-            <button type="submit" disabled={sendMessageLoading}>
-                { sendMessageLoading ? 'Loading' : 'Send' }
-            </button>
-        </form>
-
-        <br/>
-        <br/>
-        <button onClick={closeChat}>Close Chat</button>
-    </div>)
+    return(<Grid container>
+        <Grid item xs={12}>
+            <Paper style={{maxHeight: 600, width: '100%', overflow: 'auto'}}>
+                <List className='messageArea'>
+                    {
+                        viewableMessages.map((message) => {
+                            const displayedRole = message.role === 'user' ? 'PATIENT' : 'DOCTOR'
+                            const listItemContent = `${displayedRole}: ${message.content}`
+                            return(
+                                <ListItem key={message.id}>
+                                    <Grid container>
+                                        <Grid item xs={12}>
+                                            <ListItemText primary={ listItemContent }/>
+                                        </Grid>
+                                    </Grid>
+                                </ListItem>
+                            )
+                        })
+                    }
+                </List>
+            </Paper>
+            <Divider />
+            <Grid container style={{padding: '20px'}}>
+                <Grid item xs={11}>
+                    <TextField value={content} onChange={(event) => setContent(event.target.value)} id="outlined-basic-email" label="Type Something" fullWidth />
+                </Grid>
+                <Grid xs={1} align="right">
+                    <Button onClick={handleSubmit} disabled={ sendMessageLoading || content.length === 0 } color="primary">
+                        { sendMessageLoading ? 'Loading' : 'Send' }
+                    </Button>
+                </Grid>
+                <Grid xs={11} style={ { marginTop: "30px" } } align="left">
+                    <Button onClick={closeChat} color="primary">Close Chat</Button>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>)
 }
 
 export default Messages
