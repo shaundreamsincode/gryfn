@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import ApiService from "../services/ApiService";
 import LanguageService from "../services/LanguageService";
-import { Button, Typography, Snackbar } from "@material-ui/core";
+import { Button, Typography, Snackbar, Toolbar } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 
 const ChatSummary = (props) => {
@@ -76,10 +76,6 @@ const ChatSummary = (props) => {
                             ))}
                         </div>
                     </Typography>
-
-                    <Button onClick={onCopySummary} style={{ marginTop: '10px' }} align="right" color="primary">
-                        { LanguageService.translate('copySummaryButton') }
-                    </Button>
                     <Snackbar
                         open={snackbarOpen}
                         autoHideDuration={6000}
@@ -88,9 +84,16 @@ const ChatSummary = (props) => {
                     />
                 </>
             )}
-            <Button onClick={() => navigate('/')} style={{ marginTop: '10px' }} align="right" color="primary">
-                { LanguageService.translate('homeButton') }
-            </Button>
+            <Toolbar>
+                <Button onClick={() => navigate('/')} style={{ marginTop: '10px' }} align="right" color="primary">
+                    { LanguageService.translate('homeButton') }
+                </Button>
+                {
+                    summary && <Button onClick={onCopySummary} style={{ marginTop: '10px' }} color="primary">
+                        { LanguageService.translate('copySummaryButton') }
+                    </Button>
+                }
+            </Toolbar>
         </>
     );
 };
