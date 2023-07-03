@@ -49,7 +49,7 @@ const Messages = (props) => {
                 </Grid>
                 <Grid xs={1} align="right">
                     <Button onClick={handleSubmit} disabled={ sendMessageLoading || content.length === 0 } color="primary">
-                        { sendMessageLoading ? 'Loading' : 'Send' }
+                        Send
                     </Button>
                 </Grid>
                 <Grid xs={11} style={ { marginTop: "30px" } } align="left">
