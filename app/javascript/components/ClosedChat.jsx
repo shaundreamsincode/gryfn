@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ApiService from "../services/ApiService";
+import {Button, Typography} from "@material-ui/core";
 
 const ClosedChat = (props) => {
     const { chat } = props;
@@ -26,26 +27,31 @@ const ClosedChat = (props) => {
     }
 
     return(
-        <div>
-            Chat has been closed by the user. <br/>
-            <button onClick={onGenerateSummary} disabled={summaryLoading || summary}>
-                {
-                    getGenerateSummaryButtonText()
-                }
-            </button> <br/> <br/>
+        <>
+            <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
+                Chat has been closed by the user.
+            </Typography>
+
+            <Typography color="text.secondary" align="center" component="h1" variant="h4" gutterBottom>
+                <Button onClick={onGenerateSummary} disabled={summaryLoading || summary} color="primary">
+                    { getGenerateSummaryButtonText() }
+                </Button>
+            </Typography>
 
             {
-                summary && (
-                    <div>
-                        {summary.split('\n').map((item, index) => (
-                            <div key={index}>
-                                {item}
-                            </div>
-                        ))}
-                    </div>
-                )
+                summary && <>
+                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                        <div id="summaryContent">
+                            {summary.split('\n').map((item, index) => (
+                                <div key={index}>
+                                    {item}
+                                </div>
+                            ))}
+                        </div>
+                    </Typography>
+                </>
             }
-        </div>
+        </>
     )
 }
 
