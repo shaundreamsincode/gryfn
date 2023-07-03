@@ -94,7 +94,7 @@ const Chat = () => {
         <>
             {
                 !chat && <Typography component="h1" variant="h4" align="center">
-                    { LanguageService.translate('loading') }
+                    ...
                 </Typography>
             }
 
