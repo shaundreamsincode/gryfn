@@ -12,11 +12,16 @@ const Chat = () => {
     const [userClosedChat, setUserClosedChat] = useState(null)
     const [sendMessageLoading, setSendMessageLoading] = useState(false)
 
+    const navigate = useNavigate()
     const currentUrl = window.location.href
     const urlToken = currentUrl.split("/")[4]
-    const chatIsNew = !urlToken || urlToken === 'new'
 
-    const navigate = useNavigate()
+    if (!urlToken) {
+        // we are on "/chats/new". To avoid confusion, let's redirect to the home page.
+        navigate('/')
+    }
+    const chatIsNew = urlToken === 'new'
+
 
     const onSendMessage = (messageContent) => {
         setSendMessageLoading(true)
