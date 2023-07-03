@@ -12,7 +12,7 @@ export default props => <>
                 {Routes}
             </CardContent>
             <CardContent>
-                <Typography variant="body2" color="text.secondary" align="center">
+                <Typography variant="caption" color="text.secondary" align="center">
                     DocBot is NOT a substitute for professional medical advice, diagnosis or treatment.
                     Always seek the advice of your physician or other qualified health provider with any
                     questions you may have regarding a medical condition. If you are having a
