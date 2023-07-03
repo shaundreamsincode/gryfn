@@ -15,7 +15,7 @@ const Home = () => {
         setLanguage(newLanguage)
     }
 
-    const languageChangeButtonText = language === 'en' ? 'Espanol' : 'English'
+    const languageChangeButtonText = language === 'en' ? 'Español' : 'English'
 
     return(
         <>
