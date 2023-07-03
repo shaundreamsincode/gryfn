@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ApiService from "../services/ApiService";
+import LanguageService from "../services/LanguageService";
 import { useNavigate } from "react-router-dom";
 import Messages from "./Messages";
 import ChatSummary from "./ChatSummary";
@@ -34,6 +35,7 @@ const Chat = () => {
             updatedChat.messages.push(response.data.user_message)
             updatedChat.messages.push(response.data.assistant_message)
 
+            // update state
             setChat(updatedChat)
             setSendMessageLoading(false)
         });
@@ -45,14 +47,21 @@ const Chat = () => {
         })
     }
 
+    const updateChat = (chat) => {
+        localStorage.setItem('lang', chat.language)
+        setChat(chat)
+    }
+
     useEffect(() => {
         if (chatIsNew) {
-            ApiService.post('/api/v1/chats').then((response) => {
-                setChat(response.data)
+            const language = localStorage.getItem('lang') || 'en';
+
+            ApiService.post('/api/v1/chats', { chat: { language: language } }).then((response) => {
+                updateChat(response.data)
             })
         } else {
             ApiService.get(`/api/v1/chats/${urlToken}`).then((response) => {
-                setChat(response.data)
+                updateChat(response.data)
             }).catch((error) => {
                 setErrorMessage(error.response.data.error)
             })
@@ -63,14 +72,13 @@ const Chat = () => {
         return (
             <>
                 <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
-                    { errorMessage }
+                    { LanguageService.translate(errorMessage) }
                 </Typography>
 
                 <Button onClick={() => navigate('/')} style={{ marginTop: '10px' }} align="right" color="primary">
-                    Home
+                    { LanguageService.translate('homeButton') }
                 </Button>
             </>
-
         )
     }
 
@@ -86,15 +94,16 @@ const Chat = () => {
         <>
             {
                 !chat && <Typography component="h1" variant="h4" align="center">
-                    Loading...
+                    { LanguageService.translate('loading') }
                 </Typography>
             }
 
             {
                 chat && <div>
                     <Typography variant="body2" color="text.secondary" align="center" gutterBottom>
-                        Please describe your symptoms to DocBot. At the end of your chat, click “finish” and a
-                        summary of your conversation will be generated. You can send this information to your doctor for them to review.
+                        {
+                            LanguageService.translate('chatInstructions')
+                        }
                     </Typography>
                     <Divider/>
                     <Messages chat={chat} sendMessageLoading={sendMessageLoading} sendMessage={onSendMessage} closeChat={onCloseChat}/>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Grid, List, ListItem, Divider, TextField, Paper, Button, Typography } from '@material-ui/core';
+import LanguageService from "../services/LanguageService";
 
 const Messages = (props) => {
     const { chat, sendMessageLoading, sendMessage, closeChat } = props;
@@ -19,8 +20,8 @@ const Messages = (props) => {
                 <List className='messageArea'>
                     {
                         viewableMessages.map((message) => {
-                            const displayedRole = message.role === 'user' ? 'PATIENT' : 'DOCTOR'
-                            const displayedContent = `${displayedRole}: ${message.content}`
+                            const displayedRoleTranslation = message.role === 'user' ? 'patient' : 'doctor'
+                            const displayedContent = `${LanguageService.translate(displayedRoleTranslation)}: ${message.content}`
                             const backgroundColor = message.role === 'user' ? '#ffffff' : '#dbdbd9'
                             return(
                                 <ListItem key={message.id}>
@@ -57,16 +58,16 @@ const Messages = (props) => {
                         rows={4}
                         maxRows={4}
                         onChange={(event) => setContent(event.target.value)}
-                        label="Type Something"
+                        label={ LanguageService.translate('chatTextboxPlaceholder') }
                     />
                 </Grid>
                 <Grid xs={1} align="right">
                     <Button onClick={handleSubmit} disabled={ sendMessageLoading || content.length === 0 } color="primary">
-                        Send
+                        { LanguageService.translate('sendButton') }
                     </Button>
                 </Grid>
                 <Grid xs={11} style={ { marginTop: "30px" } } align="left">
-                    <Button onClick={closeChat} color="primary">Close Chat</Button>
+                    <Button onClick={closeChat} color="primary"> { LanguageService.translate('finishButton') }</Button>
                 </Grid>
             </Grid>
         </Grid>

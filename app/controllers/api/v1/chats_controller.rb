@@ -7,9 +7,10 @@ module Api
         chat = Chat.find_by(token: params[:token])
 
         if chat.nil?
-          render json: { error: "Chat not found." }, status: :not_found
+          # todo - make error messages less hacky lol
+          render json: { error: 'chatNotFound' }, status: :not_found
         elsif chat.closed_at.present?
-          render json: { error: "Chat has been closed." }, status: :unprocessable_entity
+          render json: { error: 'chatClosed' }, status: :unprocessable_entity
         else
           # todo - possibly filter out system messages here...?
           render json: chat.to_json(include: [:messages])
@@ -17,10 +18,24 @@ module Api
       end
 
       def create
-        chat = Chat.create!
+        chat = Chat.create!(language: chat_params[:language])
 
-        chat.messages.create!(content: PROMPT, role: 'system')
-        chat.messages.create!(content: "Hello! I'm an AI-assisted doctor here to help you. How can I assist you today?", role: "assistant")
+        if chat.language === 'es'
+          chat.messages.create!(
+            content: PROMPT + ". The patient speaks Spanish so make sure you only speak spanish to them.", role: 'system'
+          )
+
+          chat.messages.create!(
+            content: "¡Hola! Soy un médico asistido por IA que está aquí para ayudarte. ¿Cómo puedo ayudarle hoy?",
+            role: "assistant"
+          )
+        else
+          chat.messages.create!(content: PROMPT, role: 'system')
+          chat.messages.create!(
+            content: "Hello! I'm an AI-assisted doctor here to help you. How can I assist you today?",
+            role: "assistant"
+          )
+        end
 
         render json: chat.to_json(include: [:messages])
       end
@@ -34,6 +49,10 @@ module Api
           chat.update!(closed_at: Time.zone.now)
           render json: chat.to_json(include: [:messages])
         end
+      end
+
+      private def chat_params
+        params.require(:chat).permit(:language)
       end
     end
   end

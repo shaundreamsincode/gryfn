@@ -18,6 +18,9 @@ class GenerateChatSummary
 
     content = "please summarize the chat in the format of a history of present illness with bullet points: #{messages_content}"
 
+    if chat.language == 'es'
+      content += '. Make sure to write this summary in Spanish.'
+    end
     client = OpenAI::Client.new(access_token: ENV['OPENAI_ACCESS_TOKEN'])
 
     response = client.chat(

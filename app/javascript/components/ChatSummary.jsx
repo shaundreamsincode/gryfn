@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import ApiService from "../services/ApiService";
+import LanguageService from "../services/LanguageService";
 import { Button, Typography, Snackbar } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 
@@ -27,7 +28,7 @@ const ChatSummary = (props) => {
     const onCopySummary = () => {
         const summaryContent = summaryContentRef.current.innerText;
         navigator.clipboard.writeText(summaryContent).then(() => {
-            console.log("Summary copied to clipboard!");
+            console.log(`${LanguageService.translate('summaryCopied')}`);
         });
 
         setSnackbarOpen(true)
@@ -35,18 +36,19 @@ const ChatSummary = (props) => {
 
     const getGenerateSummaryButtonText = () => {
         if (summaryLoading) {
-            return "Loading";
+            return LanguageService.translate('loading')
         } else if (summary) {
-            return "Summary Generated";
+            return LanguageService.translate('summaryGenerated')
+
         } else {
-            return "Generate Summary";
+            return LanguageService.translate('generateSummary')
         }
     };
 
     return (
         <>
             <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                Chat has been closed by the user.
+                { LanguageService.translate('chatClosed') }
             </Typography>
 
             <Typography
@@ -76,18 +78,18 @@ const ChatSummary = (props) => {
                     </Typography>
 
                     <Button onClick={onCopySummary} style={{ marginTop: '10px' }} align="right" color="primary">
-                        Copy Summary
+                        { LanguageService.translate('copySummaryButton') }
                     </Button>
                     <Snackbar
                         open={snackbarOpen}
                         autoHideDuration={6000}
                         onClose={() => setSnackbarOpen(false)}
-                        message="Summary Copied to Clipboard!"
+                        message={ LanguageService.translate('summaryCopied') }
                     />
                 </>
             )}
             <Button onClick={() => navigate('/')} style={{ marginTop: '10px' }} align="right" color="primary">
-                Home
+                { LanguageService.translate('homeButton') }
             </Button>
         </>
     );

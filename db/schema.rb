@@ -16,6 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_01_204916) do
 
   create_table "chats", force: :cascade do |t|
     t.bigint "user_id"
+    t.integer "language", default: 0, null: false
     t.string "token"
     t.datetime "closed_at"
     t.datetime "created_at", null: false
