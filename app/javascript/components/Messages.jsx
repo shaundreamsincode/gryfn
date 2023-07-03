@@ -21,7 +21,7 @@ const Messages = (props) => {
                         viewableMessages.map((message) => {
                             const displayedRole = message.role === 'user' ? 'PATIENT' : 'DOCTOR'
                             const displayedContent = `${displayedRole}: ${message.content}`
-                            const backgroundColor = message.role === 'user' ? '#ffffff' : '#B8B8B8'
+                            const backgroundColor = message.role === 'user' ? '#ffffff' : '#dbdbd9'
                             return(
                                 <ListItem key={message.id}>
                                     <Grid container>
