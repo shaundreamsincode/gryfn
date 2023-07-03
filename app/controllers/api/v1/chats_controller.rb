@@ -18,25 +18,7 @@ module Api
       end
 
       def create
-        chat = Chat.create!(language: chat_params[:language])
-
-        if chat.language === 'es'
-          chat.messages.create!(
-            content: PROMPT + ". The patient speaks Spanish so make sure you only speak spanish to them.", role: 'system'
-          )
-
-          chat.messages.create!(
-            content: "¡Hola! Soy un médico asistido por IA que está aquí para ayudarte. ¿Cómo puedo ayudarle hoy?",
-            role: "assistant"
-          )
-        else
-          chat.messages.create!(content: PROMPT, role: 'system')
-          chat.messages.create!(
-            content: "Hello! I'm an AI-assisted doctor here to help you. How can I assist you today?",
-            role: "assistant"
-          )
-        end
-
+        chat = CreateChat.call(language: chat_params[:language]).chat
         render json: chat.to_json(include: [:messages])
       end
 
