@@ -51,7 +51,12 @@ const Chat = () => {
     }, [])
 
     if (errorMessage) {
-        return (<div>{ errorMessage }</div>)
+        return (
+            <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
+                { errorMessage }
+            </Typography>
+
+        )
     }
 
     if (chat && chatIsNew) {
