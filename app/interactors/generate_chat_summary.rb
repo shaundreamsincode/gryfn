@@ -5,10 +5,34 @@ class GenerateChatSummary
     chat = Chat.find_by!(token: context.chat_token)
 
     if chat.messages.length < 3
-      context.summary = 'Patient did not interact with the chatbot.'
+      context.summary = build_no_chat_interaction_message(chat)
       return
     end
 
+    client = OpenAI::Client.new(access_token: ENV['OPENAI_ACCESS_TOKEN'])
+
+    response = client.chat(
+      parameters: {
+        model: "gpt-3.5-turbo",
+        messages: [ { role: 'user', content: build_summary_chat_prompt(chat) } ],
+        temperature: 0.1,
+      }
+    )
+
+    context.summary = response.dig("choices", 0, "message", "content")
+  end
+
+  private def build_summary_chat_prompt(chat)
+    combined_msgs = combine_messages(chat)
+
+    prompt = "please summarize the chat in the format of a history of present illness with bullet points: #{combined_msgs}"
+    prompt += '. Make sure to write this summary in Spanish.' if chat.language == 'es'
+
+    prompt
+  end
+
+
+  private def combine_messages(chat)
     messages_content = ''
 
     chat.messages.each do |message|
@@ -16,21 +40,9 @@ class GenerateChatSummary
       messages_content += "patient: #{message.content} \n"
     end
 
-    content = "please summarize the chat in the format of a history of present illness with bullet points: #{messages_content}"
+  end
 
-    if chat.language == 'es'
-      content += '. Make sure to write this summary in Spanish.'
-    end
-    client = OpenAI::Client.new(access_token: ENV['OPENAI_ACCESS_TOKEN'])
-
-    response = client.chat(
-      parameters: {
-        model: "gpt-3.5-turbo",
-        messages: [ { role: 'user', content: content } ],
-        temperature: 0.1,
-      }
-    )
-
-    context.summary = response.dig("choices", 0, "message", "content")
+  private def build_no_chat_interaction_message(chat)
+    chat.language == 'en' ? 'Patient did not interact with the chatbot.' : 'El paciente no interactuó con el chatbot.'
   end
 end
