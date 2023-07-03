@@ -3,6 +3,7 @@ import ApiService from "../services/ApiService";
 import { useNavigate } from "react-router-dom";
 import Messages from "./Messages";
 import ClosedChat from "./ClosedChat";
+import {Typography, Divider, CardContent} from "@material-ui/core";
 
 const Chat = () => {
     const [chat, setChat] = useState(null)
@@ -62,9 +63,15 @@ const Chat = () => {
     }
 
     return(
-        <div>
+        <>
+            <Typography variant="body2" color="text.secondary" align="center" gutterBottom>
+                Please describe your symptoms to DocBot. At the end of your chat, click “finish” and a summary of your conversation will be generated. You can send this information to your doctor for them to review.
+            </Typography>
+            <Divider/>
             {
-                !chat && <p>Loading...</p>
+                !chat && <Typography component="h1" variant="h4" align="center">
+                    Loading...
+                </Typography>
             }
 
             {
@@ -72,7 +79,7 @@ const Chat = () => {
                     <Messages chat={chat} sendMessageLoading={sendMessageLoading} sendMessage={onSendMessage} closeChat={onCloseChat}/>
                 </div>
             }
-        </div>
+        </>
     )
 }
 
