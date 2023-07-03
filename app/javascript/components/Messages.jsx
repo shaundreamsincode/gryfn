@@ -37,7 +37,15 @@ const Messages = (props) => {
             <Divider />
             <Grid container style={{padding: '20px'}}>
                 <Grid item xs={11}>
-                    <TextField value={content} onChange={(event) => setContent(event.target.value)} id="outlined-basic-email" label="Type Something" fullWidth />
+                    <TextField
+                        multiline
+                        fullWidth
+                        value={content}
+                        rows={4}
+                        maxRows={4}
+                        onChange={(event) => setContent(event.target.value)}
+                        label="Type Something"
+                    />
                 </Grid>
                 <Grid xs={1} align="right">
                     <Button onClick={handleSubmit} disabled={ sendMessageLoading || content.length === 0 } color="primary">
