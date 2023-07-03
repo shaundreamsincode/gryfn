@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, List, ListItem, ListItemText, Divider, TextField, Paper, Button } from '@material-ui/core';
+import { Grid, List, ListItem, Divider, TextField, Paper, Button, Typography } from '@material-ui/core';
 
 const Messages = (props) => {
     const { chat, sendMessageLoading, sendMessage, closeChat } = props;
@@ -20,12 +20,24 @@ const Messages = (props) => {
                     {
                         viewableMessages.map((message) => {
                             const displayedRole = message.role === 'user' ? 'PATIENT' : 'DOCTOR'
-                            const listItemContent = `${displayedRole}: ${message.content}`
+                            const displayedContent = `${displayedRole}: ${message.content}`
                             return(
                                 <ListItem key={message.id}>
                                     <Grid container>
                                         <Grid item xs={12}>
-                                            <ListItemText primary={ listItemContent }/>
+                                            <Typography
+                                                variant="body1"
+                                                style={
+                                                    {
+                                                        whiteSpace: 'pre-line',
+                                                        border: '1px solid grey',
+                                                        borderRadius: '5px',
+                                                        padding: '5px'
+                                                    }
+                                                }
+                                            >
+                                                { displayedContent }
+                                            </Typography>
                                         </Grid>
                                     </Grid>
                                 </ListItem>
