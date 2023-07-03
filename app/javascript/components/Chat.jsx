@@ -14,7 +14,7 @@ const Chat = () => {
 
     const currentUrl = window.location.href
     const urlToken = currentUrl.split("/")[4]
-    const chatIsNew = urlToken === 'new'
+    const chatIsNew = !urlToken || urlToken === 'new'
 
     const navigate = useNavigate()
 
