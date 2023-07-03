@@ -4,7 +4,7 @@ import LanguageService from "../services/LanguageService";
 import { useNavigate } from "react-router-dom";
 import Messages from "./Messages";
 import ChatSummary from "./ChatSummary";
-import {Typography, Divider, Button} from "@material-ui/core";
+import {Typography, Divider, Button, CardContent} from "@material-ui/core";
 
 const Chat = () => {
     const [chat, setChat] = useState(null)
@@ -70,7 +70,7 @@ const Chat = () => {
 
     if (errorMessage) {
         return (
-            <>
+            <CardContent>
                 <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
                     { LanguageService.translate(errorMessage) }
                 </Typography>
@@ -78,7 +78,7 @@ const Chat = () => {
                 <Button onClick={() => navigate('/')} style={{ marginTop: '10px' }} align="right" color="primary">
                     { LanguageService.translate('homeButton') }
                 </Button>
-            </>
+            </CardContent>
         )
     }
 
@@ -99,7 +99,7 @@ const Chat = () => {
             }
 
             {
-                chat && <div>
+                chat && <CardContent>
                     <Typography variant="body2" color="text.secondary" align="center" gutterBottom>
                         {
                             LanguageService.translate('chatInstructions')
@@ -107,7 +107,7 @@ const Chat = () => {
                     </Typography>
                     <Divider/>
                     <Messages chat={chat} sendMessageLoading={sendMessageLoading} sendMessage={onSendMessage} closeChat={onCloseChat}/>
-                </div>
+                </CardContent>
             }
         </>
     )
