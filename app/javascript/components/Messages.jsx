@@ -1,6 +1,7 @@
 import React, { useState,useEffect, useRef, KeyboardEvent } from "react";
 import { Grid, List, ListItem, Divider, TextField, Paper, Button, Typography } from '@material-ui/core';
 import LanguageService from "../services/LanguageService";
+import Message from "./Message";
 
 const Messages = (props) => {
     const { chat, sendMessageLoading, sendMessage, closeChat } = props;
@@ -36,52 +37,16 @@ const Messages = (props) => {
                 <List className='messageArea'>
                     {
                         viewableMessages.map((message) => {
-                            const displayedRoleTranslation = message.role === 'user' ? 'patient' : 'doctor'
-                            const displayedContent = `${LanguageService.translate(displayedRoleTranslation)}: ${message.content}`
-                            const backgroundColor = message.role === 'user' ? '#ffffff' : '#dbdbd9'
                             return(
-                                <ListItem key={message.id}>
-                                    <Grid container>
-                                        <Grid item xs={12}>
-                                            <Typography
-                                                variant="body1"
-                                                style={
-                                                    {
-                                                        whiteSpace: 'pre-line',
-                                                        backgroundColor: backgroundColor,
-                                                        borderRadius: '5px',
-                                                        padding: '10px'
-                                                    }
-                                                }
-                                            >
-                                                { displayedContent }
-                                            </Typography>
-                                        </Grid>
-                                    </Grid>
-                                </ListItem>
+                                <Message messageType={message.role}
+                                         messageContent={message.content}
+                                         messageId={message.id}
+                                />
                             )
                         })
                     }
                     {
-                        sendMessageLoading && <ListItem key='loading'>
-                            <Grid container>
-                                <Grid item xs={12}>
-                                    <Typography
-                                        variant="body1"
-                                        style={
-                                            {
-                                                whiteSpace: 'pre-line',
-                                                backgroundColor: '#dbdbd9',
-                                                borderRadius: '5px',
-                                                padding: '10px'
-                                            }
-                                        }
-                                    >
-                                        Loading...
-                                    </Typography>
-                                </Grid>
-                            </Grid>
-                        </ListItem>
+                        sendMessageLoading && <Message messageType='loading'/>
                     }
                 </List>
             </Paper>
