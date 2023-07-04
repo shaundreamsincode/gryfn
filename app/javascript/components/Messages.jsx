@@ -18,14 +18,10 @@ const Messages = (props) => {
         }
     }, [(viewableMessages.length)]);
 
-    const onTextFieldChange = (event) => {
-        setContent(event.target.value)
-        autoScrollEnabled.current = false
-    };
-
     const handleSubmit = (event) => {
         event.preventDefault();
         sendMessage(content);
+        setContent('')
     };
 
     const onKeyDown = (event) => {
@@ -99,7 +95,7 @@ const Messages = (props) => {
                         value={content}
                         rows={4}
                         maxRows={4}
-                        onChange={onTextFieldChange}
+                        onChange={(event) => { setContent(event.target.value) }}
                         label={LanguageService.translate('chatTextboxPlaceholder')}
                         onKeyDown={onKeyDown}
                     />
