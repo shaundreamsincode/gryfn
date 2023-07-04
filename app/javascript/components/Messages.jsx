@@ -8,6 +8,7 @@ const Messages = (props) => {
 
     const paperRef = useRef(null);
     const textFieldRef = useRef(null);
+    const autoScrollEnabled = useRef(true);
 
     const viewableMessages = (chat.messages).filter(message => message.role !== "system");
 
@@ -15,12 +16,16 @@ const Messages = (props) => {
         if (paperRef.current) {
             paperRef.current.scrollTop = paperRef.current.scrollHeight;
         }
-    }, [viewableMessages]);
+    }, [(viewableMessages.length)]);
+
+    const onTextFieldChange = (event) => {
+        setContent(event.target.value)
+        autoScrollEnabled.current = false
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
         sendMessage(content);
-        setContent(""); // Clear the input after sending the message
     };
 
     const onKeyDown = (event) => {
@@ -61,6 +66,27 @@ const Messages = (props) => {
                             )
                         })
                     }
+                    {
+                        sendMessageLoading && <ListItem key='loading'>
+                            <Grid container>
+                                <Grid item xs={12}>
+                                    <Typography
+                                        variant="body1"
+                                        style={
+                                            {
+                                                whiteSpace: 'pre-line',
+                                                backgroundColor: '#dbdbd9',
+                                                borderRadius: '5px',
+                                                padding: '10px'
+                                            }
+                                        }
+                                    >
+                                        Loading...
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                        </ListItem>
+                    }
                 </List>
             </Paper>
             <Divider />
@@ -73,7 +99,7 @@ const Messages = (props) => {
                         value={content}
                         rows={4}
                         maxRows={4}
-                        onChange={(event) => setContent(event.target.value)}
+                        onChange={onTextFieldChange}
                         label={LanguageService.translate('chatTextboxPlaceholder')}
                         onKeyDown={onKeyDown}
                     />

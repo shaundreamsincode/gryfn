@@ -29,16 +29,12 @@ const Chat = () => {
 
         const chatWithPendingMessage = { ...chat }
         chatWithPendingMessage.messages.push({ role: 'user', content: messageContent })
-        chatWithPendingMessage.messages.push({ role: 'assistant', content: '...' })
+        // chatWithPendingMessage.messages.push({ role: 'assistant', content: '...' })
 
         ApiService.post(`/api/v1/chats/${chat.token}/messages`, { content:  messageContent }).then((response) => {
             const updatedChat = { ...chat }
 
-            // remove the pending chat items
-            updatedChat.messages = updatedChat.messages.slice(0, updatedChat.messages.length - 2)
-
-            // add in the messages hydrated from the FE
-            updatedChat.messages.push(response.data.user_message)
+            // add in the assistant message hydrated from the FE
             updatedChat.messages.push(response.data.assistant_message)
 
             // update state
