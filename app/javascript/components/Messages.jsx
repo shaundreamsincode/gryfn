@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState,useEffect, useRef, KeyboardEvent } from "react";
 import { Grid, List, ListItem, Divider, TextField, Paper, Button, Typography } from '@material-ui/core';
 import LanguageService from "../services/LanguageService";
 
@@ -7,6 +7,7 @@ const Messages = (props) => {
     const [content, setContent] = useState('')
 
     const paperRef = useRef(null);
+    const textFieldRef = useRef(null);
 
     const viewableMessages = (chat.messages).filter(message => message.role !== "system");
 
@@ -21,6 +22,12 @@ const Messages = (props) => {
         sendMessage(content);
         setContent(""); // Clear the input after sending the message
     };
+
+    const onKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            handleSubmit(event);
+        }
+    }
 
     return(<Grid container>
         <Grid item xs={12}>
@@ -60,13 +67,15 @@ const Messages = (props) => {
             <Grid container style={{padding: '20px'}}>
                 <Grid item xs={11}>
                     <TextField
+                        ref={textFieldRef}
                         multiline
                         fullWidth
                         value={content}
                         rows={4}
                         maxRows={4}
                         onChange={(event) => setContent(event.target.value)}
-                        label={ LanguageService.translate('chatTextboxPlaceholder') }
+                        label={LanguageService.translate('chatTextboxPlaceholder')}
+                        onKeyDown={onKeyDown}
                     />
                 </Grid>
                 <Grid xs={1} align="right">
