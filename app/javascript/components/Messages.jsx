@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Grid, List, ListItem, Divider, TextField, Paper, Button, Typography } from '@material-ui/core';
 import LanguageService from "../services/LanguageService";
 
@@ -6,7 +6,15 @@ const Messages = (props) => {
     const { chat, sendMessageLoading, sendMessage, closeChat } = props;
     const [content, setContent] = useState('')
 
+    const paperRef = useRef(null);
+
     const viewableMessages = (chat.messages).filter(message => message.role !== "system");
+
+    useEffect(() => {
+        if (paperRef.current) {
+            paperRef.current.scrollTop = paperRef.current.scrollHeight;
+        }
+    }, [viewableMessages]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -16,7 +24,7 @@ const Messages = (props) => {
 
     return(<Grid container>
         <Grid item xs={12}>
-            <Paper style={{maxHeight: 600, width: '100%', overflow: 'auto'}}>
+            <Paper ref={paperRef} style={{maxHeight: 600, width: '100%', overflow: 'auto'}}>
                 <List className='messageArea'>
                     {
                         viewableMessages.map((message) => {
