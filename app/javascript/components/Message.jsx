@@ -21,7 +21,7 @@ const Message = (props) => {
             const displayedRoleTranslation = LanguageService.translate('doctor')
             return `${displayedRoleTranslation}: ${messageContent}`
         } else {
-            return LanguageService.translate('loading')
+            return `${LanguageService.translate('loading')}...`
         }
     }
 
