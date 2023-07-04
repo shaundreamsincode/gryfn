@@ -22,7 +22,7 @@ class LanguageService {
                 // buttons
                 sendButton: 'Send',
                 finishButton: 'Finish',
-                homeButton: 'Hogar',
+                homeButton: 'Home',
                 copySummaryButton: 'Copy Summary',
                 chatClosed: 'Chat has been closed by the user.',
                 chatNotFound: 'Chat not found.'
