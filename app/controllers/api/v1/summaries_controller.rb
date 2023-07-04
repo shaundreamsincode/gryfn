@@ -2,11 +2,13 @@ module Api
   module V1
     class SummariesController < ApiController
       def create
-        summary = GenerateChatSummary.call(
+        result = GenerateChatSummary.call(
           chat_token: params[:chat_token]
-        ).summary
+        )
 
-        render json: summary
+        summary = result.summary
+        summary_prompt = result.summary_prompt
+        render json: {  summary: summary, summary_prompt: summary_prompt  }
       end
     end
   end

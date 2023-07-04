@@ -10,6 +10,7 @@ class GenerateChatSummary
     end
 
     client = OpenAI::Client.new(access_token: ENV['OPENAI_ACCESS_TOKEN'])
+    summary_prompt = build_summary_chat_prompt(chat)
 
     response = client.chat(
       parameters: {
@@ -19,6 +20,7 @@ class GenerateChatSummary
       }
     )
 
+    context.summary_prompt = summary_prompt
     context.summary = response.dig("choices", 0, "message", "content")
   end
 
@@ -36,6 +38,8 @@ class GenerateChatSummary
       next if message.system?
       messages_content += "#{message.role === 'user' ?  'patient' : 'doctor'}: #{message.content} \n"
     end
+
+    messages_content
   end
 
   private def build_no_chat_interaction_message(chat)
