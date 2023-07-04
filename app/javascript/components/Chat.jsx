@@ -4,6 +4,7 @@ import LanguageService from "../services/LanguageService";
 import { useNavigate } from "react-router-dom";
 import Messages from "./Messages";
 import ChatSummary from "./ChatSummary";
+import Disclaimer from "./Disclaimer";
 import {Typography, Divider, Button, CardContent} from "@material-ui/core";
 
 const Chat = () => {
@@ -112,6 +113,8 @@ const Chat = () => {
                     </Typography>
                     <Divider/>
                     <Messages chat={chat} sendMessageLoading={sendMessageLoading} sendMessage={onSendMessage} closeChat={onCloseChat}/>
+                    <Divider/>
+                    <Disclaimer lang={chat.lang}/>
                 </CardContent>
             }
         </>
