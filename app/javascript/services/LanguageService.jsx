@@ -1,6 +1,5 @@
 class LanguageService {
     static translate(string, lang = null) {
-        debugger
         const language = lang || localStorage.getItem('lang') || 'en'
         return this._locales()[language][string]
     }
