@@ -33,10 +33,9 @@ class GenerateChatSummary
     messages_content = ''
 
     chat.messages.each do |message|
-      next if message.system? || message.assistant?
-      messages_content += "patient: #{message.content} \n"
+      next if message.system?
+      messages_content += "#{message.role === 'user' ?  'patient' : 'doctor'}: #{message.content} \n"
     end
-
   end
 
   private def build_no_chat_interaction_message(chat)
