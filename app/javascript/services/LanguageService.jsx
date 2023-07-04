@@ -15,8 +15,7 @@ class LanguageService {
                 doctor: 'DOCBOT',
                 chatTextboxPlaceholder: 'Type Something',
                 loading: 'Loading',
-                summaryGenerated: 'Summary Generated',
-                generateSummary: 'Generate Summary',
+                summaryLoading: 'Summary Loading...',
                 summaryCopied: 'Summary Copied to Clipboard!',
                 // buttons
                 sendButton: 'Send',
@@ -36,8 +35,7 @@ class LanguageService {
                 doctor: 'DOCBOT',
                 chatTextboxPlaceholder: 'Escribe algo',
                 loading: 'Cargando',
-                summaryGenerated: 'Resumen Generado',
-                generateSummary: 'Generar Resumen',
+                summaryLoading: 'Resumen Cargando...',
                 summaryCopied: '¡Resumen Copiado al Portapapeles!',
                 // buttons
                 sendButton: 'Enviar',

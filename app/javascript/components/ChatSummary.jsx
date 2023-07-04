@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ApiService from "../services/ApiService";
 import LanguageService from "../services/LanguageService";
 import { Button, Typography, Snackbar, Toolbar } from "@material-ui/core";
@@ -14,7 +14,7 @@ const ChatSummary = (props) => {
     const summaryContentRef = useRef(null);
     const navigate = useNavigate()
 
-    const onGenerateSummary = () => {
+    const generateSummary = () => {
         setSummaryLoading(true);
 
         ApiService.post(`/api/v1/chats/${chat.token}/summaries`).then(
@@ -25,6 +25,8 @@ const ChatSummary = (props) => {
         );
     };
 
+    useEffect(() => { generateSummary() }, [])
+
     const onCopySummary = () => {
         const summaryContent = summaryContentRef.current.innerText;
         navigator.clipboard.writeText(summaryContent).then(() => {
@@ -34,38 +36,17 @@ const ChatSummary = (props) => {
         setSnackbarOpen(true)
     };
 
-    const getGenerateSummaryButtonText = () => {
-        if (summaryLoading) {
-            return LanguageService.translate('loading')
-        } else if (summary) {
-            return LanguageService.translate('summaryGenerated')
-
-        } else {
-            return LanguageService.translate('generateSummary')
-        }
-    };
-
     return (
         <>
             <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                 { LanguageService.translate('chatClosed') }
             </Typography>
 
-            <Typography
-                color="text.secondary"
-                align="center"
-                component="h1"
-                variant="h4"
-                gutterBottom
-            >
-                <Button
-                    onClick={onGenerateSummary}
-                    disabled={summaryLoading || summary}
-                    color="primary"
-                >
-                    {getGenerateSummaryButtonText()}
-                </Button>
-            </Typography>
+            {
+                !summary && <Typography variant="body2" color="text.secondary" gutterBottom>
+                    { LanguageService.translate('summaryLoading') }
+                </Typography>
+            }
 
             {summary && (
                 <>
