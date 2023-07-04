@@ -69,7 +69,11 @@ const Chat = () => {
             ApiService.get(`/api/v1/chats/${urlToken}`).then((response) => {
                 updateChat(response.data)
             }).catch((error) => {
-                setErrorMessage(error.response.data.error)
+                if (error.response.data.error === 'chatClosed') { // todo - make a non hardcoded string...
+                    navigate(`/`)
+                } else {
+                    setErrorMessage(error.response.data.error)
+                }
             })
         }
     }, [])

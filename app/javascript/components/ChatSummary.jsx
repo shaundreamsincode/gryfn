@@ -3,6 +3,7 @@ import ApiService from "../services/ApiService";
 import LanguageService from "../services/LanguageService";
 import { Button, Typography, Snackbar, Toolbar } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
+import Disclaimer from "./Disclaimer";
 
 const ChatSummary = (props) => {
     const { chat } = props;
@@ -75,6 +76,7 @@ const ChatSummary = (props) => {
                     </Button>
                 }
             </Toolbar>
+            <Disclaimer lang={chat.language}/>
         </>
     );
 };
