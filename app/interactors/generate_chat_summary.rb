@@ -36,6 +36,8 @@ class GenerateChatSummary
       next if message.system?
       messages_content += "#{message.role === 'user' ?  'patient' : 'doctor'}: #{message.content} \n"
     end
+
+    messages_content
   end
 
   private def build_no_chat_interaction_message(chat)
