@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import ApiService from "../services/ApiService";
 import LanguageService from "../services/LanguageService";
-import {Button, Typography, Snackbar, Toolbar, Divider} from "@material-ui/core";
+import { Button, Typography, Snackbar, Toolbar } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import Disclaimer from "./Disclaimer";
 
@@ -9,7 +9,6 @@ const ChatSummary = (props) => {
     const { chat } = props;
 
     const [summary, setSummary] = useState(null);
-    const [summaryPrompt, setSummaryPrompt] = useState(null)
     const [summaryLoading, setSummaryLoading] = useState(false);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
 
@@ -21,8 +20,7 @@ const ChatSummary = (props) => {
 
         ApiService.post(`/api/v1/chats/${chat.token}/summaries`).then(
             (response) => {
-                setSummary(response.data.summary);
-                setSummaryPrompt(response.data.summary_prompt)
+                setSummary(response.data);
                 setSummaryLoading(false);
             }
         );
@@ -60,18 +58,6 @@ const ChatSummary = (props) => {
                             ))}
                         </div>
                     </Typography>
-                    <Divider/>
-                    <br/>
-                    {
-                        summaryPrompt &&  <Typography variant="body2" color="text.secondary" gutterBottom>
-                            <div id="summaryContent" ref={summaryContentRef}>
-                                {summaryPrompt.split("\n").map((item, index) => (
-                                    <div key={index}>{item}</div>
-                                ))}
-                            </div>
-                        </Typography>
-
-                    }
                     <Snackbar
                         open={snackbarOpen}
                         autoHideDuration={6000}
