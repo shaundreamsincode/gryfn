@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_01_204916) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_05_212954) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "chats", force: :cascade do |t|
+    t.string "token"
     t.bigint "user_id"
     t.integer "language", default: 0, null: false
-    t.string "token"
     t.datetime "closed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -35,6 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_01_204916) do
   end
 
   create_table "messages", force: :cascade do |t|
+    t.string "token"
     t.bigint "chat_id"
     t.integer "role", default: 0, null: false
     t.text "content", null: false
@@ -44,7 +45,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_01_204916) do
     t.index ["chat_id"], name: "index_messages_on_chat_id"
   end
 
+  create_table "summaries", force: :cascade do |t|
+    t.string "token"
+    t.bigint "chat_id"
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_id"], name: "index_summaries_on_chat_id"
+  end
+
   create_table "users", force: :cascade do |t|
+    t.string "token"
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "email", null: false
@@ -55,4 +66,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_01_204916) do
 
   add_foreign_key "chats", "users"
   add_foreign_key "messages", "chats"
+  add_foreign_key "summaries", "chats"
 end

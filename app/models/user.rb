@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
+  has_secure_token
+
   validates :password, presence: true, on: :create
 
   has_many :chats

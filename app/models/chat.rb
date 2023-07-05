@@ -4,4 +4,8 @@ class Chat < ApplicationRecord
 
   belongs_to :user, optional: :true
   has_many :messages, dependent: :destroy
+
+  def has_user_messages?
+    messages.any? { |message| message.user? }
+  end
 end

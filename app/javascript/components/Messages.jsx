@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import LanguageService from "../services/LanguageService";
 import Message from "./Message";
-import ClearMessagesConfirmDialog from "./ClearMessagesConfirmDialog";
+import ClearMessagesDialog from "./ClearMessagesDialog";
 
 const Messages = (props) => {
     const { chat, sendMessageLoading, sendMessage, clearChatMessages, closeChat } = props;
@@ -22,7 +22,7 @@ const Messages = (props) => {
     const paperRef = useRef(null);
     const textFieldRef = useRef(null);
     const autoScrollEnabled = useRef(true);
-    const [clearMessagesConfirmDialogOpen, setClearMessagesConfirmDialogOpen] = useState(false)
+    const [clearMessagesDialogOpen, setClearMessagesDialogOpen] = useState(false)
 
     const viewableMessages = (chat.messages).filter(message => message.role !== "system");
 
@@ -39,7 +39,7 @@ const Messages = (props) => {
     };
 
     const handleClearMessagesConfirmation = () => {
-        setClearMessagesConfirmDialogOpen(false)
+        setClearMessagesDialogOpen(false)
         clearChatMessages()
     }
 
@@ -95,14 +95,14 @@ const Messages = (props) => {
                         </Grid>
 
                         <Grid xs={11} style={ { marginTop: "30px" } } align="left">
-                            <Button onClick={() => setClearMessagesConfirmDialogOpen(true)} color="primary"> { LanguageService.translate('clearMessagesButton') }</Button>
+                            <Button onClick={() => setClearMessagesDialogOpen(true)} color="primary"> { LanguageService.translate('clearMessagesButton') }</Button>
                         </Grid>
                     </Box>
                 </Toolbar>
 
-                <ClearMessagesConfirmDialog
-                    open={clearMessagesConfirmDialogOpen}
-                    closeDialog={() => setClearMessagesConfirmDialogOpen(false)}
+                <ClearMessagesDialog
+                    open={clearMessagesDialogOpen}
+                    closeDialog={() => setClearMessagesDialogOpen(false)}
                     dialogConfirmation={handleClearMessagesConfirmation}
                 />
             </Grid>

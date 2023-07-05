@@ -2,10 +2,17 @@ module Api
   module V1
     class SummariesController < ApiController
       def create
-        summary = GenerateChatSummary.call(
-          chat_token: params[:chat_token]
-        ).summary
+        chat = Chat.find_by!(token: params[:chat_token])
 
+        unless chat.has_user_messages?
+          return render json: { error: :no_user_messages }, status: :unprocessable_entity
+        end
+
+        render json: CreateSummary.call(chat: chat).summary
+      end
+
+      def send_email
+        summary = Summary.find_by!(token: params[:summary_token])
         render json: summary
       end
     end

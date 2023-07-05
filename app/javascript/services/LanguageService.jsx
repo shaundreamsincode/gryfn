@@ -17,14 +17,18 @@ class LanguageService {
                 loading: 'Loading',
                 summaryLoading: 'Summary Loading...',
                 summaryCopied: 'Summary Copied to Clipboard!',
+                summaryEmailSent: 'Summary was successfully emailed!',
                 // buttons
                 sendButton: 'Send',
                 finishButton: 'Finish',
                 clearMessagesButton: 'Clear Messages',
                 homeButton: 'Home',
                 copySummaryButton: 'Copy Summary',
+                emailSummaryButton: 'Email Summary',
+                //
                 chatClosed: 'Chat has been closed by the user.',
-                chatNotFound: 'Chat not found.'
+                chatNotFound: 'Chat not found.',
+                noUserMessages: 'Patient did not interact with the chatbot.'
             },
 
             es: {
@@ -38,14 +42,18 @@ class LanguageService {
                 loading: 'Cargando',
                 summaryLoading: 'Resumen Cargando...',
                 summaryCopied: '¡Resumen Copiado al Portapapeles!',
+                summaryEmailSent: '¡Resumen fue enviado con exito!',
                 // buttons
                 sendButton: 'Enviar',
                 finishButton: 'Finalizar',
                 clearMessagesButton: 'EliminarMesajes claros',
                 homeButton: 'Hogar',
                 copySummaryButton: 'Copiar Resumen',
+                emailSummaryButton: 'Resumen de Correo Electrónico',
+                //
                 chatClosed: 'El chat ha sido cerrado por el usuario.',
-                chatNotFound: 'Chat no encontrado.'
+                chatNotFound: 'Chat no encontrado.',
+                noUserMessages: 'El paciente no interactuó con el chatbot.'
             }
         }
     }

@@ -6,8 +6,6 @@ import Messages from "./Messages";
 import ChatSummary from "./ChatSummary";
 import Disclaimer from "./Disclaimer";
 import {Typography, Divider, Button, CardContent} from "@material-ui/core";
-import ClearMessagesConfirmDialog from "./ClearMessagesConfirmDialog";
-import {Clear} from "@material-ui/icons";
 
 const Chat = () => {
     const [chat, setChat] = useState(null)
@@ -99,10 +97,10 @@ const Chat = () => {
     if (chat && chatIsNew) {
         navigate(`/chats/${chat.token}`)
     }
-
-    if (chat && userClosedChat) {
+    if (chat) {
         return(<ChatSummary chat={chat}/>)
     }
+
 
     return(
         <>

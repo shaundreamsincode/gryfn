@@ -1,14 +1,8 @@
 import React from 'react';
-// import Button from '@mui/material/Button';
-// import Dialog from '@mui/material/Dialog';
-// import DialogActions from '@mui/material/DialogActions';
-// import DialogContent from '@mui/material/DialogContent';
-// import DialogContentText from '@mui/material/DialogContentText';
-// import DialogTitle from '@mui/material/DialogTitle';
 
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
 
-function ClearMessagesConfirmDialog(props) {
+function ClearMessagesDialog(props) {
     const { open, closeDialog, dialogConfirmation } = props
     debugger
 
@@ -33,4 +27,4 @@ function ClearMessagesConfirmDialog(props) {
     );
 }
 
-export default ClearMessagesConfirmDialog;
+export default ClearMessagesDialog;
