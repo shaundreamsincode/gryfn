@@ -1,5 +1,16 @@
 import React, { useState,useEffect, useRef, KeyboardEvent } from "react";
-import {Grid, List, ListItem, Divider, TextField, Paper, Button, Typography, CardContent} from '@material-ui/core';
+import {
+    Grid,
+    List,
+    ListItem,
+    Divider,
+    TextField,
+    Paper,
+    Button,
+    Typography,
+    CardContent,
+    Toolbar, Box
+} from '@material-ui/core';
 import LanguageService from "../services/LanguageService";
 import Message from "./Message";
 import ClearMessagesConfirmDialog from "./ClearMessagesConfirmDialog";
@@ -77,13 +88,17 @@ const Messages = (props) => {
                         { LanguageService.translate('sendButton') }
                     </Button>
                 </Grid>
-                <Grid xs={11} style={ { marginTop: "30px" } } align="left">
-                    <Button onClick={closeChat} color="primary"> { LanguageService.translate('finishButton') }</Button>
-                </Grid>
+                <Toolbar style={{display:'flex', justifyContent:"space-between", width:'100%'}}>
+                    <Box display='flex' flexGrow={1}>
+                        <Grid xs={11} style={ { marginTop: "30px" } } align="left">
+                            <Button onClick={closeChat} color="primary"> { LanguageService.translate('finishButton') }</Button>
+                        </Grid>
 
-                <Grid xs={11} style={ { marginTop: "30px" } } align="left">
-                    <Button onClick={() => setClearMessagesConfirmDialogOpen(true)} color="primary"> { LanguageService.translate('clearMessagesButton') }</Button>
-                </Grid>
+                        <Grid xs={11} style={ { marginTop: "30px" } } align="left">
+                            <Button onClick={() => setClearMessagesConfirmDialogOpen(true)} color="primary"> { LanguageService.translate('clearMessagesButton') }</Button>
+                        </Grid>
+                    </Box>
+                </Toolbar>
 
                 <ClearMessagesConfirmDialog
                     open={clearMessagesConfirmDialogOpen}
