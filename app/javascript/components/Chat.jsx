@@ -6,6 +6,8 @@ import Messages from "./Messages";
 import ChatSummary from "./ChatSummary";
 import Disclaimer from "./Disclaimer";
 import {Typography, Divider, Button, CardContent} from "@material-ui/core";
+import ClearMessagesConfirmDialog from "./ClearMessagesConfirmDialog";
+import {Clear} from "@material-ui/icons";
 
 const Chat = () => {
     const [chat, setChat] = useState(null)
@@ -42,6 +44,12 @@ const Chat = () => {
             setSendMessageLoading(false)
         });
     };
+
+    const onClearChatMessages = () => {
+        ApiService.post(`/api/v1/chats/${chat.token}/clear_messages`).then((response) => {
+            setChat(response.data)
+        })
+    }
 
     const onCloseChat = () => {
         ApiService.post(`/api/v1/chats/${chat.token}/close`).then((response) => {
@@ -112,7 +120,12 @@ const Chat = () => {
                         }
                     </Typography>
                     <Divider/>
-                    <Messages chat={chat} sendMessageLoading={sendMessageLoading} sendMessage={onSendMessage} closeChat={onCloseChat}/>
+                    <Messages chat={chat}
+                              sendMessageLoading={sendMessageLoading}
+                              sendMessage={onSendMessage}
+                              clearChatMessages={onClearChatMessages}
+                              closeChat={onCloseChat}
+                    />
                     <Divider/>
                     <Disclaimer lang={chat.lang}/>
                 </CardContent>

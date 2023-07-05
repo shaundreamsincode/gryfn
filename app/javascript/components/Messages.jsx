@@ -1,15 +1,17 @@
 import React, { useState,useEffect, useRef, KeyboardEvent } from "react";
-import { Grid, List, ListItem, Divider, TextField, Paper, Button, Typography } from '@material-ui/core';
+import {Grid, List, ListItem, Divider, TextField, Paper, Button, Typography, CardContent} from '@material-ui/core';
 import LanguageService from "../services/LanguageService";
 import Message from "./Message";
+import ClearMessagesConfirmDialog from "./ClearMessagesConfirmDialog";
 
 const Messages = (props) => {
-    const { chat, sendMessageLoading, sendMessage, closeChat } = props;
+    const { chat, sendMessageLoading, sendMessage, clearChatMessages, closeChat } = props;
     const [content, setContent] = useState('')
 
     const paperRef = useRef(null);
     const textFieldRef = useRef(null);
     const autoScrollEnabled = useRef(true);
+    const [clearMessagesConfirmDialogOpen, setClearMessagesConfirmDialogOpen] = useState(false)
 
     const viewableMessages = (chat.messages).filter(message => message.role !== "system");
 
@@ -24,6 +26,11 @@ const Messages = (props) => {
         sendMessage(content);
         setContent('')
     };
+
+    const handleClearMessagesConfirmation = () => {
+        setClearMessagesConfirmDialogOpen(false)
+        clearChatMessages()
+    }
 
     const onKeyDown = (event) => {
         if (event.key === 'Enter') {
@@ -73,6 +80,16 @@ const Messages = (props) => {
                 <Grid xs={11} style={ { marginTop: "30px" } } align="left">
                     <Button onClick={closeChat} color="primary"> { LanguageService.translate('finishButton') }</Button>
                 </Grid>
+
+                <Grid xs={11} style={ { marginTop: "30px" } } align="left">
+                    <Button onClick={() => setClearMessagesConfirmDialogOpen(true)} color="primary"> { LanguageService.translate('clearMessagesButton') }</Button>
+                </Grid>
+
+                <ClearMessagesConfirmDialog
+                    open={clearMessagesConfirmDialogOpen}
+                    closeDialog={() => setClearMessagesConfirmDialogOpen(false)}
+                    dialogConfirmation={handleClearMessagesConfirmation}
+                />
             </Grid>
         </Grid>
     </Grid>)

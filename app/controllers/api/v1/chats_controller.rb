@@ -33,6 +33,14 @@ module Api
         end
       end
 
+      def clear_messages
+        chat = Chat.find_by!(token: params[:token])
+        chat.messages.each { |message| message.destroy! unless message.is_prompt }
+        chat.reload
+
+        render json: chat.to_json(include: [:messages])
+      end
+
       private def chat_params
         params.require(:chat).permit(:language)
       end

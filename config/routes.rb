@@ -17,7 +17,10 @@ Rails.application.routes.draw do
       # resources :users, only: %i(create)
       # resources :sessions, only: %i(create)
 
+      # CHAT ENDPOINTS
       post 'chats/:token/close', to: 'chats#close'
+      post 'chats/:token/clear_messages', to: 'chats#clear_messages'
+
       get 'verify_token', to: 'sessions#verify_token'
     end
   end

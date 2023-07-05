@@ -6,8 +6,8 @@ class CreateChat
     initial_message_content = context.language == 'es' ? Prompts::INITIAL_ASSISTANT_PROMPT_ES :
                                 Prompts::INITIAL_ASSISTANT_PROMPT_EN
 
-    chat.messages.create!(content: system_prompt, role: 'system')
-    chat.messages.create!(content: initial_message_content, role: 'assistant')
+    chat.messages.create!(content: system_prompt, role: 'system', is_prompt: true)
+    chat.messages.create!(content: initial_message_content, role: 'assistant', is_prompt: true)
 
     context.chat = chat
   end

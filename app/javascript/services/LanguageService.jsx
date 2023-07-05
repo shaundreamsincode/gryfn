@@ -20,6 +20,7 @@ class LanguageService {
                 // buttons
                 sendButton: 'Send',
                 finishButton: 'Finish',
+                clearMessagesButton: 'Clear Messages',
                 homeButton: 'Home',
                 copySummaryButton: 'Copy Summary',
                 chatClosed: 'Chat has been closed by the user.',
@@ -40,6 +41,7 @@ class LanguageService {
                 // buttons
                 sendButton: 'Enviar',
                 finishButton: 'Finalizar',
+                clearMessagesButton: 'EliminarMesajes claros',
                 homeButton: 'Hogar',
                 copySummaryButton: 'Copiar Resumen',
                 chatClosed: 'El chat ha sido cerrado por el usuario.',
