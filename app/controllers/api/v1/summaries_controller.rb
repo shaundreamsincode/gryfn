@@ -12,6 +12,7 @@ module Api
       end
 
       def send_email
+        # todo - add BE validations to ensure that email is in correct format...
         summary = Summary.find_by!(token: params[:summary_token])
         SummaryMailer.summary_email(params[:email], summary.content).deliver_now
 
