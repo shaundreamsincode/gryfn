@@ -13,6 +13,8 @@ module Api
 
       def send_email
         summary = Summary.find_by!(token: params[:summary_token])
+        SummaryMailer.summary_email(params[:email], summary.content).deliver_now
+
         render json: summary
       end
     end

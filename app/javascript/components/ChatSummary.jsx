@@ -44,10 +44,13 @@ const ChatSummary = (props) => {
         setSnackbarMessage(LanguageService.translate('summaryCopied'))
     };
 
-    const onEmailSummary = () => {
+    const onEmailSummary = (email) => {
         setEmailSummaryDialogOpen(false)
 
-        ApiService.post(`/api/v1/chats/${chat.token}/summaries/${summary.token}/send_email`).then((response) => {
+        ApiService.post(
+            `/api/v1/chats/${chat.token}/summaries/${summary.token}/send_email`,
+            { email: email }
+        ).then((response) => {
             setSnackbarMessage(LanguageService.translate('summaryEmailSent'))
         })
     }
