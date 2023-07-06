@@ -18,7 +18,7 @@ const Chat = () => {
     const urlToken = currentUrl.split("/")[4]
 
     if (!urlToken) {
-        // we are on "/chats/new". To avoid confusion, let's redirect to the home page.
+        // we are on "/chats/". To avoid confusion, let's redirect to the home page.
         navigate('/')
     }
     const chatIsNew = urlToken === 'new'
