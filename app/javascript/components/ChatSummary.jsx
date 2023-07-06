@@ -50,7 +50,7 @@ const ChatSummary = (props) => {
         ApiService.post(
             `/api/v1/chats/${chat.token}/summaries/${summary.token}/send_email`,
             { email: email }
-        ).then((response) => {
+        ).then(() => {
             setSnackbarMessage(LanguageService.translate('summaryEmailSent'))
         })
     }

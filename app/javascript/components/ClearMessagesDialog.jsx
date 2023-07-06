@@ -1,25 +1,22 @@
 import React from 'react';
+import LanguageService from "../services/LanguageService";
 
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
 
 function ClearMessagesDialog(props) {
     const { open, closeDialog, dialogConfirmation } = props
-    debugger
 
     return (
         <>
-            {/*<Button variant="contained" color="primary" onClick={handleClickOpen}>*/}
-            {/*    Open Confirmation*/}
-            {/*</Button>*/}
             <Dialog open={open} onClose={closeDialog}>
-                <DialogTitle>Confirmation</DialogTitle>
+                <DialogTitle>{ LanguageService.translate('clearMessagesDialogTitle') }</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>Are you sure you want to proceed?</DialogContentText>
+                    <DialogContentText> { LanguageService.translate('confirmProceed') }</DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={closeDialog}>Cancel</Button>
+                    <Button onClick={closeDialog}> { LanguageService.translate('cancelButton') }</Button>
                     <Button onClick={dialogConfirmation} autoFocus>
-                        Confirm
+                        { LanguageService.translate('confirmButton') }
                     </Button>
                 </DialogActions>
             </Dialog>

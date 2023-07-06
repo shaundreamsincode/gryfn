@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import LanguageService from "../services/LanguageService";
 
 import {
     Button,
@@ -7,8 +8,7 @@ import {
     DialogActions,
     DialogContent,
     DialogContentText,
-    DialogTitle,
-    Typography
+    DialogTitle
 } from "@material-ui/core";
 
 function EmailSummaryDialog(props) {
@@ -43,23 +43,23 @@ function EmailSummaryDialog(props) {
     return (
         <>
             <Dialog open={open} onClose={closeDialog}>
-                <DialogTitle>Send Summary</DialogTitle>
+                <DialogTitle> { LanguageService.translate('sendSummaryTitle') }</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>Please enter the email you want to send the summary to.</DialogContentText>
+                    <DialogContentText>{ LanguageService.translate('emailSummaryInstructions') }</DialogContentText>
                 </DialogContent>
 
                 {
                     isInvalid &&
-                        <DialogContentText variant="caption" align="center" style={{ color: 'red' }}>Email is invalid</DialogContentText>
+                        <DialogContentText variant="caption" align="center" style={{ color: 'red' }}>{ LanguageService.translate('emailIsInvalidError') }</DialogContentText>
                 }
 
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <TextField style={{ width: '75%' }} onChange={(event) => onEmailChange(event.target.value)} />
                 </div>
                 <DialogActions>
-                    <Button onClick={onDialogClose} color="primary">Cancel</Button>
+                    <Button onClick={onDialogClose} color="primary"> { LanguageService.translate('cancelButton') }</Button>
                     <Button onClick={onSubmit} autoFocus color="primary" disabled={email.length === 0}>
-                        Confirm
+                        { LanguageService.translate('confirmButton') }
                     </Button>
                 </DialogActions>
             </Dialog>

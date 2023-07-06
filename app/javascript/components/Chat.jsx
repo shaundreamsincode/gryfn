@@ -97,10 +97,9 @@ const Chat = () => {
     if (chat && chatIsNew) {
         navigate(`/chats/${chat.token}`)
     }
-    if (chat) {
+    if (chat && userClosedChat) {
         return(<ChatSummary chat={chat}/>)
     }
-
 
     return(
         <>

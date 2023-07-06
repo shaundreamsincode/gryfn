@@ -25,10 +25,17 @@ class LanguageService {
                 homeButton: 'Home',
                 copySummaryButton: 'Copy Summary',
                 emailSummaryButton: 'Email Summary',
+                cancelButton: 'Cancel',
+                confirmButton: 'Confirm',
                 //
                 chatClosed: 'Chat has been closed by the user.',
                 chatNotFound: 'Chat not found.',
-                noUserMessages: 'Patient did not interact with the chatbot.'
+                noUserMessages: 'Patient did not interact with the chatbot.',
+                emailSummaryInstructions: 'Please enter the email you want to send the summary to.',
+                sendSummaryTitle: 'Send Summary',
+                emailIsInvalidError: 'Email is invalid',
+                confirmProceed: 'Are you sure you want to proceed?',
+                clearMessagesDialogTitle: 'Clear Messages'
             },
 
             es: {
@@ -46,14 +53,21 @@ class LanguageService {
                 // buttons
                 sendButton: 'Enviar',
                 finishButton: 'Finalizar',
-                clearMessagesButton: 'EliminarMesajes claros',
+                clearMessagesButton: 'Borrar Mesajes',
                 homeButton: 'Hogar',
                 copySummaryButton: 'Copiar Resumen',
                 emailSummaryButton: 'Resumen de Correo Electrónico',
+                cancelButton: 'Cancelar',
+                confirmButton: 'Confirmar',
                 //
                 chatClosed: 'El chat ha sido cerrado por el usuario.',
                 chatNotFound: 'Chat no encontrado.',
-                noUserMessages: 'El paciente no interactuó con el chatbot.'
+                noUserMessages: 'El paciente no interactuó con el chatbot.',
+                emailSummaryInstructions: 'Por favor, introduzca el correo electrónico al que desea enviar el resumen.',
+                sendSummaryTitle: 'Enviar Resumen',
+                emailIsInvalidError: 'El correo electrónico es invalido',
+                confirmProceed: '¿Estas seguro que deseas continuar?',
+                clearMessagesDialogTitle: 'Borrar Mensajes'
             }
         }
     }
