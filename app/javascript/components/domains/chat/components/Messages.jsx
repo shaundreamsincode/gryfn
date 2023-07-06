@@ -11,7 +11,7 @@ import {
     CardContent,
     Toolbar, Box
 } from '@material-ui/core';
-import LanguageService from "../services/LanguageService";
+import LanguageService from "../../../../services/LanguageService";
 import Message from "./Message";
 import ClearMessagesDialog from "./ClearMessagesDialog";
 

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import ApiService from "../services/ApiService";
-import LanguageService from "../services/LanguageService";
+import ApiService from "../../../services/ApiService";
+import LanguageService from "../../../services/LanguageService";
 import { useNavigate } from "react-router-dom";
-import Messages from "./Messages";
-import ChatSummary from "./ChatSummary";
-import Disclaimer from "./Disclaimer";
+import Messages from "./components/Messages";
+import ChatSummary from "./components/ChatSummary";
+import Disclaimer from "../../Disclaimer";
 import {Typography, Divider, Button, CardContent} from "@material-ui/core";
 
 const Chat = () => {

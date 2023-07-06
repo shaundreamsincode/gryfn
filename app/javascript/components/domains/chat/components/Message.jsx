@@ -1,6 +1,6 @@
 import React from 'react'
 import {Grid, ListItem, Typography} from "@material-ui/core";
-import LanguageService from "../services/LanguageService";
+import LanguageService from "../../../../services/LanguageService";
 
 const Message = (props) => {
     const { messageType, messageContent, messageId } = props

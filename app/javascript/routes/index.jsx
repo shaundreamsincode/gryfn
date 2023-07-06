@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "../components/Home";
-import Chat from "../components/Chat";
+import Chat from "../components/domains/chat/Chat";
 
 export default (
     <Router>

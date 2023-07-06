@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import ApiService from "../services/ApiService";
-import LanguageService from "../services/LanguageService";
+import ApiService from "../../../../services/ApiService";
+import LanguageService from "../../../../services/LanguageService";
 import { Button, Typography, Snackbar, Toolbar } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-import Disclaimer from "./Disclaimer";
+import Disclaimer from "../../../Disclaimer";
 import EmailSummaryDialog from "./EmailSummaryDialog";
 
 const ChatSummary = (props) => {
