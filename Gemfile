@@ -34,6 +34,9 @@ gem "redis", "~> 4.0"
 # For ChatGPT
 gem "ruby-openai", "~> 4.0.0"
 
+# For sending emails
+gem 'postmark-rails'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
