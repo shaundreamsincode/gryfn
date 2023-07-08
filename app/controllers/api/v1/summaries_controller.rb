@@ -12,22 +12,17 @@ module Api
       end
 
       def send_email
-        chat = Chat.find_by!(token: params[:chat_token])
-
-        summary = Summary.find_by!(
-          token: params[:summary_token],
-          chat: chat
+        result = SendSummaryEmail.call(
+          chat_token: params[:chat_token],
+          summary_token: params[:summary_token],
+          email: params[:email]
         )
 
-        email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-        unless email_regex.match?(params[:email])
-          return render json: { error: :invalid_email }, status: :unprocessable_entity
+        if result.error.present?
+          return render json: { error: result.error }, status: :unprocessable_entity
         end
 
-        SummaryMailer.summary_email(params[:email], summary.content).deliver_now
-
-        render json: summary
+        render json: result.summary
       end
     end
   end
