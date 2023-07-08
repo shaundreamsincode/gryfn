@@ -12,8 +12,19 @@ module Api
       end
 
       def send_email
-        # todo - add BE validations to ensure that email is in correct format...
-        summary = Summary.find_by!(token: params[:summary_token])
+        chat = Chat.find_by!(token: params[:chat_token])
+
+        summary = Summary.find_by!(
+          token: params[:summary_token],
+          chat: chat
+        )
+
+        email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+        unless email_regex.match?(params[:email])
+          return render json: { error: :invalid_email }, status: :unprocessable_entity
+        end
+
         SummaryMailer.summary_email(params[:email], summary.content).deliver_now
 
         render json: summary
