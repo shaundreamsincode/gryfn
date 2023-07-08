@@ -1,0 +1,3 @@
+class BadgePermission < ApplicationRecord
+
+end

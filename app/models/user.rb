@@ -2,6 +2,9 @@ class User < ApplicationRecord
   has_secure_password
   has_secure_token
 
+  belongs_to :organization
+  has_many :user_organization_badges
+
   validates :password, presence: true, on: :create
 
   has_many :chats
