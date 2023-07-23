@@ -35,7 +35,8 @@ class LanguageService {
                 sendSummaryTitle: 'Send Summary',
                 emailIsInvalidError: 'Email is invalid',
                 confirmProceed: 'Are you sure you want to proceed?',
-                clearMessagesDialogTitle: 'Clear Messages'
+                clearMessagesDialogTitle: 'Clear Messages',
+                emailDisclaimer: "DocBot will NEVER store your name, birthday, email, or doctors email."
             },
 
             es: {
@@ -67,7 +68,8 @@ class LanguageService {
                 sendSummaryTitle: 'Enviar Resumen',
                 emailIsInvalidError: 'El correo electrónico es invalido',
                 confirmProceed: '¿Estas seguro que deseas continuar?',
-                clearMessagesDialogTitle: 'Borrar Mensajes'
+                clearMessagesDialogTitle: 'Borrar Mensajes',
+                emailDisclaimer: "DocBot NUNCA almacenará su nombre, cumpleaños, correo electrónico o correo electrónico del médico."
             }
         }
     }
