@@ -3,12 +3,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "../components/Home";
 import Chat from "../components/domains/chat/Chat";
+import ContactUs from "../components/ContactUs";
 
 export default (
     <Router>
         <Fragment>
             <Routes>
                 <Route exact path='/' element={<Home/>}/>
+                <Route exact path='/contact' element={<ContactUs/>}/>
                 <Route path='/chats/:token' element={<Chat/>}/>
                 <Route path='/chats' element={<Chat/>}/>
 

@@ -1,6 +1,6 @@
 import React from "react";
 import Routes from "../routes";
-import { Container, Card, CardContent, Typography } from "@material-ui/core";
+import {Container, Card, CardContent, Typography, Button} from "@material-ui/core";
 
 export default props => <>
     <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
@@ -10,6 +10,10 @@ export default props => <>
                     DocBot
                 </Typography>
                 {Routes}
+
+                <Button>
+                    <a href="https://docbot.tech/contact" style={{ 'textDecoration': 'none' }}>Contact</a>
+                </Button>
             </CardContent>
         </Card>
     </Container>
