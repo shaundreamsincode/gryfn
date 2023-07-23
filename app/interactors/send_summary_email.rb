@@ -15,7 +15,7 @@ class SendSummaryEmail
       return
     end
 
-    SummaryMailer.summary_email(context.email, summary).deliver_now
+    SummaryMailer.summary_email(context.email, summary.content).deliver_now
     context.summary = summary
 
     true
