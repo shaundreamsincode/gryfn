@@ -1,3 +1,21 @@
-Summary:
+Dear healthcare provider, <br/> <br/>
 
-<%= @summary_content %>
+One of your patients has sent you a message via <a href="https://docbot.tech">DocBot</a>. DocBot is an
+AI-powered medical assistant, which summarizes a patient’s chief complaint. Below is the summary of the history
+of present illness for your consideration. DocBot does not provide medical advice and the patient has been advised
+to make an appointment with your office to discuss this further. <br/> <br/>
+
+
+<% @summary_content.split(/- /).each_with_index do |bullet_point, i| %>
+  <% if i != 0 %>
+    -
+  <% end %>
+  <%= bullet_point %> <br/>
+<% end %> <br> <br/>
+
+We hope that you find this helpful. <br/>  <br/>
+
+Sincerely,  <br/>  <br/>
+
+DocBot team <br/>
+Feel free to <a href="https://docbot.tech/contact">contact us</a> with any questions or concerns!

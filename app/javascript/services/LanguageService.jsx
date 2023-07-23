@@ -17,7 +17,7 @@ class LanguageService {
                 loading: 'Loading',
                 summaryLoading: 'Summary Loading...',
                 summaryCopied: 'Summary Copied to Clipboard!',
-                summaryEmailSent: 'Summary was successfully emailed! If you do not see it in a few minutes,try checking in your spam email.',
+                summaryEmailSent: 'Summary was successfully emailed! If you do not see it in a few minutes, try checking in your spam email.',
                 // buttons
                 sendButton: 'Send',
                 finishButton: 'Finish',
