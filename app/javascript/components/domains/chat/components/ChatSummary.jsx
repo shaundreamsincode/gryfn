@@ -44,12 +44,26 @@ const ChatSummary = (props) => {
         setSnackbarMessage(LanguageService.translate('summaryCopied'))
     };
 
-    const onEmailSummary = (email) => {
+    const onEmailSummary = (props) => {
+        debugger
+        // birthday
+        //     :
+        //     "asd"
+        // doctorEmail
+        //     :
+        //     "asd@asd.com"
+        // name
+        //     :
+        //     "asdf"
+        // patientEmail
+        //     :
+        //     "asdf"
+        // const doctorEmail,, name,
         setEmailSummaryDialogOpen(false)
 
         ApiService.post(
             `/api/v1/chats/${chat.token}/summaries/${summary.token}/send_email`,
-            { email: email }
+            { email: props.doctorEmail, name: props.name, birthday: props.birthday, patientEmail: props.patientEmail  }
         ).then(() => {
             setSnackbarMessage(LanguageService.translate('summaryEmailSent'))
         })

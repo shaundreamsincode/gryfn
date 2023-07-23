@@ -9,6 +9,7 @@ class SummaryMailerPreview < ActionMailer::Preview
     email = "shauncarland@gmail.com"
 
     # Call the mailer action with the dummy data
-    SummaryMailer.summary_email(email, Summary.last.content)
+    # email:, name:, birthday:, patient_email:, summary_content:
+    SummaryMailer.summary_email(email: email, name: 'Shaun Carland', patient_email: 'shaun@carland.com', birthday: 'August 24, 1992', summary_content: Summary.last.content)
   end
 end

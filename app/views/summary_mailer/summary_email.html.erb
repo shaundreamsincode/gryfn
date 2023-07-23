@@ -5,7 +5,11 @@ AI-powered medical assistant, which summarizes a patient’s chief complaint. Be
 of present illness for your consideration. DocBot does not provide medical advice and the patient has been advised
 to make an appointment with your office to discuss this further. <br/> <br/>
 
+Patient Name: <%= @name %> <br />
+Patient DoB: <%= @birthday %> <br/>
+Patient Email: <%= @patient_email %> <br> <br/>
 
+Summary: <br/>
 <% @summary_content.split(/- /).each_with_index do |bullet_point, i| %>
   <% if i != 0 %>
     -

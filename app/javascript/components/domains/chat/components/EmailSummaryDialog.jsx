@@ -12,14 +12,17 @@ import {
 } from "@material-ui/core";
 
 function EmailSummaryDialog(props) {
-    const [email, setEmail] = useState('')
+    const [doctorEmail, setDoctorEmail] = useState('')
+    const [name, setName] = useState(null)
+    const [birthday, setBirthday] = useState(null)
+    const [patientEmail, setPatientEmail] = useState(null)
     const [isInvalid, setIsInvalid] = useState(false)
 
     const { open, closeDialog, dialogConfirmation } = props
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    const onEmailChange = (newEmail) => {
-        setEmail(newEmail)
+    const onDoctorEmailChange = (newEmail) => {
+        setDoctorEmail(newEmail)
         setIsInvalid(false)
     }
 
@@ -31,10 +34,10 @@ function EmailSummaryDialog(props) {
     const onSubmit = () => {
         setIsInvalid(false)
 
-        const emailIsValid = emailRegex.test(email)
+        const emailIsValid = emailRegex.test(doctorEmail)
 
         if (emailIsValid) {
-            dialogConfirmation(email)
+            dialogConfirmation({ doctorEmail: doctorEmail, name: name, birthday: birthday, patientEmail: patientEmail})
         } else {
             setIsInvalid(true)
         }
@@ -54,11 +57,20 @@ function EmailSummaryDialog(props) {
                 }
 
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <TextField style={{ width: '75%' }} onChange={(event) => onEmailChange(event.target.value)} />
+                    <TextField label="Name" style={{ width: '75%' }} onChange={(event) => setName(event.target.value)} />
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <TextField label="Birthday" style={{ width: '75%' }} onChange={(event) => setBirthday(event.target.value)} />
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <TextField label="Your Email" style={{ width: '75%' }} onChange={(event) => setPatientEmail(event.target.value)} />
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <TextField label="Doctor Email" style={{ width: '75%' }} onChange={(event) => onDoctorEmailChange(event.target.value)} />
                 </div>
                 <DialogActions>
                     <Button onClick={onDialogClose} color="primary"> { LanguageService.translate('cancelButton') }</Button>
-                    <Button onClick={onSubmit} autoFocus color="primary" disabled={email.length === 0}>
+                    <Button onClick={onSubmit} autoFocus color="primary" disabled={doctorEmail.length === 0}>
                         { LanguageService.translate('confirmButton') }
                     </Button>
                 </DialogActions>

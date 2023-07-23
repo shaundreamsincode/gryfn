@@ -15,7 +15,13 @@ class SendSummaryEmail
       return
     end
 
-    SummaryMailer.summary_email(context.email, summary.content).deliver_now
+    SummaryMailer.summary_email(
+      email: context.email,
+      name: context.name,
+      birthday: context.birthday,
+      patient_email: context.patient_email,
+      summary_content: summary.content
+    ).deliver_now
     context.summary = summary
 
     true

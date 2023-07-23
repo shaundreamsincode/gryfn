@@ -12,10 +12,14 @@ module Api
       end
 
       def send_email
+        puts  "params #{params}"
         result = SendSummaryEmail.call(
           chat_token: params[:chat_token],
           summary_token: params[:summary_token],
-          email: params[:email]
+          email: params[:email],
+          name: params[:name],
+          birthday: params[:birthday],
+          patient_email: params[:patientEmail]
         )
 
         if result.error.present?
