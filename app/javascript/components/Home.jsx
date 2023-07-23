@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Disclaimer from "./Disclaimer";
 import { useNavigate } from "react-router-dom";
 import LanguageService from "../services/LanguageService";
-import { Button, Typography } from '@material-ui/core';
+import {Button, CardContent, Typography} from '@material-ui/core';
 
 const Home = () => {
     const initialLanguage = localStorage.getItem('lang') || 'en'
@@ -33,6 +33,9 @@ const Home = () => {
 
             <Button onClick={onLanguageChange} color="primary">{ languageChangeButtonText }</Button>
             <Disclaimer lang={language} />
+            <Button style={{ float: 'right', 'marginBottom': '10px'}}>
+                <a href="https://docbot.tech/contact" style={{ 'textDecoration': 'none' }}>Contact</a>
+            </Button>
         </>
     )
 };

@@ -10,10 +10,6 @@ export default props => <>
                     DocBot
                 </Typography>
                 {Routes}
-
-                <Button>
-                    <a href="https://docbot.tech/contact" style={{ 'textDecoration': 'none' }}>Contact</a>
-                </Button>
             </CardContent>
         </Card>
     </Container>

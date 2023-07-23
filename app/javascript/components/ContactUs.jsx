@@ -1,8 +1,8 @@
 import React from "react";
-import {CardContent, Typography} from "@material-ui/core";
+import {Button, CardContent, Typography} from "@material-ui/core";
 import LanguageService from "../services/LanguageService";
 
-const ContactUs= (props) => {
+const ContactUs = (props) => {
     const { lang } = props
     return(
         <CardContent>
@@ -11,6 +11,10 @@ const ContactUs= (props) => {
 
                 <p>You can contact us by emailing <b>teamdocbot@gmail.com</b>.</p>
             </Typography>
+
+            <Button style={{ float: 'right', 'marginBottom': '10px'}}>
+                <a href="https://docbot.tech" style={{ 'textDecoration': 'none' }}>Home</a>
+            </Button>
         </CardContent>
     )
 }
