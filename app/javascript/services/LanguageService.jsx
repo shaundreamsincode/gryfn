@@ -17,7 +17,7 @@ class LanguageService {
                 loading: 'Loading',
                 summaryLoading: 'Summary Loading...',
                 summaryCopied: 'Summary Copied to Clipboard!',
-                summaryEmailSent: 'Summary was successfully emailed!',
+                summaryEmailSent: 'Summary was successfully emailed! If you do not see it in a few minutes,try checking in your spam email.',
                 // buttons
                 sendButton: 'Send',
                 finishButton: 'Finish',
@@ -49,7 +49,7 @@ class LanguageService {
                 loading: 'Cargando',
                 summaryLoading: 'Resumen Cargando...',
                 summaryCopied: '¡Resumen Copiado al Portapapeles!',
-                summaryEmailSent: '¡Resumen fue enviado con exito!',
+                summaryEmailSent: "¡El resumen se ha enviado por correo electrónico correctamente! Si no lo ves en unos minutos, intenta revisar tu correo electrónico de spam.",
                 // buttons
                 sendButton: 'Enviar',
                 finishButton: 'Finalizar',

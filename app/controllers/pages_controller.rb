@@ -1,8 +1,9 @@
 class PagesController < ApplicationController
   def home
-    # unless session[:user_id].present?
-    #   redirect_to login_path
-    # end
+    respond_to do |format|
+      format.html # Render the default HTML template (if required)
+      format.css  # Render the CSS template for the "text/css" format
+    end
   end
 
   def login
