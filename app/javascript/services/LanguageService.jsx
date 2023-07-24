@@ -1,7 +1,10 @@
 class LanguageService {
+    static currentLanguage() {
+        return localStorage.getItem('lang') || 'en'
+    }
+
     static translate(string, lang = null) {
-        const language = lang || localStorage.getItem('lang') || 'en'
-        return this._locales()[language][string]
+        return this._locales()[this.currentLanguage()][string]
     }
 
     static _locales() {
@@ -23,6 +26,7 @@ class LanguageService {
                 finishButton: 'Finish',
                 clearMessagesButton: 'Clear Messages',
                 homeButton: 'Home',
+                contactButton: 'Contact',
                 copySummaryButton: 'Copy Summary',
                 emailSummaryButton: 'Email Summary',
                 cancelButton: 'Cancel',
@@ -56,6 +60,7 @@ class LanguageService {
                 finishButton: 'Finalizar',
                 clearMessagesButton: 'Borrar Mesajes',
                 homeButton: 'Hogar',
+                contactButton: 'Contactanos',
                 copySummaryButton: 'Copiar Resumen',
                 emailSummaryButton: 'Resumen de Correo Electrónico',
                 cancelButton: 'Cancelar',

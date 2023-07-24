@@ -130,7 +130,7 @@ const Chat = () => {
                     <Disclaimer lang={chat.lang}/>
 
                     <Button style={{ float: 'right', 'marginBottom': '10px'}}>
-                        <a onClick={() => onContactUsClick()} style={{ 'textDecoration': 'none' }}>Contact</a>
+                        <a onClick={() => onContactUsClick()} style={{ 'textDecoration': 'none' }}>{ LanguageService.translate('contactButton') }</a>
                     </Button>
                 </CardContent>
             }

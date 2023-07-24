@@ -9,16 +9,28 @@ import { useNavigate } from "react-router-dom";const ContactUs = (props) => {
     const onHomeClick = () => {
         navigate('/')
     }
+
     return(
         <CardContent>
             <Typography variant="caption" color="text.secondary" align="center">
-                <p>DocBot was built by <a href="https://www.linkedin.com/in/corinne-carland">Corinne</a> and <a href="https://shauncarland.com">Shaun Carland</a>.</p>
+                {
+                    LanguageService.currentLanguage() === 'en' && <>
+                        <p>DocBot was built by <a href="https://www.linkedin.com/in/corinne-carland">Corinne</a> and <a href="https://shauncarland.com">Shaun Carland</a>.</p>
 
-                <p>You can contact us by emailing <b>teamdocbot@gmail.com</b>.</p>
+                        <p>You can contact us by emailing <b>teamdocbot@gmail.com</b>.</p>
+                    </>
+                }
+                {
+                    LanguageService.currentLanguage() === 'es' && <>
+                        <p>DocBot fue construido por <a href="https://www.linkedin.com/in/corinne-carland">Corinne</a> y <a href="https://shauncarland.com">Shaun Carland</a>.</p>
+
+                        <p>Puede ponerse en contacto con nosotros enviando un correo electrónico <b>teamdocbot@gmail.com</b>.</p>
+                    </>
+                }
             </Typography>
 
             <Button style={{ float: 'right', 'marginBottom': '10px'}}>
-                <a onClick={() => onHomeClick()} style={{ 'textDecoration': 'none' }}>Home</a>
+                <a onClick={() => onHomeClick()} style={{ 'textDecoration': 'none' }}>{ LanguageService.translate('homeButton') }</a>
             </Button>
         </CardContent>
     )

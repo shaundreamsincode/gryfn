@@ -3,6 +3,7 @@ import Disclaimer from "./Disclaimer";
 import { useNavigate } from "react-router-dom";
 import LanguageService from "../services/LanguageService";
 import {Button, CardContent, Typography} from '@material-ui/core';
+import TranslateService from "../services/LanguageService";
 
 const Home = () => {
     const initialLanguage = localStorage.getItem('lang') || 'en'
@@ -38,7 +39,7 @@ const Home = () => {
             <Button onClick={onLanguageChange} color="primary">{ languageChangeButtonText }</Button>
             <Disclaimer lang={language} />
             <Button style={{ float: 'right', 'marginBottom': '10px'}}>
-                <a onClick={() => onContactUsClick()} style={{ 'textDecoration': 'none' }}>Contact</a>
+                <a onClick={() => onContactUsClick()} style={{ 'textDecoration': 'none' }}>{ TranslateService.translate('contactButton') }</a>
             </Button>
         </>
     )
