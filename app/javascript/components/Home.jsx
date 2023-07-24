@@ -34,7 +34,7 @@ const Home = () => {
             <Button onClick={onLanguageChange} color="primary">{ languageChangeButtonText }</Button>
             <Disclaimer lang={language} />
             <Button style={{ float: 'right', 'marginBottom': '10px'}}>
-                <a href="https://docbot.tech/contact" style={{ 'textDecoration': 'none' }}>Contact</a>
+                <a href="https://docbot.tech/contact#" style={{ 'textDecoration': 'none' }}>Contact</a>
             </Button>
         </>
     )

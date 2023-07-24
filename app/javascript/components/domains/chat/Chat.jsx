@@ -127,7 +127,7 @@ const Chat = () => {
                     <Disclaimer lang={chat.lang}/>
 
                     <Button style={{ float: 'right', 'marginBottom': '10px'}}>
-                        <a href="https://docbot.tech/contact" style={{ 'textDecoration': 'none' }}>Contact</a>
+                        <a href="https://docbot.tech/contact#" style={{ 'textDecoration': 'none' }}>Contact</a>
                     </Button>
                 </CardContent>
             }
