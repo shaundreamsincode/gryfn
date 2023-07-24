@@ -57,19 +57,19 @@ function EmailSummaryDialog(props) {
                     </DialogContentText>
                 )}
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <TextField label="Name" style={{ width: '75%' }} onChange={(event) => setName(event.target.value)} />
+                    <TextField label={LanguageService.translate('name')} style={{ width: '75%' }} onChange={(event) => setName(event.target.value)} />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <TextField label="Birthday" style={{ width: '75%' }} onChange={(event) => setBirthday(event.target.value)} />
+                    <TextField label={ LanguageService.translate('birthday') } style={{ width: '75%' }} onChange={(event) => setBirthday(event.target.value)} />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <TextField label="Your Email" style={{ width: '75%' }} onChange={(event) => setPatientEmail(event.target.value)} />
+                    <TextField label={LanguageService.translate('yourEmail')} style={{ width: '75%' }} onChange={(event) => setPatientEmail(event.target.value)} />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <TextField label="Doctor Email" style={{ width: '75%' }} onChange={(event) => onDoctorEmailChange(event.target.value)} />
+                    <TextField label={LanguageService.translate('doctorEmail')} style={{ width: '75%' }} onChange={(event) => onDoctorEmailChange(event.target.value)} />
                 </div>
             </DialogContent>
-            <DialogActions>
+            <DialogActions style={{'marginTop': '10px', 'marginRight': '10px' }}>
                 <Button onClick={onDialogClose} color="primary">
                     {LanguageService.translate('cancelButton')}
                 </Button>
@@ -77,10 +77,9 @@ function EmailSummaryDialog(props) {
                     {LanguageService.translate('confirmButton')}
                 </Button>
             </DialogActions>
-
-            <Typography variant="caption" color="text.secondary" align="center" style={{ 'marginBottom': '15px' }}>
-                { LanguageService.translate('emailDisclaimer') }
-            </Typography>
+            <DialogContent>
+                <DialogContentText>{ LanguageService.translate('emailDisclaimer') }</DialogContentText>
+            </DialogContent>
         </Dialog>
     );
 }
