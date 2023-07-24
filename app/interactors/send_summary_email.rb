@@ -24,6 +24,8 @@ class SendSummaryEmail
     ).deliver_now
     context.summary = summary
 
+    Event.create!(name: 'summary_email_sent')
+
     true
   end
 end

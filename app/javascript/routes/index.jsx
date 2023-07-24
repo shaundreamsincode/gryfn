@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "../components/Home";
 import Chat from "../components/domains/chat/Chat";
 import ContactUs from "../components/ContactUs";
+import Analytics from "../components/domains/analytics/Analytics";
 
 export default (
     <Router>
@@ -11,6 +12,7 @@ export default (
             <Routes>
                 <Route exact path='/' element={<Home/>}/>
                 <Route exact path='/contact' element={<ContactUs/>}/>
+                <Route exact path='/analytics' element={<Analytics/>}/>
                 <Route path='/chats/:token' element={<Chat/>}/>
                 <Route path='/chats' element={<Chat/>}/>
 

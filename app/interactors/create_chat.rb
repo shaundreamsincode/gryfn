@@ -9,6 +9,7 @@ class CreateChat
     chat.messages.create!(content: system_prompt, role: 'system', is_prompt: true)
     chat.messages.create!(content: initial_message_content, role: 'assistant', is_prompt: true)
 
+    Event.create!(name: 'chat_created')
     context.chat = chat
   end
 

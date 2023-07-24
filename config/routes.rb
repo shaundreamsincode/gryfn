@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      resources :analytics, only: :index
+
       resources :chats, only: [], param: :token do
         resources :messages, only: %i(create)
         resources :summaries, only: %i(create)
