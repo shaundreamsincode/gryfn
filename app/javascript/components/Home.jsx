@@ -9,6 +9,10 @@ const Home = () => {
     const [language, setLanguage] = useState(initialLanguage)
     const navigate = useNavigate()
 
+    const onContactUsClick = () => {
+        navigate('/contact')
+    }
+
     const onLanguageChange = () => {
         const newLanguage = language === 'en' ? 'es' : 'en'
         localStorage.setItem('lang', newLanguage)
@@ -34,7 +38,7 @@ const Home = () => {
             <Button onClick={onLanguageChange} color="primary">{ languageChangeButtonText }</Button>
             <Disclaimer lang={language} />
             <Button style={{ float: 'right', 'marginBottom': '10px'}}>
-                <a href="https://docbot.tech/contact#" style={{ 'textDecoration': 'none' }}>Contact</a>
+                <a onClick={() => onContactUsClick()} style={{ 'textDecoration': 'none' }}>Contact</a>
             </Button>
         </>
     )

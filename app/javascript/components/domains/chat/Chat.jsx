@@ -23,6 +23,9 @@ const Chat = () => {
     }
     const chatIsNew = urlToken === 'new'
 
+    const onContactUsClick = () => {
+        navigate('/contact')
+    }
 
     const onSendMessage = (messageContent) => {
         setSendMessageLoading(true)
@@ -127,7 +130,7 @@ const Chat = () => {
                     <Disclaimer lang={chat.lang}/>
 
                     <Button style={{ float: 'right', 'marginBottom': '10px'}}>
-                        <a href="https://docbot.tech/contact#" style={{ 'textDecoration': 'none' }}>Contact</a>
+                        <a onClick={() => onContactUsClick()} style={{ 'textDecoration': 'none' }}>Contact</a>
                     </Button>
                 </CardContent>
             }

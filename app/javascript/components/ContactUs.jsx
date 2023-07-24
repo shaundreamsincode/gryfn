@@ -2,8 +2,13 @@ import React from "react";
 import {Button, CardContent, Typography} from "@material-ui/core";
 import LanguageService from "../services/LanguageService";
 
-const ContactUs = (props) => {
+import { useNavigate } from "react-router-dom";const ContactUs = (props) => {
     const { lang } = props
+    const navigate = useNavigate()
+
+    const onHomeClick = () => {
+        navigate('/')
+    }
     return(
         <CardContent>
             <Typography variant="caption" color="text.secondary" align="center">
@@ -13,7 +18,7 @@ const ContactUs = (props) => {
             </Typography>
 
             <Button style={{ float: 'right', 'marginBottom': '10px'}}>
-                <a href="https://docbot.tech" style={{ 'textDecoration': 'none' }}>Home</a>
+                <a onClick={() => onHomeClick()} style={{ 'textDecoration': 'none' }}>Home</a>
             </Button>
         </CardContent>
     )
