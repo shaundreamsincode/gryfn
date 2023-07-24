@@ -9,8 +9,8 @@ module Api
         if chat.nil?
           # todo - make error messages less hacky lol
           render json: { error: 'chatNotFound' }, status: :not_found
-        # elsif chat.closed_at.present?
-        #   render json: { error: 'chatClosed' }, status: :unprocessable_entity
+        elsif chat.closed_at.present?
+          render json: { error: 'chatClosed' }, status: :unprocessable_entity
         else
           # todo - possibly filter out system messages here...?
           render json: chat.to_json(include: [:messages])
