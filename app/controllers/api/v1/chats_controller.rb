@@ -12,6 +12,7 @@ module Api
         elsif chat.closed_at.present?
           render json: { error: 'chatClosed' }, status: :unprocessable_entity
         else
+          Event.create!(name: :chat_viewed)
           # todo - possibly filter out system messages here...?
           render json: chat.to_json(include: [:messages])
         end

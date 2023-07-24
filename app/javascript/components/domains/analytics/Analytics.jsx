@@ -5,6 +5,7 @@ import { List, ListItem } from "@material-ui/core";
 
 const Analytics = () => {
     const [chatCreatedEvents, setChatCreatedEvents] = useState([])
+    const [chatViewedEvents, setChatViewedEvents] = useState([])
     const [summaryEmailSentEvents, setSummaryEmailSentEvents] = useState([])
     const [homePageViewedEvents, setHomePageViewedEvents] = useState([])
 
@@ -13,6 +14,7 @@ const Analytics = () => {
             debugger
 
             setChatCreatedEvents(response.data.chat_created_events)
+            setChatViewedEvents(response.data.chat_viewed_events)
             setSummaryEmailSentEvents(response.data.summary_email_sent_events)
             setHomePageViewedEvents(response.data.home_page_viewed)
 
@@ -30,6 +32,14 @@ const Analytics = () => {
 
         <List>
             { chatCreatedEvents.map((event) => <ListItem>{ event.created_at }</ListItem>) }
+        </List>
+
+        <Typography>
+            Chat(s) viewed: { chatViewedEvents.length }
+        </Typography>
+
+        <List>
+            { chatViewedEvents.map((event) => <ListItem>{ event.created_at }</ListItem>) }
         </List>
 
         <Typography>
