@@ -13,7 +13,7 @@ import {
 function EmailSummaryDialog(props) {
     const [doctorEmail, setDoctorEmail] = useState('');
     const [name, setName] = useState('');
-    const [birthday, setBirthday] = useState('');
+    const [dateOfBirth, setDateOfBirth] = useState('');
     const [patientEmail, setPatientEmail] = useState('');
     const [doctorEmailIsInvalid, setDoctorEmailIsInvalid] = useState(false);
     const [patientEmailIsInvalid, setPatientEmailIsInvalid] = useState(false);
@@ -25,9 +25,6 @@ function EmailSummaryDialog(props) {
         setDoctorEmailIsInvalid(false)
         setPatientEmailIsInvalid(false)
     }
-    const onDoctorEmailChange = (newEmail) => {
-        setDoctorEmail(newEmail);
-    };
 
     const onDialogClose = () => {
         clearErrorsFromForm(false);
@@ -43,7 +40,7 @@ function EmailSummaryDialog(props) {
             return dialogConfirmation({
                 doctorEmail: doctorEmail,
                 name: name,
-                birthday: birthday,
+                dateOfBirth: dateOfBirth,
                 patientEmail: patientEmail
             });
         }
@@ -75,7 +72,7 @@ function EmailSummaryDialog(props) {
                     <TextField label={LanguageService.translate('name')} style={{ width: '75%' }} onChange={(event) => setName(event.target.value)} />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <TextField label={ LanguageService.translate('dateOfBirth') } style={{ width: '75%' }} onChange={(event) => setBirthday(event.target.value)} />
+                    <TextField label={ LanguageService.translate('dateOfBirth') } style={{ width: '75%' }} onChange={(event) => setDateOfBirth(event.target.value)} />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <TextField label={LanguageService.translate('yourEmail')} style={{ width: '75%' }} onChange={(event) => setPatientEmail(event.target.value)} />
@@ -88,7 +85,7 @@ function EmailSummaryDialog(props) {
                 <Button onClick={onDialogClose} color="primary">
                     {LanguageService.translate('cancelButton')}
                 </Button>
-                <Button onClick={onSubmit} autoFocus color="primary" disabled={doctorEmail.length === 0 || name.length === 0 || patientEmail.length === 0 || birthday.length === 0}>
+                <Button onClick={onSubmit} autoFocus color="primary" disabled={doctorEmail.length === 0 || name.length === 0 || patientEmail.length === 0 || dateOfBirth.length === 0}>
                     {LanguageService.translate('confirmButton')}
                 </Button>
             </DialogActions>

@@ -45,6 +45,7 @@ const ChatSummary = (props) => {
     };
 
     const onEmailSummary = (props) => {
+        console.log(props)
         debugger
         // birthday
         //     :
@@ -63,7 +64,12 @@ const ChatSummary = (props) => {
 
         ApiService.post(
             `/api/v1/chats/${chat.token}/summaries/${summary.token}/send_email`,
-            { email: props.doctorEmail, name: props.name, birthday: props.birthday, patientEmail: props.patientEmail  }
+            {
+                doctor_email: props.doctorEmail,
+                name: props.name,
+                date_of_birth: props.dateOfBirth,
+                patient_email: props.patientEmail
+            }
         ).then(() => {
             setSnackbarMessage(LanguageService.translate('summaryEmailSent'))
         })
