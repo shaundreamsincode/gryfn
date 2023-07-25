@@ -91,11 +91,11 @@ const Messages = (props) => {
                 <Toolbar style={{display:'flex', justifyContent:"space-between", width:'100%'}}>
                     <Box display='flex' flexGrow={1}>
                         <Grid xs={11} style={ { marginTop: "30px" } } align="left">
-                            <Button onClick={closeChat} color="primary"> { LanguageService.translate('finishButton') }</Button>
+                            <Button onClick={() => setClearMessagesDialogOpen(true)} color="primary"> { LanguageService.translate('clearMessagesButton') }</Button>
                         </Grid>
 
                         <Grid xs={11} style={ { marginTop: "30px" } } align="left">
-                            <Button onClick={() => setClearMessagesDialogOpen(true)} color="primary"> { LanguageService.translate('clearMessagesButton') }</Button>
+                            <Button onClick={closeChat} color="primary"> { LanguageService.translate('finishButton') }</Button>
                         </Grid>
                     </Box>
                 </Toolbar>
