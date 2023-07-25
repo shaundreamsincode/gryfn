@@ -41,7 +41,8 @@ class LanguageService {
                 noUserMessages: 'Patient did not interact with the chatbot.',
                 emailSummaryInstructions: 'Please enter the email you want to send the summary to.',
                 sendSummaryTitle: 'Send Summary',
-                emailIsInvalidError: 'Email is invalid',
+                doctorEmailIsInvalidError: 'Doctor email is invalid',
+                patientEmailIsInvalidError: 'Patient email is invalid',
                 confirmProceed: 'Are you sure you want to proceed?',
                 clearMessagesDialogTitle: 'Clear Messages',
                 emailDisclaimer: "DocBot will NEVER store your name, birthday, email, or doctors email."
@@ -79,7 +80,8 @@ class LanguageService {
                 noUserMessages: 'El paciente no interactuó con el chatbot.',
                 emailSummaryInstructions: 'Por favor, introduzca el correo electrónico al que desea enviar el resumen.',
                 sendSummaryTitle: 'Enviar Resumen',
-                emailIsInvalidError: 'El correo electrónico es invalido',
+                doctorEmailIsInvalidError: 'El correo electrónico del medico es invalido',
+                patientEmailIsInvalidError: 'El correo electrónico del paciente es invalido',
                 confirmProceed: '¿Estas seguro que deseas continuar?',
                 clearMessagesDialogTitle: 'Borrar Mensajes',
                 emailDisclaimer: "DocBot NUNCA almacenará su nombre, cumpleaños, correo electrónico o correo electrónico del médico."

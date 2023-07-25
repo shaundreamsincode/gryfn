@@ -15,47 +15,63 @@ function EmailSummaryDialog(props) {
     const [name, setName] = useState('');
     const [birthday, setBirthday] = useState('');
     const [patientEmail, setPatientEmail] = useState('');
-    const [isInvalid, setIsInvalid] = useState(false);
+    const [doctorEmailIsInvalid, setDoctorEmailIsInvalid] = useState(false);
+    const [patientEmailIsInvalid, setPatientEmailIsInvalid] = useState(false);
 
     const { open, closeDialog, dialogConfirmation } = props;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+    const clearErrorsFromForm = () => {
+        setDoctorEmailIsInvalid(false)
+        setPatientEmailIsInvalid(false)
+    }
     const onDoctorEmailChange = (newEmail) => {
         setDoctorEmail(newEmail);
-        setIsInvalid(false);
+        clearErrorsFromForm();
     };
 
     const onDialogClose = () => {
-        setIsInvalid(false);
+        clearErrorsFromForm(false);
         closeDialog();
     };
 
     const onSubmit = () => {
-        setIsInvalid(false);
-        const emailIsValid = emailRegex.test(doctorEmail);
+        clearErrorsFromForm();
+        const doctorEmailIsValid = emailRegex.test(doctorEmail);
+        const patientEmailIsValid = emailRegex.test(patientEmail)
 
-        if (emailIsValid) {
-            dialogConfirmation({
+        if (doctorEmailIsValid && patientEmailIsValid) {
+            return dialogConfirmation({
                 doctorEmail: doctorEmail,
                 name: name,
                 birthday: birthday,
                 patientEmail: patientEmail
             });
-        } else {
-            setIsInvalid(true);
         }
-    };
 
+        if (!doctorEmailIsValid) {
+            setDoctorEmailIsInvalid(true)
+        }
+
+        if (!patientEmailIsValid) {
+            setPatientEmailIsInvalid(true)
+        }
+    }
     return (
         <Dialog open={open} onClose={closeDialog}>
             <DialogTitle>{LanguageService.translate('sendSummaryTitle')}</DialogTitle>
             <DialogContent>
                 <DialogContentText>{LanguageService.translate('emailSummaryInstructions')}</DialogContentText>
-                {isInvalid && (
+                {doctorEmailIsInvalid && (
                     <DialogContentText variant="caption" align="center" style={{ color: 'red' }}>
-                        {LanguageService.translate('emailIsInvalidError')}
+                        {LanguageService.translate('doctorEmailIsInvalidError')}
                     </DialogContentText>
                 )}
+                {
+                    patientEmailIsInvalid && <DialogContentText variant="caption" align="center" style={{ color: 'red' }}>
+                        {LanguageService.translate('patientEmailIsInvalidError')}
+                    </DialogContentText>
+                }
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <TextField label={LanguageService.translate('name')} style={{ width: '75%' }} onChange={(event) => setName(event.target.value)} />
                 </div>
