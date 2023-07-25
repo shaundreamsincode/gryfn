@@ -27,7 +27,6 @@ function EmailSummaryDialog(props) {
     }
     const onDoctorEmailChange = (newEmail) => {
         setDoctorEmail(newEmail);
-        clearErrorsFromForm();
     };
 
     const onDialogClose = () => {
@@ -76,13 +75,13 @@ function EmailSummaryDialog(props) {
                     <TextField label={LanguageService.translate('name')} style={{ width: '75%' }} onChange={(event) => setName(event.target.value)} />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <TextField label={ LanguageService.translate('birthday') } style={{ width: '75%' }} onChange={(event) => setBirthday(event.target.value)} />
+                    <TextField label={ LanguageService.translate('dateOfBirth') } style={{ width: '75%' }} onChange={(event) => setBirthday(event.target.value)} />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <TextField label={LanguageService.translate('yourEmail')} style={{ width: '75%' }} onChange={(event) => setPatientEmail(event.target.value)} />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <TextField label={LanguageService.translate('doctorEmail')} style={{ width: '75%' }} onChange={(event) => onDoctorEmailChange(event.target.value)} />
+                    <TextField label={LanguageService.translate('doctorEmail')} style={{ width: '75%' }} onChange={(event) => setDoctorEmail(event.target.value)} />
                 </div>
             </DialogContent>
             <DialogActions style={{'marginTop': '10px', 'marginRight': '10px' }}>

@@ -17,7 +17,7 @@ class LanguageService {
                 patient: 'PATIENT',
                 doctor: 'DOCBOT',
                 name: 'Name',
-                birthday: 'Date of Birth',
+                dateOfBirth: 'Date of Birth',
                 doctorEmail: 'Doctor Email',
                 yourEmail: 'Your Email',
                 chatTextboxPlaceholder: 'Type Something',
@@ -61,7 +61,7 @@ class LanguageService {
                 summaryCopied: '¡Resumen Copiado al Portapapeles!',
                 summaryEmailSent: "¡El resumen se ha enviado por correo electrónico correctamente! Si no lo ves en unos minutos, intenta revisar tu correo electrónico de spam.",
                 name: 'Nombre',
-                birthday: 'Fecha de nacimiento',
+                dateOfBirth: 'Fecha de nacimiento',
                 doctorEmail: 'Correo electrónico del médico',
                 yourEmail: 'Su Correo Electrónico',
                 // buttons
