@@ -12,10 +12,6 @@ module Api
       end
 
       def send_email
-        puts  "params #{params}"
-
-        byebug
-
         result = SendSummaryEmail.call(
           chat_token: params[:chat_token],
           summary_token: params[:summary_token],
