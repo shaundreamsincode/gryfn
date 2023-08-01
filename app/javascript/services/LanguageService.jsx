@@ -35,6 +35,7 @@ class LanguageService {
                 emailSummaryButton: 'Email Summary',
                 cancelButton: 'Cancel',
                 confirmButton: 'Confirm',
+                privacyPolicyButton: 'Privacy Policy',
                 //
                 chatClosed: 'Chat has been closed by the user.',
                 chatNotFound: 'Chat not found.',
@@ -74,6 +75,7 @@ class LanguageService {
                 emailSummaryButton: 'Resumen de Correo Electrónico',
                 cancelButton: 'Cancelar',
                 confirmButton: 'Confirmar',
+                privacyPolicyButton: 'Política de Privacidad',
                 //
                 chatClosed: 'El chat ha sido cerrado por el usuario.',
                 chatNotFound: 'Chat no encontrado.',

@@ -14,6 +14,9 @@ const Footer = (props) => {
         <Button style={{ float: 'right', 'marginBottom': '10px'}}>
             <a onClick={() => navigate('/contact')} style={{ 'textDecoration': 'none' }}>{ LanguageService.translate('contactButton') }</a>
         </Button>
+        <Button style={{ float: 'right', 'marginBottom': '10px'}}>
+            <a onClick={() => navigate('/privacy_policy')} style={{ 'textDecoration': 'none' }}>{ LanguageService.translate('privacyPolicyButton') }</a>
+        </Button>
     </>)
 }
 

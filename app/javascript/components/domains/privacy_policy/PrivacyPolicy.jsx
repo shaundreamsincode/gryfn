@@ -1,12 +1,15 @@
 import React from "react";
 import {Typography} from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
 
 const PrivacyPolicy = (props) => {
     const { lang } = props
+    const navigate = useNavigate()
+
     return(
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             <p>
-                Effective Date: August 1, 2023
+                Effective Date: <u>August 1, 2023</u>
             </p>
             <p>
                DocBot is committed to protecting the privacy and security of your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard the personal data we obtain through our healthcare artificial intelligence (AI) platform and related services ("Services"). By using our Services, you agree to the practices described in this Privacy Policy.
@@ -99,6 +102,9 @@ const PrivacyPolicy = (props) => {
                 Our Services are not intended for use by children under the age of 18. If we learn that we have collected personal information from a child without parental consent, we will take appropriate steps to remove such data from our systems.
 
             </p>
+
+            <h2>Contact</h2>
+            Click <b><a onClick={() => navigate('/contact')}>here</a></b> to contact the DocBot team directly.
         </Typography>
     )
 }
