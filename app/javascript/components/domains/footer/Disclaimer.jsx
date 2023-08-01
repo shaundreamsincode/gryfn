@@ -1,6 +1,6 @@
 import React from "react";
 import {CardContent, Typography} from "@material-ui/core";
-import LanguageService from "../services/LanguageService";
+import LanguageService from "../../../services/LanguageService";
 
 const Disclaimer = (props) => {
     const { lang } = props

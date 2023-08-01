@@ -1,18 +1,15 @@
 import React, { useState } from "react";
-import Disclaimer from "./Disclaimer";
+import Disclaimer from "./domains/footer/Disclaimer";
 import { useNavigate } from "react-router-dom";
 import LanguageService from "../services/LanguageService";
 import {Button, CardContent, Typography} from '@material-ui/core';
 import TranslateService from "../services/LanguageService";
+import Footer from "./domains/footer/Footer";
 
 const Home = () => {
     const initialLanguage = localStorage.getItem('lang') || 'en'
     const [language, setLanguage] = useState(initialLanguage)
     const navigate = useNavigate()
-
-    const onContactUsClick = () => {
-        navigate('/contact')
-    }
 
     const onLanguageChange = () => {
         const newLanguage = language === 'en' ? 'es' : 'en'
@@ -37,10 +34,7 @@ const Home = () => {
             </Typography>
 
             <Button onClick={onLanguageChange} color="primary">{ languageChangeButtonText }</Button>
-            <Disclaimer lang={language} />
-            <Button style={{ float: 'right', 'marginBottom': '10px'}}>
-                <a onClick={() => onContactUsClick()} style={{ 'textDecoration': 'none' }}>{ TranslateService.translate('contactButton') }</a>
-            </Button>
+            <Footer lang={language}/>
         </>
     )
 };

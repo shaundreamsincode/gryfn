@@ -3,8 +3,9 @@ import ApiService from "../../../../services/ApiService";
 import LanguageService from "../../../../services/LanguageService";
 import { Button, Typography, Snackbar, Toolbar } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-import Disclaimer from "../../../Disclaimer";
+import Disclaimer from "../../footer/Disclaimer";
 import EmailSummaryDialog from "./EmailSummaryDialog";
+import Footer from "../../footer/Footer";
 
 const ChatSummary = (props) => {
     const { chat } = props;
@@ -126,7 +127,7 @@ const ChatSummary = (props) => {
                     </Button>
                 }
             </Toolbar>
-            <Disclaimer lang={chat.language}/>
+            <Footer lang={chat.language}/>
             <EmailSummaryDialog open={emailSummaryDialogOpen}
                                 closeDialog={() => { setEmailSummaryDialogOpen(false) } }
                                     dialogConfirmation={onEmailSummary}

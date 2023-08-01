@@ -4,8 +4,9 @@ import LanguageService from "../../../services/LanguageService";
 import { useNavigate } from "react-router-dom";
 import Messages from "./components/Messages";
 import ChatSummary from "./components/ChatSummary";
-import Disclaimer from "../../Disclaimer";
+import Disclaimer from "../footer/Disclaimer";
 import {Typography, Divider, Button, CardContent} from "@material-ui/core";
+import Footer from "../footer/Footer";
 
 const Chat = () => {
     const [chat, setChat] = useState(null)
@@ -127,11 +128,7 @@ const Chat = () => {
                               closeChat={onCloseChat}
                     />
                     <Divider/>
-                    <Disclaimer lang={chat.lang}/>
-
-                    <Button style={{ float: 'right', 'marginBottom': '10px'}}>
-                        <a onClick={() => onContactUsClick()} style={{ 'textDecoration': 'none' }}>{ LanguageService.translate('contactButton') }</a>
-                    </Button>
+                    <Footer lang={chat.lang}/>
                 </CardContent>
             }
         </>
