@@ -5,6 +5,7 @@ import Home from "../components/Home";
 import Chat from "../components/domains/chat/Chat";
 import ContactUs from "../components/ContactUs";
 import Analytics from "../components/domains/analytics/Analytics";
+import PrivacyPolicy from "../components/domains/privacy_policy/PrivacyPolicy";
 
 export default (
     <Router>
@@ -15,6 +16,8 @@ export default (
                 <Route exact path='/analytics' element={<Analytics/>}/>
                 <Route path='/chats/:token' element={<Chat/>}/>
                 <Route path='/chats' element={<Chat/>}/>
+
+                <Route path="privacy_policy" element={<PrivacyPolicy/>}/>
 
                 {/*<Route exact path='/' element={<PrivateRoute/>}>*/}
                 {/*    <Route exact path='/' element={<Home/>}/>*/}
