@@ -7,9 +7,8 @@ export default props => <>
         <Card sx={{ minWidth: 275 }}>
             <CardContent>
                 <Typography component="h1" variant="h4" align="center">
-                    DocBot
+                    GRYFN
                 </Typography>
-                {Routes}
             </CardContent>
         </Card>
     </Container>
