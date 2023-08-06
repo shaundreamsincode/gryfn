@@ -1,7 +1,7 @@
 databases:
-  - name: docbot_production
-    databaseName: docbot_production
-    user: shaun
+  - name: gryfn_production
+    databaseName: gryfn_production
+    user: gryfn
 
 services:
   - type: web
@@ -12,7 +12,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: docbot_production
+          name: gryfn_production
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
