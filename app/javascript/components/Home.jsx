@@ -22,7 +22,9 @@ const Home = () => {
     return(
         <>
             <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
-                gryfh
+                {
+                    LanguageService.translate('about')
+                }
             </Typography>
 
             <Typography color="text.secondary" align="center" component="h1" variant="h4" gutterBottom>
