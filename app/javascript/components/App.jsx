@@ -9,6 +9,7 @@ export default props => <>
                 <Typography component="h1" variant="h4" align="center">
                     GRYFN
                 </Typography>
+                {Routes}
             </CardContent>
         </Card>
     </Container>
