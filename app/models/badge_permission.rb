@@ -1,3 +1,0 @@
-class BadgePermission < ApplicationRecord
-
-end

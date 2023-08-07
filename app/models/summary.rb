@@ -1,5 +1,0 @@
-class Summary < ApplicationRecord
-  has_secure_token
-
-  belongs_to :chat
-end
