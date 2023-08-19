@@ -6,9 +6,11 @@ import Register from "./onboarding/Register"
 import Instructions from "./onboarding/Instructions";
 import PrivacyPolicy from "./onboarding/PrivacyPolicy";
 
+import Survey from "./Survey";
+import AudioQuestion from "./AudioQuestion";
+
 import Eidetic from "./Eidetic";
 import Phonetic from "./Phonetic";
-
 
 export default (
     <Router>
@@ -18,6 +20,9 @@ export default (
                 <Route exact path='/register' element={<Register/>}/>
                 <Route exact path='/instructions' element={<Instructions/>}/>
                 <Route exact path='/privacy_policy' element={<PrivacyPolicy/>}/>
+
+                <Route exact path='/survey' element={<Survey/>}/>
+                <Route exact path='/audio_question' element={<AudioQuestion/>}/>
 
                 <Route exact path='/eidetic' element={<Eidetic/>}/>
                 <Route exact path='/phonetic' element={<Phonetic/>}/>
