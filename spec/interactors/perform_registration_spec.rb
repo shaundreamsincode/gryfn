@@ -23,7 +23,8 @@ RSpec.describe PerformRegistration do
                          email: 'spongebob@squarepants.com',
                          birth_year: 1992,
                          country: 'USA',
-                         zip_code: '04076'
+                         zip_code: '04076',
+                         organization_id: Organization.last.id
                        )
   end
 end
