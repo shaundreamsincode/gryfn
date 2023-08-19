@@ -17,7 +17,7 @@ RSpec.describe RegistrationsController, type: :request do
 
       expect(Account.count).to eq(1)
       expect(IntakeAssessment.count).to eq(1)
-      expect(IntakeAudioQuestion.count).to eq(4)
+      expect(IntakeQuestion.count).to eq(4)
     end
   end
 end

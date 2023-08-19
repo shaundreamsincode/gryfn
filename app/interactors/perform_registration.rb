@@ -13,17 +13,17 @@ class PerformRegistration
     )
 
     assessment = IntakeAssessment.create!(account: context.account)
-    audio_questions = create_audio_questions!(assessment)
-    assessment.update!(current_audio_question_id: audio_questions.first.id)
+    questions = create_questions!(assessment)
+    # assessment.update!(current_audio_question_id: audio_questions.first.id)
 
     context.assessment = assessment
   end
 
-  private def create_audio_questions!(assessment)
+  private def create_questions!(assessment)
     questions = []
 
     # PHONETIC QUESTIONS
-    questions << IntakeAudioQuestion.create!(
+    questions << IntakeQuestion.create!(
       intake_assessment: assessment,
       index: 0,
       answer: 'above',
@@ -31,7 +31,7 @@ class PerformRegistration
       question_type: 'phonetic'
     )
 
-    questions << IntakeAudioQuestion.create!(
+    questions << IntakeQuestion.create!(
       intake_assessment: assessment,
       index: 1,
       answer: 'achieve',
@@ -40,7 +40,7 @@ class PerformRegistration
     )
 
     # EIDETIC QUESTIONS
-    questions << IntakeAudioQuestion.create!(
+    questions << IntakeQuestion.create!(
       intake_assessment: assessment,
       index: 1,
       answer: 'was',
@@ -48,7 +48,7 @@ class PerformRegistration
       question_type: 'eidetic'
     )
 
-    questions << IntakeAudioQuestion.create!(
+    questions << IntakeQuestion.create!(
       intake_assessment: assessment,
       index: 1,
       answer: 'what',

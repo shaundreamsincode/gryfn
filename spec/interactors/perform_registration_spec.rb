@@ -14,11 +14,11 @@ RSpec.describe PerformRegistration do
 
     expect(Account.count).to eq(1)
     expect(IntakeAssessment.count).to eq(1)
-    expect(IntakeAudioQuestion.count).to eq(4)
+    expect(IntakeQuestion.count).to eq(4)
 
     account = Account.first
     assessment = IntakeAssessment.first
-    audio_question = IntakeAudioQuestion.first
+    audio_question = IntakeQuestion.first
 
     expect(account).to have_attributes(
                          name: 'Spongebob',
@@ -30,8 +30,6 @@ RSpec.describe PerformRegistration do
 
     expect(assessment).to have_attributes(
                             account_id: account.id,
-                            intake_survey_response_id: nil,
-                            current_audio_question_id: audio_question.id
                           )
   end
 end

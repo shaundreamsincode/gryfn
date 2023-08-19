@@ -4,11 +4,6 @@ class CreateIntakeSurveyResponses < ActiveRecord::Migration[7.0]
       t.string :token
 
       t.references :intake_assessment
-
-      t.string :highest_level_of_education, null: false
-      t.boolean :previously_diagnosed_with_learning_disability, null: false
-      t.datetime :date_of_last_eye_examination, null: false
-
       t.timestamps
     end
   end

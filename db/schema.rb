@@ -39,24 +39,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_054413) do
   create_table "intake_assessments", force: :cascade do |t|
     t.string "token"
     t.bigint "account_id"
-    t.bigint "intake_survey_response_id"
-    t.integer "current_audio_question_id"
+    t.string "level_of_education"
+    t.boolean "previously_diagnosed"
+    t.datetime "last_eye_examination_at"
+    t.integer "current_question_index", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_intake_assessments_on_account_id"
-    t.index ["intake_survey_response_id"], name: "index_intake_assessments_on_intake_survey_response_id"
   end
 
-  create_table "intake_audio_question_responses", force: :cascade do |t|
+  create_table "intake_question_responses", force: :cascade do |t|
     t.string "token"
-    t.bigint "intake_audio_question_id"
+    t.bigint "intake_question_id"
     t.string "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["intake_audio_question_id"], name: "index_audio_on_question_id"
+    t.index ["intake_question_id"], name: "index_on_resp_and_question_id"
   end
 
-  create_table "intake_audio_questions", force: :cascade do |t|
+  create_table "intake_questions", force: :cascade do |t|
     t.string "token"
     t.bigint "intake_assessment_id"
     t.integer "index", default: 0, null: false
@@ -65,20 +66,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_054413) do
     t.string "question_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["intake_assessment_id"], name: "index_audio_quest_on_asses"
+    t.index ["intake_assessment_id"], name: "index_quest_on_assessment"
   end
 
   create_table "intake_survey_responses", force: :cascade do |t|
     t.string "token"
     t.bigint "intake_assessment_id"
-    t.string "highest_level_of_education", null: false
-    t.boolean "previously_diagnosed_with_learning_disability", null: false
-    t.datetime "date_of_last_eye_examination", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["intake_assessment_id"], name: "index_intake_survey_responses_on_intake_assessment_id"
   end
 
   add_foreign_key "intake_assessments", "accounts"
-  add_foreign_key "intake_assessments", "intake_survey_responses"
 end

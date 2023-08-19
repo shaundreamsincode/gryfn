@@ -4,8 +4,12 @@ class CreateIntakeAssessments < ActiveRecord::Migration[7.0]
       t.string :token
 
       t.references :account, foreign_key: true
-      t.references :intake_survey_response, foreign_key: true
-      t.integer :current_audio_question_id
+
+      t.string :level_of_education
+      t.boolean :previously_diagnosed
+      t.datetime :last_eye_examination_at
+
+      t.integer :current_question_index, default: 0
       t.timestamps
     end
   end
