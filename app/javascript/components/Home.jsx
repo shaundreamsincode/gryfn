@@ -1,7 +1,10 @@
 import React from "react";
 import { Typography, Button, Grid } from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+    const navigate = useNavigate();
+
     return (
         <Grid container direction="column" alignItems="center" spacing={2}>
             <Grid item>
@@ -11,7 +14,7 @@ const Home = () => {
             </Grid>
 
             <Grid item>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" onClick={() => { navigate('/register') }}>
                     Start
                 </Button>
             </Grid>

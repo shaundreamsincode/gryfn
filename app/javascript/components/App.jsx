@@ -1,5 +1,7 @@
 import React from "react";
-import Routes from "../routes";
+// import Routes from "./Routes";
+import Routes from "./Routes";
+
 import {Container, Card, CardContent, Typography, Button} from "@material-ui/core";
 
 export default props => <>

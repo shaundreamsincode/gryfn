@@ -1,0 +1,20 @@
+import React, { Fragment } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import Home from "../components/Home";
+import Register from "../components/Register"
+import Instructions from "./Instructions";
+import PrivacyPolicy from "./PrivacyPolicy";
+
+export default (
+    <Router>
+        <Fragment>
+            <Routes>
+                <Route exact path='/' element={<Home/>}/>
+                <Route exact path='/register' element={<Register/>}/>
+                <Route exact path='/instructions' element={<Instructions/>}/>
+                <Route exact path='/privacy_policy' element={<PrivacyPolicy/>}/>
+            </Routes>
+        </Fragment>
+    </Router>
+);
