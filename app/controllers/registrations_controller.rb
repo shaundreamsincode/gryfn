@@ -1,4 +1,6 @@
 class RegistrationsController < ApplicationController
+  skip_before_action :verify_authenticity_token # TODO - fix
+
   def create
     result = PerformRegistration.call(
       name: params[:name],

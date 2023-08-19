@@ -1,27 +1,44 @@
 import React, { useState } from "react";
 import {Typography, Button, Grid, CardContent, TextField} from "@material-ui/core";
 import {useNavigate} from "react-router-dom";
+import ApiService from "../../services/ApiService";
 
 const Register = () => {
-    const [firstName, setFirstName] = useState('')
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [birthYear, setBirthYear] = useState('')
     const [country, setCountry] = useState('')
     const [zipCode, setZipCode] = useState('')
+    const [password, setPassword] = useState('')
+    const [passwordConfirmation, setPasswordConfirmation] = useState('')
+
+    const [errorMessages, setErrorMessages] = useState([])
 
     const navigate = useNavigate();
 
     const handleSubmit = () => {
-        navigate('/instructions')
+        const params = {
+            name: name,
+            email: email,
+            birth_year: birthYear,
+            country: country,
+            zip_code: zipCode,
+            password: password,
+            passwordConfirmation: passwordConfirmation
+        }
+
+        ApiService.registerAccount(params).then((response) => {
+            navigate('/instructions')
+        })
     }
 
     return(
         <CardContent>
             <div>
-                <TextField label="First Name" onChange={(e) => setFirstName(e.target.value)} />
+                <TextField value={name} label="First Name" onChange={(e) => setName(e.target.value)} />
             </div>
             <div>
-                <TextField label="Email" onChange={(e) => setEmail(e.target.value)} />
+                <TextField value={email} label="Email" onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div>
                 <TextField
@@ -36,13 +53,20 @@ const Register = () => {
                 />
             </div>
             <div>
-                <TextField label="Country" onChange={(e) => setCountry(e.target.value)} />
+                <TextField value={country} label="Country" onChange={(e) => setCountry(e.target.value)} />
             </div>
             <div>
-                <TextField label="Zip Code" onChange={(e) => setZipCode(e.target.value)} />
+                <TextField value={zipCode} label="Zip Code" onChange={(e) => setZipCode(e.target.value)} />
+            </div>
+            <div>
+                <TextField value={password} label="Password" type="password" onChange={(e) => setPassword(e.target.value)} />
+            </div>
+
+            <div>
+                <TextField value={passwordConfirmation} label="Confirm Password" type="password" onChange={(e) => setPasswordConfirmation(e.target.value)} />
             </div>
             <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "20px" }}>
-                <Button variant="contained" color="primary" onClick={handleSubmit}>
+                <Button variant="contained" color="primary" onClick={handleSubmit} disabled={!(name && email && birthYear && country && zipCode && password && passwordConfirmation)}>
                     Next
                 </Button>
             </div>
