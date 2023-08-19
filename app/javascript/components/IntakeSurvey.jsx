@@ -18,7 +18,6 @@ const IntakeSurvey = (props) => {
     const [lastEyeExamAt, setLastEyeExamAt] = useState(null) // TODO - RENAME VARIABLE
     const [doesntRememberLastEyeExamAt, setDoesntRememberLastEyeExamAt] = useState(false)
 
-
     const handleDoesNotRememberLastEyeExamAtToggle = () => {
         debugger
         setDoesntRememberLastEyeExamAt(!doesntRememberLastEyeExamAt)
