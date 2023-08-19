@@ -2,17 +2,17 @@ class PerformRegistration
   include Interactor
 
   def call
-    account = Account.create!(
+    intake_assessment = IntakeAssessment.create!(
       name: context.name,
       email: context.email,
       birth_year: context.birth_year,
       country: context.country,
       zip_code: context.zip_code,
-      password: context.password,
-      password_confirmation: context.password_confirmation
+      # password: context.password,
+      # password_confirmation: context.password_confirmation,
+      organization: fetch_organization
     )
 
-    intake_assessment = IntakeAssessment.create!(account: account)
     create_questions!(intake_assessment)
     context.intake_assessment = intake_assessment
   end
@@ -49,5 +49,12 @@ class PerformRegistration
     # )
 
     questions
+  end
+
+  private def fetch_organization
+    organization = Organization.first
+    return organization if organization.present?
+
+    Organization.create(name: 'Foo Org')
   end
 end

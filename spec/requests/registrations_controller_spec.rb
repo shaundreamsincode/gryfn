@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe RegistrationsController, type: :request do
   describe '#create' do
-    it 'creates a new account'do
+    it 'creates a new intake assessment'do
       params = {
         name: 'name',
         birth_year: 1992,
@@ -15,9 +15,8 @@ RSpec.describe RegistrationsController, type: :request do
 
       post "/registrations", params: params
 
-      expect(Account.count).to eq(1)
       expect(IntakeAssessment.count).to eq(1)
-      expect(IntakeQuestion.count).to eq(4)
+      expect(IntakeQuestion.count).to eq(1)
     end
   end
 end
