@@ -27,31 +27,31 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_055312) do
   end
 
   create_table "assessments", force: :cascade do |t|
-    t.bigint "accounts_id"
+    t.bigint "account_id"
     t.integer "survey_question_response_id"
     t.integer "current_audio_question_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["accounts_id"], name: "index_assessments_on_accounts_id"
+    t.index ["account_id"], name: "index_assessments_on_account_id"
   end
 
   create_table "audio_question_responses", force: :cascade do |t|
-    t.bigint "audio_questions_id"
+    t.bigint "audio_question_id"
     t.string "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["audio_questions_id"], name: "index_audio_question_responses_on_audio_questions_id"
+    t.index ["audio_question_id"], name: "index_audio_question_responses_on_audio_question_id"
   end
 
   create_table "audio_questions", force: :cascade do |t|
-    t.bigint "assessments_id"
+    t.bigint "assessment_id"
     t.integer "index", default: 0, null: false
     t.string "answer", null: false
     t.string "path_to_audio_file", null: false
     t.string "question_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["assessments_id"], name: "index_audio_questions_on_assessments_id"
+    t.index ["assessment_id"], name: "index_audio_questions_on_assessment_id"
   end
 
   create_table "documents", force: :cascade do |t|
@@ -65,16 +65,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_055312) do
   end
 
   create_table "survey_question_responses", force: :cascade do |t|
-    t.bigint "assessments_id"
+    t.bigint "assessment_id"
     t.string "highest_level_of_education", null: false
     t.boolean "previously_diagnosed_with_learning_disability", null: false
     t.datetime "date_of_last_eye_examination", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["assessments_id"], name: "index_survey_question_responses_on_assessments_id"
+    t.index ["assessment_id"], name: "index_survey_question_responses_on_assessment_id"
   end
 
-  add_foreign_key "assessments", "accounts", column: "accounts_id"
-  add_foreign_key "audio_question_responses", "audio_questions", column: "audio_questions_id"
-  add_foreign_key "audio_questions", "assessments", column: "assessments_id"
+  add_foreign_key "assessments", "accounts"
+  add_foreign_key "audio_question_responses", "audio_questions"
+  add_foreign_key "audio_questions", "assessments"
 end
