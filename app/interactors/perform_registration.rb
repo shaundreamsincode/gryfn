@@ -22,13 +22,11 @@ class PerformRegistration
   private def create_questions!(assessment)
     questions = []
 
-    # PHONETIC QUESTIONS
     questions << IntakeQuestion.create!(
       intake_assessment: assessment,
       index: 0,
       answer: 'above',
       file_name: 'above.mp3',
-      question_type: 'phonetic'
     )
 
     questions << IntakeQuestion.create!(
@@ -36,24 +34,20 @@ class PerformRegistration
       index: 1,
       answer: 'achieve',
       file_name: 'achieve.mp3',
-      question_type: 'phonetic'
     )
 
-    # EIDETIC QUESTIONS
     questions << IntakeQuestion.create!(
       intake_assessment: assessment,
       index: 1,
       answer: 'was',
-      file_name: 'was.mp3',
-      question_type: 'eidetic'
+      file_name: 'was.mp3'
     )
 
     questions << IntakeQuestion.create!(
       intake_assessment: assessment,
       index: 1,
       answer: 'what',
-      file_name: 'what.mp3',
-      question_type: 'eidetic'
+      file_name: 'what.mp3'
     )
 
     questions

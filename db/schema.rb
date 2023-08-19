@@ -63,7 +63,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_054413) do
     t.integer "index", default: 0, null: false
     t.string "answer", null: false
     t.string "file_name", null: false
-    t.string "question_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["intake_assessment_id"], name: "index_quest_on_assessment"

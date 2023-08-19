@@ -10,7 +10,7 @@ class Api::IntakeAssessmentController < ApplicationController
     audio_question = intake_assessment.current_audio_question
 
     render json: { currentQuestionType: :audio, currentAudioQuestion: {
-      token: audio_question.token, fileName: audio_question.file_name, questionType: audio_question.question_type }
+      token: audio_question.token, fileName: audio_question.file_name }
     }
   end
 end

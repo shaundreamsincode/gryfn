@@ -7,7 +7,6 @@ class CreateIntakeQuestions < ActiveRecord::Migration[7.0]
       t.integer :index, null: false, default: 0
       t.string :answer, null: false
       t.string :file_name, null: false
-      t.string :question_type, null: false # todo - make enum (phonetic or eidetic)
 
       t.timestamps
     end
