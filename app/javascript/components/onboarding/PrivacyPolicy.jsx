@@ -3,6 +3,8 @@ import {Button, CardContent, Checkbox} from "@material-ui/core";
 import {useNavigate} from "react-router-dom";
 
 const PrivacyPolicy = () => {
+    const navigate = useNavigate()
+
     const [privacyPolicyAccepted, setPrivacyPolicyAccepted] = useState(false)
 
     return(<CardContent>
@@ -14,7 +16,7 @@ const PrivacyPolicy = () => {
         </div>
 
         <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "20px" }}>
-            <Button variant="contained" color="primary" disabled={!privacyPolicyAccepted}>
+            <Button variant="contained" color="primary" disabled={!privacyPolicyAccepted} onClick={() => {navigate('/register')}}>
                 Next
             </Button>
         </div>

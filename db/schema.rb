@@ -70,13 +70,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_054413) do
 
   create_table "intake_survey_responses", force: :cascade do |t|
     t.string "token"
-    t.bigint "assessment_id"
+    t.bigint "intake_assessment_id"
     t.string "highest_level_of_education", null: false
     t.boolean "previously_diagnosed_with_learning_disability", null: false
     t.datetime "date_of_last_eye_examination", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["assessment_id"], name: "index_intake_survey_responses_on_assessment_id"
+    t.index ["intake_assessment_id"], name: "index_intake_survey_responses_on_intake_assessment_id"
   end
 
   add_foreign_key "intake_assessments", "accounts"

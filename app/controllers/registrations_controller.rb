@@ -1,6 +1,4 @@
 class RegistrationsController < ApplicationController
-  skip_before_action :verify_authenticity_token # TODO - fix
-
   def create
     result = PerformRegistration.call(
       name: params[:name],
@@ -12,6 +10,6 @@ class RegistrationsController < ApplicationController
       password_confirmation: params[:password_confirmation]
     )
 
-    render json: { assessment_token: result.account.token }
+    render json: { accountToken: result.account.token }
   end
 end

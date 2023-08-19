@@ -3,7 +3,7 @@ class CreateIntakeSurveyResponses < ActiveRecord::Migration[7.0]
     create_table :intake_survey_responses do |t|
       t.string :token
 
-      t.references :assessment
+      t.references :intake_assessment
 
       t.string :highest_level_of_education, null: false
       t.boolean :previously_diagnosed_with_learning_disability, null: false

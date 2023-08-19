@@ -14,7 +14,7 @@ const Home = () => {
             </Grid>
 
             <Grid item>
-                <Button variant="contained" color="primary" onClick={() => { navigate('/register') }}>
+                <Button variant="contained" color="primary" onClick={() => { navigate('/instructions') }}>
                     Start
                 </Button>
             </Grid>

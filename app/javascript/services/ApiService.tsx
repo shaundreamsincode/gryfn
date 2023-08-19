@@ -5,6 +5,10 @@ class ApiService {
         return axios.post('/registrations', params)
     }
 
+    static getIntakeAssessment(accountToken) {
+        return axios.get(`/api/intake_assessment/${accountToken}.json`)
+    }
+
     // static get(url) {
     //     return axios.get(url, { headers: { Authorization: `Bearer ${this._fetchJwtToken()}` } })
     // }

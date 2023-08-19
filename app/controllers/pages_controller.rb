@@ -1,6 +1,10 @@
 class PagesController < ApplicationController
   def home
     respond_to do |format|
+      # format.json do
+      #   # Handle the JSON format
+      # end
+
       format.html do
         # Handle HTML format
       end

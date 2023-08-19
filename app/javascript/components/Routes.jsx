@@ -6,6 +6,8 @@ import Register from "./onboarding/Register"
 import Instructions from "./onboarding/Instructions";
 import PrivacyPolicy from "./onboarding/PrivacyPolicy";
 
+import IntakeAssessment from "./IntakeAssessment";
+
 import Survey from "./Survey";
 import AudioQuestion from "./AudioQuestion";
 
@@ -21,6 +23,7 @@ export default (
                 <Route exact path='/instructions' element={<Instructions/>}/>
                 <Route exact path='/privacy_policy' element={<PrivacyPolicy/>}/>
 
+                <Route exact path='/intake_assessment/:accountToken' element={<IntakeAssessment/>}/>
                 <Route exact path='/survey' element={<Survey/>}/>
                 <Route exact path='/audio_question' element={<AudioQuestion/>}/>
 
