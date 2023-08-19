@@ -66,7 +66,8 @@ const Register = () => {
                 <TextField value={passwordConfirmation} label="Confirm Password" type="password" onChange={(e) => setPasswordConfirmation(e.target.value)} />
             </div>
             <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "20px" }}>
-                <Button variant="contained" color="primary" onClick={handleSubmit} disabled={!(name && email && birthYear && country && zipCode && password && passwordConfirmation)}>
+                <Button variant="contained" color="primary" onClick={handleSubmit}>
+                {/*<Button variant="contained" color="primary" onClick={handleSubmit} disabled={!(name && email && birthYear && country && zipCode && password && passwordConfirmation)}>*/}
                     Next
                 </Button>
             </div>

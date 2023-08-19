@@ -7,7 +7,7 @@ class CreateIntakeAssessments < ActiveRecord::Migration[7.0]
 
       t.string :level_of_education
       t.boolean :previously_diagnosed
-      t.datetime :last_eye_examination_at
+      t.datetime :last_eye_exam_at
 
       t.integer :current_question_index, default: 0
       t.timestamps

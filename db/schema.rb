@@ -16,11 +16,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_054413) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "token"
-    t.string "name", null: false
-    t.string "email", null: false
-    t.integer "birth_year", null: false
-    t.string "country", null: false
-    t.string "zip_code", null: false
+    t.string "name"
+    t.string "email"
+    t.integer "birth_year"
+    t.string "country"
+    t.string "zip_code"
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -41,7 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_054413) do
     t.bigint "account_id"
     t.string "level_of_education"
     t.boolean "previously_diagnosed"
-    t.datetime "last_eye_examination_at"
+    t.datetime "last_eye_exam_at"
     t.integer "current_question_index", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
