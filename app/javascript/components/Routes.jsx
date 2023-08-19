@@ -6,6 +6,8 @@ import Register from "./onboarding/Register"
 import Instructions from "./onboarding/Instructions";
 import PrivacyPolicy from "./onboarding/PrivacyPolicy";
 
+import Eidetic from "./Eidetic";
+
 export default (
     <Router>
         <Fragment>
@@ -14,6 +16,8 @@ export default (
                 <Route exact path='/register' element={<Register/>}/>
                 <Route exact path='/instructions' element={<Instructions/>}/>
                 <Route exact path='/privacy_policy' element={<PrivacyPolicy/>}/>
+
+                <Route exact path='/eidetic' element={<Eidetic/>}/>
             </Routes>
         </Fragment>
     </Router>
