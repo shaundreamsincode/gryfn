@@ -22,11 +22,12 @@ class PerformRegistration
   private def create_audio_questions!(assessment)
     questions = []
 
+    # PHONETIC QUESTIONS
     questions << IntakeAudioQuestion.create!(
       intake_assessment: assessment,
       index: 0,
       answer: 'above',
-      path_to_audio_file: Rails.root.join('app', 'assets', 'audio', 'above.mp3'),
+      file_name: 'above.mp3',
       question_type: 'phonetic'
     )
 
@@ -34,15 +35,16 @@ class PerformRegistration
       intake_assessment: assessment,
       index: 1,
       answer: 'achieve',
-      path_to_audio_file: Rails.root.join('app', 'assets', 'audio', 'achieve.mp3'),
+      file_name: 'achieve.mp3',
       question_type: 'phonetic'
     )
 
+    # EIDETIC QUESTIONS
     questions << IntakeAudioQuestion.create!(
       intake_assessment: assessment,
       index: 1,
       answer: 'was',
-      path_to_audio_file: Rails.root.join('app', 'assets', 'audio', 'was.mp3'),
+      file_name: 'was.mp3',
       question_type: 'eidetic'
     )
 
@@ -50,7 +52,7 @@ class PerformRegistration
       intake_assessment: assessment,
       index: 1,
       answer: 'what',
-      path_to_audio_file: Rails.root.join('app', 'assets', 'audio', 'what.mp3'),
+      file_name: 'what.mp3',
       question_type: 'eidetic'
     )
 
