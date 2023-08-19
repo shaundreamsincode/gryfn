@@ -1,30 +1,28 @@
 import React, { useState, useEffect }  from "react";
 import {CardContent} from "@material-ui/core";
 import ApiService from "../services/ApiService";
-import IntakeSurvey from "./IntakeSurvey";
 
 const IntakeAssessment = () => {
     const currentUrl = window.location.href
-    const accountToken = currentUrl.split("/")[4]
-    const [currentQuestionType, setCurrentQuestionType] = useState(null)
-    const [currentAudioQuestion, setCurrentAudioQuestion] = useState(null)
+    const assessmentToken = currentUrl.split("/")[4]
+    const [assessment, setAssignment] = useState(null)
 
     useEffect(() => {
-        ApiService.getIntakeAssessment(accountToken).then((response) => {
-            setCurrentQuestionType(response.data.currentQuestionType)
-            setCurrentAudioQuestion(response.data.currentAudioQuestion)
+        ApiService.getIntakeAssessment(assessmentToken).then((response) => {
+            setAssignment(response.data)
         })
-    }, [])
+    }, [assessmentToken])
 
-    if (!currentQuestionType && ! currentAudioQuestion) {
+    if (!assessment) {
         return(<CardContent>
             Loading...
         </CardContent>)
     }
 
     return(<CardContent>
+        Assessment ID:
         {
-            currentQuestionType === 'survey' && <IntakeSurvey/>
+            assessment.id
         }
     </CardContent>)
 }

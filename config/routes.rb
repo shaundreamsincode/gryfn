@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :registrations, only: :create
 
   namespace :api do
-    get '/intake_assessment/:account_token', to: 'intake_assessment#show'
+    resources :intake_assessments, only: [:show, :update], param: :token
   end
 
   get '/*path' => 'pages#home'

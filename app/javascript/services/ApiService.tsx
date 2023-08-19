@@ -5,8 +5,8 @@ class ApiService {
         return axios.post('/registrations', params)
     }
 
-    static getIntakeAssessment(accountToken) {
-        return axios.get(`/api/intake_assessment/${accountToken}.json`)
+    static getIntakeAssessment(intakeAssessmentToken) {
+        return axios.get(`/api/intake_assessments/${intakeAssessmentToken}.json`)
     }
 
     // static get(url) {

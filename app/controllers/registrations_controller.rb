@@ -10,6 +10,6 @@ class RegistrationsController < ApplicationController
       password_confirmation: params[:password_confirmation]
     )
 
-    render json: { accountToken: result.account.token }
+    render json: { intakeAssessmentToken: result.intake_assessment.token }
   end
 end

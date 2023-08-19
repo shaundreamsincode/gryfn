@@ -28,7 +28,7 @@ const Register = () => {
         }
 
         ApiService.registerAccount(params).then((response) => {
-            navigate(`/intake_assessment/${response.data.accountToken}`)
+            navigate(`/intake_assessments/${response.data.intakeAssessmentToken}`)
         })
     }
 
