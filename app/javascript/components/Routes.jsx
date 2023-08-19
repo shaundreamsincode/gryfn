@@ -7,6 +7,8 @@ import Instructions from "./onboarding/Instructions";
 import PrivacyPolicy from "./onboarding/PrivacyPolicy";
 
 import Eidetic from "./Eidetic";
+import Phonetic from "./Phonetic";
+
 
 export default (
     <Router>
@@ -18,6 +20,7 @@ export default (
                 <Route exact path='/privacy_policy' element={<PrivacyPolicy/>}/>
 
                 <Route exact path='/eidetic' element={<Eidetic/>}/>
+                <Route exact path='/phonetic' element={<Phonetic/>}/>
             </Routes>
         </Fragment>
     </Router>
