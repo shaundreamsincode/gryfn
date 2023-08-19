@@ -2,9 +2,9 @@ import React, { Fragment } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "../components/Home";
-import Register from "../components/Register"
-import Instructions from "./Instructions";
-import PrivacyPolicy from "./PrivacyPolicy";
+import Register from "./onboarding/Register"
+import Instructions from "./onboarding/Instructions";
+import PrivacyPolicy from "./onboarding/PrivacyPolicy";
 
 export default (
     <Router>
