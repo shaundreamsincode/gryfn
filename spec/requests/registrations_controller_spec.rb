@@ -16,8 +16,8 @@ RSpec.describe RegistrationsController, type: :request do
       post "/registrations", params: params
 
       expect(Account.count).to eq(1)
-      expect(Assessment.count).to eq(1)
-      expect(AudioQuestion.count).to eq(4)
+      expect(IntakeAssessment.count).to eq(1)
+      expect(IntakeAudioQuestion.count).to eq(4)
     end
   end
 end

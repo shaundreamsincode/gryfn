@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe PerformRegistration do
-  it 'creates a new account' do
+  it 'performs the registration' do
     PerformRegistration.call(
       name: 'Spongebob',
       email: 'spongebob@squarepants.com',
@@ -13,12 +13,12 @@ RSpec.describe PerformRegistration do
     )
 
     expect(Account.count).to eq(1)
-    expect(Assessment.count).to eq(1)
-    expect(AudioQuestion.count).to eq(4)
+    expect(IntakeAssessment.count).to eq(1)
+    expect(IntakeAudioQuestion.count).to eq(4)
 
     account = Account.first
-    assessment = Assessment.first
-    audio_question = AudioQuestion.first
+    assessment = IntakeAssessment.first
+    audio_question = IntakeAudioQuestion.first
 
     expect(account).to have_attributes(
                          name: 'Spongebob',
@@ -30,7 +30,7 @@ RSpec.describe PerformRegistration do
 
     expect(assessment).to have_attributes(
                             account_id: account.id,
-                            survey_question_response_id: nil,
+                            intake_survey_response_id: nil,
                             current_audio_question_id: audio_question.id
                           )
   end

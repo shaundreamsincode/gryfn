@@ -1,6 +1,8 @@
-class CreateSurveyQuestionResponses < ActiveRecord::Migration[7.0]
+class CreateIntakeSurveyResponses < ActiveRecord::Migration[7.0]
   def change
-    create_table :survey_question_responses do |t|
+    create_table :intake_survey_responses do |t|
+      t.string :token
+
       t.references :assessment
 
       t.string :highest_level_of_education, null: false
