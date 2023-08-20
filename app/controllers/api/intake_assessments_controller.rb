@@ -17,12 +17,12 @@ class Api::IntakeAssessmentsController < ActionController::Base
   def summary
     assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
 
-    questions_correct = 0
+    # questions_correct = 0
+    #
+    # assessment.intake_questions.each do |question|
+    #   questions_correct +=1 if question.answer.downcase == question.correct_answer.downcase
+    # end
 
-    assessment.intake_questions.each do |question|
-      questions_correct +=1 if question.answer.downcase == question.correct_answer.downcase
-    end
-
-    render json: { questions_count: assessment.intake_questions.count, questions_correct: questions_correct }
+    render json: assessment.to_json(include: [:intake_questions])
   end
 end

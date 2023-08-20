@@ -1,31 +1,57 @@
 import React, { useState, useEffect } from "react";
-import {CardContent} from "@material-ui/core";
+import {CardContent, List, ListItem, Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
 import ApiService from "../../services/ApiService";
 
 const IntakeSummary = () => {
     const currentUrl = window.location.href
     const assessmentToken = currentUrl.split("/")[4]
-    const [questionsCount, setQuestionsCount] = useState(null)
-    const [questionsCorrect, setQuestionsCorrect] = useState(null)
+    const [assessment, setAssessment] = useState(null)
 
     useEffect(() => {
         ApiService.getIntakeAssessmentSummary(assessmentToken).then((response) => {
-            setQuestionsCount(response.data.questions_count)
-            setQuestionsCorrect(response.data.questions_correct)
+            setAssessment(response.data)
         })
-        // getIntakeAssessmentSummary
     }, [assessmentToken])
 
-    if (questionsCount === null || questionsCorrect === null) {
+    if (!assessment) {
         return(<CardContent>Loading...</CardContent>)
     }
 
+    debugger
+
     return(
         <CardContent>
-            <div>
-                Questions Count: { questionsCount }
-            </div>
-            Questions Correct: { questionsCorrect }
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Your Answer</TableCell>
+                        <TableCell>Actual Answer</TableCell>
+                        <TableCell>Was Correct?</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {
+                        assessment.intake_questions.map((question) => {
+                            const userAnswerWasCorrect = question.answer.toUpperCase() === question.correct_answer.toUpperCase()
+                            return(<TableRow>
+                                <TableCell>{ question.answer }</TableCell>
+                                <TableCell>{ question.correct_answer }</TableCell>
+                                <TableCell>{ userAnswerWasCorrect ? 'Correct' : 'Incorrect' }</TableCell>
+                            </TableRow>)
+                        })
+                    }
+                    {/*<TableRow>*/}
+                    {/*    <TableCell>Data 1</TableCell>*/}
+                    {/*    <TableCell>Data 2</TableCell>*/}
+                    {/*    <TableCell>Data 3</TableCell>*/}
+                    {/*</TableRow>*/}
+                    {/*<TableRow>*/}
+                    {/*    <TableCell>Data 4</TableCell>*/}
+                    {/*    <TableCell>Data 5</TableCell>*/}
+                    {/*    <TableCell>Data 6</TableCell>*/}
+                    {/*</TableRow>*/}
+                </TableBody>
+            </Table>
         </CardContent>
     )
 }
