@@ -378,6 +378,7 @@ __metadata:
     axios: ^1.4.0
     esbuild: ^0.19.2
     react: ^18.2.0
+    react-audio-player: ^0.17.0
     react-dom: ^18.2.0
     react-router-dom: ^6.14.1
   languageName: unknown
@@ -728,6 +729,18 @@ __metadata:
   version: 1.1.0
   resolution: "proxy-from-env@npm:1.1.0"
   checksum: ed7fcc2ba0a33404958e34d95d18638249a68c430e30fcb6c478497d72739ba64ce9810a24f53a7d921d0c065e5b78e3822759800698167256b04659366ca4d4
+  languageName: node
+  linkType: hard
+
+"react-audio-player@npm:^0.17.0":
+  version: 0.17.0
+  resolution: "react-audio-player@npm:0.17.0"
+  dependencies:
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ">=16"
+    react-dom: ">=16"
+  checksum: 03042c6ed663dda5d18cae4f399daa53078deed8f34b1b9f2f634bbc168ee7f4e73686f494c88f3091c534fa90af922bc85d80f081af02e0335782557a4a8715
   languageName: node
   linkType: hard
 

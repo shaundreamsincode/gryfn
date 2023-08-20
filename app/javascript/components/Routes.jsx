@@ -6,7 +6,7 @@ import Register from "./onboarding/Register"
 import Instructions from "./onboarding/Instructions";
 import PrivacyPolicy from "./onboarding/PrivacyPolicy";
 
-import IntakeAssessment from "./IntakeAssessment";
+import IntakeAssessment from "./intake/IntakeAssessment";
 
 // import Survey from "./Survey";
 // import AudioQuestion from "./AudioQuestion";
