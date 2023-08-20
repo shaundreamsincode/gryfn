@@ -19,7 +19,7 @@ const IntakeQuestion = (props) => {
         ApiService.upsertIntakeQuestionResponse(question.token, answer).then((response) => {
 
             setAnswerSaved(true);
-            onSave(question.token, answer);
+            onSave(response.data);
         });
     };
 
@@ -30,7 +30,7 @@ const IntakeQuestion = (props) => {
 
             setAnswerSaved(false);
             setAnswer(null)
-            onSave(question.token, null);
+            onSave(response.data);
         });
     }
 
@@ -45,7 +45,7 @@ const IntakeQuestion = (props) => {
             hehe
             <AudioPlayer src={audioUrl} />
             <span>
-                <TextField disabled={answerSaved} value={answer} onChange={(e) => setAnswer(e.target.value)} />
+                <TextField disabled={answerSaved} onChange={(e) => setAnswer(e.target.value)} />
                 <Button onClick={handleSave} disabled={answerSaved || !answer}>{buttonText}</Button>
                 {
                     answerSaved && <Button onClick={handleUndoButtonClick}>Undo</Button>
