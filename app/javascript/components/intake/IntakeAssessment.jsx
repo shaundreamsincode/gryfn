@@ -13,11 +13,21 @@ const IntakeAssessment = () => {
     const questionsPerPage = 5; // Number of questions per page
     const [currentPage, setCurrentPage] = useState(0);
     const [assessment, setAssessment] = useState(null);
+    const [questions, setQuestions] = useState(assessment?.questions)
 
-    const onQuestionSave = () => {
-        ApiService.getIntakeAssessment(assessmentToken).then((response) => {
-            setAssessment(response.data);
-        });
+    // onSave(updatedQuestionToken, updatedQuestionAnswer);
+
+    const onQuestionSave = (updatedQuestionToken, updatedQuestionAnswer) => {
+        // debugger
+        const newQuestions = Object.assign({}, questions)
+
+        const updatedQuestion = newQuestions.find((question) => {
+                return question.token === updatedQuestionToken
+            }
+        )
+
+        updatedQuestion.answer = updatedQuestionAnswer
+        setQuestions(newQuestions)
     };
 
     const handleFinishButtonClick = () => {
@@ -59,7 +69,6 @@ const IntakeAssessment = () => {
 
     const showFinishButton = (currentPage + 1 === numberOfPages)
 
-    debugger
     return (
         <CardContent>
             Page { currentPage + 1 } out of { numberOfPages }.

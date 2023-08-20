@@ -5,7 +5,7 @@ import AudioPlayer from "./AudioPlayer";
 
 const IntakeQuestion = (props) => {
     const question = props.question;
-    debugger
+    // debugger
     const onSave = props.onSave;
 
     const [answer, setAnswer] = useState(question.answer); // Set initial value to question's answer
@@ -17,15 +17,20 @@ const IntakeQuestion = (props) => {
 
     const handleSave = () => {
         ApiService.upsertIntakeQuestionResponse(question.token, answer).then((response) => {
+
             setAnswerSaved(true);
-            onSave();
+            onSave(question.token, answer);
         });
     };
 
     const handleUndoButtonClick = () => {
         ApiService.upsertIntakeQuestionResponse(question.token, null).then((response) => {
+            console.log('foo')
+            console.log(response)
+
             setAnswerSaved(false);
-            onSave();
+            setAnswer(null)
+            onSave(question.token, null);
         });
     }
 
@@ -37,10 +42,11 @@ const IntakeQuestion = (props) => {
 
     return (
         <CardContent style={{ 'border': '1px solid' }}>
+            hehe
             <AudioPlayer src={audioUrl} />
             <span>
                 <TextField disabled={answerSaved} value={answer} onChange={(e) => setAnswer(e.target.value)} />
-                <Button onClick={handleSave} disabled={answerSaved}>{buttonText}</Button>
+                <Button onClick={handleSave} disabled={answerSaved || !answer}>{buttonText}</Button>
                 {
                     answerSaved && <Button onClick={handleUndoButtonClick}>Undo</Button>
                 }
