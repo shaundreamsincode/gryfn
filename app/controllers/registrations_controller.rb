@@ -1,13 +1,11 @@
 class RegistrationsController < ApplicationController
   def create
     result = PerformRegistration.call(
-      name: params[:name],
+      patient_first_name: params[:patient_first_name],
       birth_year: params[:birth_year],
       email: params[:email],
       country: params[:country],
       zip_code: params[:zip_code],
-      password: params[:password],
-      password_confirmation: params[:password_confirmation]
     )
 
     render json: { intakeAssessmentToken: result.intake_assessment.token }

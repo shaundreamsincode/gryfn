@@ -5,7 +5,7 @@ class CreateIntakeAssessments < ActiveRecord::Migration[7.0]
 
       t.references :organization, foreign_key: true
 
-      t.string :name #, null: false
+      t.string :patient_first_name #, null: false
       t.string :email #, null: false
       t.integer :birth_year #, null: false
       t.string :country #, null: false

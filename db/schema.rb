@@ -27,7 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_054413) do
   create_table "intake_assessments", force: :cascade do |t|
     t.string "token"
     t.bigint "organization_id"
-    t.string "name"
+    t.string "patient_first_name"
     t.string "email"
     t.integer "birth_year"
     t.string "country"

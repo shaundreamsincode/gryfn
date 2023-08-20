@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import {Typography, Button, Grid, CardContent, TextField} from "@material-ui/core";
+import {
+    Typography,
+    Button,
+    Grid,
+    CardContent,
+    TextField,
+    FormControl,
+    FormLabel,
+    RadioGroup,
+    FormControlLabel, Radio, InputLabel, Select, MenuItem
+} from "@material-ui/core";
 import {useNavigate} from "react-router-dom";
 import ApiService from "../../services/ApiService";
 
@@ -9,10 +19,8 @@ const Register = () => {
     const [birthYear, setBirthYear] = useState('')
     const [country, setCountry] = useState('')
     const [zipCode, setZipCode] = useState('')
-    const [password, setPassword] = useState('')
-    const [passwordConfirmation, setPasswordConfirmation] = useState('')
-
-    const [errorMessages, setErrorMessages] = useState([])
+    const [previouslyDiagnosed, setPreviouslyDiagnosed] = useState(null)
+    const [levelOfEducation, setLevelOfEducation] = useState(null)
 
     const navigate = useNavigate();
 
@@ -23,8 +31,6 @@ const Register = () => {
             birth_year: birthYear,
             country: country,
             zip_code: zipCode,
-            password: password,
-            passwordConfirmation: passwordConfirmation
         }
 
         ApiService.registerAccount(params).then((response) => {
@@ -58,13 +64,41 @@ const Register = () => {
             <div>
                 <TextField value={zipCode} label="Zip Code" onChange={(e) => setZipCode(e.target.value)} />
             </div>
-            <div>
-                <TextField value={password} label="Password" type="password" onChange={(e) => setPassword(e.target.value)} />
+
+            <div style={{ 'marginTop': '40px' }}>
+                <FormControl component="fieldset">
+                    <FormLabel component="legend">Have you been diagnosed with a learning disorder?</FormLabel>
+                    <RadioGroup
+                        aria-label="options"
+                        name="options"
+                        value={previouslyDiagnosed}
+                        onChange={(e) => { setPreviouslyDiagnosed(e.target.value) }}
+                    >
+                        <FormControlLabel value="option1" control={<Radio />} label="Yes" />
+                        <FormControlLabel value="option2" control={<Radio />} label="No" />
+                    </RadioGroup>
+                </FormControl>
             </div>
 
-            <div>
-                <TextField value={passwordConfirmation} label="Confirm Password" type="password" onChange={(e) => setPasswordConfirmation(e.target.value)} />
+            <div style={{'marginTop' : '20px' }}>
+                <FormControl>
+                    <FormLabel component="legend">What is your highest level of education?</FormLabel>
+                    <InputLabel style={{'marginTop' : '20px' }}>Select an option</InputLabel>
+                    <Select
+                        value={levelOfEducation}
+                        onChange={(e) => { setLevelOfEducation(e.target.value) }}
+                        label="Select an option"
+                    >
+                        <MenuItem value="">
+                            <em>None</em>
+                        </MenuItem>
+                        <MenuItem value="option1">Option 1</MenuItem>
+                        <MenuItem value="option2">Option 2</MenuItem>
+                        <MenuItem value="option3">Option 3</MenuItem>
+                    </Select>
+                </FormControl>
             </div>
+
             <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "20px" }}>
                 <Button variant="contained" color="primary" onClick={handleSubmit}>
                 {/*<Button variant="contained" color="primary" onClick={handleSubmit} disabled={!(name && email && birthYear && country && zipCode && password && passwordConfirmation)}>*/}

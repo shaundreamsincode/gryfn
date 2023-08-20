@@ -3,11 +3,9 @@ require 'rails_helper'
 RSpec.describe PerformRegistration do
   it 'performs the registration' do
     PerformRegistration.call(
-      name: 'Spongebob',
+      patient_first_name: 'Spongebob',
       email: 'spongebob@squarepants.com',
       birth_year: 1992,
-      password: 'password',
-      password_confirmation: 'password',
       country: 'USA',
       zip_code: '04076'
     )
@@ -19,7 +17,7 @@ RSpec.describe PerformRegistration do
     question = IntakeQuestion.first
 
     expect(assessment).to have_attributes(
-                         name: 'Spongebob',
+                         patient_first_name: 'Spongebob',
                          email: 'spongebob@squarepants.com',
                          birth_year: 1992,
                          country: 'USA',

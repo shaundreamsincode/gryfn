@@ -3,13 +3,11 @@ class PerformRegistration
 
   def call
     intake_assessment = IntakeAssessment.create!(
-      name: context.name,
+      patient_first_name: context.patient_first_name,
       email: context.email,
       birth_year: context.birth_year,
       country: context.country,
       zip_code: context.zip_code,
-      # password: context.password,
-      # password_confirmation: context.password_confirmation,
       organization: fetch_organization
     )
 
