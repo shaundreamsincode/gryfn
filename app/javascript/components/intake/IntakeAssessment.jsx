@@ -79,9 +79,3 @@ const IntakeAssessment = () => {
 };
 
 export default IntakeAssessment;
-
-
-
-
-
-
