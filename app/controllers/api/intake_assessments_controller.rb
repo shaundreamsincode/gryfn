@@ -16,13 +16,14 @@ class Api::IntakeAssessmentsController < ActionController::Base
   # /api/intake_questions/:intake_question_token/summary
   def summary
     assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
-
-    # questions_correct = 0
-    #
-    # assessment.intake_questions.each do |question|
-    #   questions_correct +=1 if question.answer.downcase == question.correct_answer.downcase
-    # end
-
     render json: assessment.to_json(include: [:intake_questions])
+  end
+
+  # /api/intake_assessments/:intake_assessment_token/send_summary_email
+  def send_summary_email
+    assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
+
+    SummaryMailer.summary_email(assessment).deliver_now
+    head 200
   end
 end

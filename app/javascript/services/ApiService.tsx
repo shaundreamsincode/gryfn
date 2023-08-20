@@ -17,6 +17,10 @@ class ApiService {
         return axios.get(`/api/intake_assessments/${intakeAssessmentToken}/summary.json`)
     }
 
+    static sendIntakeAssessmentSummaryEmail(intakeAssessmentToken) {
+        return axios.get(`/api/intake_assessments/${intakeAssessmentToken}/send_summary_email.json`)
+    }
+
     // static get(url) {
     //     return axios.get(url, { headers: { Authorization: `Bearer ${this._fetchJwtToken()}` } })
     // }

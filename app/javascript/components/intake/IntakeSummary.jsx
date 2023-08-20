@@ -31,6 +31,13 @@ const IntakeSummary = () => {
         return(<CardContent>Loading...</CardContent>)
     }
 
+    const handleEmailResults = () => {
+        ApiService.sendIntakeAssessmentSummaryEmail(assessmentToken).then((response) => {
+            console.log('boo!')
+            console.log(response)
+        })
+    }
+
     debugger
 
     return(
@@ -59,8 +66,8 @@ const IntakeSummary = () => {
                 <Button onClick={() => { navigate('/') } } align="right" color="primary">
                     Home
                 </Button>
-                <Button align="right" color="primary">
-                    Email Copy
+                <Button onClick={handleEmailResults} align="right" color="primary">
+                    Email Results
                 </Button>
             </Toolbar>
         </CardContent>
