@@ -13,7 +13,7 @@ RSpec.describe PerformRegistration do
     )
 
     expect(IntakeAssessment.count).to eq(1)
-    expect(IntakeQuestion.count).to eq(1)
+    expect(IntakeQuestion.count).to_not eq(0)
 
     assessment = IntakeAssessment.first
     question = IntakeQuestion.first

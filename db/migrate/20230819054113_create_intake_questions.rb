@@ -5,7 +5,8 @@ class CreateIntakeQuestions < ActiveRecord::Migration[7.0]
 
       t.references :intake_assessment, index: { name: 'index_quest_on_assessment' }
       t.integer :index, null: false, default: 0
-      t.string :answer, null: false
+      t.string :answer
+      t.string :correct_answer, null: false
       t.string :file_name, null: false
 
       t.timestamps

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_19_054413) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_19_054113) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,20 +40,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_054413) do
     t.index ["organization_id"], name: "index_intake_assessments_on_organization_id"
   end
 
-  create_table "intake_question_responses", force: :cascade do |t|
-    t.string "token"
-    t.bigint "intake_question_id"
-    t.string "content", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["intake_question_id"], name: "index_on_resp_and_question_id"
-  end
-
   create_table "intake_questions", force: :cascade do |t|
     t.string "token"
     t.bigint "intake_assessment_id"
     t.integer "index", default: 0, null: false
-    t.string "answer", null: false
+    t.string "answer"
+    t.string "correct_answer", null: false
     t.string "file_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

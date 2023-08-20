@@ -19,12 +19,12 @@ class PerformRegistration
 
   private def create_questions!(intake_assessment)
     IntakeQuestion::FILE_NAMES.each do |file_name|
-      answer = file_name.split('.mp3').first
+      correct_answer = file_name.split('.mp3').first
 
       IntakeQuestion.create!(
         intake_assessment: intake_assessment,
         file_name: file_name,
-        answer: answer
+        correct_answer: correct_answer
       )
     end
   end
