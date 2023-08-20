@@ -1,1 +1,20 @@
-Test email to <%= @email %>
+
+<p>Hello <%= @assessment.patient_first_name %>,</p>
+
+<p>You are receiving this notification because you took our Dyslexia test. Here are your results:</p>
+
+<table>
+  <thead>
+  <td>Answer</td>
+  <td>Your Answer</td>
+  </thead>
+  <tbody>
+      <% @assessment.intake_questions.each do |intake_question| # todo - sorting? %>
+        <tr>
+          <td> <%= intake_question.correct_answer %> </td>
+          <td><%= intake_question.answer %></td>
+          <td><%= intake_question.correct_answer.downcase ==  intake_question.answer.downcase ? 'Correct' : 'Incorrect'%></td>
+        </tr>
+      <% end %>
+  </tbody>
+</table>

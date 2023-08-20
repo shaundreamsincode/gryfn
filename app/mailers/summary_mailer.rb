@@ -1,6 +1,9 @@
 class SummaryMailer < ApplicationMailer
   def summary_email(assessment)
-    @email = assessment.email
+    @assessment = IntakeAssessment.last
+
+    puts "assessment #{@assessment}"
+    @email = @assessment.email
 
     mail(
       to: @email,
