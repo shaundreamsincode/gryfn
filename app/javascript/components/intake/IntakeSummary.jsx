@@ -9,7 +9,8 @@ import {
     TableCell,
     TableHead,
     TableRow,
-    Toolbar
+    Toolbar,
+    Snackbar
 } from "@material-ui/core";
 import ApiService from "../../services/ApiService";
 import {useNavigate} from "react-router-dom";
@@ -20,6 +21,8 @@ const IntakeSummary = () => {
     const currentUrl = window.location.href
     const assessmentToken = currentUrl.split("/")[4]
     const [assessment, setAssessment] = useState(null)
+    const [snackbarMessage, setSnackbarMessage] = useState(null);
+
 
     useEffect(() => {
         ApiService.getIntakeAssessmentSummary(assessmentToken).then((response) => {
@@ -33,8 +36,7 @@ const IntakeSummary = () => {
 
     const handleEmailResults = () => {
         ApiService.sendIntakeAssessmentSummaryEmail(assessmentToken).then((response) => {
-            console.log('boo!')
-            console.log(response)
+            setSnackbarMessage('Results sent! Check your spam inbox if you do not see an email.')
         })
     }
 
@@ -70,6 +72,12 @@ const IntakeSummary = () => {
                     Email Results
                 </Button>
             </Toolbar>
+            <Snackbar
+                open={!!snackbarMessage}
+                autoHideDuration={6000}
+                onClose={() => setSnackbarMessage(null)}
+                message={ snackbarMessage }
+            />
         </CardContent>
     )
 }
