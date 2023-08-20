@@ -38,9 +38,8 @@ const IntakeSummary = () => {
             <Table>
                 <TableHead>
                     <TableRow>
+                        <TableCell>Answer</TableCell>
                         <TableCell>Your Answer</TableCell>
-                        <TableCell>Actual Answer</TableCell>
-                        <TableCell>Was Correct?</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -48,8 +47,8 @@ const IntakeSummary = () => {
                         assessment.intake_questions.map((question) => {
                             const userAnswerWasCorrect = question.answer.toUpperCase() === question.correct_answer.toUpperCase()
                             return(<TableRow>
-                                <TableCell>{ question.answer }</TableCell>
                                 <TableCell>{ question.correct_answer }</TableCell>
+                                <TableCell>{ question.answer }</TableCell>
                                 <TableCell>{ userAnswerWasCorrect ? 'Correct' : 'Incorrect' }</TableCell>
                             </TableRow>)
                         })
