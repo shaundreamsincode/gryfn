@@ -1,8 +1,22 @@
 import React, { useState, useEffect } from "react";
-import {CardContent, List, ListItem, Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
+import {
+    Button,
+    CardContent,
+    List,
+    ListItem,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+    Toolbar
+} from "@material-ui/core";
 import ApiService from "../../services/ApiService";
+import {useNavigate} from "react-router-dom";
 
 const IntakeSummary = () => {
+    const navigate = useNavigate()
+
     const currentUrl = window.location.href
     const assessmentToken = currentUrl.split("/")[4]
     const [assessment, setAssessment] = useState(null)
@@ -40,18 +54,16 @@ const IntakeSummary = () => {
                             </TableRow>)
                         })
                     }
-                    {/*<TableRow>*/}
-                    {/*    <TableCell>Data 1</TableCell>*/}
-                    {/*    <TableCell>Data 2</TableCell>*/}
-                    {/*    <TableCell>Data 3</TableCell>*/}
-                    {/*</TableRow>*/}
-                    {/*<TableRow>*/}
-                    {/*    <TableCell>Data 4</TableCell>*/}
-                    {/*    <TableCell>Data 5</TableCell>*/}
-                    {/*    <TableCell>Data 6</TableCell>*/}
-                    {/*</TableRow>*/}
                 </TableBody>
             </Table>
+            <Toolbar>
+                <Button onClick={() => { navigate('/') } } align="right" color="primary">
+                    Home
+                </Button>
+                <Button align="right" color="primary">
+                    Email Copy
+                </Button>
+            </Toolbar>
         </CardContent>
     )
 }
