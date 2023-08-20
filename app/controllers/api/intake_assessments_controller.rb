@@ -20,7 +20,7 @@ class Api::IntakeAssessmentsController < ActionController::Base
     questions_correct = 0
 
     assessment.intake_questions.each do |question|
-      questions_correct +=1 if question.answer == question.correct_answer
+      questions_correct +=1 if question.answer.downcase == question.correct_answer.downcase
     end
 
     render json: { questions_count: assessment.intake_questions.count, questions_correct: questions_correct }
