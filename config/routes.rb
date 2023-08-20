@@ -5,13 +5,13 @@ Rails.application.routes.draw do
   resources :registrations, only: :create
 
   namespace :api do
-    resources :intake_assessments, only: [:show, :update], param: :token
-
-    resources :intake_questions, only: [], param: :token do
-      post :upsert_response, to: :upsert_response
+    resources :intake_assessments, only: :show, param: :token do
+      get :summary
     end
 
-    # post 'upsert_response',to: 'intake_assessments#upsert_response'
+    resources :intake_questions, only: [], param: :token do
+      post :upsert_response
+    end
   end
 
   get '/*path' => 'pages#home'

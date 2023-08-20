@@ -13,7 +13,16 @@ class Api::IntakeAssessmentsController < ActionController::Base
     }
   end
 
-  def update
-    # used to respond to survey questions
+  # /api/intake_questions/:intake_question_token/summary
+  def summary
+    assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
+
+    questions_correct = 0
+
+    assessment.intake_questions.each do |question|
+      questions_correct +=1 if question.answer == question.correct_answer
+    end
+
+    render json: { questions_count: assessment.intake_questions.count, questions_correct: questions_correct }
   end
 end

@@ -7,12 +7,7 @@ import Instructions from "./onboarding/Instructions";
 import PrivacyPolicy from "./onboarding/PrivacyPolicy";
 
 import IntakeAssessment from "./intake/IntakeAssessment";
-
-// import Survey from "./Survey";
-// import AudioQuestion from "./AudioQuestion";
-//
-// import Eidetic from "./Eidetic";
-// import Phonetic from "./Phonetic";
+import IntakeSummary from "./intake/IntakeSummary";
 
 export default (
     <Router>
@@ -23,7 +18,8 @@ export default (
                 <Route exact path='/instructions' element={<Instructions/>}/>
                 <Route exact path='/privacy_policy' element={<PrivacyPolicy/>}/>
 
-                <Route exact path='/intake_assessments/:accountToken' element={<IntakeAssessment/>}/>
+                <Route exact path='/intake_assessments/:intakeAssessmentToken' element={<IntakeAssessment/>}/>
+                <Route exact path='/intake_assessments/:intakeAssessmentToken/summary' element={<IntakeSummary/>}/>
             </Routes>
         </Fragment>
     </Router>

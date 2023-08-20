@@ -2,8 +2,11 @@ import React, { useState, useEffect }  from "react";
 import {CardContent, Button} from "@material-ui/core";
 import ApiService from "../../services/ApiService";
 import IntakeQuestion from "./IntakeQuestion";
+import {useNavigate} from "react-router-dom";
 
 const IntakeAssessment = () => {
+    const navigate = useNavigate()
+
     const currentUrl = window.location.href
     const assessmentToken = currentUrl.split("/")[4]
     const [assessment, setAssessment] = useState(null)
@@ -15,7 +18,7 @@ const IntakeAssessment = () => {
     }
 
     const handleFinishButtonClick = () => {
-        console.log('finish')
+        navigate(`/intake_assessments/${assessmentToken}/summary`)
     }
 
     useEffect(() => {

@@ -13,6 +13,10 @@ class ApiService {
         return axios.post(`/api/intake_questions/${intakeQuestionToken}/upsert_response`, { answer: answer })
     }
 
+    static getIntakeAssessmentSummary(intakeAssessmentToken) {
+        return axios.get(`/api/intake_assessments/${intakeAssessmentToken}/summary.json`)
+    }
+
     // static get(url) {
     //     return axios.get(url, { headers: { Authorization: `Bearer ${this._fetchJwtToken()}` } })
     // }
