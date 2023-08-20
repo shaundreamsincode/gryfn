@@ -43,3 +43,6 @@
 .env
 .idea/**
 .yarn
+
+.DS_Store
+public/.DS_Store

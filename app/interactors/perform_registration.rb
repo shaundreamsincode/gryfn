@@ -18,37 +18,15 @@ class PerformRegistration
   end
 
   private def create_questions!(intake_assessment)
-    questions = []
+    IntakeQuestion::FILE_NAMES.each do |file_name|
+      answer = file_name.split('.mp3').first
 
-    questions << IntakeQuestion.create!(
-      intake_assessment: intake_assessment,
-      index: 0,
-      answer: 'above',
-      file_name: 'above.mp3',
-    )
-
-    # questions << IntakeQuestion.create!(
-    #   intake_assessment: assessment,
-    #   index: 1,
-    #   answer: 'achieve',
-    #   file_name: 'achieve.mp3',
-    # )
-    #
-    # questions << IntakeQuestion.create!(
-    #   intake_assessment: assessment,
-    #   index: 1,
-    #   answer: 'was',
-    #   file_name: 'was.mp3'
-    # )
-    #
-    # questions << IntakeQuestion.create!(
-    #   intake_assessment: assessment,
-    #   index: 1,
-    #   answer: 'what',
-    #   file_name: 'what.mp3'
-    # )
-
-    questions
+      IntakeQuestion.create!(
+        intake_assessment: intake_assessment,
+        file_name: file_name,
+        answer: answer
+      )
+    end
   end
 
   private def fetch_organization
