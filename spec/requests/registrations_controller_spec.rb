@@ -8,7 +8,9 @@ RSpec.describe RegistrationsController, type: :request do
         birth_year: 1992,
         email: 'spongebob@squarepants.com',
         country: 'USA',
-        zip_code: '04076'
+        zip_code: '04076',
+        level_of_education: 'Bachelors',
+        previously_diagnosed: true
       }
 
       post "/registrations", params: params
@@ -24,6 +26,8 @@ RSpec.describe RegistrationsController, type: :request do
                               birth_year: 1992,
                               country: 'USA',
                               zip_code: '04076',
+                              level_of_education: 'Bachelors',
+                              previously_diagnosed: true,
                               organization_id: Organization.last.id
                             )
     end

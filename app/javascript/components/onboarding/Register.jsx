@@ -31,9 +31,11 @@ const Register = () => {
             birth_year: birthYear,
             country: country,
             zip_code: zipCode,
+            previously_diagnosed: previouslyDiagnosed,
+            level_of_education: levelOfEducation
         }
 
-        ApiService.registerAccount(params).then((response) => {
+        ApiService.createIntakeAssessment(params).then((response) => {
             navigate(`/intake_assessments/${response.data.intakeAssessmentToken}`)
         })
     }

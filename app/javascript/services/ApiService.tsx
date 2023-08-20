@@ -1,7 +1,7 @@
 import axios from "axios";
 
 class ApiService {
-    static registerAccount(params) {
+    static createIntakeAssessment(params) {
         return axios.post('/registrations', params)
     }
 

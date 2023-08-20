@@ -6,6 +6,8 @@ class RegistrationsController < ApplicationController
       email: params[:email],
       country: params[:country],
       zip_code: params[:zip_code],
+      previously_diagnosed: params[:previously_diagnosed],
+      level_of_education: params[:level_of_education],
     )
 
     render json: { intakeAssessmentToken: result.intake_assessment.token }

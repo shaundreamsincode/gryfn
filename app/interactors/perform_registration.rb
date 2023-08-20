@@ -8,7 +8,9 @@ class PerformRegistration
       birth_year: context.birth_year,
       country: context.country,
       zip_code: context.zip_code,
-      organization: fetch_organization
+      previously_diagnosed: context.previously_diagnosed,
+      level_of_education: context.level_of_education,
+      organization: fetch_organization,
     )
 
     create_questions!(intake_assessment)
