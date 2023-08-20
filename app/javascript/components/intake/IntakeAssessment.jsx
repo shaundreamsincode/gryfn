@@ -48,8 +48,14 @@ const IntakeAssessment = () => {
 
     const hasUnansweredQuestion = questionsToDisplay.some((question) => !question.answer);
 
+    const numberOfPages = Math.ceil(assessment.questions.length / questionsPerPage)
+
+    const showFinishButton = (currentPage + 1 === numberOfPages)
+
     return (
         <CardContent>
+            Page { currentPage + 1 } out of { numberOfPages }.
+
             <div>
                 {
                     questionsToDisplay.map((question) => (
@@ -65,15 +71,20 @@ const IntakeAssessment = () => {
                 >
                     Previous Page
                 </Button>
-                <Button
-                    onClick={() => handlePageChange(currentPage + 1)}
-                    disabled={endIndex >= assessment.questions.length}
-                >
-                    Next Page
-                </Button>
+                {
+                    showFinishButton && <Button onClick={handleFinishButtonClick} disabled={hasUnansweredQuestion}>Finish</Button>
+                }
+
+                {
+                    !showFinishButton && <Button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={endIndex >= assessment.questions.length}
+                    >
+                        Next Page
+                    </Button>
+                }
             </div>
 
-            <Button onClick={handleFinishButtonClick} disabled={hasUnansweredQuestion}>Finish</Button>
         </CardContent>
     );
 };

@@ -5,9 +5,10 @@ import AudioPlayer from "./AudioPlayer";
 
 const IntakeQuestion = (props) => {
     const question = props.question;
+    debugger
     const onSave = props.onSave;
 
-    const [answer, setAnswer] = useState(question.answer || ""); // Set initial value to question's answer
+    const [answer, setAnswer] = useState(question.answer); // Set initial value to question's answer
     const [answerSaved, setAnswerSaved] = useState(!!question.answer);
 
     const audioUrl = `https://shauncarlandcom.files.wordpress.com/2023/08/${question.file_name}`;
@@ -30,7 +31,7 @@ const IntakeQuestion = (props) => {
 
     // Update the answer state when the question changes
     useEffect(() => {
-        setAnswer(question.answer || "");
+        setAnswer(question.answer);
         setAnswerSaved(!!question.answer);
     }, [question]);
 
