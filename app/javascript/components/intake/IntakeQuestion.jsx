@@ -1,36 +1,51 @@
-import React, { useState } from "react";
-import ReactAudioPlayer from 'react-audio-player';
-import AudioPlayer from "./AudioPlayer";
-import {CardContent, TextField, Button} from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { CardContent, TextField, Button } from "@material-ui/core";
 import ApiService from "../../services/ApiService";
+import AudioPlayer from "./AudioPlayer";
 
 const IntakeQuestion = (props) => {
-    const question = props.question
-    const onSave = props.onSave
+    const question = props.question;
+    const onSave = props.onSave;
 
-    const [answer, setAnswer] = useState('')
-    const [answerSaved, setAnswerSaved] = useState(!!question.answer)
+    const [answer, setAnswer] = useState(question.answer || ""); // Set initial value to question's answer
+    const [answerSaved, setAnswerSaved] = useState(!!question.answer);
 
-    const audioUrl = `https://shauncarlandcom.files.wordpress.com/2023/08/${question.file_name}`
+    const audioUrl = `https://shauncarlandcom.files.wordpress.com/2023/08/${question.file_name}`;
 
-    const buttonText = answerSaved ? 'Saved' : 'Save'
+    const buttonText = answerSaved ? 'Saved' : 'Save';
 
     const handleSave = () => {
         ApiService.upsertIntakeQuestionResponse(question.token, answer).then((response) => {
-            setAnswerSaved(true)
-            onSave()
-        })
+            setAnswerSaved(true);
+            onSave();
+        });
+    };
+
+    const handleUndoButtonClick = () => {
+        ApiService.upsertIntakeQuestionResponse(question.token, null).then((response) => {
+            setAnswerSaved(false);
+            onSave();
+        });
     }
 
-    return(<CardContent style={{'border': '1px solid'}}>
-            <AudioPlayer src={audioUrl}/>
+    // Update the answer state when the question changes
+    useEffect(() => {
+        setAnswer(question.answer || "");
+        setAnswerSaved(!!question.answer);
+    }, [question]);
 
+    return (
+        <CardContent style={{ 'border': '1px solid' }}>
+            <AudioPlayer src={audioUrl} />
             <span>
-                <TextField value={answer} label="Answer" onChange={(e) => setAnswer(e.target.value)} />
-                <Button onClick={handleSave} disabled={answerSaved}>{ buttonText }</Button>
+                <TextField disabled={answerSaved} value={answer} onChange={(e) => setAnswer(e.target.value)} />
+                <Button onClick={handleSave} disabled={answerSaved}>{buttonText}</Button>
+                {
+                    answerSaved && <Button onClick={handleUndoButtonClick}>Undo</Button>
+                }
             </span>
         </CardContent>
-    )
-}
+    );
+};
 
-export default IntakeQuestion
+export default IntakeQuestion;
