@@ -1,5 +1,5 @@
 import React, { useState, useEffect }  from "react";
-import {CardContent} from "@material-ui/core";
+import {CardContent, Button} from "@material-ui/core";
 import ApiService from "../../services/ApiService";
 import IntakeQuestion from "./IntakeQuestion";
 
@@ -23,19 +23,14 @@ const IntakeAssessment = () => {
 
     return(<CardContent>
         <div>
-            Assessment token:
-            {
-                assessment.token
-            }
-        </div>
-        <div>
-            Questions:
             {
                 assessment.questions.map((question) => {
                     return (<IntakeQuestion question={question}/>)
                 })
             }
         </div>
+
+        <Button>Finish</Button>
     </CardContent>)
 }
 

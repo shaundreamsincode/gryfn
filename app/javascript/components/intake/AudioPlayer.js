@@ -40,7 +40,6 @@ class AudioPlayer extends React.Component {
                 <button onClick={playing ? this.handlePause : this.handlePlay}>
                     {playing ? 'Pause' : 'Play'}
                 </button>
-                <p>{currentTime} / {duration}</p>
             </div>
         )
     }
