@@ -78,7 +78,7 @@ const IntakeAssessment = () => {
                 {
                     !showFinishButton && <Button
                         onClick={() => handlePageChange(currentPage + 1)}
-                        disabled={endIndex >= assessment.questions.length}
+                        disabled={(endIndex >= assessment.questions.length) || hasUnansweredQuestion}
                     >
                         Next Page
                     </Button>
