@@ -8,10 +8,19 @@ const IntakeAssessment = () => {
     const assessmentToken = currentUrl.split("/")[4]
     const [assessment, setAssessment] = useState(null)
 
+    const onQuestionSave = () => {
+        ApiService.getIntakeAssessment(assessmentToken).then((response) => {
+            setAssessment(response.data)
+        })
+    }
+
+    const handleFinishButtonClick = () => {
+        console.log('finish')
+    }
+
     useEffect(() => {
         ApiService.getIntakeAssessment(assessmentToken).then((response) => {
             setAssessment(response.data)
-            console.log(response.data)
         })
     }, [assessmentToken])
 
@@ -21,16 +30,18 @@ const IntakeAssessment = () => {
         </CardContent>)
     }
 
+    const hasUnansweredQuestion = assessment.questions.some((question) => !question.answer);
+
     return(<CardContent>
         <div>
             {
                 assessment.questions.map((question) => {
-                    return (<IntakeQuestion question={question}/>)
+                    return (<IntakeQuestion question={question} onSave={onQuestionSave}/>)
                 })
             }
         </div>
 
-        <Button>Finish</Button>
+        <Button onClick={handleFinishButtonClick} disabled={hasUnansweredQuestion}>Finish</Button>
     </CardContent>)
 }
 
