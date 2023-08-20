@@ -42,7 +42,6 @@ const IntakeQuestion = (props) => {
 
     return (
         <CardContent style={{ 'border': '1px solid' }}>
-            hehe
             <AudioPlayer src={audioUrl} />
             <span>
                 <TextField disabled={answerSaved} onChange={(e) => setAnswer(e.target.value)} />
