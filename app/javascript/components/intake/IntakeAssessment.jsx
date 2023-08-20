@@ -44,7 +44,14 @@ const IntakeAssessment = () => {
 
     const startIndex = currentPage * questionsPerPage;
     const endIndex = startIndex + questionsPerPage;
-    const questionsToDisplay = assessment.questions.slice(startIndex, endIndex);
+
+    const sortedQuestions = assessment.questions.sort(function(a, b) {
+        var textA = a.file_name;
+        var textB = b.file_name;
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    })
+
+    const questionsToDisplay = sortedQuestions.slice(startIndex, endIndex);
 
     const hasUnansweredQuestion = questionsToDisplay.some((question) => !question.answer);
 
@@ -52,6 +59,7 @@ const IntakeAssessment = () => {
 
     const showFinishButton = (currentPage + 1 === numberOfPages)
 
+    debugger
     return (
         <CardContent>
             Page { currentPage + 1 } out of { numberOfPages }.
