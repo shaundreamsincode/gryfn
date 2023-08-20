@@ -17,7 +17,6 @@ const IntakeQuestion = (props) => {
 
     const handleSave = () => {
         ApiService.upsertIntakeQuestionResponse(question.token, answer).then((response) => {
-
             setAnswerSaved(true);
             onSave(response.data);
         });
@@ -41,15 +40,15 @@ const IntakeQuestion = (props) => {
     }, [question]);
 
     return (
-        <CardContent style={{ 'border': '1px solid' }}>
-            <AudioPlayer src={audioUrl} />
-            <span>
-                <TextField disabled={answerSaved} onChange={(e) => setAnswer(e.target.value)} />
-                <Button onClick={handleSave} disabled={answerSaved || !answer}>{buttonText}</Button>
-                {
-                    answerSaved && <Button onClick={handleUndoButtonClick}>Undo</Button>
-                }
-            </span>
+        <CardContent style={{ 'display': 'flex' }}>
+                <AudioPlayer src={audioUrl} />
+                <span style={{'float': 'right'}}>
+                    <TextField disabled={answerSaved} onChange={(e) => setAnswer(e.target.value)} />
+                        <Button onClick={handleSave} disabled={answerSaved || !answer}>{buttonText}</Button>
+                                {
+                                    answerSaved && <Button onClick={handleUndoButtonClick}>Undo</Button>
+                                }
+                </span>
         </CardContent>
     );
 };

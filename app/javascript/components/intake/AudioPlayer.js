@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Button} from "@material-ui/core";
 class AudioPlayer extends React.Component {
     state = {
         playing: false,
@@ -37,9 +37,10 @@ class AudioPlayer extends React.Component {
                     src={src}
                     onTimeUpdate={this.handleTimeUpdate}
                 />
-                <button onClick={playing ? this.handlePause : this.handlePlay}>
-                    {playing ? 'Pause' : 'Play'}
-                </button>
+                <Button onClick={playing ? this.handlePause : this.handlePlay}>
+                    Play
+                    {/*{playing ? 'Pause' : 'Play'}*/}
+                </Button>
             </div>
         )
     }
