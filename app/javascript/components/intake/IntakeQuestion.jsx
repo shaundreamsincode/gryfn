@@ -43,7 +43,7 @@ const IntakeQuestion = (props) => {
         <CardContent style={{ 'display': 'flex' }}>
                 <AudioPlayer src={audioUrl} />
                 <span style={{'float': 'right'}}>
-                    <TextField disabled={answerSaved} onChange={(e) => setAnswer(e.target.value)} />
+                    <TextField disabled={answerSaved} value={answer} onChange={(e) => setAnswer(e.target.value)} />
                         <Button onClick={handleSave} disabled={answerSaved || !answer}>{buttonText}</Button>
                                 {
                                     answerSaved && <Button onClick={handleUndoButtonClick}>Undo</Button>
