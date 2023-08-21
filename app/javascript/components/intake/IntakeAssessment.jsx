@@ -13,6 +13,8 @@ const IntakeAssessment = () => {
     const questionsPerPage = 5; // Number of questions per page
     const [currentPage, setCurrentPage] = useState(0);
     const [questions, setQuestions] = useState(null)
+    const [questionsToDisplay, setQuestionsToDisplay] = useState([])
+    const [hasUnansweredQuestions, setHasUnansweredQuestions] = useState(true)
 
     const onQuestionSave = (updatedQuestion) => {
         const newQuestions = questions.slice(0)
@@ -21,9 +23,9 @@ const IntakeAssessment = () => {
             return question.token === updatedQuestion.token
         })
 
-
         newQuestions[indexOfUpdatedQuestion] = updatedQuestion
         setQuestions(newQuestions)
+        setHasUnansweredQuestions(questionsToDisplay.some((question) => !question.answer));
     };
 
     const handleFinishButtonClick = () => {
@@ -31,6 +33,10 @@ const IntakeAssessment = () => {
     };
 
     const handlePageChange = (newPage) => {
+        const newQuestionsToDisplay = calculateQuestionsToDisplay(newPage + 1)
+
+        setHasUnansweredQuestions(newQuestionsToDisplay.some((question) => !question.answer));
+        setQuestionsToDisplay(newQuestionsToDisplay)
         setCurrentPage(newPage);
     };
 
@@ -40,6 +46,13 @@ const IntakeAssessment = () => {
         });
     }, [assessmentToken]);
 
+    useEffect(() => {
+        if (questions) {
+            const questionsToDisplay = calculateQuestionsToDisplay(0)
+            setHasUnansweredQuestions(questionsToDisplay.some((question) => !question.answer));
+        }
+    }, [questions]);
+
     if (!questions) {
         return (
             <CardContent>
@@ -48,22 +61,35 @@ const IntakeAssessment = () => {
         );
     }
 
-    const startIndex = currentPage * questionsPerPage;
-    const endIndex = startIndex + questionsPerPage;
+    const calculateQuestionsToDisplay = (page) => {
+        debugger
+        if (!questions) {
+            return
+        }
 
-    const sortedQuestions = questions.sort(function(a, b) {
-        var textA = a.file_name;
-        var textB = b.file_name;
-        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-    })
+        const startIndex = page * questionsPerPage;
+        const endIndex = startIndex + questionsPerPage;
 
-    const questionsToDisplay = sortedQuestions.slice(startIndex, endIndex);
+        const sortedQuestions = questions.sort(function(a, b) {
+            var textA = a.file_name;
+            var textB = b.file_name;
+            return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+        })
 
-    const hasUnansweredQuestions = sortedQuestions.some((question) => !question.answer);
+        // const questionsToDisplay = sortedQuestions.slice(startIndex, endIndex);
+        // // setHasUnansweredQuestions(questionsToDisplay.some((question) => !question.answer));
+        return sortedQuestions.slice(startIndex, endIndex);
+    }
+
+
+    // const hasUnansweredQuestions = sortedQuestions.some((question) => !question.answer);
 
     const numberOfPages = Math.ceil(questions.length / questionsPerPage)
 
     const showFinishButton = (currentPage + 1 === numberOfPages)
+
+    const startIndex = currentPage * questionsPerPage;
+    const endIndex = startIndex + questionsPerPage;
 
     //
 
@@ -96,7 +122,7 @@ const IntakeAssessment = () => {
                 {
                     !showFinishButton && <Button
                         onClick={() => handlePageChange(currentPage + 1)}
-                        disabled={(endIndex >= questions.length)}
+                        disabled={(endIndex >= questions.length) || hasUnansweredQuestions}
                     >
                         Next Page
                     </Button>
