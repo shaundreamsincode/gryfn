@@ -62,7 +62,7 @@ const IntakeAssessment = () => {
                 }
             </div>
             <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '1rem' }}>
-                 <Button onClick={handleFinishButtonClick} disabled={hasUnansweredQuestions}>Finish</Button>
+                 <Button variant="contained" color="primary" onClick={handleFinishButtonClick} disabled={hasUnansweredQuestions}>Finish</Button>
             </div>
 
             {/*<div>*/}

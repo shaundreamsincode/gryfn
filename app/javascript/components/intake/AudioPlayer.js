@@ -37,7 +37,7 @@ class AudioPlayer extends React.Component {
                     src={src}
                     onTimeUpdate={this.handleTimeUpdate}
                 />
-                <Button onClick={playing ? this.handlePause : this.handlePlay}>
+                <Button color="primary" onClick={playing ? this.handlePause : this.handlePlay}>
                     Play
                     {/*{playing ? 'Pause' : 'Play'}*/}
                 </Button>
