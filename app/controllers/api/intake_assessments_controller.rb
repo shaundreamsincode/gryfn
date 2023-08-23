@@ -13,6 +13,16 @@ class Api::IntakeAssessmentsController < ActionController::Base
     }
   end
 
+  def speech_questions
+    intake_assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
+
+    questions_json = intake_assessment.intake_speech_questions.each do |question|
+      { token: question.token, file_name: question.file_name, answer: question.answer }
+    end
+
+    render json: questions_json
+  end
+
   # /api/intake_questions/:intake_question_token/summary
   def summary
     assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
