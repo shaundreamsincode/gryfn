@@ -25,7 +25,11 @@ class ApiService {
         return axios.get(`/api/intake_assessments/${intakeAssessmentToken}/speech_questions.json`)
     }
 
-    // static get(url) {
+    static upsertSpeechQuestionResponse(speechQuestionToken, answerFilePath) {
+        return axios.post(`/api/intake_speech_questions/${speechQuestionToken}/upsert_response`, { answerFilePath: answerFilePath })
+    }
+
+        // static get(url) {
     //     return axios.get(url, { headers: { Authorization: `Bearer ${this._fetchJwtToken()}` } })
     // }
     //

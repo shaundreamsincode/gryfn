@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ApiService from "../../services/ApiService";
 import {CardContent} from "@material-ui/core";
+import IntakeSpeechQuestion from "./IntakeSpeechQuestion";
 
 const IntakeSpeechQuestions = () => {
     const currentUrl = window.location.href;
@@ -21,7 +22,7 @@ const IntakeSpeechQuestions = () => {
     return(<CardContent>
         {
             questions.map((question) => {
-                return(<div>{ question.file_name }</div>)
+                return(<IntakeSpeechQuestion question={question} />)
             })
         }
     </CardContent>)
