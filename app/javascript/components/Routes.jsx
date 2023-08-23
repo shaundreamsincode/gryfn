@@ -8,7 +8,7 @@ import PrivacyPolicy from "./onboarding/PrivacyPolicy";
 
 import IntakeAssessment from "./intake/IntakeAssessment";
 import IntakeSummary from "./intake/IntakeSummary";
-
+import IntakeSpeechQuestions from "./intake/IntakeSpeechQuestions";
 export default (
     <Router>
         <Fragment>
@@ -20,6 +20,7 @@ export default (
 
                 <Route exact path='/intake_assessments/:intakeAssessmentToken' element={<IntakeAssessment/>}/>
                 <Route exact path='/intake_assessments/:intakeAssessmentToken/summary' element={<IntakeSummary/>}/>
+                <Route exact path='/intake_assessments/:intakeAssessmentToken/speech_questions' element={<IntakeSpeechQuestions/>}/>
             </Routes>
         </Fragment>
     </Router>

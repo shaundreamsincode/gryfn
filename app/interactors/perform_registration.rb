@@ -14,6 +14,7 @@ class PerformRegistration
     )
 
     create_questions!(intake_assessment)
+    create_speech_questions!(intake_assessment)
     context.intake_assessment = intake_assessment
   end
 
@@ -22,6 +23,18 @@ class PerformRegistration
       correct_answer = file_name.split('.mp3').first
 
       IntakeEideticQuestion.create!(
+        intake_assessment: intake_assessment,
+        file_name: file_name,
+        correct_answer: correct_answer
+      )
+    end
+  end
+
+  private def create_speech_questions!(intake_assessment)
+    IntakeSpeechQuestion::FILE_NAMES.each do |file_name|
+      correct_answer = file_name.split('.mp3').first
+
+      IntakeSpeechQuestion.create!(
         intake_assessment: intake_assessment,
         file_name: file_name,
         correct_answer: correct_answer
