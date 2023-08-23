@@ -12,9 +12,11 @@ const IntakeSpeechQuestion = (props) => {
     debugger
 
     const handleSave = () => {
+        debugger
+
         ApiService.upsertSpeechQuestionResponse(question.token, answerFilePath).then((response) => {
-            debugger
             setQuestionHasBeenAnswered(true)
+            setRecordingComplete(false)
         })
     }
 
