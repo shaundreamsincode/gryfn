@@ -7,7 +7,9 @@ import { AudioRecorder } from 'react-audio-voice-recorder';
 const IntakeSpeechQuestion = (props) => {
     const { question } = props
     const [answerFilePath, setAnswerFilePath] = useState(null)
+    const [recordingComplete, setRecordingComplete] = useState(false)
     const [questionHasBeenAnswered, setQuestionHasBeenAnswered] = useState(!!question.answer)
+    debugger
 
     const handleSave = () => {
         ApiService.upsertSpeechQuestionResponse(question.token, answerFilePath).then((response) => {
@@ -20,12 +22,14 @@ const IntakeSpeechQuestion = (props) => {
         ApiService.upsertSpeechQuestionResponse(question.token, null).then((response) => {
             debugger
             setQuestionHasBeenAnswered(false)
+            setRecordingComplete(false)
         })
     }
 
     const handleRecordingComplete = (blob) => {
         const url = URL.createObjectURL(blob);
         setAnswerFilePath(url)
+        setRecordingComplete(true)
         console.log(answerFilePath)
     }
 
@@ -41,7 +45,7 @@ const IntakeSpeechQuestion = (props) => {
         />
 
         { question.file_name }
-        <Button disabled={questionHasBeenAnswered || !answerFilePath} onClick={handleSave}>Save</Button>
+        <Button disabled={questionHasBeenAnswered || !recordingComplete} onClick={handleSave}>Save</Button>
         {
             questionHasBeenAnswered && <Button onClick={handleUndo}>Undo</Button>
 
