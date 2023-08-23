@@ -25,8 +25,6 @@ const IntakeSpeechQuestions = () => {
                 return(<IntakeSpeechQuestion question={question} />)
             })
         }
-    </CardContent>)
-
-}
+    </CardContent>) }
 
 export default IntakeSpeechQuestions

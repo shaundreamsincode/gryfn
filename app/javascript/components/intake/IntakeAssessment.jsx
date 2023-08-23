@@ -1,41 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { CardContent, Button } from "@material-ui/core";
+import {Card, CardContent} from "@material-ui/core";
 import ApiService from "../../services/ApiService";
-import IntakeQuestion from "./IntakeQuestion";
-import { useNavigate } from "react-router-dom";
+import IntakeSpellingQuestions from "./IntakeSpellingQuestions";
+import IntakeSpeechQuestions from "./IntakeSpeechQuestions";
 
 const IntakeAssessment = () => {
-    const navigate = useNavigate();
-
     const currentUrl = window.location.href;
     const assessmentToken = currentUrl.split("/")[4];
-
-    const [currentPage, setCurrentPage] = useState(0);
-    const [questions, setQuestions] = useState(null)
-
-    const onQuestionSave = (updatedQuestion) => {
-        const newQuestions = questions.slice(0)
-
-        const indexOfUpdatedQuestion = newQuestions.findIndex((question) => {
-            return question.token === updatedQuestion.token
-        })
-
-        newQuestions[indexOfUpdatedQuestion] = updatedQuestion
-        setQuestions(newQuestions)
-    };
-
-    const handleFinishButtonClick = () => {
-        navigate(`/intake_assessments/${assessmentToken}/summary`)
-    }
-
+    const [assessment, setAssessment] = useState(null)
 
     useEffect(() => {
         ApiService.getIntakeAssessment(assessmentToken).then((response) => {
-            setQuestions(response.data.questions);
+            setAssessment(response.data);
         });
     }, [assessmentToken]);
 
-    if (!questions) {
+    if (!assessment) {
         return (
             <CardContent>
                 Loading...
@@ -43,52 +23,21 @@ const IntakeAssessment = () => {
         );
     }
 
-    const sortedQuestions = questions.sort(function(a, b) {
-        var textA = a.file_name;
-        var textB = b.file_name;
-        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-    })
+    console.log(assessment)
 
-    const hasUnansweredQuestions = questions.some((q) => !q.answer)
+    if (assessment.current_step === "speech") {
+        return(<IntakeSpeechQuestions questions={assessment.speech_questions}/>)
+    }
 
-    return (
-        <CardContent>
+    if (assessment.current_step === "eidetic") {
+        return(<IntakeSpellingQuestions title="Eidetic" questions={assessment.eidetic_questions}/>)
+    }
 
-            <div>
-                {
-                    sortedQuestions.map((question) => (
-                        <IntakeQuestion key={question.token} question={question} onSave={onQuestionSave} />
-                    ))
-                }
-            </div>
-            <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '1rem' }}>
-                 <Button variant="contained" color="primary" onClick={handleFinishButtonClick} disabled={hasUnansweredQuestions}>Finish</Button>
-            </div>
+    if (assessment.current_step === "phonetic") {
+        return(<IntakeSpellingQuestions title="Phonetic" questions={assessment.phonetic_questions}/>)
+    }
 
-            {/*<div>*/}
-            {/*    <Button*/}
-            {/*        onClick={() => handlePageChange(currentPage - 1)}*/}
-            {/*        disabled={currentPage === 0}*/}
-            {/*    >*/}
-            {/*        Previous Page*/}
-            {/*    </Button>*/}
-            {/*    {*/}
-            {/*        // todo - recalc hasUnansweredQuestion*/}
-            {/*        showFinishButton && <Button onClick={handleFinishButtonClick} disabled={hasUnansweredQuestions}>Finish</Button>*/}
-            {/*    }*/}
-
-            {/*    {*/}
-            {/*        !showFinishButton && <Button*/}
-            {/*            onClick={() => handlePageChange(currentPage + 1)}*/}
-            {/*            disabled={(endIndex >= questions.length)}*/}
-            {/*        >*/}
-            {/*            Next Page*/}
-            {/*        </Button>*/}
-            {/*    }*/}
-            {/*</div>*/}
-
-        </CardContent>
-    );
+    return(<CardContent>Invalid current step</CardContent>)
 };
 
 export default IntakeAssessment;

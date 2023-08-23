@@ -9,13 +9,14 @@ Rails.application.routes.draw do
       get :summary
       get :send_summary_email
       get :speech_questions
+      get :spelling_questions
     end
 
     resources :intake_speech_questions, only: [], param: :token do
       post :upsert_response
     end
 
-    resources :intake_eidetic_questions, only: [], param: :token do
+    resources :intake_spelling_questions, only: [], param: :token do
       post :upsert_response
     end
   end

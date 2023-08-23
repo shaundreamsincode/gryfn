@@ -3,7 +3,7 @@ import { CardContent, TextField, Button } from "@material-ui/core";
 import ApiService from "../../services/ApiService";
 import AudioPlayer from "./AudioPlayer";
 
-const IntakeQuestion = (props) => {
+const IntakeSpellingQuestion = (props) => {
     const question = props.question;
     // debugger
     const onSave = props.onSave;
@@ -53,4 +53,4 @@ const IntakeQuestion = (props) => {
     );
 };
 
-export default IntakeQuestion;
+export default IntakeSpellingQuestion;

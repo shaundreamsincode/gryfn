@@ -10,7 +10,7 @@ class ApiService {
     }
 
     static upsertIntakeQuestionResponse(intakeQuestionToken, answer) {
-        return axios.post(`/api/intake_questions/${intakeQuestionToken}/upsert_response`, { answer: answer })
+        return axios.post(`/api/intake_spelling_questions/${intakeQuestionToken}/upsert_response`, { answer: answer })
     }
 
     static getIntakeAssessmentSummary(intakeAssessmentToken) {
