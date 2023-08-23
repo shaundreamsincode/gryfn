@@ -35,6 +35,12 @@ class Api::IntakeAssessmentsController < ActionController::Base
     render json: map_intake_spelling_questions(intake_assessment)
   end
 
+  def speech_questions
+    intake_assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
+
+    render json: intake_assessment.speech_questions.map { |question| question.correct_answer }
+  end
+
   private def map_intake_spelling_questions(intake_assessment, question_type=[:eidetic, :phonetic])
     intake_assessment.intake_spelling_questions.where(question_type: question_type).map do |question|
       {

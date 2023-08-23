@@ -22,7 +22,7 @@ class ApiService {
     }
 
     static getIntakeSpeechQuestions = (intakeAssessmentToken) => {
-        return axios.get(`/api/intake_assessments/${intakeAssessmentToken}/speech_questions.json`)
+        return axios.get(`/api/intake_assessments/${intakeAssessmentToken}/speech_questions`)
     }
 
     static upsertSpeechQuestionResponse(speechQuestionToken, answerFilePath) {
