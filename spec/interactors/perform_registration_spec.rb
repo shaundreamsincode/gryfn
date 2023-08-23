@@ -13,10 +13,10 @@ RSpec.describe PerformRegistration do
     )
 
     expect(IntakeAssessment.count).to eq(1)
-    expect(IntakeEideticQuestion.count).to_not eq(0)
+    expect(IntakeQuestion.count).to_not eq(0)
 
     assessment = IntakeAssessment.first
-    question = IntakeEideticQuestion.first
+    question = IntakeQuestion.first
 
     expect(assessment).to have_attributes(
                          patient_first_name: 'Spongebob',
