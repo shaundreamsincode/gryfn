@@ -9,6 +9,8 @@ class CreateIntakeSpellingQuestions < ActiveRecord::Migration[7.0]
       t.string :correct_answer, null: false
       t.string :file_name, null: false
 
+      t.integer :question_type, null: false, default: 0
+
       t.string :valid_phonetics, array: true, default: []
 
       t.timestamps

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import IntakeSpellingQuestion from "./IntakeSpellingQuestion";
 
 const IntakeSpellingQuestions = (props) => {
-    const { questions } = props
+    const { questions, title } = props
     const navigate = useNavigate()
     const currentUrl = window.location.href
     const assessmentToken = currentUrl.split("/")[4]
@@ -35,6 +35,7 @@ const IntakeSpellingQuestions = (props) => {
 
     return (
         <CardContent>
+            <div> { title } </div>
             <div>
                 {
                     sortedQuestions.map((question) => (

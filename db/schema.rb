@@ -34,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_054113) do
     t.string "zip_code"
     t.string "level_of_education"
     t.boolean "previously_diagnosed"
-    t.integer "current_question_index", default: 0
+    t.integer "current_step", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organization_id"], name: "index_intake_assessments_on_organization_id"
@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_054113) do
     t.string "answer"
     t.string "correct_answer", null: false
     t.string "file_name", null: false
+    t.integer "question_type", default: 0, null: false
     t.string "valid_phonetics", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
