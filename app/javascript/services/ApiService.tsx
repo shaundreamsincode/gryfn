@@ -26,7 +26,8 @@ class ApiService {
     }
 
     static upsertSpeechQuestionResponse(speechQuestionToken, answerFilePath) {
-        return axios.post(`/api/intake_speech_questions/${speechQuestionToken}/upsert_response`, { answerFilePath: answerFilePath })
+        console.log(`intakeAssessmentToken ${speechQuestionToken}`)
+        return axios.post(`/api/intake_speech_questions/${speechQuestionToken}/upsert_response`, { answer_file_path: answerFilePath })
     }
 
         // static get(url) {
