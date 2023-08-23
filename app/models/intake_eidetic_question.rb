@@ -1,4 +1,4 @@
-class IntakeQuestion < ApplicationRecord
+class IntakeEideticQuestion < ApplicationRecord
   belongs_to :intake_assessment
 
     FILE_NAMES =

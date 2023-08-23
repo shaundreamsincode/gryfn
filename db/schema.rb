@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_054113) do
     t.index ["organization_id"], name: "index_intake_assessments_on_organization_id"
   end
 
-  create_table "intake_questions", force: :cascade do |t|
+  create_table "intake_eidetic_questions", force: :cascade do |t|
     t.string "token"
     t.bigint "intake_assessment_id"
     t.integer "index", default: 0, null: false

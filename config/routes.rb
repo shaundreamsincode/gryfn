@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       get :send_summary_email
     end
 
-    resources :intake_questions, only: [], param: :token do
+    resources :intake_eidetic_questions, only: [], param: :token do
       post :upsert_response
     end
   end

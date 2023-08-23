@@ -2,7 +2,7 @@ class Api::IntakeAssessmentsController < ActionController::Base
   def show
     intake_assessment = IntakeAssessment.find_by!(token: params[:token])
 
-    intake_assessment_questions_json = intake_assessment.intake_questions.map do |question|
+    intake_assessment_questions_json = intake_assessment.intake_eidetic_questions.map do |question|
       { token: question.token, file_name: question.file_name, answer: question.answer }
     end
 
