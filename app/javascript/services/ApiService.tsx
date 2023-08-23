@@ -10,7 +10,7 @@ class ApiService {
     }
 
     static upsertIntakeQuestionResponse(intakeQuestionToken, answer) {
-        return axios.post(`/api/intake_questions/${intakeQuestionToken}/upsert_response`, { answer: answer })
+        return axios.post(`/api/intake_spelling_questions/${intakeQuestionToken}/upsert_response`, { answer: answer })
     }
 
     static getIntakeAssessmentSummary(intakeAssessmentToken) {
@@ -19,6 +19,10 @@ class ApiService {
 
     static sendIntakeAssessmentSummaryEmail(intakeAssessmentToken) {
         return axios.get(`/api/intake_assessments/${intakeAssessmentToken}/send_summary_email.json`)
+    }
+
+    static getIntakeSpellingQuestions(intakeAssessmentToken) {
+        return axios.get(`/api/intake_assessments/${intakeAssessmentToken}/spelling_questions.json`)
     }
 
     // static get(url) {

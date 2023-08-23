@@ -13,20 +13,8 @@ class PerformRegistration
       organization: fetch_organization,
     )
 
-    create_questions!(intake_assessment)
+    IntakeSpellingQuestion.create_questions_for_assessment!(intake_assessment)
     context.intake_assessment = intake_assessment
-  end
-
-  private def create_questions!(intake_assessment)
-    IntakeQuestion::FILE_NAMES.each do |file_name|
-      correct_answer = file_name.split('.mp3').first
-
-      IntakeQuestion.create!(
-        intake_assessment: intake_assessment,
-        file_name: file_name,
-        correct_answer: correct_answer
-      )
-    end
   end
 
   private def fetch_organization

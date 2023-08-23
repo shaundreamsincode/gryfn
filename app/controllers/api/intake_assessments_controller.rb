@@ -2,14 +2,10 @@ class Api::IntakeAssessmentsController < ActionController::Base
   def show
     intake_assessment = IntakeAssessment.find_by!(token: params[:token])
 
-    intake_assessment_questions_json = intake_assessment.intake_questions.map do |question|
-      { token: question.token, file_name: question.file_name, answer: question.answer }
-    end
-
     render json: {
       token: intake_assessment.token,
       current_question_index: intake_assessment.current_question_index,
-      questions: intake_assessment_questions_json
+      spelling_questions: map_intake_spelling_questions(intake_assessment)
     }
   end
 
@@ -25,5 +21,17 @@ class Api::IntakeAssessmentsController < ActionController::Base
 
     SummaryMailer.summary_email(assessment).deliver_now
     head 200
+  end
+
+  def spelling_questions
+    intake_assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
+
+    render json: map_intake_spelling_questions(intake_assessment)
+  end
+
+  private def map_intake_spelling_questions(intake_assessment)
+    intake_assessment.intake_spelling_questions.map do |question|
+      { token: question.token, file_name: question.file_name, answer: question.answer }
+    end
   end
 end
