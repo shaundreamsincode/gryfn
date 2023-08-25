@@ -3,18 +3,27 @@ import ApiService from "../../services/ApiService";
 
 import {Button, CardContent} from "@material-ui/core";
 import { AudioRecorder } from 'react-audio-voice-recorder';
+import axios from "axios";
 
 const IntakeSpeechQuestion = (props) => {
     const { question } = props
     const [answerFilePath, setAnswerFilePath] = useState(null)
+    const [blob, setBlob] = useState(null)
     const [recordingComplete, setRecordingComplete] = useState(false)
     const [questionHasBeenAnswered, setQuestionHasBeenAnswered] = useState(!!question.answer)
-    debugger
 
     const handleSave = () => {
-        debugger
+        const wavFromBlob = new File([blob], "test.wav")
+        console.log(wavFromBlob)
+        // const wavFromBlob = new File([])
 
-        ApiService.upsertSpeechQuestionResponse(question.token, answerFilePath).then((response) => {
+        axios.post(
+            `/api/intake_speech_questions/${question.token}/upsert_response`,
+            wavFromBlob,
+            {
+                headers: { "content-type": "audio/mpeg"}
+            }
+        ).then((response) => {
             setQuestionHasBeenAnswered(true)
             setRecordingComplete(false)
         })
@@ -22,13 +31,13 @@ const IntakeSpeechQuestion = (props) => {
 
     const handleUndo = () => {
         ApiService.upsertSpeechQuestionResponse(question.token, null).then((response) => {
-            debugger
             setQuestionHasBeenAnswered(false)
             setRecordingComplete(false)
         })
     }
 
     const handleRecordingComplete = (blob) => {
+        setBlob(blob)
         const url = URL.createObjectURL(blob);
         setAnswerFilePath(url)
         setRecordingComplete(true)

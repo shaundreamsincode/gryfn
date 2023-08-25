@@ -46,3 +46,5 @@
 
 .DS_Store
 public/.DS_Store
+
+app/controllers/concerns/credentials.json*

@@ -25,8 +25,16 @@ class ApiService {
         return axios.get(`/api/intake_assessments/${intakeAssessmentToken}/speech_questions`)
     }
 
-    static upsertSpeechQuestionResponse(speechQuestionToken, answerFilePath) {
-        return axios.post(`/api/intake_speech_questions/${speechQuestionToken}/upsert_response`, { answer_file_path: answerFilePath })
+    static upsertSpeechQuestionResponse(speechQuestionToken, answer) {
+        debugger
+        console.log(`answer ${answer}`)
+        return axios.post(
+            `/api/intake_speech_questions/${speechQuestionToken}/upsert_response`,
+            { answer: answer },
+            {
+                headers: { "content-type": "audio/mpeg"}
+            }
+        )
     }
 
         // static get(url) {

@@ -56,6 +56,10 @@ gem 'dotenv-rails'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
 
+# for voice recognition
+gem 'google-cloud-speech', '~> 1.2', '>= 1.2.3'
+gem 'google-cloud-ruby'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
