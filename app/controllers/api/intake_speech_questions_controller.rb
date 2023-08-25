@@ -4,8 +4,9 @@ class Api::IntakeSpeechQuestionsController < ApplicationController
     audio_file = request.body.read
 
     result = DecodeSpeech.call(audio_file: audio_file)
-    question.update!(answer: result.transcript)
+    return render json: result.error, status: 422 if result.failure?
 
+    question.update!(answer: result.transcript)
     render json: question
   end
 
