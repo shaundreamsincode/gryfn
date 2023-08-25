@@ -30,7 +30,7 @@ const IntakeSpeechQuestion = (props) => {
     }
 
     const handleUndo = () => {
-        ApiService.upsertSpeechQuestionResponse(question.token, null).then((response) => {
+        ApiService.resetSpeechQuestionResponse(question.token).then((response) => {
             setQuestionHasBeenAnswered(false)
             setRecordingComplete(false)
         })
@@ -51,7 +51,6 @@ const IntakeSpeechQuestion = (props) => {
                 noiseSuppression: true,
                 echoCancellation: true,
             }}
-            downloadOnSavePress={true}
             downloadFileExtension="webm"
         />
 

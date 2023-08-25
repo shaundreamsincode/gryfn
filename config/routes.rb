@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
     resources :intake_speech_questions, only: [], param: :token do
       post :upsert_response
+      post :reset_response
     end
 
     resources :intake_spelling_questions, only: [], param: :token do

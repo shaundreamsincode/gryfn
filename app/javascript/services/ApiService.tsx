@@ -5,36 +5,38 @@ class ApiService {
         return axios.post('/registrations', params)
     }
 
-    static getIntakeAssessment(intakeAssessmentToken) {
-        return axios.get(`/api/intake_assessments/${intakeAssessmentToken}.json`)
+    static getIntakeAssessment(token) {
+        return axios.get(`/api/intake_assessments/${token}.json`)
     }
 
-    static upsertIntakeQuestionResponse(intakeQuestionToken, answer) {
-        return axios.post(`/api/intake_spelling_questions/${intakeQuestionToken}/upsert_response`, { answer: answer })
+    static upsertIntakeQuestionResponse(token, answer) {
+        return axios.post(`/api/intake_spelling_questions/${token}/upsert_response`, { answer: answer })
     }
 
-    static getIntakeAssessmentSummary(intakeAssessmentToken) {
-        return axios.get(`/api/intake_assessments/${intakeAssessmentToken}/summary.json`)
+    static getIntakeAssessmentSummary(token) {
+        return axios.get(`/api/intake_assessments/${token}/summary.json`)
     }
 
-    static sendIntakeAssessmentSummaryEmail(intakeAssessmentToken) {
-        return axios.get(`/api/intake_assessments/${intakeAssessmentToken}/send_summary_email.json`)
+    static sendIntakeAssessmentSummaryEmail(token) {
+        return axios.get(`/api/intake_assessments/${token}/send_summary_email.json`)
     }
 
-    static getIntakeSpeechQuestions = (intakeAssessmentToken) => {
-        return axios.get(`/api/intake_assessments/${intakeAssessmentToken}/speech_questions`)
+    static getIntakeSpeechQuestions = (token) => {
+        return axios.get(`/api/intake_assessments/${token}/speech_questions`)
     }
 
-    static upsertSpeechQuestionResponse(speechQuestionToken, answer) {
-        debugger
-        console.log(`answer ${answer}`)
+    static upsertSpeechQuestionResponse(token, answer) {
         return axios.post(
-            `/api/intake_speech_questions/${speechQuestionToken}/upsert_response`,
+            `/api/intake_speech_questions/${token}/upsert_response`,
             { answer: answer },
             {
                 headers: { "content-type": "audio/mpeg"}
             }
         )
+    }
+
+    static resetSpeechQuestionResponse(token) {
+        return axios.post(`/api/intake_speech_questions/${token}/reset_response`)
     }
 
         // static get(url) {
