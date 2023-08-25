@@ -9,6 +9,12 @@ const IntakeSpeechQuestions = () => {
 
     const [questions, setQuestions] = useState([])
 
+    const sortedQuestions = questions.sort(function(a, b) {
+        var textA = a.file_name;
+        var textB = b.file_name;
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    })
+
     useEffect(() => {
         ApiService.getIntakeSpeechQuestions(assessmentToken).then((response) => {
             console.log('success')
@@ -21,13 +27,13 @@ const IntakeSpeechQuestions = () => {
         })
     }, [assessmentToken])
 
-    if (questions.length === 0) {
+    if (sortedQuestions.length === 0) {
         return(<CardContent>Loading...</CardContent>)
     }
 
     return(<CardContent>
         {
-            questions.map((question) => {
+            sortedQuestions.map((question) => {
                 return(<IntakeSpeechQuestion question={question} />)
             })
         }

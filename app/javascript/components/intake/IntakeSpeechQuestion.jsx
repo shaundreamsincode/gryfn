@@ -65,14 +65,16 @@ const IntakeSpeechQuestion = (props) => {
 
     return(<CardContent>
         <span>
-                    <AudioRecorder
-                        onRecordingComplete={handleRecordingComplete}
-                        audioTrackConstraints={{
-                            noiseSuppression: true,
-                            echoCancellation: true,
-                        }}
-                        downloadFileExtension="webm"
-                    />
+            {
+                !questionHasBeenAnswered && <AudioRecorder
+                    onRecordingComplete={handleRecordingComplete}
+                    audioTrackConstraints={{
+                        noiseSuppression: true,
+                        echoCancellation: true,
+                    }}
+                    downloadFileExtension="webm"
+                />
+            }
 
             {
                 isSaving && <div>Saving...</div>
