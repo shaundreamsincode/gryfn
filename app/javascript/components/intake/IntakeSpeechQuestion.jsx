@@ -7,6 +7,7 @@ import axios from "axios";
 
 const IntakeSpeechQuestion = (props) => {
     const { question } = props
+    const [answer, setAnswer] = useState(question.answer)
     const [answerFilePath, setAnswerFilePath] = useState(null)
     const [blob, setBlob] = useState(null)
     const [recordingComplete, setRecordingComplete] = useState(false)
@@ -24,6 +25,8 @@ const IntakeSpeechQuestion = (props) => {
                 headers: { "content-type": "audio/mpeg"}
             }
         ).then((response) => {
+            console.log(response.data)
+            setAnswer(response.data.answer)
             setQuestionHasBeenAnswered(true)
             setRecordingComplete(false)
         })
@@ -33,6 +36,7 @@ const IntakeSpeechQuestion = (props) => {
         ApiService.resetSpeechQuestionResponse(question.token).then((response) => {
             setQuestionHasBeenAnswered(false)
             setRecordingComplete(false)
+            setAnswer(null)
         })
     }
 
@@ -45,22 +49,25 @@ const IntakeSpeechQuestion = (props) => {
     }
 
     return(<CardContent>
-        <AudioRecorder
-            onRecordingComplete={handleRecordingComplete}
-            audioTrackConstraints={{
-                noiseSuppression: true,
-                echoCancellation: true,
-            }}
-            downloadFileExtension="webm"
-        />
+        <span>
+                    <AudioRecorder
+                        onRecordingComplete={handleRecordingComplete}
+                        audioTrackConstraints={{
+                            noiseSuppression: true,
+                            echoCancellation: true,
+                        }}
+                        downloadFileExtension="webm"
+                    />
 
-        { question.file_name }
+            {
+                answer && <div>{ answer }</div>
+            }
+        </span>
+
         <Button disabled={questionHasBeenAnswered || !recordingComplete} onClick={handleSave}>Save</Button>
         {
             questionHasBeenAnswered && <Button onClick={handleUndo}>Undo</Button>
-
         }
     </CardContent>)
 }
-
 export default IntakeSpeechQuestion
