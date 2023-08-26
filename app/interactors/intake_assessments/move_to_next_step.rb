@@ -1,4 +1,4 @@
-class MoveIntakeAssessmentToNextStep
+class IntakeAssessments::MoveToNextStep
   include Interactor
 
   def call
@@ -12,6 +12,7 @@ class MoveIntakeAssessmentToNextStep
       context.fail!(error: "There are unanswered questions!")
     end
 
+    eidetic_questions = IntakeAssessments::CreateEideticQuestions.call(intake_assessment: intake_assessment)
     context.intake_assessment.update!(current_step: :eidetic)
   end
 

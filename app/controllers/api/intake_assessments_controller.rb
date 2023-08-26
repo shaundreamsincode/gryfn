@@ -46,7 +46,7 @@ class Api::IntakeAssessmentsController < ActionController::Base
   def move_to_next_step
     intake_assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
 
-    result = MoveIntakeAssessmentToNextStep.call(
+    result = IntakeAssessments::MoveToNextStep.call(
       intake_assessment: intake_assessment
     )
 
