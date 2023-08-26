@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import ApiService from "../../services/ApiService";
-import {CardContent} from "@material-ui/core";
+import {CardContent, Button} from "@material-ui/core";
 import IntakeSpeechQuestion from "./IntakeSpeechQuestion";
 
 const IntakeSpeechQuestions = () => {
+    const arrayHasUnansweredQuestions = (_questions) => {
+        return _questions.some((question) => { return !question.answer })
+    }
+
     const currentUrl = window.location.href;
     const assessmentToken = currentUrl.split("/")[4];
 
     const [questions, setQuestions] = useState([])
+    const [finishButtonDisabled, setFinishButtonDisabled] = useState(null)
 
     const sortedQuestions = questions.sort(function(a, b) {
         var textA = a.file_name;
@@ -15,12 +20,28 @@ const IntakeSpeechQuestions = () => {
         return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     })
 
+    const handleQuestionUpdate = (question, newAnswer) => {
+        debugger
+
+        let newQuestion = Object.assign(question, {})
+        newQuestion.answer = newAnswer
+
+        let newQuestions = Object.assign(questions, {})
+        const indexToUpdate = newQuestions.findIndex((q) => q.token === newQuestion.token)
+        newQuestions[indexToUpdate] = newQuestion
+
+        setQuestions(newQuestions)
+        setFinishButtonDisabled(arrayHasUnansweredQuestions(newQuestions))
+    }
+
+    const handleFinish = () => {
+
+    }
+
     useEffect(() => {
         ApiService.getIntakeSpeechQuestions(assessmentToken).then((response) => {
-            console.log('success')
-            console.log(response)
-
             setQuestions(response.data)
+            setFinishButtonDisabled(arrayHasUnansweredQuestions(response.data))
         }).catch((error) => {
             console.log('error')
             console.log(error)
@@ -34,9 +55,11 @@ const IntakeSpeechQuestions = () => {
     return(<CardContent>
         {
             sortedQuestions.map((question) => {
-                return(<IntakeSpeechQuestion question={question} />)
+                return(<IntakeSpeechQuestion question={question} onUpdate={handleQuestionUpdate} />)
             })
         }
+
+        <Button onClick={handleFinish} disabled={finishButtonDisabled}>Finish</Button>
     </CardContent>) }
 
 export default IntakeSpeechQuestions

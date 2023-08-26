@@ -6,7 +6,7 @@ import { AudioRecorder } from 'react-audio-voice-recorder';
 import axios from "axios";
 
 const IntakeSpeechQuestion = (props) => {
-    const { question } = props
+    const { question, onUpdate } = props
     const [answer, setAnswer] = useState(question.answer)
     const [answerFilePath, setAnswerFilePath] = useState(null)
     const [blob, setBlob] = useState(null)
@@ -33,6 +33,8 @@ const IntakeSpeechQuestion = (props) => {
             setRecordingComplete(false)
             setRecordingUnsuccessful(false)
             setIsSaving(false)
+
+            onUpdate(question, response.data.answer)
         }).catch((error)=> {
             setRecordingComplete(false)
             setIsSaving(false)
@@ -53,6 +55,7 @@ const IntakeSpeechQuestion = (props) => {
             setRecordingComplete(false)
             setAnswer(null)
             setIsSaving(false)
+            onUpdate(question, null)
         })
     }
 
