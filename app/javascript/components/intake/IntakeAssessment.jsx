@@ -23,8 +23,6 @@ const IntakeAssessment = () => {
         );
     }
 
-    console.log(assessment)
-
     if (assessment.current_step === "speech") {
         return(<IntakeSpeechQuestions questions={assessment.speech_questions}/>)
     }

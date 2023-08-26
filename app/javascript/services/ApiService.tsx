@@ -39,6 +39,10 @@ class ApiService {
         return axios.post(`/api/intake_speech_questions/${token}/reset_response`)
     }
 
+    static moveIntakeAssessmentToNextStep(token) {
+        return axios.get(`/api/intake_assessments/${token}/move_to_next_step`)
+    }
+
         // static get(url) {
     //     return axios.get(url, { headers: { Authorization: `Bearer ${this._fetchJwtToken()}` } })
     // }
