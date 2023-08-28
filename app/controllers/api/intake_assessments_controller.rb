@@ -42,17 +42,6 @@ class Api::IntakeAssessmentsController < ActionController::Base
     end
   end
 
-  # TODO - MAKE THIS A POST!
-  def move_to_next_step
-    intake_assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
-
-    result = IntakeAssessments::MoveToNextStep.call(
-      intake_assessment: intake_assessment
-    )
-
-    render json: result.intake_assessment
-  end
-
   private def map_intake_spelling_questions(intake_assessment, question_type=[:eidetic, :phonetic])
     intake_assessment.intake_spelling_questions.where(question_type: question_type).map do |question|
       {

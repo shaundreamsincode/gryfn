@@ -35,10 +35,7 @@ const IntakeSpeechQuestions = () => {
     }
 
     const handleFinish = () => {
-        ApiService.moveIntakeAssessmentToNextStep(assessmentToken).then(() => {
-            // TODO fix this
-            navigate(`/intake_assessments/${assessmentToken}`)
-        })
+
     }
 
     useEffect(() => {
