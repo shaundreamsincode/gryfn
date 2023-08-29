@@ -23,7 +23,7 @@ const IntakeAssessment = () => {
         );
     }
 
-    return(<IntakePhoneticQuestions assessmentToken={assessmentToken}/>)
+    return(<IntakeEideticQuestions questions={assessment.eidetic_questions} assessmentToken={assessmentToken}/>)
     // return(<IntakeEideticQuestions title="Eidetic" questions={assessment.eidetic_questions}/>)
 
 

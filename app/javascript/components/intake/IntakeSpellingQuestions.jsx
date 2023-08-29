@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import IntakeSpellingQuestion from "./IntakeSpellingQuestion";
 
 const IntakeSpellingQuestions = (props) => {
-    const { questions, onSave, questionSaveEndpoint, title } = props
+    const { questions, onSave, onFinish, questionSaveEndpoint, title } = props
     const navigate = useNavigate()
     const currentUrl = window.location.href
     const assessmentToken = currentUrl.split("/")[4]
@@ -29,10 +29,6 @@ const IntakeSpellingQuestions = (props) => {
         onSave(newQuestions)
     };
 
-    const handleFinishButtonClick = () => {
-        navigate(`/intake_assessments/${assessmentToken}/summary`)
-    }
-
     return (
         <>
             <div> { title } </div>
@@ -49,18 +45,10 @@ const IntakeSpellingQuestions = (props) => {
                 }
             </div>
             <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '1rem' }}>
-                <Button variant="contained" color="primary" onClick={handleFinishButtonClick} disabled={hasUnansweredQuestions}>Finish</Button>
+                <Button variant="contained" color="primary" onClick={onFinish} disabled={hasUnansweredQuestions}>Finish</Button>
             </div>
         </>
     );
-
-    // return(<CardContent>
-    //     {
-    //         questions.map((question) => {
-    //             return(<div> { question.file_name }</div>)
-    //         })
-    //     }
-    // </CardContent>)
 }
 
 export default IntakeSpellingQuestions

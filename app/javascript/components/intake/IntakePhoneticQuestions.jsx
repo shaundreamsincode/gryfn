@@ -17,17 +17,23 @@ const IntakePhoneticQuestions = (props) => {
         return(<CardContent>Loading...</CardContent>)
     }
 
-    const onQuestionSave = (newQuestions) => {
+    const handleQuestionSave = (newQuestions) => {
         setQuestions(newQuestions)
     }
 
+    const handleFinish = () => {
+    }
+
     return(
-        <IntakeSpellingQuestions
-        questions={questions}
-        onSave={onQuestionSave}
-        title="Phonetic"
-        questionSaveEndpoint={ApiService.upsertIntakePhoneticQuestionResponse}
-    />
+        <CardContent>
+            <IntakeSpellingQuestions
+                questions={questions}
+                onSave={handleQuestionSave}
+                onFinish={handleFinish}
+                title="Phonetic"
+                questionSaveEndpoint={ApiService.upsertIntakePhoneticQuestionResponse}
+            />
+        </CardContent>
     )
 }
 
