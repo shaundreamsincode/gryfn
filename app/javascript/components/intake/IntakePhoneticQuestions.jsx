@@ -1,22 +1,42 @@
 import React, { useState, useEffect } from "react";
 import ApiService from "../../services/ApiService";
-import {CardContent} from "@material-ui/core";
+import {Card, CardContent} from "@material-ui/core";
 import IntakeSpellingQuestions from "./IntakeSpellingQuestions";
+import {useNavigate} from "react-router-dom";
 
-const IntakePhoneticQuestions = (props) => {
-    const { questions, onFinish } = props
-    const [spellingQuestions, setSpellingQuestions] = useState(questions)
+const IntakePhoneticQuestions = () => {
+    const currentUrl = window.location.href;
+    const assessmentToken = currentUrl.split("/")[4];
+    const navigate = useNavigate()
+
+    const [questions, setQuestions] = useState(null)
+
+    useEffect(() => {
+        ApiService.getIntakePhoneticQuestions(assessmentToken).then((response) => {
+            setQuestions(response.data)
+        })
+    }, [assessmentToken])
 
     const handleQuestionSave = (newQuestions) => {
-        setSpellingQuestions(newQuestions)
+        setQuestions(newQuestions)
+    }
+
+    const handleFinish = () => {
+        ApiService.moveIntakeAssessmentToNextStep(assessmentToken).then(() => {
+            navigate(`/intake_assessments/${assessmentToken}`)
+        })
+    }
+
+    if (!questions) {
+        return <CardContent>Loading...</CardContent>
     }
 
     return(
         <CardContent>
             <IntakeSpellingQuestions
-                questions={spellingQuestions}
+                questions={questions}
                 onSave={handleQuestionSave}
-                onFinish={onFinish}
+                onFinish={handleFinish}
                 title="Phonetic"
                 questionSaveEndpoint={ApiService.upsertIntakePhoneticQuestionResponse}
             />

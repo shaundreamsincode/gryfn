@@ -9,6 +9,10 @@ class ApiService {
         return axios.get(`/api/intake_assessments/${token}.json`)
     }
 
+    static getIntakeEideticQuestions(token) {
+        return axios.get(`/api/intake_assessments/${token}/eidetic_questions`)
+    }
+
     static upsertIntakeEideticQuestionResponse(token, answer) {
         return axios.post(`/api/intake_eidetic_questions/${token}/upsert_response`, { answer: answer })
     }
@@ -45,6 +49,11 @@ class ApiService {
 
     static upsertIntakePhoneticQuestionResponse(token, answer) {
         return axios.post(`/api/intake_phonetic_questions/${token}/upsert_response`, { answer: answer })
+    }
+
+    // TODO ---- CHANGE THIS TO A POST
+    static moveIntakeAssessmentToNextStep(token) {
+        return axios.post(`/api/intake_assessments/${token}/move_to_next_step`)
     }
 
     // static get(url) {

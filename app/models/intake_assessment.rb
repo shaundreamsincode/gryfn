@@ -10,5 +10,5 @@ class IntakeAssessment < ApplicationRecord
   has_many :intake_phonetic_questions
   alias_attribute :phonetic_questions, :intake_phonetic_questions
 
-  enum current_step: { speech: 0, eidetic: 1, phonetic: 2 }
+  enum current_step: { speech: 0, eidetic: 1, phonetic: 2, summary: 3 }
 end

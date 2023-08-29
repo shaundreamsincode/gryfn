@@ -8,7 +8,11 @@ import PrivacyPolicy from "./onboarding/PrivacyPolicy";
 
 import IntakeAssessment from "./intake/IntakeAssessment";
 import IntakeSummary from "./intake/IntakeSummary";
+
 import IntakeSpeechQuestions from "./intake/IntakeSpeechQuestions";
+import IntakeEideticQuestions from "./intake/IntakeEideticQuestions";
+import IntakePhoneticQuestions from "./intake/IntakePhoneticQuestions";
+
 export default (
     <Router>
         <Fragment>
@@ -20,7 +24,10 @@ export default (
 
                 <Route exact path='/intake_assessments/:intakeAssessmentToken' element={<IntakeAssessment/>}/>
                 <Route exact path='/intake_assessments/:intakeAssessmentToken/summary' element={<IntakeSummary/>}/>
-                <Route exact path='/intake_assessments/:intakeAssessmentToken/speech_questions' element={<IntakeSpeechQuestions/>}/>
+
+                <Route exact path='/intake_assessments/:intakeAssessmentToken/speech' element={<IntakeSpeechQuestions/>}/>
+                <Route exact path='/intake_assessments/:intakeAssessmentToken/eidetic' element={<IntakeEideticQuestions/>}/>
+                <Route exact path='/intake_assessments/:intakeAssessmentToken/phonetic' element={<IntakePhoneticQuestions/>}/>
             </Routes>
         </Fragment>
     </Router>

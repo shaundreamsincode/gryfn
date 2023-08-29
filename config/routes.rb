@@ -10,7 +10,10 @@ Rails.application.routes.draw do
       get :send_summary_email
 
       get :speech_questions
+      get :eidetic_questions
       get :phonetic_questions
+
+      post :move_to_next_step
     end
 
     resources :intake_speech_questions, only: [], param: :token do

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ApiService from "../../services/ApiService";
 import {CardContent, Button} from "@material-ui/core";
 import IntakeSpeechQuestion from "./IntakeSpeechQuestion";
+import { useNavigate } from "react-router-dom";
 
 const IntakeSpeechQuestions = (props) => {
     const arrayHasUnansweredQuestions = (_questions) => {
@@ -10,10 +11,10 @@ const IntakeSpeechQuestions = (props) => {
 
     const currentUrl = window.location.href;
     const assessmentToken = currentUrl.split("/")[4];
+    const navigate = useNavigate()
 
     const [questions, setQuestions] = useState([])
     const [finishButtonDisabled, setFinishButtonDisabled] = useState(false)
-    const { onFinish } = props
 
     const sortedQuestions = questions.sort(function(a, b) {
         var textA = a.file_name;
@@ -22,8 +23,6 @@ const IntakeSpeechQuestions = (props) => {
     })
 
     const handleQuestionUpdate = (question, newAnswer) => {
-        debugger
-
         let newQuestion = Object.assign(question, {})
         newQuestion.answer = newAnswer
 
@@ -32,7 +31,14 @@ const IntakeSpeechQuestions = (props) => {
         newQuestions[indexToUpdate] = newQuestion
 
         setQuestions(newQuestions)
-        // setFinishButtonDisabled(arrayHasUnansweredQuestions(newQuestions))
+        setFinishButtonDisabled(arrayHasUnansweredQuestions(newQuestions))
+    }
+
+    const handleFinish = () => {
+        ApiService.moveIntakeAssessmentToNextStep(assessmentToken).then(() => {
+            debugger
+            navigate(`/intake_assessments/${assessmentToken}`)
+        })
     }
 
     useEffect(() => {
@@ -56,7 +62,7 @@ const IntakeSpeechQuestions = (props) => {
             })
         }
 
-        <Button onClick={onFinish} disabled={false}>Finish</Button>
+        <Button onClick={handleFinish} disabled={finishButtonDisabled}>Finish</Button>
     </CardContent>) }
 
 export default IntakeSpeechQuestions

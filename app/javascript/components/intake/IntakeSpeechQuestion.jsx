@@ -82,9 +82,6 @@ const IntakeSpeechQuestion = (props) => {
             {
                 isSaving && <div>Saving...</div>
             }
-            {
-                answer && <div>{ answer }</div>
-            }
 
             {
                 recordingUnsuccessful && <div>Recording unsucessful. Please try again.</div>

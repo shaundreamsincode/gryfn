@@ -4,10 +4,10 @@ class IntakePhoneticQuestion < ApplicationRecord
 
   EXAMPLE_PHONETIC_SETS_DICTIONARY = {
     'baby' => [['b','eɪ','b','i']],
-    'one' => [['w','ʌ','n']],
-    'boat' => [['b','oʊ','t']],
-    'do' => [['d','u']],
-    'car' => [['k','ɑ','r']],
+    # 'one' => [['w','ʌ','n']],
+    # 'boat' => [['b','oʊ','t']],
+    # 'do' => [['d','u']],
+    # 'car' => [['k','ɑ','r']],
     # 'there' => [['ð','ɛr'], ['ð','eɪ','r']]
   }.with_indifferent_access.freeze
 

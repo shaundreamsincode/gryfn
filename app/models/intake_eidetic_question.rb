@@ -1,7 +1,7 @@
 class IntakeEideticQuestion < ApplicationRecord
   belongs_to :intake_assessment
 
-  WORDS = ['what', 'islet']
+  WORDS = ['what']
 
   def self.create_questions_for_assessment!(assessment)
     WORDS.each do |word|

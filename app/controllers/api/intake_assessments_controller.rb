@@ -1,13 +1,10 @@
-class Api::IntakeAssessmentsController < ActionController::Base
+class Api::IntakeAssessmentsController < ApplicationController
   def show
     intake_assessment = IntakeAssessment.find_by!(token: params[:token])
 
     render json: {
       token: intake_assessment.token,
-      current_step: intake_assessment.current_step,
-      eidetic_questions: map_questions(intake_assessment.eidetic_questions),
-      phonetic_questions: map_questions(intake_assessment.phonetic_questions),
-      speech_questions: [] # todo - fix
+      current_step: intake_assessment.current_step
     }
   end
 
@@ -25,13 +22,41 @@ class Api::IntakeAssessmentsController < ActionController::Base
     head 200
   end
 
+  def move_to_next_step
+    assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
+
+    # TODO - fix this
+
+    if assessment.speech?
+      assessment.eidetic!
+    elsif assessment.eidetic?
+      assessment.phonetic!
+    elsif assessment.phonetic?
+      assessment.summary!
+    end
+
+    render json: assessment
+
+    # next_step = assessment.current_step.to_i + 1
+    # assessment.update!(current_step: next_step)
+    #
+    # render json: assessment
+  end
 
   def speech_questions
     intake_assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
 
     render json: intake_assessment.speech_questions.map do |question|
-      # todo - do we want to hydrate up the correct answer?
       { token: question.token, answer: question.answer, correct_answer: question.correct_answer }
+    end
+  end
+
+  def eidetic_questions
+    intake_assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
+
+    # todo - DRY this
+    render json: intake_assessment.eidetic_questions.map do |question|
+      { token: question.token, answer: question.answer, file_name: question.file_name }
     end
   end
 
@@ -41,16 +66,6 @@ class Api::IntakeAssessmentsController < ActionController::Base
     # todo - DRY this
     render json: intake_assessment.phonetic_questions.map do |question|
       { token: question.token, answer: question.answer, file_name: question.file_name }
-    end
-  end
-
-  private def map_questions(questions)
-    questions.map do |question|
-      {
-        token: question.token,
-        file_name: question.file_name,
-        answer: question.answer
-      }
     end
   end
 
