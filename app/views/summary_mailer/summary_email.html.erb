@@ -3,18 +3,53 @@
 
 <p>You are receiving this notification because you took our Dyslexia test. Here are your results:</p>
 
+<b>Speech Questions</b>
 <table>
   <thead>
   <td>Answer</td>
   <td>Your Answer</td>
   </thead>
   <tbody>
-      <% @assessment.intake_questions.each do |intake_question| # todo - sorting? %>
+      <% @assessment.speech_questions.each do |question| # todo - sorting? %>
         <tr>
-          <td> <%= intake_question.correct_answer %> </td>
-          <td><%= intake_question.answer %></td>
-          <td><%= intake_question.correct_answer.downcase ==  intake_question.answer.downcase ? 'Correct' : 'Incorrect'%></td>
+          <td> <%= question.correct_answer %> </td>
+          <td><%= question.answer %></td>
+          <td><%= question.is_correct? ? 'Correct' : 'Incorrect'%></td>
         </tr>
       <% end %>
+  </tbody>
+</table>
+
+<b>Eidetic Questions</b>
+<table>
+  <thead>
+  <td>Answer</td>
+  <td>Your Answer</td>
+  </thead>
+  <tbody>
+      <% @assessment.eidetic_questions.each do |question| # todo - sorting? %>
+        <tr>
+          <td> <%= question.correct_answer %> </td>
+          <td><%= question.answer %></td>
+          <td><%= question.is_correct? ? 'Correct' : 'Incorrect'%></td>
+        </tr>
+      <% end %>
+  </tbody>
+</table>
+
+<b>Phonetic Questions</b>
+<table>
+  <thead>
+  <td>Answer</td>
+  <td>Your Answer</td>
+  </thead>
+  <tbody>
+  <% @assessment.phonetic_questions.each do |question| # todo - sorting? %>
+    <tr>
+      <td> <%= question.correct_answer %> </td>
+      <td><%= question.answer %></td>
+      <td><%= question.is_correct? ? 'Correct' : 'Incorrect'%></td>
+    </tr>
+  <% end %>
   </tbody>
 </table>

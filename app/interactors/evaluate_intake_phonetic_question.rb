@@ -38,7 +38,7 @@ class EvaluateIntakePhoneticQuestion
   }
 
   def call
-    context.correct = (context.question.answer === context.question.correct_answer || has_correct_phonetic_words?)
+    context.correct = (context.question.answer.downcase === context.question.correct_answer.downcase || has_correct_phonetic_words?)
   end
 
   private def has_correct_phonetic_words?

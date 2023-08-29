@@ -14,6 +14,7 @@ class IntakeEideticQuestion < ApplicationRecord
   end
 
   def is_correct?
-    answer == correct_answer
+    return false if answer.nil?
+    answer.downcase == correct_answer.downcase
   end
 end
