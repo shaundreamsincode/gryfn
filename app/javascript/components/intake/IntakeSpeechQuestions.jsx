@@ -36,7 +36,6 @@ const IntakeSpeechQuestions = (props) => {
 
     const handleFinish = () => {
         ApiService.moveIntakeAssessmentToNextStep(assessmentToken).then(() => {
-            debugger
             navigate(`/intake_assessments/${assessmentToken}`)
         })
     }
@@ -44,6 +43,7 @@ const IntakeSpeechQuestions = (props) => {
     useEffect(() => {
         ApiService.getIntakeSpeechQuestions(assessmentToken).then((response) => {
             setQuestions(response.data)
+            debugger
             setFinishButtonDisabled(arrayHasUnansweredQuestions(response.data))
         }).catch((error) => {
             console.log('error')

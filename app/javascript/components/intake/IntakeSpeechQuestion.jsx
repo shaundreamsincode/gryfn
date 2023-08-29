@@ -17,6 +17,7 @@ const IntakeSpeechQuestion = (props) => {
 
     const handleSave = () => {
         setIsSaving(true)
+        setRecordingUnsuccessful(false)
         const wavFromBlob = new File([blob], "test.wav")
         console.log(wavFromBlob)
         // const wavFromBlob = new File([])
@@ -68,16 +69,21 @@ const IntakeSpeechQuestion = (props) => {
 
     return(<CardContent>
         <span>
-            {
-                !questionHasBeenAnswered && <AudioRecorder
-                    onRecordingComplete={handleRecordingComplete}
-                    audioTrackConstraints={{
-                        noiseSuppression: true,
-                        echoCancellation: true,
-                    }}
-                    downloadFileExtension="webm"
-                />
-            }
+            <div>
+                {
+                    !questionHasBeenAnswered && <AudioRecorder
+                        onRecordingComplete={handleRecordingComplete}
+                        audioTrackConstraints={{
+                            noiseSuppression: true,
+                            echoCancellation: true,
+                        }}
+                        downloadFileExtension="webm"
+                    />
+                }
+
+                { question.correct_answer }
+            </div>
+
 
             {
                 isSaving && <div>Saving...</div>
