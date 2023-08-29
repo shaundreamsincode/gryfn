@@ -6,7 +6,8 @@ class IntakePhoneticQuestion < ApplicationRecord
     'one' => [['w','ʌ','n']],
     'boat' => [['b','oʊ','t']],
     'do' => [['d','u']],
-    'car' => [['k','ɑ','r']]
+    'car' => [['k','ɑ','r']],
+    # 'there' => [['ð','ɛr'], ['ð','eɪ','r']]
   }.with_indifferent_access.freeze
 
   def self.create_questions_for_assessment!(intake_assessment)

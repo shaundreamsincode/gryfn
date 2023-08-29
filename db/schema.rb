@@ -58,7 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_26_021654) do
     t.integer "index", default: 0, null: false
     t.string "answer"
     t.string "correct_answer", null: false
-    t.string "phonetic_sets"
+    t.string "phonetic_sets", default: [], array: true
     t.string "file_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
