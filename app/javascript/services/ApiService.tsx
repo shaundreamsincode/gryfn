@@ -9,8 +9,8 @@ class ApiService {
         return axios.get(`/api/intake_assessments/${token}.json`)
     }
 
-    static upsertIntakeQuestionResponse(token, answer) {
-        return axios.post(`/api/intake_spelling_questions/${token}/upsert_response`, { answer: answer })
+    static upsertIntakeEideticQuestionResponse(token, answer) {
+        return axios.post(`/api/intake_eidetic_questions/${token}/upsert_response`, { answer: answer })
     }
 
     static getIntakeAssessmentSummary(token) {

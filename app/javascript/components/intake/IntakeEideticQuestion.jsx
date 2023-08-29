@@ -3,7 +3,7 @@ import { CardContent, TextField, Button } from "@material-ui/core";
 import ApiService from "../../services/ApiService";
 import AudioPlayer from "./AudioPlayer";
 
-const IntakeSpellingQuestion = (props) => {
+const IntakeEideticQuestion = (props) => {
     const question = props.question;
     // debugger
     const onSave = props.onSave;
@@ -16,14 +16,14 @@ const IntakeSpellingQuestion = (props) => {
     const buttonText = answerSaved ? 'Saved' : 'Save';
 
     const handleSave = () => {
-        ApiService.upsertIntakeQuestionResponse(question.token, answer).then((response) => {
+        ApiService.upsertIntakeEideticQuestionResponse(question.token, answer).then((response) => {
             setAnswerSaved(true);
             onSave(response.data);
         });
     };
 
     const handleUndoButtonClick = () => {
-        ApiService.upsertIntakeQuestionResponse(question.token, null).then((response) => {
+        ApiService.upsertIntakeEideticQuestionResponse(question.token, null).then((response) => {
             console.log('foo')
             console.log(response)
 
@@ -53,4 +53,4 @@ const IntakeSpellingQuestion = (props) => {
     );
 };
 
-export default IntakeSpellingQuestion;
+export default IntakeEideticQuestion;

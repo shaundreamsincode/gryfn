@@ -14,7 +14,7 @@ class PerformRegistration
     )
 
     create_speech_questions!(intake_assessment)
-    # IntakeSpellingQuestion.create_questions_for_assessment!(intake_assessment)
+    IntakeEideticQuestion.create_questions_for_assessment!(intake_assessment)
     context.intake_assessment = intake_assessment
   end
 

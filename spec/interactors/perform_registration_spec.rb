@@ -13,7 +13,7 @@ RSpec.describe PerformRegistration do
     )
 
     expect(IntakeAssessment.count).to eq(1)
-    expect(IntakeSpellingQuestion.count).to_not eq(0)
+    expect(IntakeEideticQuestion.count).to_not eq(0)
 
     assessment = IntakeAssessment.first
 
@@ -27,9 +27,5 @@ RSpec.describe PerformRegistration do
                          level_of_education: 'Bachelors',
                          organization_id: Organization.last.id
                        )
-
-    expect(IntakeSpellingQuestion.pluck(:question_type).to eq(
-      %w[phonetic phonetic phonetic phonetic phonetic eidetic eidetic eidetic eidetic eidetic])
-    )
   end
 end

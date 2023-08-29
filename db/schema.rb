@@ -74,20 +74,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_26_021654) do
     t.index ["intake_assessment_id"], name: "index_intake_speech_questions_on_intake_assessment_id"
   end
 
-  create_table "intake_spelling_questions", force: :cascade do |t|
-    t.string "token"
-    t.bigint "intake_assessment_id"
-    t.integer "index", default: 0, null: false
-    t.string "answer"
-    t.string "correct_answer", null: false
-    t.string "file_name", null: false
-    t.integer "question_type", default: 0, null: false
-    t.string "valid_phonetics", default: [], array: true
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["intake_assessment_id"], name: "index_quest_on_assessment"
-  end
-
   create_table "organizations", force: :cascade do |t|
     t.string "token"
     t.string "name"

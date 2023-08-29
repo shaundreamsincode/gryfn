@@ -16,7 +16,7 @@ RSpec.describe RegistrationsController, type: :request do
       post "/registrations", params: params
 
       expect(IntakeAssessment.count).to eq(1)
-      expect(IntakeSpellingQuestion.count).to_not eq(0)
+      expect(IntakeEideticQuestion.count).to_not eq(0)
 
       assessment = IntakeAssessment.last
 
