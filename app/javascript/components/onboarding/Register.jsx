@@ -49,15 +49,16 @@ const Register = () => {
     };
 
     const nextButtonDisabled = () => {
-        return !(
-            name &&
-            isEmailValid &&
-            birthYear &&
-            country &&
-            zipCode &&
-            previouslyDiagnosed &&
-            levelOfEducation
-        );
+        return false
+        // return !(
+        //     name &&
+        //     isEmailValid &&
+        //     birthYear &&
+        //     country &&
+        //     zipCode &&
+        //     previouslyDiagnosed &&
+        //     levelOfEducation
+        // );
     };
 
     return (

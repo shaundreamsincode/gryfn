@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react'
 import ApiService from "../../services/ApiService";
 import {Button, CardContent} from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-import IntakeEideticQuestion from "./IntakeEideticQuestion";
+import IntakeSpellingQuestion from "./IntakeSpellingQuestion";
 
-const IntakeEideticQuestions = (props) => {
-    const { questions, title } = props
+const IntakeSpellingQuestions = (props) => {
+    const { questions, onSave, questionSaveEndpoint, title } = props
     const navigate = useNavigate()
     const currentUrl = window.location.href
     const assessmentToken = currentUrl.split("/")[4]
@@ -26,7 +26,7 @@ const IntakeEideticQuestions = (props) => {
         })
 
         newQuestions[indexOfUpdatedQuestion] = updatedQuestion
-        setQuestions(newQuestions)
+        onSave(newQuestions)
     };
 
     const handleFinishButtonClick = () => {
@@ -34,19 +34,24 @@ const IntakeEideticQuestions = (props) => {
     }
 
     return (
-        <CardContent>
+        <>
             <div> { title } </div>
             <div>
                 {
                     sortedQuestions.map((question) => (
-                        <IntakeEideticQuestion key={question.token} question={question} onSave={onQuestionSave} />
+                        <IntakeSpellingQuestion
+                            key={question.token}
+                            question={question}
+                            onSave={onQuestionSave}
+                            questionSaveEndpoint={questionSaveEndpoint}
+                        />
                     ))
                 }
             </div>
             <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '1rem' }}>
                 <Button variant="contained" color="primary" onClick={handleFinishButtonClick} disabled={hasUnansweredQuestions}>Finish</Button>
             </div>
-        </CardContent>
+        </>
     );
 
     // return(<CardContent>
@@ -58,4 +63,4 @@ const IntakeEideticQuestions = (props) => {
     // </CardContent>)
 }
 
-export default IntakeEideticQuestions
+export default IntakeSpellingQuestions

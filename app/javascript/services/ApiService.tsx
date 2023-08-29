@@ -39,7 +39,15 @@ class ApiService {
         return axios.post(`/api/intake_speech_questions/${token}/reset_response`)
     }
 
-        // static get(url) {
+    static getIntakePhoneticQuestions(token) {
+        return axios.get(`/api/intake_assessments/${token}/phonetic_questions`)
+    }
+
+    static upsertIntakePhoneticQuestionResponse(token, answer) {
+        return axios.post(`/api/intake_phonetic_questions/${token}/upsert_response`, { answer: answer })
+    }
+
+    // static get(url) {
     //     return axios.get(url, { headers: { Authorization: `Bearer ${this._fetchJwtToken()}` } })
     // }
     //

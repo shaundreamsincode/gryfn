@@ -8,6 +8,7 @@ class CreateIntakePhoneticQuestions < ActiveRecord::Migration[7.0]
       t.integer :index, null: false, default: 0
       t.string :answer
       t.string :correct_answer, null: false
+      t.string :phonetic_sets
       t.string :file_name, null: false
 
       # phonetic set

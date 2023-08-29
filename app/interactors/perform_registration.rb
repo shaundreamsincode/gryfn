@@ -10,11 +10,13 @@ class PerformRegistration
       zip_code: context.zip_code,
       previously_diagnosed: context.previously_diagnosed,
       level_of_education: context.level_of_education,
-      organization: fetch_organization,
+      organization: fetch_organization
     )
 
     create_speech_questions!(intake_assessment)
     IntakeEideticQuestion.create_questions_for_assessment!(intake_assessment)
+    IntakePhoneticQuestion.create_questions_for_assessment!(intake_assessment)
+
     context.intake_assessment = intake_assessment
   end
 

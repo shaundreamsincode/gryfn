@@ -29,7 +29,17 @@ class Api::IntakeAssessmentsController < ActionController::Base
     intake_assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
 
     render json: intake_assessment.speech_questions.map do |question|
+      # todo - do we want to hydrate up the correct answer?
       { token: question.token, answer: question.answer, correct_answer: question.correct_answer }
+    end
+  end
+
+  def phonetic_questions
+    intake_assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
+
+    # todo - DRY this
+    render json: intake_assessment.phonetic_questions.map do |question|
+      { token: question.token, answer: question.answer, file_name: question.file_name }
     end
   end
 

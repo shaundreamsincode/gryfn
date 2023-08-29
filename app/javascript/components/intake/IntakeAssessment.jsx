@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {Card, CardContent} from "@material-ui/core";
 import ApiService from "../../services/ApiService";
 import IntakeEideticQuestions from "./IntakeEideticQuestions";
+import IntakePhoneticQuestions from "./IntakePhoneticQuestions";
 
 const IntakeAssessment = () => {
     const currentUrl = window.location.href;
@@ -22,7 +23,8 @@ const IntakeAssessment = () => {
         );
     }
 
-    return(<IntakeEideticQuestions title="Eidetic" questions={assessment.eidetic_questions}/>)
+    return(<IntakePhoneticQuestions assessmentToken={assessmentToken}/>)
+    // return(<IntakeEideticQuestions title="Eidetic" questions={assessment.eidetic_questions}/>)
 
 
     // if (assessment.current_step === "speech") {

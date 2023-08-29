@@ -8,7 +8,9 @@ Rails.application.routes.draw do
     resources :intake_assessments, only: :show, param: :token do
       get :summary
       get :send_summary_email
+
       get :speech_questions
+      get :phonetic_questions
     end
 
     resources :intake_speech_questions, only: [], param: :token do
@@ -17,6 +19,10 @@ Rails.application.routes.draw do
     end
 
     resources :intake_eidetic_questions, only: [], param: :token do
+      post :upsert_response
+    end
+
+    resources :intake_phonetic_questions, only: [], param: :token do
       post :upsert_response
     end
   end
