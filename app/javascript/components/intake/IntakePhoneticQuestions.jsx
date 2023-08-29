@@ -4,32 +4,19 @@ import {CardContent} from "@material-ui/core";
 import IntakeSpellingQuestions from "./IntakeSpellingQuestions";
 
 const IntakePhoneticQuestions = (props) => {
-    const { assessmentToken } = props
-    const [questions, setQuestions] = useState(null)
-
-    useEffect(() => {
-        ApiService.getIntakePhoneticQuestions(assessmentToken).then((response) => {
-            setQuestions(response.data)
-        })
-    }, assessmentToken)
-
-    if (!questions) {
-        return(<CardContent>Loading...</CardContent>)
-    }
+    const { questions, onFinish } = props
+    const [spellingQuestions, setSpellingQuestions] = useState(questions)
 
     const handleQuestionSave = (newQuestions) => {
-        setQuestions(newQuestions)
-    }
-
-    const handleFinish = () => {
+        setSpellingQuestions(newQuestions)
     }
 
     return(
         <CardContent>
             <IntakeSpellingQuestions
-                questions={questions}
+                questions={spellingQuestions}
                 onSave={handleQuestionSave}
-                onFinish={handleFinish}
+                onFinish={onFinish}
                 title="Phonetic"
                 questionSaveEndpoint={ApiService.upsertIntakePhoneticQuestionResponse}
             />

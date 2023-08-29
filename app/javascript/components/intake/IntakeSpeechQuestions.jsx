@@ -3,7 +3,7 @@ import ApiService from "../../services/ApiService";
 import {CardContent, Button} from "@material-ui/core";
 import IntakeSpeechQuestion from "./IntakeSpeechQuestion";
 
-const IntakeSpeechQuestions = () => {
+const IntakeSpeechQuestions = (props) => {
     const arrayHasUnansweredQuestions = (_questions) => {
         return _questions.some((question) => { return !question.answer })
     }
@@ -13,6 +13,7 @@ const IntakeSpeechQuestions = () => {
 
     const [questions, setQuestions] = useState([])
     const [finishButtonDisabled, setFinishButtonDisabled] = useState(null)
+    const { onFinish } = props
 
     const sortedQuestions = questions.sort(function(a, b) {
         var textA = a.file_name;
@@ -32,10 +33,6 @@ const IntakeSpeechQuestions = () => {
 
         setQuestions(newQuestions)
         setFinishButtonDisabled(arrayHasUnansweredQuestions(newQuestions))
-    }
-
-    const handleFinish = () => {
-
     }
 
     useEffect(() => {
@@ -59,7 +56,7 @@ const IntakeSpeechQuestions = () => {
             })
         }
 
-        <Button onClick={handleFinish} disabled={finishButtonDisabled}>Finish</Button>
+        <Button onClick={onFinish} disabled={finishButtonDisabled}>Finish</Button>
     </CardContent>) }
 
 export default IntakeSpeechQuestions

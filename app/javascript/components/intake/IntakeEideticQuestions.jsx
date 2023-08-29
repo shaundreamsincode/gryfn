@@ -4,8 +4,7 @@ import IntakeSpellingQuestions from "./IntakeSpellingQuestions";
 import ApiService from "../../services/ApiService";
 
 const IntakeEideticQuestions = (props) => {
-    const { questions } = props
-    // const navigate = useNavigate()
+    const { questions, onFinish } = props
 
     const [spellingQuestions, setSpellingQuestions] = useState(questions)
 
@@ -13,16 +12,12 @@ const IntakeEideticQuestions = (props) => {
         setSpellingQuestions(newQuestions)
     }
 
-    const handleFinish = () => {
-
-    }
-
     return (
         <CardContent>
             <IntakeSpellingQuestions
                 questions={spellingQuestions}
                 onSave={handleQuestionSave}
-                onFinish={handleFinish}
+                onFinish={onFinish}
                 title="Eidetic"
                 questionSaveEndpoint={ApiService.upsertIntakeEideticQuestionResponse}
             />

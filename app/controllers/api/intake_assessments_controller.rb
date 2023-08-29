@@ -5,8 +5,9 @@ class Api::IntakeAssessmentsController < ActionController::Base
     render json: {
       token: intake_assessment.token,
       current_step: intake_assessment.current_step,
-      eidetic_questions: map_eidetic_questions(intake_assessment),
-      speech_questions: []
+      eidetic_questions: map_questions(intake_assessment.eidetic_questions),
+      phonetic_questions: map_questions(intake_assessment.phonetic_questions),
+      speech_questions: [] # todo - fix
     }
   end
 
@@ -43,8 +44,8 @@ class Api::IntakeAssessmentsController < ActionController::Base
     end
   end
 
-  private def map_eidetic_questions(intake_assessment)
-    intake_assessment.eidetic_questions.map do |question|
+  private def map_questions(questions)
+    questions.map do |question|
       {
         token: question.token,
         file_name: question.file_name,
