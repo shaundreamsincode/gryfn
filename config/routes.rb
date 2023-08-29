@@ -8,7 +8,6 @@ Rails.application.routes.draw do
     resources :intake_assessments, only: :show, param: :token do
       get :summary
       get :send_summary_email
-      get :spelling_questions
       get :speech_questions
     end
 
@@ -17,7 +16,7 @@ Rails.application.routes.draw do
       post :reset_response
     end
 
-    resources :intake_spelling_questions, only: [], param: :token do
+    resources :intake_eidetic_questions, only: [], param: :token do
       post :upsert_response
     end
   end

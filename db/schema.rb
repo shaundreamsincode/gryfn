@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_23_165715) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_26_021654) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,30 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_23_165715) do
     t.index ["organization_id"], name: "index_intake_assessments_on_organization_id"
   end
 
+  create_table "intake_eidetic_questions", force: :cascade do |t|
+    t.string "token"
+    t.bigint "intake_assessment_id"
+    t.integer "index", default: 0, null: false
+    t.string "answer"
+    t.string "correct_answer", null: false
+    t.string "file_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["intake_assessment_id"], name: "index_eidetic_quest_on_assessment_idx"
+  end
+
+  create_table "intake_phonetic_questions", force: :cascade do |t|
+    t.string "token"
+    t.bigint "intake_assessment_id"
+    t.integer "index", default: 0, null: false
+    t.string "answer"
+    t.string "correct_answer", null: false
+    t.string "file_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["intake_assessment_id"], name: "index_phonetic_quest_on_assessment_idx"
+  end
+
   create_table "intake_speech_questions", force: :cascade do |t|
     t.string "token"
     t.bigint "intake_assessment_id"
@@ -48,20 +72,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_23_165715) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["intake_assessment_id"], name: "index_intake_speech_questions_on_intake_assessment_id"
-  end
-
-  create_table "intake_spelling_questions", force: :cascade do |t|
-    t.string "token"
-    t.bigint "intake_assessment_id"
-    t.integer "index", default: 0, null: false
-    t.string "answer"
-    t.string "correct_answer", null: false
-    t.string "file_name", null: false
-    t.integer "question_type", default: 0, null: false
-    t.string "valid_phonetics", default: [], array: true
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["intake_assessment_id"], name: "index_quest_on_assessment"
   end
 
   create_table "organizations", force: :cascade do |t|

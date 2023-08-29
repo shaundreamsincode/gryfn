@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react'
 import ApiService from "../../services/ApiService";
 import {Button, CardContent} from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-import IntakeSpellingQuestion from "./IntakeSpellingQuestion";
-
-const IntakeSpellingQuestions = (props) => {
+import IntakeEideticQuestion from "./IntakeEideticQuestion";
+1
+const IntakeEideticQuestions = (props) => {
     const { questions, title } = props
     const navigate = useNavigate()
     const currentUrl = window.location.href
@@ -39,7 +39,7 @@ const IntakeSpellingQuestions = (props) => {
             <div>
                 {
                     sortedQuestions.map((question) => (
-                        <IntakeSpellingQuestion key={question.token} question={question} onSave={onQuestionSave} />
+                        <IntakeEideticQuestion key={question.token} question={question} onSave={onQuestionSave} />
                     ))
                 }
             </div>
@@ -58,4 +58,4 @@ const IntakeSpellingQuestions = (props) => {
     // </CardContent>)
 }
 
-export default IntakeSpellingQuestions
+export default IntakeEideticQuestions

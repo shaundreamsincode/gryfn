@@ -2,14 +2,10 @@ class Api::IntakeAssessmentsController < ActionController::Base
   def show
     intake_assessment = IntakeAssessment.find_by!(token: params[:token])
 
-    eidetic_questions_json = map_intake_spelling_questions(intake_assessment, :eidetic)
-    phonetic_questions_json = map_intake_spelling_questions(intake_assessment, :phonetic)
-
     render json: {
       token: intake_assessment.token,
       current_step: intake_assessment.current_step,
-      eidetic_questions: eidetic_questions_json,
-      phonetic_questions: phonetic_questions_json,
+      eidetic_questions: map_eidetic_questions(intake_assessment),
       speech_questions: []
     }
   end
@@ -28,11 +24,6 @@ class Api::IntakeAssessmentsController < ActionController::Base
     head 200
   end
 
-  def spelling_questions
-    intake_assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
-
-    render json: map_intake_spelling_questions(intake_assessment)
-  end
 
   def speech_questions
     intake_assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
@@ -42,13 +33,12 @@ class Api::IntakeAssessmentsController < ActionController::Base
     end
   end
 
-  private def map_intake_spelling_questions(intake_assessment, question_type=[:eidetic, :phonetic])
-    intake_assessment.intake_spelling_questions.where(question_type: question_type).map do |question|
+  private def map_eidetic_questions(intake_assessment)
+    intake_assessment.eidetic_questions.map do |question|
       {
         token: question.token,
         file_name: question.file_name,
-        answer: question.answer,
-        question_type: question.question_type
+        answer: question.answer
       }
     end
   end
