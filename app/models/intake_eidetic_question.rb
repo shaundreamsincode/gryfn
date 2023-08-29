@@ -12,4 +12,8 @@ class IntakeEideticQuestion < ApplicationRecord
       )
     end
   end
+
+  def is_correct?
+    answer == correct_answer
+  end
 end

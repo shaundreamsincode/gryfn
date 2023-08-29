@@ -20,17 +20,25 @@ const IntakeSummary = () => {
 
     const currentUrl = window.location.href
     const assessmentToken = currentUrl.split("/")[4]
-    const [assessment, setAssessment] = useState(null)
-    const [snackbarMessage, setSnackbarMessage] = useState(null);
+    const [loading, setLoading] = useState(true)
 
+    const [speechQuestions, setSpeechQuestions] = useState(null)
+    const [eideticQuestions, setEideticQuestions] = useState(null)
+    const [phoneticQuestions, setPhoneticQuestions] = useState(null)
+
+    const [snackbarMessage, setSnackbarMessage] = useState(null);
 
     useEffect(() => {
         ApiService.getIntakeAssessmentSummary(assessmentToken).then((response) => {
-            setAssessment(response.data)
+            setLoading(false)
+
+            setSpeechQuestions(response.data.speech_questions)
+            setEideticQuestions(response.data.eidetic_questions)
+            setPhoneticQuestions(response.data.phonetic_questions)
         })
     }, [assessmentToken])
 
-    if (!assessment) {
+    if (loading) {
         return(<CardContent>Loading...</CardContent>)
     }
 
@@ -40,10 +48,11 @@ const IntakeSummary = () => {
         })
     }
 
-    debugger
+    // debugger
 
     return(
         <CardContent>
+            Speech Questions
             <Table>
                 <TableHead>
                     <TableRow>
@@ -53,12 +62,51 @@ const IntakeSummary = () => {
                 </TableHead>
                 <TableBody>
                     {
-                        assessment.intake_questions.map((question) => {
-                            const userAnswerWasCorrect = question.answer.toUpperCase() === question.correct_answer.toUpperCase()
+                        speechQuestions.map((question) => {
                             return(<TableRow>
                                 <TableCell>{ question.correct_answer }</TableCell>
                                 <TableCell>{ question.answer }</TableCell>
-                                <TableCell>{ userAnswerWasCorrect ? 'Correct' : 'Incorrect' }</TableCell>
+                                <TableCell>{ question.is_correct ? 'Correct' : 'Incorrect' }</TableCell>
+                            </TableRow>)
+                        })
+                    }
+                </TableBody>
+            </Table>
+            Eidetic Questions
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Answer</TableCell>
+                        <TableCell>Your Answer</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {
+                        eideticQuestions.map((question) => {
+                            return(<TableRow>
+                                <TableCell>{ question.correct_answer }</TableCell>
+                                <TableCell>{ question.answer }</TableCell>
+                                <TableCell>{ question.is_correct ? 'Correct' : 'Incorrect' }</TableCell>
+                            </TableRow>)
+                        })
+                    }
+                </TableBody>
+            </Table>
+            Phonetic Questions
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Answer</TableCell>
+                        <TableCell>Your Answer</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {
+                        phoneticQuestions.map((question) => {
+                            return(<TableRow>
+                                <TableCell>{ question.correct_answer }</TableCell>
+                                <TableCell>{ question.answer }</TableCell>
+                                <TableCell>{ question.is_correct ? 'Correct' : 'Incorrect' }</TableCell>
                             </TableRow>)
                         })
                     }

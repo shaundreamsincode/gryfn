@@ -12,7 +12,7 @@ const IntakeSpeechQuestions = (props) => {
     const assessmentToken = currentUrl.split("/")[4];
 
     const [questions, setQuestions] = useState([])
-    const [finishButtonDisabled, setFinishButtonDisabled] = useState(null)
+    const [finishButtonDisabled, setFinishButtonDisabled] = useState(false)
     const { onFinish } = props
 
     const sortedQuestions = questions.sort(function(a, b) {
@@ -32,7 +32,7 @@ const IntakeSpeechQuestions = (props) => {
         newQuestions[indexToUpdate] = newQuestion
 
         setQuestions(newQuestions)
-        setFinishButtonDisabled(arrayHasUnansweredQuestions(newQuestions))
+        // setFinishButtonDisabled(arrayHasUnansweredQuestions(newQuestions))
     }
 
     useEffect(() => {
@@ -56,7 +56,7 @@ const IntakeSpeechQuestions = (props) => {
             })
         }
 
-        <Button onClick={onFinish} disabled={finishButtonDisabled}>Finish</Button>
+        <Button onClick={onFinish} disabled={false}>Finish</Button>
     </CardContent>) }
 
 export default IntakeSpeechQuestions

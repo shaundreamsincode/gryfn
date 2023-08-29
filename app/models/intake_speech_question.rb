@@ -11,4 +11,8 @@ class IntakeSpeechQuestion < ApplicationRecord
     execrable.mp3
     islet.mp3
     ).freeze
+
+  def is_correct?
+    answer == correct_answer
+  end
 end

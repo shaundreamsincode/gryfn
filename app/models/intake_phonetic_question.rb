@@ -1,5 +1,6 @@
 class IntakePhoneticQuestion < ApplicationRecord
   belongs_to :intake_assessment
+  serialize :phonetic_sets, Array
 
   EXAMPLE_PHONETIC_SETS_DICTIONARY = {
     'baby' => [['b','eɪ','b','i']],
@@ -19,5 +20,9 @@ class IntakePhoneticQuestion < ApplicationRecord
         file_name: "#{answer}.mp3"
       )
     end
+  end
+
+  def is_correct?
+    EvaluateIntakePhoneticQuestion.call(question: self).correct
   end
 end

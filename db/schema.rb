@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_26_021654) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_29_045935) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,7 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_26_021654) do
     t.integer "index", default: 0, null: false
     t.string "answer"
     t.string "correct_answer", null: false
-    t.string "phonetic_sets", default: [], array: true
+    t.string "phonetic_sets"
     t.string "file_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -75,6 +75,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_26_021654) do
     t.index ["intake_assessment_id"], name: "index_intake_speech_questions_on_intake_assessment_id"
   end
 
+  create_table "intake_summaries", force: :cascade do |t|
+    t.bigint "intake_assessment_id"
+    t.string "correct_speech_questions", default: [], array: true
+    t.string "incorrect_speech_questions", default: [], array: true
+    t.string "correct_eidetic_questions", default: [], array: true
+    t.string "incorrect_eidetic_questions", default: [], array: true
+    t.string "correct_phonetic_questions", default: [], array: true
+    t.string "incorrect_phonetic_questions", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["intake_assessment_id"], name: "index_intake_summaries_on_intake_assessment_id"
+  end
+
   create_table "organizations", force: :cascade do |t|
     t.string "token"
     t.string "name"
@@ -84,4 +97,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_26_021654) do
 
   add_foreign_key "intake_assessments", "organizations"
   add_foreign_key "intake_speech_questions", "intake_assessments"
+  add_foreign_key "intake_summaries", "intake_assessments"
 end
