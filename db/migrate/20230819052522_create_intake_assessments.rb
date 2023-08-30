@@ -15,6 +15,8 @@ class CreateIntakeAssessments < ActiveRecord::Migration[7.0]
       t.boolean :previously_diagnosed
 
       t.integer :speech_assessment_current_level
+      t.string :speech_assessment_correct_words, null: false, array: true, default: []
+      t.string :speech_assessment_incorrect_words, null: false, array: true, default: []
 
       # enums
       t.integer :current_step, null: false, default: 0

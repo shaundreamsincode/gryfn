@@ -16,11 +16,37 @@ class Api::IntakeAssessmentsController < ApplicationController
   end
 
   def move_speech_assessment_to_next_level
-    assessment = IntakeAssessment.find_by_token!(params[:intake_assessment_token])
+    intake_assessment = IntakeAssessment.find_by_token!(params[:intake_assessment_token])
 
-    assessment.speech_assessment_current_level += 1
-    assessment.save!
+    if intake_assessment.speech_assessment_current_level.nil?
+      return render json: { error: :not_in_speech_state }, status: :unprocessable_entity
+    end
 
-    render json: assessment
+    current_level = intake_assessment.speech_assessment_current_level
+
+    speech_questions_at_current_level = intake_assessment.speech_questions.where(level: current_level)
+
+    if speech_questions_at_current_level.any? {|q| q.answer.blank? }
+      return render json: { error: :unanswered_questions }, status: :unprocessable_entity
+    end
+
+    correct_words = speech_questions_at_current_level.select {|q| q.is_correct? }
+    incorrect_problems = speech_questions_at_current_level.reject {|q| q.is_correct? }
+
+    intake_assessment.speech_assessment_correct_words << correct_words
+    intake_assessment.speech_assessment_correct_words.flatten!
+
+    intake_assessment.speech_assessment_incorrect_words << incorrect_problems
+    intake_assessment.speech_assessment_incorrect_words.flatten!
+
+    if intake_assessment.speech_assessment_correct_words.length > 4 && intake_assessment.speech_assessment_incorrect_words.length > 4
+      intake_assessment.update!(speech_assessment_current_level: nil)
+      return render json: intake_assessment
+    end
+
+    intake_assessment.speech_assessment_current_level += 1
+    intake_assessment.save!
+
+    render json: intake_assessment
   end
 end

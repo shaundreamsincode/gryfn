@@ -35,6 +35,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_045935) do
     t.string "level_of_education"
     t.boolean "previously_diagnosed"
     t.integer "speech_assessment_current_level"
+    t.string "speech_assessment_correct_words", default: [], null: false, array: true
+    t.string "speech_assessment_incorrect_words", default: [], null: false, array: true
     t.integer "current_step", default: 0, null: false
     t.integer "assessment_type", default: 0, null: false
     t.datetime "created_at", null: false
@@ -73,7 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_045935) do
     t.integer "level", default: 0, null: false
     t.bigint "intake_assessment_id"
     t.string "answer"
-    t.string "correct_answer"
+    t.string "correct_answer", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["intake_assessment_id"], name: "index_intake_speech_questions_on_intake_assessment_id"

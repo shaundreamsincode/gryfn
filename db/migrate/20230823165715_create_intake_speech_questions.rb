@@ -8,7 +8,7 @@ class CreateIntakeSpeechQuestions < ActiveRecord::Migration[7.0]
       t.references :intake_assessment, foreign_key: true
 
       t.string :answer
-      t.string :correct_answer
+      t.string :correct_answer, null: false
 
       t.timestamps
     end
