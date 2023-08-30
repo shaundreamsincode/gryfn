@@ -18,11 +18,11 @@ class ApiService {
     }
 
     static getIntakeAssessmentSummary(token) {
-        return axios.get(`/api/intake_assessments/${token}/summary.json`)
+        return axios.get(`/api/intake_assessments/${token}/summary`)
     }
 
     static sendIntakeAssessmentSummaryEmail(token) {
-        return axios.get(`/api/intake_assessments/${token}/send_summary_email.json`)
+        return axios.get(`/api/intake_assessments/${token}/send_summary_email`)
     }
 
     static getIntakeSpeechQuestions = (token) => {
