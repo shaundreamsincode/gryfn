@@ -43,7 +43,6 @@ const IntakeSpeechQuestions = (props) => {
     useEffect(() => {
         ApiService.getIntakeSpeechQuestions(assessmentToken).then((response) => {
             setQuestions(response.data)
-            debugger
             setFinishButtonDisabled(arrayHasUnansweredQuestions(response.data))
         }).catch((error) => {
             console.log('error')

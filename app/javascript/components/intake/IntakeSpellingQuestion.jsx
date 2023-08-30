@@ -13,14 +13,14 @@ const IntakeSpellingQuestion = (props) => {
     const buttonText = answerSaved ? 'Saved' : 'Save';
 
     const handleSave = () => {
-        questionSaveEndpoint(question.token, answer).then((response) => {
+        questionSaveEndpoint(question, answer).then((response) => {
             setAnswerSaved(true);
             onSave(response.data);
         });
     };
 
     const handleUndoButtonClick = () => {
-        questionSaveEndpoint(question.token, null).then((response) => {
+        questionSaveEndpoint(question, null).then((response) => {
             console.log('foo')
             console.log(response)
 

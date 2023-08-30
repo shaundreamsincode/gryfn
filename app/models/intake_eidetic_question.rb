@@ -1,5 +1,6 @@
 class IntakeEideticQuestion < ApplicationRecord
   belongs_to :intake_assessment
+  alias_attribute :assessment, :intake_assessment
 
   WORDS = ['what']
 

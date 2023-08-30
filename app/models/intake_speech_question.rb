@@ -1,5 +1,6 @@
 class IntakeSpeechQuestion < ApplicationRecord
   belongs_to :intake_assessment
+  alias_attribute :assessment, :intake_assessment
 
   FILE_NAMES =
     %w(

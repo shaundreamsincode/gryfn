@@ -13,8 +13,8 @@ class ApiService {
         return axios.get(`/api/intake_assessments/${token}/eidetic_questions`)
     }
 
-    static upsertIntakeEideticQuestionResponse(token, answer) {
-        return axios.post(`/api/intake_eidetic_questions/${token}/upsert_response`, { answer: answer })
+    static upsertIntakeEideticQuestionResponse(question, answer) {
+        return axios.put(`/api/intake_assessments/${question.assessment_token}/eidetic_questions/${question.token}`, { answer: answer })
     }
 
     static getIntakeAssessmentSummary(token) {
@@ -29,27 +29,30 @@ class ApiService {
         return axios.get(`/api/intake_assessments/${token}/speech_questions`)
     }
 
-    static upsertSpeechQuestionResponse(token, answer) {
-        return axios.post(
-            `/api/intake_speech_questions/${token}/upsert_response`,
-            { answer: answer },
+    static upsertSpeechQuestionResponse(question, wavFromBlob) {
+        return axios.put(
+            `/api/intake_assessments/${question.assessment_token}/speech_questions/${question.token}`,
+            wavFromBlob,
             {
                 headers: { "content-type": "audio/mpeg"}
-            }
-        )
+        })
     }
 
-    static resetSpeechQuestionResponse(token) {
-        return axios.post(`/api/intake_speech_questions/${token}/reset_response`)
+    static resetSpeechQuestionResponse(question) {
+        return axios.delete(`/api/intake_assessments/${question.assessment_token}/speech_questions/${question.token}`)
     }
 
     static getIntakePhoneticQuestions(token) {
         return axios.get(`/api/intake_assessments/${token}/phonetic_questions`)
     }
 
-    static upsertIntakePhoneticQuestionResponse(token, answer) {
-        return axios.post(`/api/intake_phonetic_questions/${token}/upsert_response`, { answer: answer })
+    static upsertIntakePhoneticQuestionResponse(question, answer) {
+        return axios.put(`/api/intake_assessments/${question.assessment_token}/phonetic_questions/${question.token}`, { answer: answer })
     }
+
+    // static upsertIntakePhoneticQuestionResponse(token, answer) {
+    //     return axios.post(`/api/intake_phonetic_questions/${token}/upsert_response`, { answer: answer })
+    // }
 
     // TODO ---- CHANGE THIS TO A POST
     static moveIntakeAssessmentToNextStep(token) {

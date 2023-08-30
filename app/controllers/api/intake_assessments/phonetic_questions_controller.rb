@@ -6,8 +6,20 @@ module Api
 
         # todo - DRY this
         render json: intake_assessment.phonetic_questions.map do |question|
-          { token: question.token, answer: question.answer, file_name: question.file_name }
+          {
+            token: question.token,
+            answer: question.answer,
+            file_name: question.file_name,
+            assessment_token: intake_assessment.token
+          }
         end
+      end
+
+      def update
+        question = IntakePhoneticQuestion.find_by!(token: params[:token])
+        question.update!(answer: params[:answer])
+
+        render json: question
       end
     end
   end

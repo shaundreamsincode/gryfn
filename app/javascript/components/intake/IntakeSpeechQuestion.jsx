@@ -19,16 +19,8 @@ const IntakeSpeechQuestion = (props) => {
         setIsSaving(true)
         setRecordingUnsuccessful(false)
         const wavFromBlob = new File([blob], "test.wav")
-        console.log(wavFromBlob)
-        // const wavFromBlob = new File([])
 
-        axios.post(
-            `/api/intake_speech_questions/${question.token}/upsert_response`,
-            wavFromBlob,
-            {
-                headers: { "content-type": "audio/mpeg"}
-            }
-        ).then((response) => {
+        ApiService.upsertSpeechQuestionResponse(question, wavFromBlob).then((response) => {
             setAnswer(response.data.answer)
             setQuestionHasBeenAnswered(true)
             setRecordingComplete(false)
@@ -36,7 +28,7 @@ const IntakeSpeechQuestion = (props) => {
             setIsSaving(false)
 
             onUpdate(question, response.data.answer)
-        }).catch((error)=> {
+        }).catch((error) => {
             setRecordingComplete(false)
             setIsSaving(false)
 
@@ -45,13 +37,14 @@ const IntakeSpeechQuestion = (props) => {
             if (errorResponseCode === "decode_error") {
                 setRecordingUnsuccessful(true)
             }
+
         })
     }
 
     const handleUndo = () => {
         setIsSaving(true)
 
-        ApiService.resetSpeechQuestionResponse(question.token).then((response) => {
+        ApiService.resetSpeechQuestionResponse(question).then((response) => {
             setQuestionHasBeenAnswered(false)
             setRecordingComplete(false)
             setAnswer(null)

@@ -1,5 +1,7 @@
 class IntakePhoneticQuestion < ApplicationRecord
   belongs_to :intake_assessment
+  alias_attribute :assessment, :intake_assessment
+
   serialize :phonetic_sets, Array
 
   EXAMPLE_PHONETIC_SETS_DICTIONARY = {
