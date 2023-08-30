@@ -11,21 +11,7 @@ class Api::IntakeAssessmentsController < ApplicationController
   def move_to_next_step
     assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
 
-    # TODO - fix this
-
-    if assessment.speech?
-      assessment.eidetic!
-    elsif assessment.eidetic?
-      assessment.phonetic!
-    elsif assessment.phonetic?
-      assessment.summary!
-    end
-
-    render json: assessment
-
-    # next_step = assessment.current_step.to_i + 1
-    # assessment.update!(current_step: next_step)
-    #
-    # render json: assessment
+    updated_assessment = IntakeAssessments::MoveToNextStep.call(assessment: assessment).assessment
+    render json: updated_assessment
   end
 end
