@@ -59,6 +59,9 @@ class ApiService {
         return axios.post(`/api/intake_assessments/${token}/move_to_next_step`)
     }
 
+    static moveIntakeSpeechAssessmentToNextLevel(assessmentToken) {
+        return axios.post(`/api/intake_assessments/${assessmentToken}/move_speech_assessment_to_next_level`)
+    }
     // static get(url) {
     //     return axios.get(url, { headers: { Authorization: `Bearer ${this._fetchJwtToken()}` } })
     // }

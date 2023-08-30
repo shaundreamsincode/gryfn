@@ -29,9 +29,12 @@ const IntakeSpeechQuestions = (props) => {
     }
 
     const handleNext = () => {
-        ApiService.moveIntakeAssessmentToNextStep(assessmentToken).then(() => {
+        ApiService.moveIntakeSpeechAssessmentToNextLevel(assessmentToken).then((response) => {
             navigate(`/intake_assessments/${assessmentToken}`)
         })
+        // ApiService.moveIntakeAssessmentToNextStep(assessmentToken).then(() => {
+        //     navigate(`/intake_assessments/${assessmentToken}`)
+        // })
     }
 
     useEffect(() => {

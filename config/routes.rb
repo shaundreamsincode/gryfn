@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :intake_assessments, only: :show, param: :token do
       post :move_to_next_step
+      post :move_speech_assessment_to_next_level
 
       resources :speech_questions, only: [:index, :update, :destroy], param: :token, controller: 'intake_assessments/speech_questions'
       resources :eidetic_questions, only: [:index, :update], param: :token, controller: 'intake_assessments/eidetic_questions'

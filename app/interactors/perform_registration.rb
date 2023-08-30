@@ -3,15 +3,16 @@ class PerformRegistration
 
   def call
     intake_assessment = IntakeAssessment.create!(
+      speech_assessment_current_level: 0,
+      organization: fetch_organization,
+      assessment_type: calculate_assessment_type,
       patient_first_name: context.patient_first_name,
       email: context.email,
       birth_year: context.birth_year,
       country: context.country,
       zip_code: context.zip_code,
       previously_diagnosed: context.previously_diagnosed,
-      level_of_education: context.level_of_education,
-      organization: fetch_organization,
-      assessment_type: calculate_assessment_type
+      level_of_education: context.level_of_education
     )
 
     IntakeAssessments::CreateSpeechQuestions.call(assessment: intake_assessment)
