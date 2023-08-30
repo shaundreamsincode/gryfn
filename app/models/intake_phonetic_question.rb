@@ -25,6 +25,6 @@ class IntakePhoneticQuestion < ApplicationRecord
   end
 
   def is_correct?
-    EvaluateIntakePhoneticQuestion.call(question: self).correct
+    EvaluatePhoneticQuestion.call(question: self).correct
   end
 end

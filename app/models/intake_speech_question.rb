@@ -12,3 +12,6 @@ class IntakeSpeechQuestion < ApplicationRecord
     answer.downcase == correct_answer.downcase
   end
 end
+
+# correct_speech_questions
+# incorrect_speech_questions
