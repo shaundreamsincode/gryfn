@@ -9,11 +9,12 @@ Rails.application.routes.draw do
       get :summary
       get :send_summary_email
 
-      get :speech_questions
-      get :eidetic_questions
-      get :phonetic_questions
 
       post :move_to_next_step
+
+      resources :speech_questions, only: :index, controller: 'intake_assessments/speech_questions'
+      resources :eidetic_questions, only: :index, controller: 'intake_assessments/eidetic_questions'
+      resources :phonetic_questions, only: :index, controller: 'intake_assessments/phonetic_questions'
     end
 
     resources :intake_speech_questions, only: [], param: :token do

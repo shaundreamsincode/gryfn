@@ -43,32 +43,6 @@ class Api::IntakeAssessmentsController < ApplicationController
     # render json: assessment
   end
 
-  def speech_questions
-    intake_assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
-
-    render json: intake_assessment.speech_questions.map do |question|
-      { token: question.token, answer: question.answer, correct_answer: question.correct_answer }
-    end
-  end
-
-  def eidetic_questions
-    intake_assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
-
-    # todo - DRY this
-    render json: intake_assessment.eidetic_questions.map do |question|
-      { token: question.token, answer: question.answer, file_name: question.file_name }
-    end
-  end
-
-  def phonetic_questions
-    intake_assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
-
-    # todo - DRY this
-    render json: intake_assessment.phonetic_questions.map do |question|
-      { token: question.token, answer: question.answer, file_name: question.file_name }
-    end
-  end
-
   private def map_summary(intake_assessment)
     {
       speech_questions: map_summary_questions(intake_assessment.speech_questions),
