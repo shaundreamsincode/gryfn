@@ -14,7 +14,9 @@ class CreateIntakeAssessments < ActiveRecord::Migration[7.0]
       t.string :level_of_education
       t.boolean :previously_diagnosed
 
+      # enums
       t.integer :current_step, null: false, default: 0
+      t.integer :assessment_type, null: false, default: 0
 
       t.timestamps
     end

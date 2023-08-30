@@ -15,9 +15,6 @@ class IntakeAssessment < ApplicationRecord
   has_many :intake_phonetic_questions
   alias_attribute :phonetic_questions, :intake_phonetic_questions
 
+  enum :assessment_type, { desd: 0, adt: 1 }
   enum current_step: { speech: 0, eidetic: 1, phonetic: 2, summary: 3 }
-
-  def assessment_type
-    Time.now.year - birth_year < 18 ? ASSESSMENT_TYPES[:desd] : ASSESSMENT_TYPES[:adt]
-  end
 end

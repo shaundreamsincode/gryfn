@@ -35,6 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_045935) do
     t.string "level_of_education"
     t.boolean "previously_diagnosed"
     t.integer "current_step", default: 0, null: false
+    t.integer "assessment_type", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organization_id"], name: "index_intake_assessments_on_organization_id"
@@ -42,8 +43,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_045935) do
 
   create_table "intake_eidetic_questions", force: :cascade do |t|
     t.string "token"
-    t.bigint "intake_assessment_id"
     t.integer "index", default: 0, null: false
+    t.bigint "intake_assessment_id"
     t.string "answer"
     t.string "correct_answer", null: false
     t.string "file_name", null: false
@@ -54,8 +55,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_045935) do
 
   create_table "intake_phonetic_questions", force: :cascade do |t|
     t.string "token"
-    t.bigint "intake_assessment_id"
     t.integer "index", default: 0, null: false
+    t.bigint "intake_assessment_id"
     t.string "answer"
     t.string "correct_answer", null: false
     t.string "phonetic_sets"
@@ -67,6 +68,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_045935) do
 
   create_table "intake_speech_questions", force: :cascade do |t|
     t.string "token"
+    t.integer "index", default: 0, null: false
+    t.integer "level", default: 0, null: false
     t.bigint "intake_assessment_id"
     t.string "answer"
     t.string "correct_answer"

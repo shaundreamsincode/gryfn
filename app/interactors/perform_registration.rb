@@ -10,32 +10,29 @@ class PerformRegistration
       zip_code: context.zip_code,
       previously_diagnosed: context.previously_diagnosed,
       level_of_education: context.level_of_education,
-      organization: fetch_organization
+      organization: fetch_organization,
+      assessment_type: calculate_assessment_type
     )
 
-    create_speech_questions!(intake_assessment)
+    IntakeAssessments::CreateSpeechQuestions.call(assessment: intake_assessment)
     IntakeEideticQuestion.create_questions_for_assessment!(intake_assessment)
     IntakePhoneticQuestion.create_questions_for_assessment!(intake_assessment)
 
     context.intake_assessment = intake_assessment
   end
 
-
-  private def create_speech_questions!(intake_assessment)
-    IntakeSpeechQuestion::FILE_NAMES.each do |file_name|
-      correct_answer = file_name.split('.mp3').first
-
-      IntakeSpeechQuestion.create!(
-        intake_assessment: intake_assessment,
-        correct_answer: correct_answer
-      )
-    end
-  end
-
   private def fetch_organization
     organization = Organization.first
     return organization if organization.present?
 
-    Organization.create(name: 'Foo Org')
+    Organization.create(name: 'Default Organization')
+  end
+
+  private def calculate_assessment_type
+    if Time.now.year - context.birth_year.to_i < 18
+      return IntakeAssessment::ASSESSMENT_TYPES[:desd]
+    end
+
+    IntakeAssessment::ASSESSMENT_TYPES[:adt]
   end
 end
