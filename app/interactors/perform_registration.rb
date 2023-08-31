@@ -16,8 +16,6 @@ class PerformRegistration
     )
 
     IntakeAssessments::CreateSpeechQuestions.call(assessment: intake_assessment)
-    IntakeEideticQuestion.create_questions_for_assessment!(intake_assessment)
-    IntakePhoneticQuestion.create_questions_for_assessment!(intake_assessment)
 
     context.intake_assessment = intake_assessment
   end

@@ -36,6 +36,7 @@ const IntakeEideticQuestions = () => {
                     onSave={handleQuestionSave}
                     onFinish={handleFinish}
                     title="Eidetic"
+                    finishButtonText="Next"
                     questionSaveEndpoint={ApiService.upsertIntakeEideticQuestionResponse}
                 />
             }

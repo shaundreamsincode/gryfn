@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import IntakeSpellingQuestion from "./IntakeSpellingQuestion";
 
 const IntakeSpellingQuestions = (props) => {
-    const { questions, onSave, onFinish, questionSaveEndpoint, title } = props
+    const { questions, onSave, onFinish, questionSaveEndpoint, title, finishButtonText } = props
     const navigate = useNavigate()
     const currentUrl = window.location.href
     const assessmentToken = currentUrl.split("/")[4]
@@ -45,7 +45,7 @@ const IntakeSpellingQuestions = (props) => {
                 }
             </div>
             <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '1rem' }}>
-                <Button variant="contained" color="primary" onClick={onFinish} disabled={hasUnansweredQuestions}>Finish</Button>
+                <Button variant="contained" color="primary" onClick={onFinish} disabled={hasUnansweredQuestions}>{ finishButtonText }</Button>
             </div>
         </>
     );

@@ -38,7 +38,7 @@ class IntakeAssessments::CompleteSpeechAssessment
     words.each_with_index do |word, index|
       questions << IntakeEideticQuestion.create!(
         correct_answer: word,
-        file_name: "#{word}mp3",
+        file_name: "#{word}.mp3",
         index: index,
         intake_assessment: context.assessment
       )
@@ -56,18 +56,20 @@ class IntakeAssessments::CompleteSpeechAssessment
 
     context.assessment.level_count.times do |_level|
       questions_at_level = IntakeSpeechQuestion.where(intake_assessment: context.assessment, level: _level)
-      next unless questions_at_level.present?
+      break unless questions_at_level.all? { |question| question.answer.present? }
 
       incorrect_at_level = questions_at_level.reject { |question| question.is_correct? }
       level = _level unless incorrect_at_level.count === 0
     end
+
+    puts "phonetic level #{level}"
 
     words = context.assessment.words_by_level(level)
 
     words.each_with_index do |word, index|
       questions << IntakePhoneticQuestion.create!(
         correct_answer: word,
-        file_name: "#{word}mp3",
+        file_name: "#{word}.mp3",
         index: index,
         intake_assessment: context.assessment,
         phonetic_sets: IntakePhoneticQuestion::EXAMPLE_PHONETIC_SETS_DICTIONARY[word]

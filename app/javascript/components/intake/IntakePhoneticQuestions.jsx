@@ -38,6 +38,7 @@ const IntakePhoneticQuestions = () => {
                 onSave={handleQuestionSave}
                 onFinish={handleFinish}
                 title="Phonetic"
+                finishButtonText="Finish"
                 questionSaveEndpoint={ApiService.upsertIntakePhoneticQuestionResponse}
             />
         </CardContent>

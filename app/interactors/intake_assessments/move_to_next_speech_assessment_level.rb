@@ -12,14 +12,11 @@ class IntakeAssessments::MoveToNextSpeechAssessmentLevel
       context.fail!(error: :unanswered_questions)
     end
 
-    correct_words = speech_questions_at_current_level.select {|q| q.is_correct? }
-    incorrect_problems = speech_questions_at_current_level.reject {|q| q.is_correct? }
+    correct_words = speech_questions_at_current_level.select {|q| q.is_correct? }.map(&:correct_answer)
+    incorrect_words = speech_questions_at_current_level.reject {|q| q.is_correct? }.map(&:correct_answer)
 
-    intake_assessment.speech_assessment_correct_words << correct_words
-    intake_assessment.speech_assessment_correct_words.flatten!
-
-    intake_assessment.speech_assessment_incorrect_words << incorrect_problems
-    intake_assessment.speech_assessment_incorrect_words.flatten!
+    intake_assessment.speech_assessment_correct_words.concat(correct_words).flatten!
+    intake_assessment.speech_assessment_incorrect_words.concat(incorrect_words).flatten!
 
     if intake_assessment.speech_assessment_correct_words.length > 4 && intake_assessment.speech_assessment_incorrect_words.length > 4
       IntakeAssessments::CompleteSpeechAssessment.call(assessment: intake_assessment)
@@ -28,6 +25,6 @@ class IntakeAssessments::MoveToNextSpeechAssessmentLevel
       intake_assessment.save!
     end
 
-    context.assessment.reload
+    context.assessment = intake_assessment
   end
 end

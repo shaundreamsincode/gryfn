@@ -13,18 +13,7 @@ class IntakePhoneticQuestion < ApplicationRecord
     # 'there' => [['ð','ɛr'], ['ð','eɪ','r']]
   }.with_indifferent_access.freeze
 
-  def self.create_questions_for_assessment!(intake_assessment)
-    EXAMPLE_PHONETIC_SETS_DICTIONARY.each do |answer, phonetic_sets|
-      create!(
-        intake_assessment: intake_assessment,
-        correct_answer: answer,
-        phonetic_sets: phonetic_sets,
-        file_name: "#{answer}.mp3"
-      )
-    end
-  end
-
   def is_correct?
-    EvaluatePhoneticQuestion.call(question: self).correct
+    IntakeAssessments::EvaluatePhoneticQuestion.call(question: self).correct
   end
 end
