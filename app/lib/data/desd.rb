@@ -12,6 +12,5 @@ module Data::Desd
     [ 'zealous', 'clique', 'atrocious', 'catastrophe', 'liquidate' ],
   ].freeze
 
-
   # todo - map level string somehow to index?
 end

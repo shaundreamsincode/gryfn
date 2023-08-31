@@ -30,6 +30,12 @@ const IntakeSpeechQuestions = (props) => {
 
     const handleNext = () => {
         ApiService.moveIntakeSpeechAssessmentToNextLevel(assessmentToken).then((response) => {
+            const updatedAssessment = response.data
+
+            if (!updatedAssessment.speech_assessment_current_level) {
+                // handleFinish()
+            }
+
             navigate(`/intake_assessments/${assessmentToken}`)
         })
         // ApiService.moveIntakeAssessmentToNextStep(assessmentToken).then(() => {

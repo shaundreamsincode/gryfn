@@ -17,4 +17,16 @@ class IntakeAssessment < ApplicationRecord
 
   enum :assessment_type, { desd: 0, adt: 1 }
   enum current_step: { speech: 0, eidetic: 1, phonetic: 2, summary: 3 }
+
+  def dataset
+    desd? ? Data::Desd : Data::Adt
+  end
+
+  def words_by_level(level)
+    desd? ? Data::Desd::WORDS_BY_LEVEL[level] : Data::Adt::WORDS_BY_LEVEL[level]
+  end
+
+  def level_count
+    desd? ? Data::Desd::WORDS_BY_LEVEL.count : Data::Desd::WORDS_BY_LEVEL.count
+  end
 end
