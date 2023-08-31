@@ -62,8 +62,6 @@ class IntakeAssessments::CompleteSpeechAssessment
       level = _level unless incorrect_at_level.count === 0
     end
 
-    puts "phonetic level #{level}"
-
     words = context.assessment.words_by_level(level)
 
     words.each_with_index do |word, index|
@@ -72,7 +70,7 @@ class IntakeAssessments::CompleteSpeechAssessment
         file_name: "#{word}.mp3",
         index: index,
         intake_assessment: context.assessment,
-        phonetic_sets: IntakePhoneticQuestion::EXAMPLE_PHONETIC_SETS_DICTIONARY[word]
+        phonetic_sets: Data::PhoneticDictionary::DICTIONARY[word]
       )
     end
 
