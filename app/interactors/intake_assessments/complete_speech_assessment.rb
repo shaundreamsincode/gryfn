@@ -55,12 +55,11 @@ class IntakeAssessments::CompleteSpeechAssessment
     level = 0
 
     context.assessment.level_count.times do |_level|
-      incorrect_at_level = IntakeSpeechQuestion.where(
-        intake_assessment: context.assessment,
-        level: _level
-      ).reject { |question| question.is_correct? }
+      questions_at_level = IntakeSpeechQuestion.where(intake_assessment: context.assessment, level: _level)
+      next unless questions_at_level.present?
 
-      level = _level if incorrect_at_level.count === 0
+      incorrect_at_level = questions_at_level.reject { |question| question.is_correct? }
+      level = _level unless incorrect_at_level.count === 0
     end
 
     words = context.assessment.words_by_level(level)

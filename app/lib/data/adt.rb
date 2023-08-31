@@ -1,8 +1,8 @@
 module Data::Adt
   WORDS_BY_LEVEL =
     [
-      [ 'father', 'could', 'know', 'money', 'call', 'funny', 'there' ],
-      [ 'does', 'listen', 'city', 'animal', 'light', 'uncle', 'rolled' ],
+      [ 'father', 'could', 'know', 'money', 'call', 'funny', 'there' ], # got this
+      [ 'does', 'listen', 'city', 'animal', 'light', 'uncle', 'rolled' ], # expecting this (?)
       [ 'calf', 'enough', 'meadow', 'heavy', 'business', 'believe', 'laugh' ],
       [ 'delight', 'familiar', 'rough', 'glisten', 'league', 'spectacles', 'decorate' ],
       [ 'cautious', 'ancient', 'toughen', 'height', 'doubt', 'position', 'contagious' ],
