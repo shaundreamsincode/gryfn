@@ -50,8 +50,6 @@ const IntakeSummary = () => {
 
     const questionsWithAnswer = speechQuestions.filter((question) => !!question.answer)
 
-    // debugger
-
     return(
         <CardContent>
             Speech Questions
