@@ -48,6 +48,8 @@ const IntakeSummary = () => {
         })
     }
 
+    const questionsWithAnswer = speechQuestions.filter((question) => !!question.answer)
+
     // debugger
 
     return(
@@ -62,7 +64,7 @@ const IntakeSummary = () => {
                 </TableHead>
                 <TableBody>
                     {
-                        speechQuestions.map((question) => {
+                        questionsWithAnswer.map((question) => {
                             return(<TableRow>
                                 <TableCell>{ question.correct_answer }</TableCell>
                                 <TableCell>{ question.answer }</TableCell>
