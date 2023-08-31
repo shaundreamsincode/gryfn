@@ -77,4 +77,3 @@ class IntakeAssessments::CompleteSpeechAssessment
     questions
   end
 end
-# calculate grade
