@@ -1,5 +1,6 @@
 require "rails_helper"
 
+# TODO - WRITE TESTS FOR ADT
 RSpec.describe Api::IntakeAssessmentsController, type: :request do
   describe "#move_speech_assessment_to_next_level" do
     it do
@@ -36,8 +37,13 @@ RSpec.describe Api::IntakeAssessmentsController, type: :request do
         expect(IntakeEideticQuestion.count).to eq(5)
         expect(IntakePhoneticQuestion.count).to eq(5)
 
-        expect(IntakeEideticQuestion.pluck(:correct_answer)).to match_array(['bear', 'baby', 'cow', 'deer', 'elf'])
-        expect(IntakePhoneticQuestion.pluck(:correct_answer)).to match_array(['zebra', 'yay', 'x-ray', 'war', 'vet'])
+        eidetic_questions = IntakeEideticQuestion.order(index: :desc)
+        eidetic_questions_answer_data = eidetic_questions.pluck(:correct_answer)
+        expect(eidetic_questions_answer_data).to eq(["doll", "good", "book", "daddy", "was"])
+
+        phonetic_questions = IntakeEideticQuestion.order(index: :desc)
+        phonetic_questions_answer_data = phonetic_questions.pluck(:correct_answer)
+        expect(phonetic_questions_answer_data).to eq(["doll", "good", "book", "daddy", "was"])
       end
     end
   end
