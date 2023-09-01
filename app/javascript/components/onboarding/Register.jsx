@@ -25,6 +25,7 @@ const Register = () => {
     const [zipCode, setZipCode] = useState("");
     const [previouslyDiagnosed, setPreviouslyDiagnosed] = useState(null);
     const [levelOfEducation, setLevelOfEducation] = useState(null);
+    const [saving, setSaving] = useState(false);
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const navigate = useNavigate();
@@ -33,6 +34,8 @@ const Register = () => {
     const [emailErrorMessage, setEmailErrorMessage] = useState("");
 
     const handleSubmit = () => {
+        setSaving(true);
+
         const params = {
             name: name,
             email: email,
@@ -44,32 +47,33 @@ const Register = () => {
         };
 
         ApiService.createIntakeAssessment(params).then((response) => {
+            setSaving(false);
             navigate(`/intake_assessments/${response.data.intakeAssessmentToken}`);
         });
     };
 
     const nextButtonDisabled = () => {
-        return false
-        // return !(
-        //     name &&
-        //     isEmailValid &&
-        //     birthYear &&
-        //     country &&
-        //     zipCode &&
-        //     previouslyDiagnosed &&
-        //     levelOfEducation
-        // );
+        if (saving) {
+            return true;
+        }
+
+        return !(email && birthYear);
     };
 
     return (
         <CardContent>
             <div>
-                <TextField value={name} label="First Name" onChange={(e) => setName(e.target.value)} />
+                <TextField
+                    value={name}
+                    label="First Name"
+                    onChange={(e) => setName(e.target.value)}
+                />
             </div>
             <div>
                 <TextField
                     value={email}
                     label="Email"
+                    required
                     onChange={(e) => {
                         const input = e.target.value;
                         setEmail(input);
@@ -82,12 +86,15 @@ const Register = () => {
                         }
                     }}
                 />
-                {!isEmailValid && <Typography color="error">{emailErrorMessage}</Typography>}
+                {!isEmailValid && (
+                    <Typography color="error">{emailErrorMessage}</Typography>
+                )}
             </div>
             <div>
                 <TextField
                     label="Birth Year"
                     value={birthYear}
+                    required
                     onChange={(e) => {
                         const input = e.target.value;
                         if (/^\d*$/.test(input)) {
@@ -97,15 +104,28 @@ const Register = () => {
                 />
             </div>
             <div>
-                <TextField value={country} label="Country" onChange={(e) => setCountry(e.target.value)} />
+                <TextField
+                    value={country}
+                    label="Country"
+                    onChange={(e) => setCountry(e.target.value)}
+                />
             </div>
             <div>
-                <TextField value={zipCode} label="Zip Code" onChange={(e) => setZipCode(e.target.value)} />
+                <TextField
+                    value={zipCode}
+                    label="Zip Code"
+                    onChange={(e) => setZipCode(e.target.value)}
+                />
             </div>
+            <Typography variant="subtitle2" gutterBottom style={{ color: 'grey' }}>
+                * indicates a required field
+            </Typography>
 
             <div style={{ marginTop: "40px" }}>
                 <FormControl component="fieldset">
-                    <FormLabel component="legend">Have you been diagnosed with a learning disorder?</FormLabel>
+                    <FormLabel component="legend">
+                        Have you been diagnosed with a learning disorder?
+                    </FormLabel>
                     <RadioGroup
                         aria-label="options"
                         name="options"
@@ -122,8 +142,12 @@ const Register = () => {
 
             <div style={{ marginTop: "20px" }}>
                 <FormControl>
-                    <FormLabel component="legend">What is your highest level of education?</FormLabel>
-                    <InputLabel style={{ marginTop: "20px" }}>Select an option</InputLabel>
+                    <FormLabel component="legend">
+                        What is your highest level of education?
+                    </FormLabel>
+                    <InputLabel style={{ marginTop: "20px" }}>
+                        Select an option
+                    </InputLabel>
                     <Select
                         value={levelOfEducation}
                         onChange={(e) => {
@@ -145,8 +169,15 @@ const Register = () => {
                 </FormControl>
             </div>
 
-            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "20px" }}>
-                <Button variant="contained" color="primary" onClick={handleSubmit} disabled={nextButtonDisabled()}>
+            <div
+                style={{ display: "flex", justifyContent: "flex-end", marginTop: "20px" }}
+            >
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSubmit}
+                    disabled={nextButtonDisabled()}
+                >
                     Next
                 </Button>
             </div>
