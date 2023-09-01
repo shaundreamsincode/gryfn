@@ -124,7 +124,6 @@ const IntakeSpeechQuestions = (props) => {
                                             onError={handleQuestionError}
                                         />
                                     </CardContent>
-
                                 </Card>
                             )
                         })
