@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ApiService from "../../services/ApiService";
 import {Button, Card, CardContent} from "@material-ui/core";
-import IntakeSpellingQuestions from "./IntakeSpellingQuestions";
+import IntakeSpellingQuestions from "./spelling_questions/IntakeSpellingQuestions";
 import {useNavigate} from "react-router-dom";
 import IntakePhoneticQuestionsInstructions from "./instructions/IntakePhoneticQuestionsInstructions";
 

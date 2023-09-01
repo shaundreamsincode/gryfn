@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CardContent, TextField, Button } from "@material-ui/core";
-import AudioPlayer from "./AudioPlayer";
+import AudioPlayer from "../AudioPlayer";
 
 const IntakeSpellingQuestion = (props) => {
     const { question, questionSaveEndpoint, onSave } = props
