@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ApiService from "../../services/ApiService";
 
-import {Button, Typography} from "@material-ui/core";
+import {Button, Typography, Link} from "@material-ui/core";
 import { AudioRecorder } from 'react-audio-voice-recorder';
 
 const IntakeSpeechQuestion = (props) => {
@@ -20,14 +20,14 @@ const IntakeSpeechQuestion = (props) => {
         marginTop: '20px',
     };
 
-    const disabledMicrophoneStyle = {
-        'background-color': "#f0f0f0",
-    'color': "#888888",
-    "pointer-events": "none", /* This prevents interactions */
-    "opacity": "0.7" /* You can also adjust the opacity to indicate it's disabled */
+    const microphoneStyle = () => {
+        const disabledMicrophoneStyle = {
+            // 'background-color': "#f0f0f0",
+            // 'color': "#888888",
+            "pointer-events": "none",
+            "opacity": "0.5"
         }
 
-    const microphoneStyle = () => {
         if (questionHasBeenAnswered) {
             return disabledMicrophoneStyle
         } else {
@@ -112,19 +112,27 @@ const IntakeSpeechQuestion = (props) => {
                     }
                 </div>
 
-                <div>
-                    <Button
-                        disabled={saving || questionHasBeenAnswered || !recordingComplete}
-                        onClick={handleSave}
-                        variant="contained"
-                        color="primary">
-                        Save
-                    </Button>
-                    <Button
-                        onClick={handleUndo}
-                        disabled={undoButtonDisabled}>Redo
-                        {/*disabled={!questionHasBeenAnswered || (questionHasBeenAnswered && recordingComplete)}>Redo*/}
-                    </Button>
+                <div style={{ 'display': 'flex', 'alignItems': 'center', 'flexDirection': 'column'}}>
+                    <div>
+                        <Button
+                            disabled={saving || questionHasBeenAnswered || !recordingComplete}
+                            onClick={handleSave}
+                            variant="contained"
+                            color="primary">
+                            Save
+                        </Button>
+                    </div>
+
+                    <div style={{ 'marginTop': '20px' }}>
+                        {
+                            !undoButtonDisabled && <Link
+                                onClick={handleUndo}
+                                disabled={undoButtonDisabled}>(Redo)
+                                {/*disabled={!questionHasBeenAnswered || (questionHasBeenAnswered && recordingComplete)}>Redo*/}
+                            </Link>
+                        }
+                    </div>
+
                 </div>
             </div>
     </div>)
