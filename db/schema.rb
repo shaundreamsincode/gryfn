@@ -30,7 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_045935) do
     t.string "patient_first_name"
     t.string "email"
     t.integer "birth_year"
-    t.string "country"
+    t.string "countrye"
     t.string "zip_code"
     t.string "level_of_education"
     t.boolean "previously_diagnosed"
@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_045935) do
 
   create_table "intake_eidetic_questions", force: :cascade do |t|
     t.string "token"
+    t.integer "level", default: 0, null: false
     t.integer "index", default: 0, null: false
     t.bigint "intake_assessment_id"
     t.string "answer"
@@ -59,6 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_045935) do
 
   create_table "intake_phonetic_questions", force: :cascade do |t|
     t.string "token"
+    t.integer "level", default: 0, null: false
     t.integer "index", default: 0, null: false
     t.bigint "intake_assessment_id"
     t.string "answer"

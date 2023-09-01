@@ -40,6 +40,7 @@ class IntakeAssessments::CompleteSpeechAssessment
         correct_answer: word,
         file_name: "#{word}.mp3",
         index: index,
+        level: level,
         intake_assessment: context.assessment
       )
     end
@@ -70,6 +71,7 @@ class IntakeAssessments::CompleteSpeechAssessment
         file_name: "#{word}.mp3",
         index: index,
         intake_assessment: context.assessment,
+        level: level,
         phonetic_sets: Data::PhoneticDictionary::DICTIONARY[word]
       )
     end
