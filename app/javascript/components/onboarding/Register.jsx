@@ -33,6 +33,9 @@ const Register = () => {
     const [isEmailValid, setIsEmailValid] = useState(true);
     const [emailErrorMessage, setEmailErrorMessage] = useState("");
 
+    const [isBirthYearValid, setIsBirthYearValid] = useState(true);
+    // const [birthYearErrorMessage, setBirthYearErrorMessage] = useState("");
+
     const handleSubmit = () => {
         setSaving(true);
 
@@ -57,8 +60,16 @@ const Register = () => {
             return true;
         }
 
-        return !(email && birthYear);
+        return !(email && isEmailValid && birthYear && isBirthYearValid);
     };
+
+    // const calculateBirthYearIsValid = () => {
+    //     if (!birthYear) {
+    //         return false
+    //     }
+    //
+    //     return birthYear
+    // }
 
     return (
         <CardContent>
@@ -97,11 +108,19 @@ const Register = () => {
                     required
                     onChange={(e) => {
                         const input = e.target.value;
-                        if (/^\d*$/.test(input)) {
-                            setBirthYear(input);
-                        }
+                        setBirthYear(input);
+
+                        const birthYearIsInteger = /^\d*$/.test(input)
+                        debugger
+                        const birthYearIsValid = birthYearIsInteger && Number(input) > 1900 && Number(input) < 2024
+                        setIsBirthYearValid(birthYearIsValid)
                     }}
                 />
+                {
+                    !isBirthYearValid && (
+                        <Typography color="error">Invalid Birth Year</Typography>
+                    )
+                }
             </div>
             <div>
                 <TextField
