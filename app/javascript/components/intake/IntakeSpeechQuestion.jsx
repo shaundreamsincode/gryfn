@@ -119,7 +119,6 @@ const IntakeSpeechQuestion = (props) => {
 
                             {
                                 questionHasBeenAnswered && <DoneOutlined sx={{ color: "green" }}/>
-                                // questionHasBeenAnswered && <DoneOutlined style={{"color": "green"}}/>
                             }
                         </div>
                     </div>
@@ -143,7 +142,6 @@ const IntakeSpeechQuestion = (props) => {
                                     onClick={handleUndo}
                                     size="small"
                                     disabled={undoButtonHidden}>redo
-                                    {/*disabled={!questionHasBeenAnswered || (questionHasBeenAnswered && recordingComplete)}>Redo*/}
                                 </Button>
                             }
                         </div>

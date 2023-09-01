@@ -4,7 +4,6 @@ import {useNavigate} from "react-router-dom";
 
 const PrivacyPolicy = () => {
     const navigate = useNavigate()
-
     const [privacyPolicyAccepted, setPrivacyPolicyAccepted] = useState(false)
 
     return(<CardContent>
@@ -15,13 +14,7 @@ const PrivacyPolicy = () => {
 
             <FormGroup>
                 <FormControlLabel control={<Checkbox onChange={() =>setPrivacyPolicyAccepted(!privacyPolicyAccepted)} />} label="I accept the privacy policy" />
-
             </FormGroup>
-
-            {/*<span>*/}
-            {/*    <Checkbox label="asdfafsd" onChange={() =>setPrivacyPolicyAccepted(!privacyPolicyAccepted) }/> asd*/}
-            {/*    /!*<Typography>I accept the privacy policy</Typography>*!/*/}
-            {/*</span>*/}
         </div>
 
         <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "20px" }}>

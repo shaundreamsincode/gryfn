@@ -32,9 +32,7 @@ const Register = () => {
 
     const [isEmailValid, setIsEmailValid] = useState(true);
     const [emailErrorMessage, setEmailErrorMessage] = useState("");
-
     const [isBirthYearValid, setIsBirthYearValid] = useState(true);
-    // const [birthYearErrorMessage, setBirthYearErrorMessage] = useState("");
 
     const handleSubmit = () => {
         setSaving(true);
@@ -62,14 +60,6 @@ const Register = () => {
 
         return !(email && isEmailValid && birthYear && isBirthYearValid);
     };
-
-    // const calculateBirthYearIsValid = () => {
-    //     if (!birthYear) {
-    //         return false
-    //     }
-    //
-    //     return birthYear
-    // }
 
     return (
         <CardContent>

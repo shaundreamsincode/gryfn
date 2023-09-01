@@ -1,5 +1,4 @@
 import React from "react";
-// import Routes from "./Routes";
 import Routes from "./Routes";
 
 import {Container, Card, CardContent, Typography, Button, Link} from "@material-ui/core";
@@ -18,7 +17,6 @@ export default props => <>
         <div style={{ 'marginTop': '20px' }}>
             <Typography align="center" >
                 <Button color="primary" onClick={() => {window.location.href = "https://gryfn.onrender.com/about"} }>
-                {/*<Button color="primary" onClick={() => {window.location.href = "https://gryfn.onrender.com/about"} }>*/}
                     About Us
                 </Button>
                 <Button color="primary" onClick={() => {window.location.href = "https://gryfn.onrender.com/contact"} }>

@@ -38,7 +38,6 @@ const IntakePhoneticQuestions = () => {
         localStorage.setItem('phoneticInstructionsRead', true)
     }
 
-
     if (!readInstructions) {
         return(
             <CardContent>

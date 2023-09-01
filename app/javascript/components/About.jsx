@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, CardContent, Typography} from "@material-ui/core";
+import {CardContent, Typography} from "@material-ui/core";
 
 const About = () => {
     return(<CardContent>

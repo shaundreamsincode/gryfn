@@ -10,7 +10,6 @@ import {useNavigate} from "react-router-dom";
 const IntakeAssessment = () => {
     const currentUrl = window.location.href;
     const assessmentToken = currentUrl.split("/")[4];
-    // const [currentStep, setCurrentStep] = useState(null)
     const navigate = useNavigate()
 
     useEffect(() => {

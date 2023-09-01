@@ -1,14 +1,10 @@
-import React, {useState, useEffect} from 'react'
-import ApiService from "../../services/ApiService";
-import {Button, CardContent} from "@material-ui/core";
-import { useNavigate } from "react-router-dom";
+import React from 'react'
+import {Button} from "@material-ui/core";
 import IntakeSpellingQuestion from "./IntakeSpellingQuestion";
 
 const IntakeSpellingQuestions = (props) => {
     const { questions, onSave, onFinish, questionSaveEndpoint, title, finishButtonText } = props
-    const navigate = useNavigate()
     const currentUrl = window.location.href
-    const assessmentToken = currentUrl.split("/")[4]
 
     const sortedQuestions = questions.sort(function(a, b) {
         var textA = a.file_name;

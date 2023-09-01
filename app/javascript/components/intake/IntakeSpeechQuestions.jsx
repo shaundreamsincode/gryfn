@@ -22,13 +22,6 @@ const IntakeSpeechQuestions = (props) => {
     const [showSuccessMessage, setShowSuccessMessage] = useState(false)
     const [showSuccessUndoMessage, setShowSuccessUndoMessage] = useState(false)
 
-    const containerStyle = {
-        // display: 'flex',
-        // justifyContent: 'space-between',
-        // flexDirection: 'column', // Stack components vertically
-        // alignItems: 'center', // Horizontally center components
-    };
-
     const handleQuestionUpdate = (question, newAnswer) => {
         setShowSuccessMessage(false)
         setShowSuccessUndoMessage(false)
@@ -123,8 +116,6 @@ const IntakeSpeechQuestions = (props) => {
                         questions.map((question) => {
                             return(
                                 <Card style={{ 'marginTop': '20px' }}>
-                                {/*<Card style={{ 'background-color': 'orange', 'marginTop': '20px' }}>*/}
-
                                     <CardContent>
                                         <IntakeSpeechQuestion
                                             question={question}
@@ -141,8 +132,6 @@ const IntakeSpeechQuestions = (props) => {
                 </List>
             </div>
 
-            {/*<div style={containerStyle}>*/}
-            {/*</div>*/}
             <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '40px' }}>
                 <Button style={{'margin-top': '30px'}}  color="primary" variant="contained" onClick={handleNext} disabled={nextButtonDisabled}>Next</Button>
             </div>
