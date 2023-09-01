@@ -11,8 +11,8 @@ RSpec.describe IntakeAssessments::CompleteSpeechAssessment do
     end
 
     context "when the assessment type is DESD" do
-      it "calculates the grade correctly" do
-        assessment = create(:intake_assessment, assessment_type: 'desd')
+      it "calculates the grade correctly and creates eidetic and phonetic questions" do
+        assessment = create(:intake_assessment, :desd)
 
         correct_speech_questions = [
           create(:intake_speech_question, :correct, assessment: assessment, level: 0),
@@ -48,8 +48,8 @@ RSpec.describe IntakeAssessments::CompleteSpeechAssessment do
     end
 
     context "when the assessment type is ADT" do
-      it "calculates the grade correctly" do
-        assessment = create(:intake_assessment, assessment_type: 'adt')
+      it "calculates the grade correctly and creates eidetic and phonetic questions" do
+        assessment = create(:intake_assessment, :adt)
 
         # todo - spec for when it's uneven (e.g. 6, 5 maybe)
         correct_speech_questions = [
