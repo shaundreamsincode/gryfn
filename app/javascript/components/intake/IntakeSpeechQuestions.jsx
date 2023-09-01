@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ApiService from "../../services/ApiService";
 import {CardContent, Button} from "@material-ui/core";
 import IntakeSpeechQuestion from "./IntakeSpeechQuestion";
-import IntakeSpeechQuestionsInstructions from "./IntakeSpeechQuestionsInstructions";
+import IntakeSpeechQuestionsInstructions from "./instructions/IntakeSpeechQuestionsInstructions";
 
 import { useNavigate } from "react-router-dom";
 

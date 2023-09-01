@@ -57,18 +57,21 @@ const IntakeSummary = () => {
                 <h2>Level: { speechAssessmentGrade }</h2>
             </div>
 
-            <h3>Speech Questions</h3>
+            <h3 style={{ 'marginTop': '50px' }}>Speech Questions</h3>
             <Table>
                 <TableHead>
                     <TableRow>
+                        <TableCell>Question Number</TableCell>
                         <TableCell>Answer</TableCell>
                         <TableCell>Your Answer</TableCell>
+                        <TableCell>Result</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {
-                        questionsWithAnswer.map((question) => {
-                            return(<TableRow>
+                        questionsWithAnswer.map((question, index) => {
+                            return(<TableRow key={index}>
+                                <TableCell>{ index + 1 }</TableCell>
                                 <TableCell>{ question.correct_answer }</TableCell>
                                 <TableCell>{ question.answer }</TableCell>
                                 <TableCell>{ question.is_correct ? 'Correct' : 'Incorrect' }</TableCell>
@@ -78,28 +81,31 @@ const IntakeSummary = () => {
                 </TableBody>
             </Table>
 
-            <h3>Eidetic Questions</h3>
+            <h3 style={{ 'marginTop': '50px' }}>Eidetic Questions</h3>
             <Table>
                 <TableHead>
                     <TableRow>
+                        <TableCell>Question Number</TableCell>
                         <TableCell>Answer</TableCell>
                         <TableCell>Your Answer</TableCell>
+                        <TableCell>Result</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {
-                        eideticQuestions.map((question) => {
+                        eideticQuestions.map((question, index) => {
                             return(<TableRow>
-                                <TableCell>{ question.correct_answer }</TableCell>
-                                <TableCell>{ question.answer }</TableCell>
-                                <TableCell>{ question.is_correct ? 'Correct' : 'Incorrect' }</TableCell>
+                                <TableCell key={index}>{ index + 1 }</TableCell>
+                                <TableCell key={index}>{ question.correct_answer }</TableCell>
+                                <TableCell key={index}>{ question.answer }</TableCell>
+                                <TableCell key={index}>{ question.is_correct ? 'Correct' : 'Incorrect' }</TableCell>
                             </TableRow>)
                         })
                     }
                 </TableBody>
             </Table>
 
-            <h3>Phonetic Questions</h3>
+            <h3 style={{ 'marginTop': '50px' }}>Phonetic Questions</h3>
             <Table>
                 <TableHead>
                     <TableRow>

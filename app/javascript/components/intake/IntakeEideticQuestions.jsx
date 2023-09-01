@@ -3,7 +3,7 @@ import {Button, CardContent} from "@material-ui/core";
 import IntakeSpellingQuestions from "./IntakeSpellingQuestions";
 import ApiService from "../../services/ApiService";
 import { useNavigate } from "react-router-dom";
-import IntakeEideticQuestionsInstructions from "./IntakeEideticQuestionsInstructions";
+import IntakeEideticQuestionsInstructions from "./instructions/IntakeEideticQuestionsInstructions";
 
 const IntakeEideticQuestions = () => {
     const currentUrl = window.location.href;

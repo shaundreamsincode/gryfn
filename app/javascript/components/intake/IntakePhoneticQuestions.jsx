@@ -3,7 +3,7 @@ import ApiService from "../../services/ApiService";
 import {Button, Card, CardContent} from "@material-ui/core";
 import IntakeSpellingQuestions from "./IntakeSpellingQuestions";
 import {useNavigate} from "react-router-dom";
-import IntakePhoneticQuestionsInstructions from "./IntakePhoneticQuestionsInstructions";
+import IntakePhoneticQuestionsInstructions from "./instructions/IntakePhoneticQuestionsInstructions";
 
 const IntakePhoneticQuestions = () => {
     const currentUrl = window.location.href;
