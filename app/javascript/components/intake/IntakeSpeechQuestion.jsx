@@ -3,6 +3,10 @@ import ApiService from "../../services/ApiService";
 
 import {Button, Typography, Link} from "@material-ui/core";
 import { AudioRecorder } from 'react-audio-voice-recorder';
+// DoneOutlined
+
+import { DoneOutlined } from '@mui/icons-material'
+
 
 const IntakeSpeechQuestion = (props) => {
     const { question, onUpdate, onError, onRecordingBegin } = props
@@ -87,22 +91,30 @@ const IntakeSpeechQuestion = (props) => {
 
     return(
         <div style={containerStyle}>
-        <div style={{ 'display': 'flex', 'alignItems': 'center', 'flexDirection': 'column'}}>
-            <div style={{ display: 'flex' }}>
-                <div>
-                        <div onClick={handleRecordingBegin} style={microphoneStyle()}>
-                            <AudioRecorder
-                                onRecordingComplete={handleRecordingComplete}
-                                audioTrackConstraints={{
-                                    noiseSuppression: true,
-                                    echoCancellation: true,
-                                }}
-                                downloadFileExtension="webm"
-                            />
-                        </div>
+            <div style={{ 'display': 'flex', 'alignItems': 'center', 'flexDirection': 'column'}}>
+                <div style={{ display: 'flex' }}>
+                    <div>
+                        {
+                            !questionHasBeenAnswered &&
+                            <div onClick={handleRecordingBegin} style={microphoneStyle()}>
+                                <AudioRecorder
+                                    onRecordingComplete={handleRecordingComplete}
+                                    audioTrackConstraints={{
+                                        noiseSuppression: true,
+                                        echoCancellation: true,
+                                    }}
+                                    downloadFileExtension="webm"
+                                />
+                            </div>
+                        }
+
+                        {
+                            questionHasBeenAnswered && <DoneOutlined sx={{ color: "green" }}/>
+                            // questionHasBeenAnswered && <DoneOutlined style={{"color": "green"}}/>
+                        }
+                    </div>
                 </div>
             </div>
-        </div>
             <div>
                 <div>
                     <Typography style={{ "marginTop": "10px" }}><b>{ question.correct_answer }</b></Typography>
@@ -123,13 +135,13 @@ const IntakeSpeechQuestion = (props) => {
                         </Button>
                     </div>
 
-                    <div style={{ 'marginTop': '20px' }}>
+                    <div style={{ 'marginTop': '10px' }}>
                         {
-                            !undoButtonDisabled && <Link
+                            <Button
                                 onClick={handleUndo}
-                                disabled={undoButtonDisabled}>(Redo)
+                                disabled={undoButtonDisabled}>redo
                                 {/*disabled={!questionHasBeenAnswered || (questionHasBeenAnswered && recordingComplete)}>Redo*/}
-                            </Link>
+                            </Button>
                         }
                     </div>
 
