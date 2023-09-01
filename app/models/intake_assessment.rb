@@ -16,7 +16,15 @@ class IntakeAssessment < ApplicationRecord
   alias_attribute :phonetic_questions, :intake_phonetic_questions
 
   enum :assessment_type, { desd: 0, adt: 1 }
-  enum current_step: { speech: 0, eidetic: 1, phonetic: 2, summary: 3 }
+
+  enum current_step: {
+    speech: 0,
+    eidetic: 1,
+    phonetic: 2,
+    summary: 3,
+    fail_insufficient_correct: 4,
+    fail_insufficient_incorrect: 5
+  }
 
   def dataset
     desd? ? Data::Desd : Data::Adt
@@ -34,7 +42,7 @@ class IntakeAssessment < ApplicationRecord
     desd? ? 3 : 4 # todo - put these in dataset
   end
 
-  def required_inccorrect_questions_count
+  def required_incorrect_questions_count
     desd? ? 2 : 3 # todo - put these in dataset
   end
 

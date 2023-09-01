@@ -3,6 +3,13 @@ module IntakeAssessments
     include Interactor
 
     def call
+      # TODO - REMOVE THIS (ITS FOR DEBUGGING)
+      complete_speech_result = IntakeAssessments::CompleteSpeechAssessment.call(assessment: context.assessment)
+
+      if complete_speech_result.error.present?
+        context.fail!(error: complete_speech_result.error)
+      end
+
       intake_assessment = context.assessment
       validate_current_step(intake_assessment)
 

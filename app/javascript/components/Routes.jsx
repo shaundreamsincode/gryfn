@@ -18,10 +18,13 @@ import PrivacyPolicy from "./app_toolbar/PrivacyPolicy";
 // intake
 import IntakeAssessment from "./intake/IntakeAssessment";
 import IntakeSummary from "./intake/IntakeSummary";
-
 import IntakeSpeechQuestions from "./intake/IntakeSpeechQuestions";
 import IntakeEideticQuestions from "./intake/IntakeEideticQuestions";
 import IntakePhoneticQuestions from "./intake/IntakePhoneticQuestions";
+import IntakeInsufficientCorrectSpeechQuestionsFailure
+    from "./intake/failures/IntakeInsufficientCorrectSpeechQuestionsFailure";
+import IntakeInsufficientIncorrectSpeechQuestionsFailure
+    from "./intake/failures/IntakeInsufficientIncorrectSpeechQuestionsFailure";
 
 export default (
     <Router>
@@ -46,6 +49,8 @@ export default (
                 <Route exact path='/intake_assessments/:intakeAssessmentToken/speech' element={<IntakeSpeechQuestions/>}/>
                 <Route exact path='/intake_assessments/:intakeAssessmentToken/eidetic' element={<IntakeEideticQuestions/>}/>
                 <Route exact path='/intake_assessments/:intakeAssessmentToken/phonetic' element={<IntakePhoneticQuestions/>}/>
+                <Route exact path='/intake_assessments/:intakeAssessmentToken/fail_insufficient_correct' element={<IntakeInsufficientCorrectSpeechQuestionsFailure/>}/>
+                <Route exact path='/intake_assessments/:intakeAssessmentToken/fail_insufficient_incorrect' element={<IntakeInsufficientIncorrectSpeechQuestionsFailure/>}/>
             </Routes>
         </Fragment>
     </Router>

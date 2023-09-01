@@ -2,10 +2,11 @@ class IntakeAssessments::CompleteSpeechAssessment
   include Interactor
 
   def call
-    validate_assessment!
-    # todo - put validations?
-    grade = calculate_grade
+    _assessment = context.assessment
+    validate_assessment!(_assessment)
+    return if context.errors.present?
 
+    grade = calculate_grade
     create_eidetic_questions!(grade)
     create_phonetic_questions!
 
@@ -19,19 +20,19 @@ class IntakeAssessments::CompleteSpeechAssessment
     context.assessment.reload
   end
 
-  private def validate_assessment!
-    _assessment = context.assessment
-
+  private def validate_assessment!(_assessment)
     correct_question_count = _assessment.correct_speech_questions.count
     incorrect_question_count = _assessment.incorrect_speech_questions.count
 
     # byebug
     if _assessment.required_correct_speech_questions_count > correct_question_count
-      context.fail!(error: :not_enough_correct)
+      _assessment.update!(current_step: 'fail_insufficient_correct')
+      context.error = 'insufficient_correct'
     end
 
-    if _assessment.required_correct_speech_questions_count > incorrect_question_count
-      context.fail!(error: :not_enough_incorrect)
+    if _assessment.required_incorrect_questions_count > incorrect_question_count
+      _assessment.update!(current_step: 'fail_insufficient_incorrect')
+      context.error = 'insufficient_incorrect'
     end
   end
 
