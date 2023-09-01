@@ -119,13 +119,23 @@ const IntakeSummary = () => {
                     }
                 </TableBody>
             </Table>
-            <Toolbar>
-                <Button onClick={() => { navigate('/') } } align="right" color="primary">
-                    Home
-                </Button>
-                <Button onClick={handleEmailResults} align="right" color="primary">
-                    Email Results
-                </Button>
+            <Toolbar style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem' }}>
+                    <Button
+                        onClick={() => { navigate('/') } }
+                        style={{ marginRight: 'auto' }} // Pushes the button to the left
+                        color="primary"
+                        variant="contained"
+                    >
+                        Home
+                    </Button>
+                    <Button
+                        onClick={handleEmailResults}
+                        style={{ marginLeft: 'auto' }} // Pushes the button to the right
+                        color="primary"
+                        variant="contained"
+                    >
+                        Email Results
+                    </Button>
             </Toolbar>
             <Snackbar
                 open={!!snackbarMessage}
