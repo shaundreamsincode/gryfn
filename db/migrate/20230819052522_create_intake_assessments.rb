@@ -8,7 +8,7 @@ class CreateIntakeAssessments < ActiveRecord::Migration[7.0]
       t.string :patient_first_name
       t.string :email
       t.integer :birth_year
-      t.string :countrye
+      t.string :country
       t.string :zip_code
 
       t.string :level_of_education

@@ -30,7 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_045935) do
     t.string "patient_first_name"
     t.string "email"
     t.integer "birth_year"
-    t.string "countrye"
+    t.string "country"
     t.string "zip_code"
     t.string "level_of_education"
     t.boolean "previously_diagnosed"
