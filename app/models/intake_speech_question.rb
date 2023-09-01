@@ -2,16 +2,11 @@ class IntakeSpeechQuestion < ApplicationRecord
   belongs_to :intake_assessment
   alias_attribute :assessment, :intake_assessment
 
-  FILE_NAMES =
-    %w(
-    what.mp3
-    ).freeze
+  scope :answered, -> { where.not(answer: nil) }
+  scope :unanswered, -> { where(answer: nil) }
 
   def is_correct?
     return false if answer.nil?
     answer.downcase == correct_answer.downcase
   end
 end
-
-# correct_speech_questions
-# incorrect_speech_questions

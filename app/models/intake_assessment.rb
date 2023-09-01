@@ -30,6 +30,22 @@ class IntakeAssessment < ApplicationRecord
     desd? ? Data::Desd::WORDS_BY_LEVEL.count : Data::Desd::WORDS_BY_LEVEL.count
   end
 
+  def required_correct_speech_questions_count
+    desd? ? 3 : 4 # todo - put these in dataset
+  end
+
+  def required_inccorrect_questions_count
+    desd? ? 2 : 3 # todo - put these in dataset
+  end
+
+  def correct_speech_questions
+    speech_questions.answered.select { |question| question.is_correct? }
+  end
+
+  def incorrect_speech_questions
+    speech_questions.answered.reject { |question| question.is_correct? }
+  end
+
   def speech_assessment_grade_level_as_label
     return if speech_assessment_grade_level.nil?
 

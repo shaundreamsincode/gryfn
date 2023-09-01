@@ -25,7 +25,7 @@ module Api
             answer: question.answer,
             correct_answer: question.correct_answer,
             is_correct: question.is_correct?,
-            level: question.level
+            level: question.assessment.desd? ? Data::Desd::LEVEL_LABELS[question.level] : Data::Adt::LEVEL_LABELS[question.level]
           }
         end
       end

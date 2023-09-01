@@ -2,6 +2,7 @@ class IntakeAssessments::CompleteSpeechAssessment
   include Interactor
 
   def call
+    validate_assessment!
     # todo - put validations?
     grade = calculate_grade
 
@@ -16,6 +17,22 @@ class IntakeAssessments::CompleteSpeechAssessment
 
     IntakeAssessments::MoveToNextStep.call(assessment: context.assessment)
     context.assessment.reload
+  end
+
+  private def validate_assessment!
+    _assessment = context.assessment
+
+    correct_question_count = _assessment.correct_speech_questions.count
+    incorrect_question_count = _assessment.incorrect_speech_questions.count
+
+    # byebug
+    if _assessment.required_correct_speech_questions_count > correct_question_count
+      context.fail!(error: :not_enough_correct)
+    end
+
+    if _assessment.required_correct_speech_questions_count > incorrect_question_count
+      context.fail!(error: :not_enough_incorrect)
+    end
   end
 
   # should return an integer

@@ -2,7 +2,8 @@ class IntakeEideticQuestion < ApplicationRecord
   belongs_to :intake_assessment
   alias_attribute :assessment, :intake_assessment
 
-  WORDS = ['what']
+  scope :answered, -> { where.not(answer: nil) }
+  scope :unanswered, -> { where(answer: nil) }
 
   def self.create_questions_for_assessment!(assessment)
     WORDS.each do |word|

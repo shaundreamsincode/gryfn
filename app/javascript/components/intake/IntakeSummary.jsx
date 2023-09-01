@@ -87,7 +87,7 @@ const IntakeSummary = () => {
                         questionsWithAnswer.map((question, index) => {
                             return(<TableRow key={index}>
                                 <TableCell>{ index + 1 }</TableCell>
-                                <TableCell>{ question.level + 1 }</TableCell>
+                                <TableCell>{ question.level }</TableCell>
                                 <TableCell>{ question.correct_answer }</TableCell>
                                 <TableCell>{ question.answer }</TableCell>
                                 <TableCell>{ question.is_correct ? 'Correct' : 'Incorrect' }</TableCell>
