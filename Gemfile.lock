@@ -203,6 +203,8 @@ GEM
       racc (~> 1.4)
     nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
+    numbers_and_words (0.11.12)
+      i18n (<= 2)
     os (1.1.4)
     pg (1.5.3)
     postmark (1.24.0)
@@ -335,6 +337,7 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   jwt
+  numbers_and_words
   pg
   postmark-rails
   puma (~> 5.0)

@@ -60,6 +60,9 @@ gem 'jwt'
 gem 'google-cloud-speech', '~> 1.2', '>= 1.2.3'
 gem 'google-cloud-ruby'
 
+# For fixing a bug with Google voice recognition
+gem 'numbers_and_words'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

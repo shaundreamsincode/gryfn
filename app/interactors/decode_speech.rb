@@ -21,6 +21,16 @@ class DecodeSpeech
     result = response.results.first
     context.fail!(error: :decode_error) if result.blank?
 
-    context.transcript = result.alternatives.first.transcript
+    transcript = result.alternatives.first.transcript
+
+    # test to see if google gave us an integer (e.g. '1')
+    if transcript =~ /^\d+$/
+      integer_value = transcript.to_i
+      english_name = integer_value.to_words
+
+      transcript = english_name
+    end
+
+    context.transcript = transcript
   end
 end
