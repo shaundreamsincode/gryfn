@@ -5,62 +5,92 @@ import {Button, Typography} from "@material-ui/core";
 import { AudioRecorder } from 'react-audio-voice-recorder';
 
 const IntakeSpeechQuestion = (props) => {
-    const { question, onUpdate } = props
+    const { question, onUpdate, onError, onRecordingBegin } = props
     const [blob, setBlob] = useState(null)
     const [recordingComplete, setRecordingComplete] = useState(false)
     const [questionHasBeenAnswered, setQuestionHasBeenAnswered] = useState(!!question.answer)
-    const [recordingMessage, setRecordingMessage] = useState(null)
+    const [recordingError, setRecordingError] = useState(false)
+    const [undoButtonDisabled, setUndoButtonDisabled] = useState(!question.answer)
+    const [saving, setSaving] = useState(false)
 
     const containerStyle = {
         display: 'flex',
-        justifyContent: 'space-between', // This aligns the components with space between them
-        alignItems: 'center', // This vertically aligns the components
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: '20px',
     };
 
+    const disabledMicrophoneStyle = {
+        'background-color': "#f0f0f0",
+    'color': "#888888",
+    "pointer-events": "none", /* This prevents interactions */
+    "opacity": "0.7" /* You can also adjust the opacity to indicate it's disabled */
+        }
+
+    const microphoneStyle = () => {
+        if (questionHasBeenAnswered) {
+            return disabledMicrophoneStyle
+        } else {
+            return {}
+        }
+    }
+
     const handleSave = () => {
-        setRecordingMessage(null)
-        setRecordingMessage('Saving...')
+        setSaving(true)
+        setRecordingError(null)
         const wavFromBlob = new File([blob], "test.wav")
 
         ApiService.upsertSpeechQuestionResponse(question, wavFromBlob).then((response) => {
             setQuestionHasBeenAnswered(true)
             setRecordingComplete(false)
-            setRecordingMessage(null)
+            setRecordingError(null)
+            setSaving(true)
 
             onUpdate(question, response.data.answer)
         }).catch(() => {
             setRecordingComplete(false)
-            setRecordingMessage('Recording Unsuccessful - please try again.')
+            setRecordingError(true)
+            setUndoButtonDisabled(true)
+            setSaving(false)
+
+            onError()
         })
     }
 
     const handleUndo = () => {
-        setRecordingMessage('Saving...')
+        setSaving(true)
 
         ApiService.resetSpeechQuestionResponse(question).then((response) => {
             setQuestionHasBeenAnswered(false)
             setRecordingComplete(false)
-            setRecordingMessage(null)
+            setRecordingError(null)
             onUpdate(question, null)
+            setSaving(false)
+
+            setUndoButtonDisabled(true)
+        }).catch(() => {
+            setSaving(false)
+            onError()
         })
     }
 
     const handleRecordingBegin = () => {
-        setRecordingMessage(null)
+        setRecordingError(null)
+        onRecordingBegin()
     }
 
     const handleRecordingComplete = (blob) => {
         setBlob(blob)
         setRecordingComplete(true)
+        setUndoButtonDisabled(false)
     }
 
-    return(<div style={containerStyle}>
-        <div>
+    return(
+        <div style={containerStyle}>
+        <div style={{ 'display': 'flex', 'alignItems': 'center', 'flexDirection': 'column'}}>
             <div style={{ display: 'flex' }}>
                 <div>
-                    {
-                        !questionHasBeenAnswered &&
-                        <div onClick={handleRecordingBegin}>
+                        <div onClick={handleRecordingBegin} style={microphoneStyle()}>
                             <AudioRecorder
                                 onRecordingComplete={handleRecordingComplete}
                                 audioTrackConstraints={{
@@ -70,36 +100,30 @@ const IntakeSpeechQuestion = (props) => {
                                 downloadFileExtension="webm"
                             />
                         </div>
-                    }
-                </div>
-
-                <div>
-                    {
-                        recordingMessage && <Typography> { recordingMessage } </Typography>
-                    }
                 </div>
             </div>
-
-            <div>
-                <Typography>{ question.correct_answer }</Typography>
-            </div>
+        </div>
+        <div>
+            <Typography style={{ "marginTop": "10px" }}>{ question.correct_answer }</Typography>
 
             {
                 question.answer_viewable && question.answer && <Typography>Your answer: { question.answer }</Typography>
             }
         </div>
 
-        <div>
+            <div>
             <Button
-                disabled={questionHasBeenAnswered || !recordingComplete}
+                disabled={saving || questionHasBeenAnswered || !recordingComplete}
                 onClick={handleSave}
                 variant="contained"
                 color="primary">
                 Save
             </Button>
-                {
-                    questionHasBeenAnswered && <Button onClick={handleUndo}>Redo</Button>
-                }
+                <Button
+                    onClick={handleUndo}
+                    disabled={undoButtonDisabled}>Redo
+                    {/*disabled={!questionHasBeenAnswered || (questionHasBeenAnswered && recordingComplete)}>Redo*/}
+                </Button>
         </div>
     </div>)
 }

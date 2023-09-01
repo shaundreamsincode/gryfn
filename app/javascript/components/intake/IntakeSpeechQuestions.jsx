@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ApiService from "../../services/ApiService";
-import {CardContent, Button} from "@material-ui/core";
+import {CardContent, Button, List, ListItem, Typography} from "@material-ui/core";
 import IntakeSpeechQuestion from "./IntakeSpeechQuestion";
 import IntakeSpeechQuestionsInstructions from "./instructions/IntakeSpeechQuestionsInstructions";
 
@@ -18,8 +18,20 @@ const IntakeSpeechQuestions = (props) => {
     const [questions, setQuestions] = useState([])
     const [nextButtonDisabled, setNextButtonDisabled] = useState(false)
     const [readInstructions, setReadInstructions] = useState(localStorage.getItem('speechInstructionsRead'))
+    const [questionError, setQuestionError] = useState(false)
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false)
+    const [showSuccessUndoMessage, setShowSuccessUndoMessage] = useState(false)
+
+    const containerStyle = {
+        // display: 'flex',
+        // justifyContent: 'space-between',
+        // flexDirection: 'column', // Stack components vertically
+        // alignItems: 'center', // Horizontally center components
+    };
 
     const handleQuestionUpdate = (question, newAnswer) => {
+        setShowSuccessMessage(false)
+        setShowSuccessUndoMessage(false)
         let newQuestion = Object.assign(question, {})
         newQuestion.answer = newAnswer
 
@@ -29,6 +41,13 @@ const IntakeSpeechQuestions = (props) => {
 
         setQuestions(newQuestions)
         setNextButtonDisabled(arrayHasUnansweredQuestions(newQuestions))
+        setQuestionError(false)
+
+        if (newAnswer) {
+            setShowSuccessMessage(true)
+        } else {
+            setShowSuccessUndoMessage(true)
+        }
     }
 
     const handleNext = () => {
@@ -41,6 +60,18 @@ const IntakeSpeechQuestions = (props) => {
 
             navigate(`/intake_assessments/${assessmentToken}`)
         })
+    }
+
+    const handleRecordingBegin = () => {
+        setShowSuccessMessage(false)
+        setShowSuccessUndoMessage(false)
+        setQuestionError(false)
+    }
+
+    const handleQuestionError = () => {
+        setShowSuccessMessage(false)
+        setShowSuccessUndoMessage(false)
+        setQuestionError(true)
     }
 
     const onViewedInstructions = () => {
@@ -76,13 +107,35 @@ const IntakeSpeechQuestions = (props) => {
     return(<CardContent>
         <h2>Speech Questions</h2>
         {
-            questions.map((question) => {
-                return(<IntakeSpeechQuestion question={question} onUpdate={handleQuestionUpdate} />)
-            })
+            questionError && <Typography style={{ "color": "red" }}>There was an error with recording your audio. Please try again.</Typography>
+        }
+        {
+            showSuccessMessage && <Typography style={{ "color": "green" }}>Your answer was successfully updated!</Typography>
         }
 
-        <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '1rem' }}>
-            <Button onClick={handleNext} disabled={nextButtonDisabled}>Next</Button>
+        {
+            showSuccessUndoMessage && <Typography style={{ "color": "green" }}>Your answer was successfully deleted!</Typography>
+        }
+        <div>
+            <List>
+                {
+                    questions.map((question) => {
+                        return(
+                                <IntakeSpeechQuestion
+                                    question={question}
+                                    onRecordingBegin={handleRecordingBegin}
+                                    onUpdate={handleQuestionUpdate}
+                                    onError={handleQuestionError}
+                                />
+                            )
+                    })
+                }
+            </List>
+            {/*<div style={containerStyle}>*/}
+            {/*</div>*/}
+            <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '1rem' }}>
+                <Button onClick={handleNext} disabled={nextButtonDisabled}>Next</Button>
+            </div>
         </div>
 
     </CardContent>) }
