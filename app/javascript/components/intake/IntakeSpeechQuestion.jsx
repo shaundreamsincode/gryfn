@@ -103,28 +103,30 @@ const IntakeSpeechQuestion = (props) => {
                 </div>
             </div>
         </div>
-        <div>
-            <Typography style={{ "marginTop": "10px" }}>{ question.correct_answer }</Typography>
-
-            {
-                question.answer_viewable && question.answer && <Typography>Your answer: { question.answer }</Typography>
-            }
-        </div>
-
             <div>
-            <Button
-                disabled={saving || questionHasBeenAnswered || !recordingComplete}
-                onClick={handleSave}
-                variant="contained"
-                color="primary">
-                Save
-            </Button>
-                <Button
-                    onClick={handleUndo}
-                    disabled={undoButtonDisabled}>Redo
-                    {/*disabled={!questionHasBeenAnswered || (questionHasBeenAnswered && recordingComplete)}>Redo*/}
-                </Button>
-        </div>
+                <div>
+                    <Typography style={{ "marginTop": "10px" }}><b>{ question.correct_answer }</b></Typography>
+
+                    {
+                        question.answer_viewable && question.answer && <Typography>Your answer: { question.answer }</Typography>
+                    }
+                </div>
+
+                <div>
+                    <Button
+                        disabled={saving || questionHasBeenAnswered || !recordingComplete}
+                        onClick={handleSave}
+                        variant="contained"
+                        color="primary">
+                        Save
+                    </Button>
+                    <Button
+                        onClick={handleUndo}
+                        disabled={undoButtonDisabled}>Redo
+                        {/*disabled={!questionHasBeenAnswered || (questionHasBeenAnswered && recordingComplete)}>Redo*/}
+                    </Button>
+                </div>
+            </div>
     </div>)
 }
 export default IntakeSpeechQuestion
