@@ -2,24 +2,26 @@ import React from "react";
 import {Button, Typography} from "@material-ui/core";
 
 const AppToolbar = () => {
+    const pathPrefix = "https://gryfn.onrender.com"
+
     return(
         <div style={{ 'marginTop': '20px' }}>
             <Typography align="center" >
-                <Button color="primary" onClick={() => {window.location.href = "/"} }>
+                <Button color="primary" onClick={() => {window.location.href = `${pathPrefix}/`} }>
                     Home
                 </Button>
-                <Button color="primary" onClick={() => {window.location.href = "/about"} }>
+                <Button color="primary" onClick={() => {window.location.href = `${pathPrefix}/about`} }>
                     About Us
                 </Button>
-                <Button color="primary" onClick={() => {window.location.href = "/contact"} }>
+                <Button color="primary" onClick={() => {window.location.href = `${pathPrefix}/contact`} }>
                     Contact Us
                 </Button>
 
-                <Button color="primary" onClick={() => {window.location.href = "/faq"} }>
+                <Button color="primary" onClick={() => {window.location.href = `${pathPrefix}/faq` } }>
                     FAQ
                 </Button>
 
-                <Button color="primary" onClick={() => {window.location.href = "/dyslexia_resources"} }>
+                <Button color="primary" onClick={() => {window.location.href = `${pathPrefix}/dyslexia_resources`} }>
                     Resources
                 </Button>
 
