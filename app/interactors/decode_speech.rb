@@ -21,7 +21,8 @@ class DecodeSpeech
     result = response.results.first
     context.fail!(error: :decode_error) if result.blank?
 
-    transcript = result.alternatives.first.transcript
+    transcript = result.alternatives.first.transcript.downcase
+    transcript = handle_edge_cases(transcript)
 
     # test to see if google gave us an integer (e.g. '1')
     if transcript =~ /^\d+$/
@@ -32,5 +33,21 @@ class DecodeSpeech
     end
 
     context.transcript = transcript
+  end
+
+  private def handle_edge_cases(transcript)
+    if transcript == 'knight'
+      return 'night'
+    end
+
+    if transcript == 'no'
+      return 'know'
+    end
+
+    if transcript == 'their' || "they're"
+      return "there"
+    end
+
+    transcript
   end
 end
