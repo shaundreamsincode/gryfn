@@ -23,17 +23,25 @@ const IntakeSummary = () => {
     const [speechQuestions, setSpeechQuestions] = useState(null)
     const [eideticQuestions, setEideticQuestions] = useState(null)
     const [phoneticQuestions, setPhoneticQuestions] = useState(null)
+
     const [speechAssessmentGrade, setSpeechAssessmentGrade] = useState(null)
+    const [eideticAssessmentLevel, setEideticAssessmentLevel] = useState(null)
+    const [phoneticAssessmentLevel, setPhoneticAssessmentLevel] = useState(null)
+
     const [snackbarMessage, setSnackbarMessage] = useState(null)
 
     useEffect(() => {
         ApiService.getIntakeAssessmentSummary(assessmentToken).then((response) => {
             setLoading(false)
-
+            // eidetic_assessment_level_as_label
+            debugger
             setSpeechQuestions(response.data.speech_questions)
             setEideticQuestions(response.data.eidetic_questions)
             setPhoneticQuestions(response.data.phonetic_questions)
+
             setSpeechAssessmentGrade(response.data.speech_assessment_grade)
+            setEideticAssessmentLevel(response.data.eidetic_assessment_level)
+            setPhoneticAssessmentLevel(response.data.phonetic_assessment_level)
         })
     }, [assessmentToken])
 
@@ -52,14 +60,23 @@ const IntakeSummary = () => {
     return(
         <CardContent>
             <div>
-                <h2>Level: { speechAssessmentGrade }</h2>
+                <h2>Speech Assessment Grade: { speechAssessmentGrade }</h2>
+            </div>
+
+            <div>
+                <b>Eidetic Questions Level: { eideticAssessmentLevel }</b>
+            </div>
+
+            <div>
+                <b>Phonetic Questions Level: { phoneticAssessmentLevel }</b>
             </div>
 
             <h3 style={{ 'marginTop': '50px' }}>Speech Questions</h3>
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell>Question Number</TableCell>
+                        <TableCell>Question #</TableCell>
+                        <TableCell>Level</TableCell>
                         <TableCell>Answer</TableCell>
                         <TableCell>Your Answer</TableCell>
                         <TableCell>Result</TableCell>
@@ -70,6 +87,7 @@ const IntakeSummary = () => {
                         questionsWithAnswer.map((question, index) => {
                             return(<TableRow key={index}>
                                 <TableCell>{ index + 1 }</TableCell>
+                                <TableCell>{ question.level + 1 }</TableCell>
                                 <TableCell>{ question.correct_answer }</TableCell>
                                 <TableCell>{ question.answer }</TableCell>
                                 <TableCell>{ question.is_correct ? 'Correct' : 'Incorrect' }</TableCell>
