@@ -11,26 +11,10 @@ const IntakeAssessment = () => {
     const currentUrl = window.location.href;
     const assessmentToken = currentUrl.split("/")[4];
     const navigate = useNavigate()
-    const [insufficientCorrectSpeechQuestions, setInsufficientCorrectSpeechQuestions] = useState(false)
-    const [insufficientIncorrectSpeechQuestions, setInsufficientIncorrectSpeechQuestions] = useState(false)
-
 
     useEffect(() => {
         ApiService.getIntakeAssessment(assessmentToken).then((response) => {
             const currentStep = response.data.current_step
-
-            if (currentStep === "fail_insufficient_correct") {
-                return(<CardContent>
-                    Sorry, you didn't answer enough questions to continue onto the next portion of the assessment.
-                </CardContent>)
-            }
-
-            if (currentStep === "fail_insufficient_incorrect") {
-                return(<CardContent>
-                    Sorry, you didn't answer enough questions to continue onto the next portion of the assessment.
-                </CardContent>)
-            }
-
             navigate(`/intake_assessments/${assessmentToken}/${currentStep}`)
         });
     }, [assessmentToken]);
