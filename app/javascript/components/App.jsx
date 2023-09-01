@@ -2,7 +2,7 @@ import React from "react";
 // import Routes from "./Routes";
 import Routes from "./Routes";
 
-import {Container, Card, CardContent, Typography, Button} from "@material-ui/core";
+import {Container, Card, CardContent, Typography, Button, Link} from "@material-ui/core";
 
 export default props => <>
     <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
@@ -13,6 +13,14 @@ export default props => <>
                 </Typography>
                 {Routes}
             </CardContent>
+
         </Card>
+        <div style={{ 'marginTop': '20px' }}>
+            <Typography align="center" >
+                <Button color="primary" onClick={() => {window.location.href = "https://gryfn.onrender.com/contact"} }>
+                    Contact Us
+                </Button>
+            </Typography>
+        </div>
     </Container>
 </>;

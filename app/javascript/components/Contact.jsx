@@ -1,15 +1,14 @@
 import React from "react"
-import {Button, CardContent} from "@material-ui/core";
-import { useNavigate } from "react-router-dom";
+import {Button, CardContent, Typography} from "@material-ui/core";
 
 const Contact = () => {
-    const navigate = useNavigate()
-
     return(<CardContent>
-        Contact page goes here
+        <Typography>
+            Contact page info goes here
+        </Typography>
 
         <div style={{ 'display': 'flex', 'justifyContent': 'flex-start', 'margin-top': '1rem' }}>
-            <Button variant="contained" color="primary" onClick={() => { navigate('/') }}>Home</Button>
+            <Button variant="contained" color="primary" onClick={() => {window.location.href = "https://gryfn.onrender.com"}}>Home</Button>
         </div>
     </CardContent>)
 }
