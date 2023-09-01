@@ -14,7 +14,7 @@ const IntakeSpeechQuestion = (props) => {
     const [recordingComplete, setRecordingComplete] = useState(false)
     const [questionHasBeenAnswered, setQuestionHasBeenAnswered] = useState(!!question.answer)
     const [recordingError, setRecordingError] = useState(false)
-    const [undoButtonDisabled, setUndoButtonDisabled] = useState(!question.answer)
+    const [undoButtonHidden, setUndoButtonHidden] = useState(!question.answer)
     const [saving, setSaving] = useState(false)
 
     const containerStyle = {
@@ -54,7 +54,7 @@ const IntakeSpeechQuestion = (props) => {
         }).catch(() => {
             setRecordingComplete(false)
             setRecordingError(true)
-            setUndoButtonDisabled(true)
+            setUndoButtonHidden(true)
             setSaving(false)
 
             onError()
@@ -71,7 +71,7 @@ const IntakeSpeechQuestion = (props) => {
             onUpdate(question, null)
             setSaving(false)
 
-            setUndoButtonDisabled(true)
+            setUndoButtonHidden(true)
         }).catch(() => {
             setSaving(false)
             onError()
@@ -86,7 +86,7 @@ const IntakeSpeechQuestion = (props) => {
     const handleRecordingComplete = (blob) => {
         setBlob(blob)
         setRecordingComplete(true)
-        setUndoButtonDisabled(false)
+        setUndoButtonHidden(false)
     }
 
     return(
@@ -138,10 +138,11 @@ const IntakeSpeechQuestion = (props) => {
 
                         <div style={{ 'marginTop': '10px' }}>
                             {
+                                !undoButtonHidden &&
                                 <Button
                                     onClick={handleUndo}
                                     size="small"
-                                    disabled={undoButtonDisabled}>redo
+                                    disabled={undoButtonHidden}>redo
                                     {/*disabled={!questionHasBeenAnswered || (questionHasBeenAnswered && recordingComplete)}>Redo*/}
                                 </Button>
                             }
