@@ -18,7 +18,10 @@ class IntakeAssessments::MoveToNextSpeechAssessmentLevel
     intake_assessment.speech_assessment_correct_words.concat(correct_words).flatten!
     intake_assessment.speech_assessment_incorrect_words.concat(incorrect_words).flatten!
 
-    if intake_assessment.speech_assessment_correct_words.length > 4 && intake_assessment.speech_assessment_incorrect_words.length > 4
+    correct_incorrect_word_length = intake_assessment.desd? ? 4 : 5
+
+    if intake_assessment.speech_assessment_correct_words.length > correct_incorrect_word_length &&
+      intake_assessment.speech_assessment_incorrect_words.length > correct_incorrect_word_length
       IntakeAssessments::CompleteSpeechAssessment.call(assessment: intake_assessment)
     else
       intake_assessment.speech_assessment_current_level += 1
