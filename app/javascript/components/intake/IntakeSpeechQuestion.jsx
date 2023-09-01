@@ -139,6 +139,7 @@ const IntakeSpeechQuestion = (props) => {
                         {
                             <Button
                                 onClick={handleUndo}
+                                size="small"
                                 disabled={undoButtonDisabled}>redo
                                 {/*disabled={!questionHasBeenAnswered || (questionHasBeenAnswered && recordingComplete)}>Redo*/}
                             </Button>

@@ -117,10 +117,11 @@ const IntakeSpeechQuestions = (props) => {
             showSuccessUndoMessage && <Typography style={{ "color": "green" }}>Your answer was successfully deleted!</Typography>
         }
         <div>
-            <List>
-                {
-                    questions.map((question) => {
-                        return(
+            <div style={{ 'marginBottom': '20px' }}>
+                <List>
+                    {
+                        questions.map((question) => {
+                            return(
                                 <IntakeSpeechQuestion
                                     question={question}
                                     onRecordingBegin={handleRecordingBegin}
@@ -128,13 +129,15 @@ const IntakeSpeechQuestions = (props) => {
                                     onError={handleQuestionError}
                                 />
                             )
-                    })
-                }
-            </List>
+                        })
+                    }
+                </List>
+            </div>
+
             {/*<div style={containerStyle}>*/}
             {/*</div>*/}
-            <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '1rem' }}>
-                <Button onClick={handleNext} disabled={nextButtonDisabled}>Next</Button>
+            <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '40px' }}>
+                <Button style={{'margin-top': '30px'}}  color="primary" variant="contained" onClick={handleNext} disabled={nextButtonDisabled}>Next</Button>
             </div>
         </div>
 
