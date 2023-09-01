@@ -107,7 +107,7 @@ const IntakeSpeechQuestions = (props) => {
     return(<CardContent>
         <h2>Speech Questions</h2>
         {
-            questionError && <Typography style={{ "color": "red" }}>There was an error with recording your audio. Please try again.</Typography>
+            questionError && <Typography style={{ "color": "red" }}>We didn't quite catch that. Please try again.</Typography>
         }
         {
             showSuccessMessage && <Typography style={{ "color": "green" }}>Your answer was successfully updated!</Typography>
