@@ -90,64 +90,67 @@ const IntakeSpeechQuestion = (props) => {
     }
 
     return(
-        <div style={containerStyle}>
+        <div>
             <div style={{ 'display': 'flex', 'alignItems': 'center', 'flexDirection': 'column'}}>
-                <div style={{ display: 'flex' }}>
-                    <div>
-                        {
-                            !questionHasBeenAnswered &&
-                            <div onClick={handleRecordingBegin} style={microphoneStyle()}>
-                                <AudioRecorder
-                                    onRecordingComplete={handleRecordingComplete}
-                                    audioTrackConstraints={{
-                                        noiseSuppression: true,
-                                        echoCancellation: true,
-                                    }}
-                                    downloadFileExtension="webm"
-                                />
-                            </div>
-                        }
+                <Typography variant="h6" style={{ "marginTop": "10px" }}><b>{ question.correct_answer }</b></Typography>
 
-                        {
-                            questionHasBeenAnswered && <DoneOutlined sx={{ color: "green" }}/>
-                            // questionHasBeenAnswered && <DoneOutlined style={{"color": "green"}}/>
-                        }
-                    </div>
-                </div>
+                {
+                    question.answer_viewable && question.answer && <Typography>(Your answer: { question.answer })</Typography>
+                }
             </div>
-            <div>
-                <div>
-                    <Typography style={{ "marginTop": "10px" }}><b>{ question.correct_answer }</b></Typography>
 
-                    {
-                        question.answer_viewable && question.answer && <Typography>Your answer: { question.answer }</Typography>
-                    }
-                </div>
-
+            <div style={containerStyle}>
                 <div style={{ 'display': 'flex', 'alignItems': 'center', 'flexDirection': 'column'}}>
-                    <div>
-                        <Button
-                            disabled={saving || questionHasBeenAnswered || !recordingComplete}
-                            onClick={handleSave}
-                            variant="contained"
-                            color="primary">
-                            Save
-                        </Button>
-                    </div>
+                    <div style={{ display: 'flex' }}>
+                        <div>
+                            {
+                                !questionHasBeenAnswered &&
+                                <div onClick={handleRecordingBegin} style={microphoneStyle()}>
+                                    <AudioRecorder
+                                        onRecordingComplete={handleRecordingComplete}
+                                        audioTrackConstraints={{
+                                            noiseSuppression: true,
+                                            echoCancellation: true,
+                                        }}
+                                        downloadFileExtension="webm"
+                                    />
+                                </div>
+                            }
 
-                    <div style={{ 'marginTop': '10px' }}>
-                        {
+                            {
+                                questionHasBeenAnswered && <DoneOutlined sx={{ color: "green" }}/>
+                                // questionHasBeenAnswered && <DoneOutlined style={{"color": "green"}}/>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div style={{ 'display': 'flex', 'alignItems': 'center', 'flexDirection': 'column'}}>
+                        <div>
                             <Button
-                                onClick={handleUndo}
-                                size="small"
-                                disabled={undoButtonDisabled}>redo
-                                {/*disabled={!questionHasBeenAnswered || (questionHasBeenAnswered && recordingComplete)}>Redo*/}
+                                disabled={saving || questionHasBeenAnswered || !recordingComplete}
+                                onClick={handleSave}
+                                variant="contained"
+                                color="primary">
+                                Save
                             </Button>
-                        }
-                    </div>
+                        </div>
 
+                        <div style={{ 'marginTop': '10px' }}>
+                            {
+                                <Button
+                                    onClick={handleUndo}
+                                    size="small"
+                                    disabled={undoButtonDisabled}>redo
+                                    {/*disabled={!questionHasBeenAnswered || (questionHasBeenAnswered && recordingComplete)}>Redo*/}
+                                </Button>
+                            }
+                        </div>
+
+                    </div>
                 </div>
             </div>
-    </div>)
+
+        </div>)
 }
 export default IntakeSpeechQuestion

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ApiService from "../../services/ApiService";
-import {CardContent, Button, List, ListItem, Typography} from "@material-ui/core";
+import {CardContent, Button, List, ListItem, Typography, Card} from "@material-ui/core";
 import IntakeSpeechQuestion from "./IntakeSpeechQuestion";
 import IntakeSpeechQuestionsInstructions from "./instructions/IntakeSpeechQuestionsInstructions";
 
@@ -122,12 +122,19 @@ const IntakeSpeechQuestions = (props) => {
                     {
                         questions.map((question) => {
                             return(
-                                <IntakeSpeechQuestion
-                                    question={question}
-                                    onRecordingBegin={handleRecordingBegin}
-                                    onUpdate={handleQuestionUpdate}
-                                    onError={handleQuestionError}
-                                />
+                                <Card style={{ 'marginTop': '20px' }}>
+                                {/*<Card style={{ 'background-color': 'orange', 'marginTop': '20px' }}>*/}
+
+                                    <CardContent>
+                                        <IntakeSpeechQuestion
+                                            question={question}
+                                            onRecordingBegin={handleRecordingBegin}
+                                            onUpdate={handleQuestionUpdate}
+                                            onError={handleQuestionError}
+                                        />
+                                    </CardContent>
+
+                                </Card>
                             )
                         })
                     }
