@@ -1,7 +1,7 @@
 import React from "react";
 import Routes from "./Routes";
 
-import AppToolbar from "./AppToolbar";
+import AppToolbar from "./app_toolbar/AppToolbar";
 
 // AppToolbar
 

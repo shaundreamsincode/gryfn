@@ -8,12 +8,12 @@ import Instructions from "./onboarding/Instructions";
 import AcceptTermsOfServiceAndPrivacyPolicy from "./onboarding/AcceptTermsOfServiceAndPrivacyPolicy";
 
 // toolbar
-import About from "./About";
-import Contact from "./Contact";
-import FrequentlyAskedQuestions from "./FrequentlyAskedQuestions";
-import DyslexiaResources from "./DyslexiaResources";
-import TermsOfService from "./TermsOfService";
-import PrivacyPolicy from "./PrivacyPolicy";
+import About from "./app_toolbar/About";
+import Contact from "./app_toolbar/Contact";
+import FrequentlyAskedQuestions from "./app_toolbar/FrequentlyAskedQuestions";
+import DyslexiaResources from "./app_toolbar/DyslexiaResources";
+import TermsOfService from "./app_toolbar/TermsOfService";
+import PrivacyPolicy from "./app_toolbar/PrivacyPolicy";
 
 // intake
 import IntakeAssessment from "./intake/IntakeAssessment";
