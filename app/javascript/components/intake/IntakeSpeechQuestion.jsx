@@ -60,7 +60,7 @@ const IntakeSpeechQuestion = (props) => {
         setRecordingComplete(true)
     }
 
-    return(<CardContent>
+    return(<>
         <span>
             <div>
                 {
@@ -95,6 +95,6 @@ const IntakeSpeechQuestion = (props) => {
         {
             questionHasBeenAnswered && <Button onClick={handleUndo}>Undo</Button>
         }
-    </CardContent>)
+    </>)
 }
 export default IntakeSpeechQuestion

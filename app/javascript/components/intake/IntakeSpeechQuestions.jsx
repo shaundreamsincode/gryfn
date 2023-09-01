@@ -55,6 +55,7 @@ const IntakeSpeechQuestions = (props) => {
     }
 
     return(<CardContent>
+        <h2>Speech Questions</h2>
         {
             questions.map((question) => {
                 return(<IntakeSpeechQuestion question={question} onUpdate={handleQuestionUpdate} />)

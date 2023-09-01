@@ -31,7 +31,7 @@ const IntakeSpellingQuestions = (props) => {
 
     return (
         <>
-            <div> { title } </div>
+            <h2> { title } Questions </h2>
             <div>
                 {
                     sortedQuestions.map((question) => (
