@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ApiService from "../../services/ApiService";
 
-import {Button, CardContent} from "@material-ui/core";
+import {Button, CardContent, Typography} from "@material-ui/core";
 import { AudioRecorder } from 'react-audio-voice-recorder';
 import axios from "axios";
 
@@ -14,6 +14,12 @@ const IntakeSpeechQuestion = (props) => {
     const [questionHasBeenAnswered, setQuestionHasBeenAnswered] = useState(!!question.answer)
     const [recordingUnsuccessful, setRecordingUnsuccessful] = useState(false)
     const [isSaving, setIsSaving] = useState(false)
+
+    const containerStyle = {
+        display: 'flex',
+        justifyContent: 'space-between', // This aligns the components with space between them
+        alignItems: 'center', // This vertically aligns the components
+    };
 
     const handleSave = () => {
         setIsSaving(true)
@@ -60,21 +66,25 @@ const IntakeSpeechQuestion = (props) => {
         setRecordingComplete(true)
     }
 
-    return(<>
-        <span>
+    return(<div style={containerStyle}>
+        <div>
             <div>
-                {
-                    !questionHasBeenAnswered && <AudioRecorder
-                        onRecordingComplete={handleRecordingComplete}
-                        audioTrackConstraints={{
-                            noiseSuppression: true,
-                            echoCancellation: true,
-                        }}
-                        downloadFileExtension="webm"
-                    />
-                }
+                <span>
+                    {
+                        !questionHasBeenAnswered && <AudioRecorder
+                            onRecordingComplete={handleRecordingComplete}
+                            audioTrackConstraints={{
+                                noiseSuppression: true,
+                                echoCancellation: true,
+                            }}
+                            downloadFileExtension="webm"
+                        />
+                    }
 
-                { question.correct_answer }
+                    asfd
+                </span>
+
+                <Typography>{ question.correct_answer }</Typography>
             </div>
 
 
@@ -87,20 +97,22 @@ const IntakeSpeechQuestion = (props) => {
             }
 
             {
-                question.answer_viewable && question.answer && <div>Your answer: { question.answer }</div>
+                question.answer_viewable && question.answer && <Typography>Your answer: { question.answer }</Typography>
             }
-        </span>
+        </div>
 
-        <Button
-            disabled={questionHasBeenAnswered || !recordingComplete}
-            onClick={handleSave}
-            variant="contained"
-            color="primary">
-            Save
-        </Button>
-        {
-            questionHasBeenAnswered && <Button onClick={handleUndo}>Redo</Button>
-        }
-    </>)
+        <div>
+            <Button
+                disabled={questionHasBeenAnswered || !recordingComplete}
+                onClick={handleSave}
+                variant="contained"
+                color="primary">
+                Save
+            </Button>
+                {
+                    questionHasBeenAnswered && <Button onClick={handleUndo}>Redo</Button>
+                }
+        </div>
+    </div>)
 }
 export default IntakeSpeechQuestion
