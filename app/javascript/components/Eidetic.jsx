@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { getEideticWords } from "../utils/getEncodingWords";
 import { useSessionStorage } from "../hooks/useSessionStorage";
 import { useNavigate } from 'react-router-dom';
-import {CardContent} from "@material-ui/core";
+import {Button, CardContent} from "@material-ui/core";
 
 const Eidetic = () => {
     debugger
@@ -96,7 +96,7 @@ const Eidetic = () => {
                                 </div>
                                 <div className='button-container'>
                                     {incompleteSubmit && <p>Please answer this item.</p>}
-                                    <button type="submit">
+                                    <button type="submit" variant="contained" color="primary">
                                         {currentItem < audioPaths.length - 1 ? 'Next' : 'Submit'}
                                     </button>
                                 </div>

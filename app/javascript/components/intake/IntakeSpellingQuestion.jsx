@@ -43,7 +43,7 @@ const IntakeSpellingQuestion = (props) => {
                     <TextField disabled={answerSaved} value={answer} onChange={(e) => setAnswer(e.target.value)} />
                         <Button color="primary" onClick={handleSave} disabled={answerSaved || !answer}>{buttonText}</Button>
                 {
-                    answerSaved && <Button color="primary" onClick={handleUndoButtonClick}>Undo</Button>
+                    answerSaved && <Button color="primary" onClick={handleUndoButtonClick}>Redo</Button>
                 }
                 </span>
         </CardContent>

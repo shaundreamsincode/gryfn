@@ -5,6 +5,7 @@ import Home from "../components/Home";
 import Register from "./onboarding/Register"
 import Instructions from "./onboarding/Instructions";
 import PrivacyPolicy from "./onboarding/PrivacyPolicy";
+import Contact from "./Contact";
 
 import IntakeAssessment from "./intake/IntakeAssessment";
 import IntakeSummary from "./intake/IntakeSummary";
@@ -21,6 +22,7 @@ export default (
                 <Route exact path='/register' element={<Register/>}/>
                 <Route exact path='/instructions' element={<Instructions/>}/>
                 <Route exact path='/privacy_policy' element={<PrivacyPolicy/>}/>
+                <Route exact path='/contact' element={<Contact/>}/>
 
                 <Route exact path='/intake_assessments/:intakeAssessmentToken' element={<IntakeAssessment/>}/>
                 <Route exact path='/intake_assessments/:intakeAssessmentToken/summary' element={<IntakeSummary/>}/>

@@ -91,9 +91,15 @@ const IntakeSpeechQuestion = (props) => {
             }
         </span>
 
-        <Button disabled={questionHasBeenAnswered || !recordingComplete} onClick={handleSave}>Save</Button>
+        <Button
+            disabled={questionHasBeenAnswered || !recordingComplete}
+            onClick={handleSave}
+            variant="contained"
+            color="primary">
+            Save
+        </Button>
         {
-            questionHasBeenAnswered && <Button onClick={handleUndo}>Undo</Button>
+            questionHasBeenAnswered && <Button onClick={handleUndo}>Redo</Button>
         }
     </>)
 }
