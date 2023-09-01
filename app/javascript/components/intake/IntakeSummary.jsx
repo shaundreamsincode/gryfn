@@ -25,8 +25,8 @@ const IntakeSummary = () => {
     const [speechQuestions, setSpeechQuestions] = useState(null)
     const [eideticQuestions, setEideticQuestions] = useState(null)
     const [phoneticQuestions, setPhoneticQuestions] = useState(null)
-
-    const [snackbarMessage, setSnackbarMessage] = useState(null);
+    const [speechAssessmentGrade, setSpeechAssessmentGrade] = useState(null)
+    const [snackbarMessage, setSnackbarMessage] = useState(null)
 
     useEffect(() => {
         ApiService.getIntakeAssessmentSummary(assessmentToken).then((response) => {
@@ -35,6 +35,7 @@ const IntakeSummary = () => {
             setSpeechQuestions(response.data.speech_questions)
             setEideticQuestions(response.data.eidetic_questions)
             setPhoneticQuestions(response.data.phonetic_questions)
+            setSpeechAssessmentGrade(response.data.speech_assessment_grade)
         })
     }, [assessmentToken])
 
@@ -52,7 +53,11 @@ const IntakeSummary = () => {
 
     return(
         <CardContent>
-            Speech Questions
+            <div>
+                <h2>Level: { speechAssessmentGrade }</h2>
+            </div>
+
+            <h3>Speech Questions</h3>
             <Table>
                 <TableHead>
                     <TableRow>
@@ -72,7 +77,8 @@ const IntakeSummary = () => {
                     }
                 </TableBody>
             </Table>
-            Eidetic Questions
+
+            <h3>Eidetic Questions</h3>
             <Table>
                 <TableHead>
                     <TableRow>
@@ -92,7 +98,8 @@ const IntakeSummary = () => {
                     }
                 </TableBody>
             </Table>
-            Phonetic Questions
+
+            <h3>Phonetic Questions</h3>
             <Table>
                 <TableHead>
                     <TableRow>

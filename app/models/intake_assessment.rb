@@ -29,4 +29,11 @@ class IntakeAssessment < ApplicationRecord
   def level_count
     desd? ? Data::Desd::WORDS_BY_LEVEL.count : Data::Desd::WORDS_BY_LEVEL.count
   end
+
+  def speech_assessment_grade_as_label
+    return if speech_assessment_grade_level.nil?
+
+    desd? ? Data::Desd::LEVEL_LABELS[speech_assessment_grade_level] :
+      Data::Adt::LEVEL_LABELS[speech_assessment_grade_level]
+  end
 end

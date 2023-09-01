@@ -10,7 +10,8 @@ module Api
         {
           speech_questions: map_summary_questions(intake_assessment.speech_questions),
           eidetic_questions: map_summary_questions(intake_assessment.eidetic_questions),
-          phonetic_questions: map_summary_questions(intake_assessment.phonetic_questions)
+          phonetic_questions: map_summary_questions(intake_assessment.phonetic_questions),
+          speech_assessment_grade: intake_assessment.speech_assessment_grade_as_label
         }
       end
 

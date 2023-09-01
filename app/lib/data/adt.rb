@@ -15,4 +15,6 @@ module Data::Adt
       [ 'sobriquet', 'deliquesce', 'colloquy', 'vitiate', 'sycophant', 'intermezzo', 'dehiscence' ],
       [ 'exiguous', 'malapropos', 'ytterbium', 'monocotyledon', 'leitmotif', 'egregious', 'legerdemain' ]
     ].freeze
+
+  LEVEL_LABELS = %w[1 2 3 4 5 6 JRH HIS LOD UPD MAS DOC POD].freeze
 end

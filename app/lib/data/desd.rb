@@ -12,5 +12,7 @@ module Data::Desd
     [ 'zealous', 'clique', 'atrocious', 'catastrophe', 'liquidate' ],
   ].freeze
 
+  LEVEL_LABELS = %w[K 1L 1U 2 3 4 5 6 7-8 9-12].freeze
+
   # todo - map level string somehow to index?
 end
