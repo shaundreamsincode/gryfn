@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import ApiService from "../../services/ApiService";
 import {CardContent, Button} from "@material-ui/core";
 import IntakeSpeechQuestion from "./IntakeSpeechQuestion";
+import IntakeSpeechQuestionsInstructions from "./IntakeSpeechQuestionsInstructions";
+
 import { useNavigate } from "react-router-dom";
 
 const IntakeSpeechQuestions = (props) => {
@@ -15,6 +17,7 @@ const IntakeSpeechQuestions = (props) => {
 
     const [questions, setQuestions] = useState([])
     const [nextButtonDisabled, setNextButtonDisabled] = useState(false)
+    const [readInstructions, setReadInstructions] = useState(localStorage.getItem('speechInstructionsRead'))
 
     const handleQuestionUpdate = (question, newAnswer) => {
         let newQuestion = Object.assign(question, {})
@@ -40,6 +43,11 @@ const IntakeSpeechQuestions = (props) => {
         })
     }
 
+    const onViewedInstructions = () => {
+        setReadInstructions(true)
+        localStorage.setItem('speechInstructionsRead', true)
+    }
+
     useEffect(() => {
         ApiService.getIntakeSpeechQuestions(assessmentToken).then((response) => {
             setQuestions(response.data)
@@ -52,6 +60,17 @@ const IntakeSpeechQuestions = (props) => {
 
     if (questions.length === 0) {
         return(<CardContent>Loading...</CardContent>)
+    }
+
+    if (!readInstructions) {
+        return(
+            <CardContent>
+                <IntakeSpeechQuestionsInstructions/>
+                <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '1rem' }}>
+                    <Button color="primary" variant="contained" onClick={onViewedInstructions}>Continue</Button>
+                </div>
+            </CardContent>
+        )
     }
 
     return(<CardContent>

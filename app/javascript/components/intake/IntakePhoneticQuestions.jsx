@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import ApiService from "../../services/ApiService";
-import {Card, CardContent} from "@material-ui/core";
+import {Button, Card, CardContent} from "@material-ui/core";
 import IntakeSpellingQuestions from "./IntakeSpellingQuestions";
 import {useNavigate} from "react-router-dom";
+import IntakePhoneticQuestionsInstructions from "./IntakePhoneticQuestionsInstructions";
 
 const IntakePhoneticQuestions = () => {
     const currentUrl = window.location.href;
@@ -10,6 +11,7 @@ const IntakePhoneticQuestions = () => {
     const navigate = useNavigate()
 
     const [questions, setQuestions] = useState(null)
+    const [readInstructions, setReadInstructions] = useState(localStorage.getItem('phoneticInstructionsRead'))
 
     useEffect(() => {
         ApiService.getIntakePhoneticQuestions(assessmentToken).then((response) => {
@@ -29,6 +31,23 @@ const IntakePhoneticQuestions = () => {
 
     if (!questions) {
         return <CardContent>Loading...</CardContent>
+    }
+
+    const onViewedInstructions = () => {
+        setReadInstructions(true)
+        localStorage.setItem('phoneticInstructionsRead', true)
+    }
+
+
+    if (!readInstructions) {
+        return(
+            <CardContent>
+                <IntakePhoneticQuestionsInstructions/>
+                <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '1rem' }}>
+                    <Button color="primary" variant="contained" onClick={onViewedInstructions}>Continue</Button>
+                </div>
+            </CardContent>
+        )
     }
 
     return(
