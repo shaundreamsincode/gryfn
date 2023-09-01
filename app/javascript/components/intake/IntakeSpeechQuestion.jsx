@@ -1,19 +1,14 @@
 import React, { useState } from 'react'
 import ApiService from "../../services/ApiService";
 
-import {Button, CardContent, Typography} from "@material-ui/core";
+import {Button, Typography} from "@material-ui/core";
 import { AudioRecorder } from 'react-audio-voice-recorder';
-import axios from "axios";
 
 const IntakeSpeechQuestion = (props) => {
     const { question, onUpdate } = props
-    const [answer, setAnswer] = useState(question.answer)
-    const [answerFilePath, setAnswerFilePath] = useState(null)
     const [blob, setBlob] = useState(null)
     const [recordingComplete, setRecordingComplete] = useState(false)
     const [questionHasBeenAnswered, setQuestionHasBeenAnswered] = useState(!!question.answer)
-    const [recordingUnsuccessful, setRecordingUnsuccessful] = useState(false)
-    const [isSaving, setIsSaving] = useState(false)
     const [recordingMessage, setRecordingMessage] = useState(null)
 
     const containerStyle = {
@@ -23,39 +18,28 @@ const IntakeSpeechQuestion = (props) => {
     };
 
     const handleSave = () => {
-        setIsSaving(true)
         setRecordingMessage(null)
         setRecordingMessage('Saving...')
-        setRecordingUnsuccessful(false)
         const wavFromBlob = new File([blob], "test.wav")
 
         ApiService.upsertSpeechQuestionResponse(question, wavFromBlob).then((response) => {
-            setAnswer(response.data.answer)
             setQuestionHasBeenAnswered(true)
             setRecordingComplete(false)
-            setRecordingUnsuccessful(false)
-            setIsSaving(false)
             setRecordingMessage(null)
 
             onUpdate(question, response.data.answer)
         }).catch(() => {
             setRecordingComplete(false)
-            setIsSaving(false)
-
             setRecordingMessage('Recording Unsuccessful - please try again.')
-            setRecordingUnsuccessful(true)
         })
     }
 
     const handleUndo = () => {
         setRecordingMessage('Saving...')
-        setIsSaving(true)
 
         ApiService.resetSpeechQuestionResponse(question).then((response) => {
             setQuestionHasBeenAnswered(false)
             setRecordingComplete(false)
-            setAnswer(null)
-            setIsSaving(false)
             setRecordingMessage(null)
             onUpdate(question, null)
         })
@@ -67,8 +51,6 @@ const IntakeSpeechQuestion = (props) => {
 
     const handleRecordingComplete = (blob) => {
         setBlob(blob)
-        const url = URL.createObjectURL(blob);
-        setAnswerFilePath(url)
         setRecordingComplete(true)
     }
 
