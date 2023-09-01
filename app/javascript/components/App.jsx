@@ -1,6 +1,10 @@
 import React from "react";
 import Routes from "./Routes";
 
+import AppToolbar from "./AppToolbar";
+
+// AppToolbar
+
 import {Container, Card, CardContent, Typography, Button, Link} from "@material-ui/core";
 
 export default props => <>
@@ -14,15 +18,6 @@ export default props => <>
             </CardContent>
 
         </Card>
-        <div style={{ 'marginTop': '20px' }}>
-            <Typography align="center" >
-                <Button color="primary" onClick={() => {window.location.href = "https://gryfn.onrender.com/about"} }>
-                    About Us
-                </Button>
-                <Button color="primary" onClick={() => {window.location.href = "https://gryfn.onrender.com/contact"} }>
-                    Contact Us
-                </Button>
-            </Typography>
-        </div>
+        <AppToolbar/>
     </Container>
 </>;

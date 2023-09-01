@@ -3,14 +3,17 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "../components/Home";
 
-// onboarding
 import Register from "./onboarding/Register"
 import Instructions from "./onboarding/Instructions";
-import PrivacyPolicy from "./onboarding/PrivacyPolicy";
+import AcceptTermsOfServiceAndPrivacyPolicy from "./onboarding/AcceptTermsOfServiceAndPrivacyPolicy";
 
 // toolbar
 import About from "./About";
 import Contact from "./Contact";
+import FrequentlyAskedQuestions from "./FrequentlyAskedQuestions";
+import DyslexiaResources from "./DyslexiaResources";
+import TermsOfService from "./TermsOfService";
+import PrivacyPolicy from "./PrivacyPolicy";
 
 // intake
 import IntakeAssessment from "./intake/IntakeAssessment";
@@ -27,10 +30,15 @@ export default (
                 <Route exact path='/' element={<Home/>}/>
                 <Route exact path='/register' element={<Register/>}/>
                 <Route exact path='/instructions' element={<Instructions/>}/>
-                <Route exact path='/privacy_policy' element={<PrivacyPolicy/>}/>
+                <Route exact path='/accept_tos_and_privacy_policy' element={<AcceptTermsOfServiceAndPrivacyPolicy/>}/>
 
-                <Route exact path='/contact' element={<Contact/>}/>
+
                 <Route exact path='/about' element={<About/>}/>
+                <Route exact path='/contact' element={<Contact/>}/>
+                <Route exact path='/faq' element={<FrequentlyAskedQuestions/>}/>
+                <Route exact path='/dyslexia_resources' element={<DyslexiaResources/>}/>
+                <Route exact path='/privacy_policy' element={<PrivacyPolicy/>}/>
+                <Route exact path='/terms_of_service' element={<TermsOfService/>}/>
 
                 <Route exact path='/intake_assessments/:intakeAssessmentToken' element={<IntakeAssessment/>}/>
                 <Route exact path='/intake_assessments/:intakeAssessmentToken/summary' element={<IntakeSummary/>}/>

@@ -8,7 +8,7 @@ const Instructions = () => {
     return(<CardContent>
         <Typography>Instructions will go here...</Typography>
         <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "20px" }}>
-            <Button variant="contained" color="primary" onClick={() => navigate('/privacy_policy')}>
+            <Button variant="contained" color="primary" onClick={() => navigate('/accept_tos_and_privacy_policy')}>
                 Next
             </Button>
         </div>
