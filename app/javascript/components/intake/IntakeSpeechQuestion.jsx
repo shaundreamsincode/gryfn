@@ -14,6 +14,7 @@ const IntakeSpeechQuestion = (props) => {
     const [questionHasBeenAnswered, setQuestionHasBeenAnswered] = useState(!!question.answer)
     const [recordingUnsuccessful, setRecordingUnsuccessful] = useState(false)
     const [isSaving, setIsSaving] = useState(false)
+    const [recordingMessage, setRecordingMessage] = useState(null)
 
     const containerStyle = {
         display: 'flex',
@@ -23,6 +24,8 @@ const IntakeSpeechQuestion = (props) => {
 
     const handleSave = () => {
         setIsSaving(true)
+        setRecordingMessage(null)
+        setRecordingMessage('Saving...')
         setRecordingUnsuccessful(false)
         const wavFromBlob = new File([blob], "test.wav")
 
@@ -32,22 +35,20 @@ const IntakeSpeechQuestion = (props) => {
             setRecordingComplete(false)
             setRecordingUnsuccessful(false)
             setIsSaving(false)
+            setRecordingMessage(null)
 
             onUpdate(question, response.data.answer)
-        }).catch((error) => {
+        }).catch(() => {
             setRecordingComplete(false)
             setIsSaving(false)
 
-            const errorResponseCode = error.response.data
-
-            if (errorResponseCode === "decode_error") {
-                setRecordingUnsuccessful(true)
-            }
-
+            setRecordingMessage('Recording Unsuccessful - please try again.')
+            setRecordingUnsuccessful(true)
         })
     }
 
     const handleUndo = () => {
+        setRecordingMessage('Saving...')
         setIsSaving(true)
 
         ApiService.resetSpeechQuestionResponse(question).then((response) => {
@@ -55,8 +56,13 @@ const IntakeSpeechQuestion = (props) => {
             setRecordingComplete(false)
             setAnswer(null)
             setIsSaving(false)
+            setRecordingMessage(null)
             onUpdate(question, null)
         })
+    }
+
+    const handleRecordingBegin = () => {
+        setRecordingMessage(null)
     }
 
     const handleRecordingComplete = (blob) => {
@@ -68,33 +74,33 @@ const IntakeSpeechQuestion = (props) => {
 
     return(<div style={containerStyle}>
         <div>
-            <div>
-                <span>
+            <div style={{ display: 'flex' }}>
+                <div>
                     {
-                        !questionHasBeenAnswered && <AudioRecorder
-                            onRecordingComplete={handleRecordingComplete}
-                            audioTrackConstraints={{
-                                noiseSuppression: true,
-                                echoCancellation: true,
-                            }}
-                            downloadFileExtension="webm"
-                        />
+                        !questionHasBeenAnswered &&
+                        <div onClick={handleRecordingBegin}>
+                            <AudioRecorder
+                                onRecordingComplete={handleRecordingComplete}
+                                audioTrackConstraints={{
+                                    noiseSuppression: true,
+                                    echoCancellation: true,
+                                }}
+                                downloadFileExtension="webm"
+                            />
+                        </div>
                     }
+                </div>
 
-                    asfd
-                </span>
-
-                <Typography>{ question.correct_answer }</Typography>
+                <div>
+                    {
+                        recordingMessage && <Typography> { recordingMessage } </Typography>
+                    }
+                </div>
             </div>
 
-
-            {
-                isSaving && <div>Saving...</div>
-            }
-
-            {
-                recordingUnsuccessful && <div>Recording unsucessful. Please try again.</div>
-            }
+            <div>
+                <Typography>{ question.correct_answer }</Typography>
+            </div>
 
             {
                 question.answer_viewable && question.answer && <Typography>Your answer: { question.answer }</Typography>
