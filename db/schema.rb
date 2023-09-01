@@ -38,6 +38,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_045935) do
     t.integer "speech_assessment_current_level"
     t.string "speech_assessment_correct_words", default: [], null: false, array: true
     t.string "speech_assessment_incorrect_words", default: [], null: false, array: true
+    t.integer "eidetic_assessment_level"
+    t.integer "phonetic_assessment_level"
     t.integer "current_step", default: 0, null: false
     t.integer "assessment_type", default: 0, null: false
     t.datetime "created_at", null: false

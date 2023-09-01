@@ -37,6 +37,12 @@ RSpec.describe IntakeAssessments::CompleteSpeechAssessment do
         # Grade is the highest level where the patient read 3 out of 5 words correctly
         expect(assessment.reload.speech_assessment_grade_level).to eq(1)
 
+        expect(assessment.reload).to have_attributes(
+                                       speech_assessment_grade_level: 1, # Speech grade is the highest level where the patient read 3 out of 5 words correctly
+                                       eidetic_assessment_level: 2,
+                                       phonetic_assessment_level: 3
+                                     )
+
         expect(IntakeEideticQuestion.count).to eq(5)
         expect(IntakeEideticQuestion.pluck(:level).uniq).to eq([2])
         expect(IntakeEideticQuestion.pluck(:correct_answer).sort).to eq(["apple", "girl", "some", "story", "they"])
@@ -45,6 +51,7 @@ RSpec.describe IntakeAssessments::CompleteSpeechAssessment do
         expect(IntakePhoneticQuestion.count).to eq(5)
         expect(IntakePhoneticQuestion.pluck(:level).uniq).to eq([3])
         expect(IntakePhoneticQuestion.pluck(:correct_answer).sort).to eq( ["above", "any", "busy", "night", "what"])
+
       end
     end
 
@@ -78,8 +85,12 @@ RSpec.describe IntakeAssessments::CompleteSpeechAssessment do
         speech_questions = [correct_speech_questions, incorrect_speech_questions].flatten
         IntakeAssessments::CompleteSpeechAssessment.call(assessment: assessment.reload) # todo remove .reload?
 
-        # Grade is the highest level where the patient read 3 out of 5 words correctly
-        expect(assessment.reload.speech_assessment_grade_level).to eq(1)
+
+        expect(assessment.reload).to have_attributes(
+                                       speech_assessment_grade_level: 1, # Speech grade is the highest level where the patient read 3 out of 5 words correctly
+                                       eidetic_assessment_level: 2,
+                                       phonetic_assessment_level: 3
+                                     )
 
         expect(IntakeEideticQuestion.count).to eq(7)
         expect(IntakeEideticQuestion.pluck(:level).uniq).to eq([2])
