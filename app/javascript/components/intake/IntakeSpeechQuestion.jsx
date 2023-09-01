@@ -85,6 +85,10 @@ const IntakeSpeechQuestion = (props) => {
             {
                 recordingUnsuccessful && <div>Recording unsucessful. Please try again.</div>
             }
+
+            {
+                question.answer_viewable && question.answer && <div>Your answer: { question.answer }</div>
+            }
         </span>
 
         <Button disabled={questionHasBeenAnswered || !recordingComplete} onClick={handleSave}>Save</Button>
