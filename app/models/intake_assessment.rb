@@ -17,6 +17,14 @@ class IntakeAssessment < ApplicationRecord
 
   enum :assessment_type, { desd: 0, adt: 1 }
 
+  scope :current_step_speech, ->() { where(current_step: 'speech') }
+  scope :current_step_eidetic, ->() { where(current_step: 'eidetic') }
+  scope :current_step_phonetic, ->() { where(current_step: 'phonetic') }
+  scope :current_step_summary, ->() { where(current_step: 'phonetic') }
+  scope :current_step_failure, ->() {
+    where(current_step: ['fail_insufficient_correct', 'fail_insufficient_incorrect'])
+  }
+
   enum current_step: {
     speech: 0,
     eidetic: 1,
