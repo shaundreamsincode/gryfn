@@ -20,7 +20,7 @@ class IntakeAssessment < ApplicationRecord
   scope :current_step_speech, ->() { where(current_step: 'speech') }
   scope :current_step_eidetic, ->() { where(current_step: 'eidetic') }
   scope :current_step_phonetic, ->() { where(current_step: 'phonetic') }
-  scope :current_step_summary, ->() { where(current_step: 'phonetic') }
+  scope :current_step_summary, ->() { where(current_step: 'summary') }
   scope :current_step_failure, ->() {
     where(current_step: ['fail_insufficient_correct', 'fail_insufficient_incorrect'])
   }

@@ -15,6 +15,8 @@ module Api
           speech_assessment_grade: intake_assessment.speech_assessment_grade_level_as_label,
           eidetic_assessment_level: intake_assessment.eidetic_assessment_level_as_label,
           phonetic_assessment_level: intake_assessment.phonetic_assessment_level_as_label,
+
+          can_send_summary_email: intake_assessment.email == 'test@gryfn.io'
         }
       end
 

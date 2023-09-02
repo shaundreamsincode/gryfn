@@ -28,6 +28,7 @@ const IntakeSummary = () => {
     const [eideticAssessmentLevel, setEideticAssessmentLevel] = useState(null)
     const [phoneticAssessmentLevel, setPhoneticAssessmentLevel] = useState(null)
 
+    const [canSendSummaryEmail, setCanSeeSummaryEmail] = useState(null)
     const [snackbarMessage, setSnackbarMessage] = useState(null)
 
     useEffect(() => {
@@ -42,6 +43,8 @@ const IntakeSummary = () => {
             setSpeechAssessmentGrade(response.data.speech_assessment_grade)
             setEideticAssessmentLevel(response.data.eidetic_assessment_level)
             setPhoneticAssessmentLevel(response.data.phonetic_assessment_level)
+
+            setCanSeeSummaryEmail(response.data.can_send_summary_email)
         })
     }, [assessmentToken])
 
@@ -150,7 +153,9 @@ const IntakeSummary = () => {
                     >
                         Home
                     </Button>
-                    <Button
+
+                {
+                    canSendSummaryEmail && <Button
                         onClick={handleEmailResults}
                         style={{ marginLeft: 'auto' }} // Pushes the button to the right
                         color="primary"
@@ -158,6 +163,7 @@ const IntakeSummary = () => {
                     >
                         Email Results
                     </Button>
+                }
             </Toolbar>
             <Snackbar
                 open={!!snackbarMessage}
