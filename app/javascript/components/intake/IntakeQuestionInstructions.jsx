@@ -14,7 +14,16 @@ const IntakeQuestionInstructions = (props) => {
         }
     }
 
+    function capitalizeFirstLetter(word) {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    }
+
+    const title = `${capitalizeFirstLetter(questionType)} Assessment`
+
     return(<>
+        <Typography variant="h6" align="center">
+            { title }
+        </Typography>
         <Typography>
             { calculateContent() }
             <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '1rem' }}>

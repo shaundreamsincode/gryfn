@@ -33,15 +33,15 @@ const IntakePhoneticQuestions = () => {
         return <CardContent>Loading...</CardContent>
     }
 
-    const handleViewedInstructions = () => {
+    const handleReadInstructions = () => {
         setReadInstructions(true)
-        localStorage.setItem('intakeInstructionsRead', true)
+        localStorage.setItem('phoneticInstructionsRead', true)
     }
 
     if (!readInstructions) {
         return(
             <CardContent>
-                <IntakeQuestionInstructions questionType="phonetic" onContinue={handleViewedInstructions}/>
+                <IntakeQuestionInstructions questionType="phonetic" onContinue={handleReadInstructions}/>
             </CardContent>
         )
     }
