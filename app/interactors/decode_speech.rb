@@ -44,7 +44,7 @@ class DecodeSpeech
       return 'know'
     end
 
-    if transcript == 'their' || "they're"
+    if transcript == 'their' || transcript == "they're"
       return "there"
     end
 
