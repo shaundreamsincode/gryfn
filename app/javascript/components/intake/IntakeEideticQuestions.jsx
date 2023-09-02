@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import {Button, CardContent} from "@material-ui/core";
 import IntakeSpellingQuestions from "./spelling_questions/IntakeSpellingQuestions";
+import IntakeQuestionInstructions from "./IntakeQuestionInstructions";
+
 import ApiService from "../../services/ApiService";
 import { useNavigate } from "react-router-dom";
-import IntakeEideticQuestionsInstructions from "./instructions/IntakeEideticQuestionsInstructions";
 
 const IntakeEideticQuestions = () => {
     const currentUrl = window.location.href;
@@ -38,10 +39,7 @@ const IntakeEideticQuestions = () => {
     if (!readInstructions) {
         return(
             <CardContent>
-                <IntakeEideticQuestionsInstructions/>
-                <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '1rem' }}>
-                    <Button color="primary" variant="contained" onClick={onViewedInstructions}>Continue</Button>
-                </div>
+                <IntakeQuestionInstructions questionType="eidetic" onContinue={onViewedInstructions}/>
             </CardContent>
         )
     }

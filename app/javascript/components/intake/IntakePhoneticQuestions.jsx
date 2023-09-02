@@ -3,7 +3,7 @@ import ApiService from "../../services/ApiService";
 import {Button, Card, CardContent} from "@material-ui/core";
 import IntakeSpellingQuestions from "./spelling_questions/IntakeSpellingQuestions";
 import {useNavigate} from "react-router-dom";
-import IntakePhoneticQuestionsInstructions from "./instructions/IntakePhoneticQuestionsInstructions";
+import IntakeQuestionInstructions from "./IntakeQuestionInstructions";
 
 const IntakePhoneticQuestions = () => {
     const currentUrl = window.location.href;
@@ -33,18 +33,15 @@ const IntakePhoneticQuestions = () => {
         return <CardContent>Loading...</CardContent>
     }
 
-    const onViewedInstructions = () => {
+    const handleViewedInstructions = () => {
         setReadInstructions(true)
-        localStorage.setItem('phoneticInstructionsRead', true)
+        localStorage.setItem('intakeInstructionsRead', true)
     }
 
     if (!readInstructions) {
         return(
             <CardContent>
-                <IntakePhoneticQuestionsInstructions/>
-                <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '1rem' }}>
-                    <Button color="primary" variant="contained" onClick={onViewedInstructions}>Continue</Button>
-                </div>
+                <IntakeQuestionInstructions questionType="phonetic" onContinue={handleViewedInstructions}/>
             </CardContent>
         )
     }

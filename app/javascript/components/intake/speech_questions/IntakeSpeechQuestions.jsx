@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ApiService from "../../../services/ApiService";
 import {CardContent, Button, List, ListItem, Typography, Card} from "@material-ui/core";
 import IntakeSpeechQuestion from "./IntakeSpeechQuestion";
-import IntakeSpeechQuestionsInstructions from "../instructions/IntakeSpeechQuestionsInstructions";
+import IntakeQuestionInstructions from "../IntakeQuestionInstructions";
 
 import { useNavigate } from "react-router-dom";
 
@@ -61,10 +61,11 @@ const IntakeSpeechQuestions = (props) => {
         setQuestionError(true)
     }
 
-    const onViewedInstructions = () => {
+    const handleReadInstructions = () => {
         setReadInstructions(true)
         localStorage.setItem('speechInstructionsRead', true)
     }
+
 
     useEffect(() => {
         ApiService.getIntakeSpeechQuestions(assessmentToken).then((response) => {
@@ -83,10 +84,7 @@ const IntakeSpeechQuestions = (props) => {
     if (!readInstructions) {
         return(
             <CardContent>
-                <IntakeSpeechQuestionsInstructions/>
-                <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '1rem' }}>
-                    <Button color="primary" variant="contained" onClick={onViewedInstructions}>Continue</Button>
-                </div>
+                <IntakeQuestionInstructions questionType="speech" onContinue={handleReadInstructions}/>
             </CardContent>
         )
     }
