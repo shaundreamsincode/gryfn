@@ -17,7 +17,7 @@ const IntakeSpeechQuestions = (props) => {
 
     const [questions, setQuestions] = useState([])
     const [nextButtonDisabled, setNextButtonDisabled] = useState(false)
-    const [readInstructions, setReadInstructions] = useState(localStorage.getItem('speechInstructionsRead'))
+    const [readInstructions, setReadInstructions] = useState(false)
     const [questionError, setQuestionError] = useState(false)
     const [showSuccessMessage, setShowSuccessMessage] = useState(false)
     const [showSuccessUndoMessage, setShowSuccessUndoMessage] = useState(false)
@@ -61,12 +61,6 @@ const IntakeSpeechQuestions = (props) => {
         setQuestionError(true)
     }
 
-    const handleReadInstructions = () => {
-        setReadInstructions(true)
-        localStorage.setItem('speechInstructionsRead', true)
-    }
-
-
     useEffect(() => {
         ApiService.getIntakeSpeechQuestions(assessmentToken).then((response) => {
             setQuestions(response.data)
@@ -84,7 +78,7 @@ const IntakeSpeechQuestions = (props) => {
     if (!readInstructions) {
         return(
             <CardContent>
-                <IntakeQuestionInstructions questionType="speech" onContinue={handleReadInstructions}/>
+                <IntakeQuestionInstructions questionType="speech" onContinue={() => { setReadInstructions(true) }}/>
             </CardContent>
         )
     }

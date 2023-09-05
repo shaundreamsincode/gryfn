@@ -11,7 +11,7 @@ const IntakePhoneticQuestions = () => {
     const navigate = useNavigate()
 
     const [questions, setQuestions] = useState(null)
-    const [readInstructions, setReadInstructions] = useState(localStorage.getItem('phoneticInstructionsRead'))
+    const [readInstructions, setReadInstructions] = useState(false)
 
     useEffect(() => {
         ApiService.getIntakePhoneticQuestions(assessmentToken).then((response) => {
@@ -33,15 +33,10 @@ const IntakePhoneticQuestions = () => {
         return <CardContent>Loading...</CardContent>
     }
 
-    const handleReadInstructions = () => {
-        setReadInstructions(true)
-        localStorage.setItem('phoneticInstructionsRead', true)
-    }
-
     if (!readInstructions) {
         return(
             <CardContent>
-                <IntakeQuestionInstructions questionType="phonetic" onContinue={handleReadInstructions}/>
+                <IntakeQuestionInstructions questionType="phonetic" onContinue={() => { setReadInstructions(true) }}/>
             </CardContent>
         )
     }

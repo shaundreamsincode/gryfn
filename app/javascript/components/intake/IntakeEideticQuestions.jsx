@@ -12,7 +12,7 @@ const IntakeEideticQuestions = () => {
     const navigate = useNavigate()
 
     const [questions, setQuestions] = useState(null)
-    const [readInstructions, setReadInstructions] = useState(localStorage.getItem('eideticInstructionsRead'))
+    const [readInstructions, setReadInstructions] = useState(false)
 
     const handleQuestionSave = (newQuestions) => {
         setQuestions(newQuestions)
@@ -31,15 +31,10 @@ const IntakeEideticQuestions = () => {
         })
     }, [assessmentToken])
 
-    const onViewedInstructions = () => {
-        setReadInstructions(true)
-        localStorage.setItem('eideticInstructionsRead', true)
-    }
-
     if (!readInstructions) {
         return(
             <CardContent>
-                <IntakeQuestionInstructions questionType="eidetic" onContinue={onViewedInstructions}/>
+                <IntakeQuestionInstructions questionType="eidetic" onContinue={() => { setReadInstructions(true) }}/>
             </CardContent>
         )
     }
