@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "../components/Home";
+import Dashboard from "./Dashboard";
 
 import Register from "./onboarding/Register"
 import Instructions from "./onboarding/Instructions";
@@ -26,6 +27,8 @@ import IntakeInsufficientCorrectSpeechQuestionsFailure
     from "./intake/failures/IntakeInsufficientCorrectSpeechQuestionsFailure";
 import IntakeInsufficientIncorrectSpeechQuestionsFailure
     from "./intake/failures/IntakeInsufficientIncorrectSpeechQuestionsFailure";
+import Login from "./Login";
+import PrivateRoute from "./PrivateRoute";
 
 export default (
     <Router>
@@ -43,6 +46,7 @@ export default (
                 <Route exact path='/dyslexia_resources' element={<DyslexiaResources/>}/>
                 <Route exact path='/privacy_policy' element={<PrivacyPolicy/>}/>
                 <Route exact path='/terms_of_service' element={<TermsOfService/>}/>
+                <Route exact path='/login' element={<Login/>}/>
 
                 <Route exact path='/intake_assessments/:intakeAssessmentToken' element={<IntakeAssessment/>}/>
                 <Route exact path='/intake_assessments/:intakeAssessmentToken/summary' element={<IntakeSummary/>}/>
@@ -52,6 +56,10 @@ export default (
                 <Route exact path='/intake_assessments/:intakeAssessmentToken/phonetic' element={<IntakePhoneticQuestions/>}/>
                 <Route exact path='/intake_assessments/:intakeAssessmentToken/fail_insufficient_correct' element={<IntakeInsufficientCorrectSpeechQuestionsFailure/>}/>
                 <Route exact path='/intake_assessments/:intakeAssessmentToken/fail_insufficient_incorrect' element={<IntakeInsufficientIncorrectSpeechQuestionsFailure/>}/>
+
+                <Route exact path='/dashboard' element={<PrivateRoute/>}>
+                    <Route exact path='/dashboard' element={<Dashboard/>}/>
+                </Route>
             </Routes>
         </Fragment>
     </Router>

@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
   root 'pages#home'
 
-
   resources :registrations, only: :create
 
   namespace :api do
+    resources :sessions, only: :create
+    resources :verify_jwt, only: :index
+    resources :logout, only: :create
+
     resources :intake_assessments, only: :show, param: :token do
       post :move_speech_assessment_to_next_level
       get :current_speech_question

@@ -1,6 +1,19 @@
 import axios from "axios";
 
+// fetch('/api/sessions', {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json', "X-CSRF-Token": csrfToken },
+//     body: JSON.stringify({ email, password }),
+// })
+
 class ApiService {
+
+    static login(params) {
+        return axios.post('/api/sessions', params)
+    }
+
+
+
     static createIntakeAssessment(params) {
         return axios.post('/registrations', params)
     }

@@ -10,9 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_29_045935) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_06_011547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.string "token"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "badges", force: :cascade do |t|
+    t.string "token"
+    t.bigint "organization_id"
+    t.bigint "account_id"
+    t.integer "role", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_badges_on_account_id"
+    t.index ["organization_id"], name: "index_badges_on_organization_id"
+  end
+
+  create_table "deities", force: :cascade do |t|
+    t.string "token"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "documents", force: :cascade do |t|
     t.text "body"
@@ -107,6 +136,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_045935) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "badges", "accounts"
+  add_foreign_key "badges", "organizations"
   add_foreign_key "intake_assessments", "organizations"
   add_foreign_key "intake_speech_questions", "intake_assessments"
   add_foreign_key "intake_summaries", "intake_assessments"
