@@ -20,7 +20,6 @@ import IntakeSpeechQuestionShow from "./intake/speech_questions/IntakeSpeechQues
 // intake
 import IntakeAssessment from "./intake/IntakeAssessment";
 import IntakeSummary from "./intake/IntakeSummary";
-import IntakeSpeechQuestions from "./intake/speech_questions/IntakeSpeechQuestions";
 import IntakeEideticQuestions from "./intake/IntakeEideticQuestions";
 import IntakePhoneticQuestions from "./intake/IntakePhoneticQuestions";
 import IntakeInsufficientCorrectSpeechQuestionsFailure

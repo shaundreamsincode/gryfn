@@ -15,7 +15,6 @@ class IntakeAssessment < ApplicationRecord
   has_many :intake_phonetic_questions
   alias_attribute :phonetic_questions, :intake_phonetic_questions
 
-  # current_speech_question
   enum :assessment_type, { desd: 0, adt: 1 }
 
   scope :current_step_speech, ->() { where(current_step: 'speech') }
