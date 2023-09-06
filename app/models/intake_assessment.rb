@@ -5,6 +5,7 @@ class IntakeAssessment < ApplicationRecord
   }.freeze
 
   belongs_to :organization
+  belongs_to :created_by, foreign_key: :created_by_id, class_name: 'Account'
 
   has_many :intake_speech_questions
   alias_attribute :speech_questions, :intake_speech_questions

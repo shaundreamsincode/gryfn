@@ -5,6 +5,7 @@ class PerformRegistration
     intake_assessment = IntakeAssessment.create!(
       speech_assessment_current_level: 0,
       organization: fetch_organization,
+      created_by_id: fetch_created_by.id,
       assessment_type: calculate_assessment_type,
       patient_first_name: context.patient_first_name,
       email: context.email,
@@ -16,16 +17,16 @@ class PerformRegistration
       current_speech_question_index: 0
     )
 
-    speech_questions = IntakeAssessments::CreateSpeechQuestions.call(assessment: intake_assessment).questions
-
-    context.intake_assessment = intake_assessment
+    IntakeAssessments::CreateSpeechQuestions.call(assessment: intake_assessment)
+    context.intake_assessment = intake_assessment.reload
   end
 
   private def fetch_organization
-    organization = Organization.first
-    return organization if organization.present?
+    @_organization ||= Organization.find_by!(name: 'ACME corp')
+  end
 
-    Organization.create(name: 'Default Organization')
+  private def fetch_created_by
+    @_created_by ||= fetch_organization.accounts.first
   end
 
   private def calculate_assessment_type

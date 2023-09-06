@@ -27,6 +27,8 @@ class CreateIntakeAssessments < ActiveRecord::Migration[7.0]
       t.integer :current_step, null: false, default: 0
       t.integer :assessment_type, null: false, default: 0
 
+      t.references :accounts, :created_by, foreign_key: { to_table: :accounts }
+
       t.timestamps
     end
   end
