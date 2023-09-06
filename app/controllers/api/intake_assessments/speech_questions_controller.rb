@@ -21,20 +21,13 @@ module Api
 
       def update
         question = IntakeSpeechQuestion.find_by_token!(params[:token])
-        audio_file = request.body.read
 
-        result = DecodeSpeech.call(audio_file: audio_file)
-        return render json: result.error, status: 422 if result.failure?
+        result = ::IntakeAssessments::AnswerSpeechQuestion.call(
+          question: question,
+          audio_file: request.body.read
+        )
 
-        question.update!(answer: result.transcript)
-        render json: question
-      end
-
-      def destroy
-        question = IntakeSpeechQuestion.find_by_token!(params[:token])
-        question.update!(answer: nil)
-
-        render json: question
+        render json: result.question
       end
     end
   end

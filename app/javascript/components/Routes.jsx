@@ -15,10 +15,11 @@ import DyslexiaResources from "./app_toolbar/DyslexiaResources";
 import TermsOfService from "./app_toolbar/TermsOfService";
 import PrivacyPolicy from "./app_toolbar/PrivacyPolicy";
 
+import IntakeSpeechQuestion from "./intake/IntakeSpeechQuestion";
+
 // intake
 import IntakeAssessment from "./intake/IntakeAssessment";
 import IntakeSummary from "./intake/IntakeSummary";
-import IntakeSpeechQuestions from "./intake/speech_questions/IntakeSpeechQuestions";
 import IntakeEideticQuestions from "./intake/IntakeEideticQuestions";
 import IntakePhoneticQuestions from "./intake/IntakePhoneticQuestions";
 import IntakeInsufficientCorrectSpeechQuestionsFailure
@@ -46,7 +47,7 @@ export default (
                 <Route exact path='/intake_assessments/:intakeAssessmentToken' element={<IntakeAssessment/>}/>
                 <Route exact path='/intake_assessments/:intakeAssessmentToken/summary' element={<IntakeSummary/>}/>
 
-                <Route exact path='/intake_assessments/:intakeAssessmentToken/speech' element={<IntakeSpeechQuestions/>}/>
+                <Route exact path='/intake_assessments/:intakeAssessmentToken/speech' element={<IntakeSpeechQuestion/>}/>
                 <Route exact path='/intake_assessments/:intakeAssessmentToken/eidetic' element={<IntakeEideticQuestions/>}/>
                 <Route exact path='/intake_assessments/:intakeAssessmentToken/phonetic' element={<IntakePhoneticQuestions/>}/>
                 <Route exact path='/intake_assessments/:intakeAssessmentToken/fail_insufficient_correct' element={<IntakeInsufficientCorrectSpeechQuestionsFailure/>}/>

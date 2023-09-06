@@ -14,6 +14,8 @@ module IntakeAssessments
       correct_incorrect_word_length = intake_assessment.desd? ? 4 : 5
       evaluate_assessment_progress(intake_assessment, correct_incorrect_word_length)
 
+      intake_assessment.speech_assessment_current_level += 1
+      intake_assessment.save!
       context.assessment = intake_assessment
     end
 

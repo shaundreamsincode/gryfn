@@ -34,6 +34,10 @@ class IntakeAssessment < ApplicationRecord
     fail_insufficient_incorrect: 5
   }
 
+  def current_speech_question
+    speech_questions[current_speech_question_index]
+  end
+
   def dataset
     desd? ? Data::Desd : Data::Adt
   end
@@ -50,7 +54,7 @@ class IntakeAssessment < ApplicationRecord
     desd? ? 3 : 4 # todo - put these in dataset
   end
 
-  def required_incorrect_questions_count
+  def required_incorrect_speech_questions_count
     desd? ? 2 : 3 # todo - put these in dataset
   end
 
