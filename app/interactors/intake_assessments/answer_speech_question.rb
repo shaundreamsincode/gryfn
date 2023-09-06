@@ -18,7 +18,6 @@ module IntakeAssessments
       assessment.save!
 
       questions_answered = assessment.speech_questions.where.not(answer: nil).where(level: assessment.speech_assessment_current_level)
-      # byebug
 
       if questions_answered.length === 5
         IntakeAssessments::MoveToNextSpeechAssessmentLevel.call(assessment: assessment)
