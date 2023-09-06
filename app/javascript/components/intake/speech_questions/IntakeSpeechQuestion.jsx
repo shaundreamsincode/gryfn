@@ -26,8 +26,6 @@ const IntakeSpeechQuestion = (props) => {
 
     const microphoneStyle = () => {
         const disabledMicrophoneStyle = {
-            // 'background-color': "#f0f0f0",
-            // 'color': "#888888",
             "pointer-events": "none",
             "opacity": "0.5"
         }
@@ -63,19 +61,6 @@ const IntakeSpeechQuestion = (props) => {
 
     const handleUndo = () => {
         setSaving(true)
-
-        ApiService.resetSpeechQuestionResponse(question).then((response) => {
-            setQuestionHasBeenAnswered(false)
-            setRecordingComplete(false)
-            setRecordingError(null)
-            onUpdate(question, null)
-            setSaving(false)
-
-            setUndoButtonHidden(true)
-        }).catch(() => {
-            setSaving(false)
-            onError()
-        })
     }
 
     const handleRecordingBegin = () => {

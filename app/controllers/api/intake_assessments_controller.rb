@@ -8,6 +8,11 @@ class Api::IntakeAssessmentsController < ApplicationController
     }
   end
 
+  def current_speech_question
+    intake_assessment = IntakeAssessment.find_by_token!(params[:intake_assessment_token])
+    render json: intake_assessment.current_speech_question.hashify
+  end
+
   def move_to_next_step
     assessment = IntakeAssessment.find_by_token!(params[:intake_assessment_token])
 

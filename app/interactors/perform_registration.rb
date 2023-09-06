@@ -12,10 +12,11 @@ class PerformRegistration
       country: context.country,
       zip_code: context.zip_code,
       previously_diagnosed: context.previously_diagnosed,
-      level_of_education: context.level_of_education
+      level_of_education: context.level_of_education,
+      current_speech_question_index: 0
     )
 
-    IntakeAssessments::CreateSpeechQuestions.call(assessment: intake_assessment)
+    speech_questions = IntakeAssessments::CreateSpeechQuestions.call(assessment: intake_assessment).questions
 
     context.intake_assessment = intake_assessment
   end

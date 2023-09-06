@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_29_045935) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_05_230939) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_045935) do
     t.string "zip_code"
     t.string "level_of_education"
     t.boolean "previously_diagnosed"
+    t.integer "current_speech_question_index"
     t.integer "speech_assessment_grade_level"
     t.integer "speech_assessment_current_level"
     t.string "speech_assessment_correct_words", default: [], null: false, array: true
@@ -72,6 +73,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_045935) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["intake_assessment_id"], name: "index_phonetic_quest_on_assessment_idx"
+  end
+
+  create_table "intake_speech_questionnaires", force: :cascade do |t|
+    t.integer "grade"
+    t.integer "current_level"
+    t.integer "current_question_id"
+    t.string "correct_words", default: [], null: false, array: true
+    t.string "incorrect_words", default: [], null: false, array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "intake_speech_questions", force: :cascade do |t|

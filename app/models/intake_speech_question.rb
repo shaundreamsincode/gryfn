@@ -9,4 +9,14 @@ class IntakeSpeechQuestion < ApplicationRecord
     return false if answer.nil?
     answer.downcase == correct_answer.downcase
   end
+
+  def hashify
+    {
+      token: token,
+      answer: answer,
+      correct_answer: correct_answer,
+      assessment_token: intake_assessment.token,
+      answer_viewable: intake_assessment.email == 'test@gryfn.ai'
+    }
+  end
 end

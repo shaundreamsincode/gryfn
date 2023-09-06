@@ -25,6 +25,10 @@ class ApiService {
         return axios.get(`/api/intake_assessments/${token}/send_summary_email`)
     }
 
+    static getCurrentIntakeSpeechQuestion = (token) => {
+        return axios.get(`/api/intake_assessments/${token}/current_speech_question`)
+    }
+
     static getIntakeSpeechQuestions = (token) => {
         return axios.get(`/api/intake_assessments/${token}/speech_questions`)
     }
