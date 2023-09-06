@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from "react"
-import ApiService from "../../../services/ApiService";
+import ApiService from "../../services/ApiService";
 import {Button, Card, CardContent, Typography} from "@material-ui/core";
 import { AudioRecorder } from 'react-audio-voice-recorder';
 
 import { useNavigate } from "react-router-dom";
 
-const IntakeSpeechQuestionShow = (props) => {
+const IntakeSpeechQuestion = () => {
     const currentUrl = window.location.href;
     const assessmentToken = currentUrl.split("/")[4];
 
@@ -92,4 +92,4 @@ const IntakeSpeechQuestionShow = (props) => {
     </Card>)
 }
 
-export default IntakeSpeechQuestionShow
+export default IntakeSpeechQuestion
