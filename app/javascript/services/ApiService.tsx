@@ -10,8 +10,9 @@ class ApiService {
         return axios.post('/api/sessions', params)
     }
 
-    static getAccountSettings() {
-
+    static getCurrentAccount() {
+        const jwtToken = localStorage.getItem('jwtToken')
+        return axios.get(`/api/current_account`, { headers: { Authorization: `Bearer ${jwtToken}` } })
     }
 
     static createIntakeAssessment(params) {
