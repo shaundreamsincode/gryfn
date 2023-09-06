@@ -7,14 +7,11 @@ const PrivateRoute = () => {
     const jwtToken = localStorage.getItem('jwtToken');
     const navigate = useNavigate();
 
-    debugger
-
     const checkTokenValidity = () => {
         fetch('/api/verify_jwt', {
             headers: {Authorization: `Bearer ${jwtToken}`},
         }).then((response) => {
             if (response.ok) {
-                debugger
                 setIsAuthenticated(true);
             } else {
                 setIsAuthenticated(false)

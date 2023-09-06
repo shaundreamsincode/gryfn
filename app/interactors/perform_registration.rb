@@ -5,7 +5,7 @@ class PerformRegistration
     intake_assessment = IntakeAssessment.create!(
       speech_assessment_current_level: 0,
       organization: fetch_organization,
-      created_by_id: fetch_created_by.id,
+      created_by: fetch_created_by,
       assessment_type: calculate_assessment_type,
       patient_first_name: context.patient_first_name,
       email: context.email,
