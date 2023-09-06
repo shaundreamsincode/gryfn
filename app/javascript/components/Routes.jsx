@@ -2,7 +2,8 @@ import React, { Fragment } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "../components/Home";
-import Dashboard from "./Dashboard";
+import Dashboard from "./application/Dashboard";
+import Application from "./application/Application";
 
 import Register from "./onboarding/Register"
 import Instructions from "./onboarding/Instructions";
@@ -28,7 +29,8 @@ import IntakeInsufficientCorrectSpeechQuestionsFailure
 import IntakeInsufficientIncorrectSpeechQuestionsFailure
     from "./intake/failures/IntakeInsufficientIncorrectSpeechQuestionsFailure";
 import Login from "./Login";
-import PrivateRoute from "./PrivateRoute";
+import ApplicationRoute from "./ApplicationRoute";
+import AccountSettings from "./application/AccountSettings";
 
 export default (
     <Router>
@@ -57,8 +59,16 @@ export default (
                 <Route exact path='/intake_assessments/:intakeAssessmentToken/fail_insufficient_correct' element={<IntakeInsufficientCorrectSpeechQuestionsFailure/>}/>
                 <Route exact path='/intake_assessments/:intakeAssessmentToken/fail_insufficient_incorrect' element={<IntakeInsufficientIncorrectSpeechQuestionsFailure/>}/>
 
-                <Route exact path='/dashboard' element={<PrivateRoute/>}>
-                    <Route exact path='/dashboard' element={<Dashboard/>}/>
+                {/*<Route exact path='/application' element={<ApplicationRoute/>}>*/}
+                {/*    <Route exact path='/application' element={<Application/>}/>*/}
+                {/*</Route>*/}
+
+                <Route exact path='/application/dashboard' element={<ApplicationRoute/>}>
+                    <Route exact path='/application/dashboard' element={<Application/>}/>
+                </Route>
+
+                <Route exact path='/application/account_settings' element={<ApplicationRoute/>}>
+                    <Route exact path='/application/account_settings' element={<Application/>}/>
                 </Route>
             </Routes>
         </Fragment>

@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     resources :verify_jwt, only: :index
     resources :logout, only: :create
 
+    resources :account_settings, only: :index
+    put :account_settings, to: 'account_settings#update'
+
     resources :intake_assessments, only: :show, param: :token do
       post :move_speech_assessment_to_next_level
       get :current_speech_question

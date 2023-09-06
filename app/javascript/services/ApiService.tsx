@@ -10,6 +10,10 @@ class ApiService {
         return axios.post('/api/sessions', params)
     }
 
+    static getAccountSettings() {
+
+    }
+
     static createIntakeAssessment(params) {
         return axios.post('/registrations', params)
     }

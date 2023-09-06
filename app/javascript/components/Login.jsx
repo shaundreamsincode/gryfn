@@ -48,7 +48,7 @@ const Login = () => {
             // Save the token in local storage or a secure cookie
             localStorage.setItem('jwtToken', response.data);
             // Redirect to a protected route
-            navigate('/dashboard')
+            navigate('/application/dashboard')
         }).catch(() => {
             setShowSnackbar(true)
         })

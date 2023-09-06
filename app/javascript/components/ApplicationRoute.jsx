@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate, Outlet, useNavigate } from 'react-router-dom';
 
-const PrivateRoute = () => {
+const ApplicationRoute = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true)
     const jwtToken = localStorage.getItem('jwtToken');
@@ -23,11 +23,6 @@ const PrivateRoute = () => {
         })
     };
 
-    const handleLogout = () => {
-        localStorage.removeItem('jwtToken');
-        navigate('/login')
-    }
-
     useEffect(() => {
         if (jwtToken) {
             checkTokenValidity();
@@ -45,11 +40,10 @@ const PrivateRoute = () => {
         return(
             <div>
                 <Outlet/>
-                <button onClick={handleLogout}>Logout</button>
             </div>
         )
     } else {
-        return <Navigate to="/login" />
+        navigate('/login')
     }
     // If authorized, return an outlet that will render child elements
     // If not, return element that will navigate to login page
@@ -57,4 +51,4 @@ const PrivateRoute = () => {
     // return auth ? <Outlet /> : <Navigate to="/login" />;
 }
 
-export default PrivateRoute
+export default ApplicationRoute
