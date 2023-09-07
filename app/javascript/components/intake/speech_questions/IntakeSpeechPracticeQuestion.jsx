@@ -58,68 +58,74 @@ const IntakeSpeechPracticeQuestion = (props) => {
     }
 
     return(<Card>
-        <CardContent>
-            <Typography variant="h4">
-                Practice Question
-            </Typography>
+            <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+                <Typography variant="h4">
+                    Practice Question
+                </Typography>
 
-            <Typography>
-                Say the word "map".
-            </Typography>
-            {
-                questionAnswered && <Typography>Question Answered!</Typography>
-            }
-            {
-                isSaving && <Typography>Saving...</Typography>
-            }
+                <Typography>
+                    Say the word "map".
+                </Typography>
 
-            {
-                !isSaving && !questionAnswered && <div onClick={() => { setIsRecording(true) }} style={microphoneStyle()}>
-                    <AudioRecorder
-                        onRecordingComplete={onRecordingComplete}
-                        audioTrackConstraints={{
-                            noiseSuppression: true,
-                            echoCancellation: true,
-                        }}
-                        downloadFileExtension="webm"
-                    />
+                {
+                    recordingFailedCount > 4 && <Typography style={{ color: 'red' }}>Your microphone has failed quite a few times in a row. Perhaps you should check it?</Typography>
+
+                }
+                {
+                    questionAnswered && <Typography style={{ color: 'green' }}>Question Answered!</Typography>
+                }
+                {
+                    isSaving && <Typography>Saving...</Typography>
+                }
+
+                {
+                    !isSaving && !questionAnswered && <div onClick={() => { setIsRecording(true) }} style={microphoneStyle()}>
+                        <AudioRecorder
+                            onRecordingComplete={onRecordingComplete}
+                            audioTrackConstraints={{
+                                noiseSuppression: true,
+                                echoCancellation: true,
+                            }}
+                            downloadFileExtension="webm"
+                        />
+                    </div>
+                }
+
+                <div style={{ marginTop: '40px' }}>
+                    <Button onClick={() => { onSolveProp() }} disabled={!questionAnswered} color="primary" variant="contained">Start Assessment</Button>
                 </div>
-            }
+            </CardContent>
+            <Snackbar
+                open={showRecordingSuccessMessage}
+                autoHideDuration={6000}
+                onClose={() => setShowRecordingSuccessMessage(false)}
+            >
+                <Alert severity="success">
+                    Recording was successful!
+                </Alert>
+            </Snackbar>
 
-            <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '40px' }}>
-                <Button onClick={() => { onSolveProp() }} disabled={!questionAnswered} color="primary" variant="contained">Start Assessment</Button>
-            </div>
-        </CardContent>
-        <Snackbar
-            open={showRecordingSuccessMessage}
-            autoHideDuration={6000}
-            onClose={() => setShowRecordingSuccessMessage(false)}
-        >
-            <Alert severity="success">
-                Recording was successful!
-            </Alert>
-        </Snackbar>
-
-        <Snackbar
-            open={recordingFailed}
-            autoHideDuration={6000}
-            onClose={() => setRecordingFailed(false)}
-        >
-            <Alert severity="error">
-                Recording failed! Please try again!
-            </Alert>
-        </Snackbar>
-        <Snackbar
-            open={!!incorrectAnswer}
-            autoHideDuration={6000}
-            onClose={() => setIncorrectAnswer(null)}
-        >
-            <Alert severity="error">
-                Recording was successful, but detected your answer as "{ incorrectAnswer }".
-                Please try again!
-            </Alert>
-        </Snackbar>
-    </Card>)
+            <Snackbar
+                open={recordingFailed}
+                autoHideDuration={6000}
+                onClose={() => setRecordingFailed(false)}
+            >
+                <Alert severity="error">
+                    Recording failed! Please try again!
+                </Alert>
+            </Snackbar>
+            <Snackbar
+                open={!!incorrectAnswer}
+                autoHideDuration={6000}
+                onClose={() => setIncorrectAnswer(null)}
+            >
+                <Alert severity="error">
+                    Recording was successful, but detected your answer as "{ incorrectAnswer }".
+                    Please try again!
+                </Alert>
+            </Snackbar>
+        </Card>
+    )
 
 }
 
