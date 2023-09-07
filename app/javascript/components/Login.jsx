@@ -20,7 +20,7 @@ const Login = () => {
         }).then((response) => {
             if (response.ok) {
                 debugger
-                navigate('/dashboard')
+                navigate('/application/dashboard')
             }
         })
     };

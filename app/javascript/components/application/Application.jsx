@@ -23,10 +23,6 @@ const Application = () => {
 
     }
 
-    // if (splitUrl.length)
-
-    debugger
-
     return(<>
         <Card>
             <CardContent>

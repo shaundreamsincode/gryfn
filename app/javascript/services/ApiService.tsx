@@ -12,7 +12,12 @@ class ApiService {
 
     static getCurrentAccount() {
         const jwtToken = localStorage.getItem('jwtToken')
-        return axios.get(`/api/current_account`, { headers: { Authorization: `Bearer ${jwtToken}` } })
+        return axios.get(`/api/current_account`,  { headers: { Authorization: `Bearer ${jwtToken}` } })
+    }
+
+    static updateCurrentAccountPassword(data) {
+        const jwtToken = localStorage.getItem('jwtToken')
+        return axios.put(`/api/current_account_password`,data, { headers: { Authorization: `Bearer ${jwtToken}` } })
     }
 
     static createIntakeAssessment(params) {
