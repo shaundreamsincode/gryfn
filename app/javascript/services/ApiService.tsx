@@ -10,15 +10,6 @@ class ApiService {
         return axios.post('/api/sessions', params)
     }
 
-    // static upsertSpeechQuestionResponse(question, wavFromBlob) {
-    //     return axios.put(
-    //         `/api/intake_assessments/${question.assessment_token}/speech_questions/${question.token}`,
-    //         wavFromBlob,
-    //         {
-    //             headers: { "content-type": "audio/mpeg"}
-    //         })
-    // }
-
     static practiceSpeechQuestions(token, wavFromBlob) {
         return axios.post(
             `/api/intake_assessments/${token}/practice_speech_questions`,

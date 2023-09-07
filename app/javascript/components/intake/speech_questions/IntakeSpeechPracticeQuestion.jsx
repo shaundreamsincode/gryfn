@@ -72,7 +72,7 @@ const IntakeSpeechPracticeQuestion = (props) => {
 
                 }
                 {
-                    questionAnswered && <Typography style={{ color: 'green' }}>Question Answered!</Typography>
+                    questionAnswered && <Typography style={{ color: 'g' }}>Question Answered!</Typography>
                 }
                 {
                     isSaving && <Typography>Saving...</Typography>
