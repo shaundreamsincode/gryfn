@@ -67,6 +67,10 @@ export default (
                     <Route exact path='/application/dashboard' element={<Application/>}/>
                 </Route>
 
+                <Route exact path='/application/intake_assessments/:token' element={<ApplicationRoute/>}>
+                    <Route exact path='/application/intake_assessments/:token' element={<Application/>}/>
+                </Route>
+
                 <Route exact path='/application/account_settings' element={<ApplicationRoute/>}>
                     <Route exact path='/application/account_settings' element={<Application/>}/>
                 </Route>

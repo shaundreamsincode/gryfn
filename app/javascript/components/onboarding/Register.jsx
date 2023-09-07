@@ -101,7 +101,6 @@ const Register = () => {
                         setBirthYear(input);
 
                         const birthYearIsInteger = /^\d*$/.test(input)
-                        debugger
                         const birthYearIsValid = birthYearIsInteger && Number(input) > 1900 && Number(input) < 2024
                         setIsBirthYearValid(birthYearIsValid)
                     }}

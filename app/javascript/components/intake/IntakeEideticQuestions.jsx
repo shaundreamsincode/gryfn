@@ -20,7 +20,6 @@ const IntakeEideticQuestions = () => {
 
     const handleFinish = () => {
         ApiService.moveIntakeAssessmentToNextStep(assessmentToken).then((response) => {
-            debugger
             navigate(`/intake_assessments/${assessmentToken}`)
         })
     }

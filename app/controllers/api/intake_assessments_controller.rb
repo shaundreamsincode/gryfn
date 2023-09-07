@@ -1,11 +1,7 @@
 class Api::IntakeAssessmentsController < ApplicationController
   def show
     intake_assessment = IntakeAssessment.find_by_token!(params[:token])
-
-    render json: {
-      token: intake_assessment.token,
-      current_step: intake_assessment.current_step
-    }
+    render json: intake_assessment.hashify
   end
 
   def current_speech_question
@@ -18,6 +14,10 @@ class Api::IntakeAssessmentsController < ApplicationController
 
     updated_assessment = IntakeAssessments::MoveToNextStep.call(assessment: assessment).assessment
     render json: updated_assessment
+  end
+
+  def cancel
+    assessment = IntakeAssessment.find_by_token!(params[:intake_assessment_token])
   end
 
   def move_speech_assessment_to_next_level

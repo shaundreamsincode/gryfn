@@ -35,7 +35,6 @@ const IntakeSummary = () => {
         ApiService.getIntakeAssessmentSummary(assessmentToken).then((response) => {
             setLoading(false)
             // eidetic_assessment_level_as_label
-            debugger
             setSpeechQuestions(response.data.speech_questions)
             setEideticQuestions(response.data.eidetic_questions)
             setPhoneticQuestions(response.data.phonetic_questions)

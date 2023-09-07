@@ -19,7 +19,6 @@ const Login = () => {
             headers: {Authorization: `Bearer ${jwtToken}`},
         }).then((response) => {
             if (response.ok) {
-                debugger
                 navigate('/application/dashboard')
             }
         })

@@ -10,6 +10,11 @@ class ApiService {
         return axios.post('/api/sessions', params)
     }
 
+    static cancelIntakeAssessment(token) {
+        // const jwtToken = localStorage.getItem('jwtToken')
+        return axios.post(`/api/intake_assessments/${token}/cancel`)
+        // return axios.post(`/api/current_account_create_intake_assessment`,  data, { headers: { Authorization: `Bearer ${jwtToken}` } })
+    }
     static createIntakeAssessmentForCurrentAccount(data) {
         const jwtToken = localStorage.getItem('jwtToken')
         return axios.post(`/api/current_account_create_intake_assessment`,  data, { headers: { Authorization: `Bearer ${jwtToken}` } })

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
     resources :intake_assessments, only: :show, param: :token do
       post :move_speech_assessment_to_next_level
+      post :cancel
       get :current_speech_question
 
       resources :speech_questions, only: [:index, :update], param: :token, controller: 'intake_assessments/speech_questions'

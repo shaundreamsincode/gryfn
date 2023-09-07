@@ -3,6 +3,7 @@ import Dashboard from "./dashboard/Dashboard";
 import ApplicationNavbar from "./ApplicationNavbar";
 import {Card, CardContent} from "@material-ui/core";
 import AccountSettings from "./account_settings/AccountSettings";
+import IntakeAssessment from "./intake_assessments/IntakeAssessment";
 
 const Application = () => {
     const currentUrl = window.location.href;
@@ -15,6 +16,10 @@ const Application = () => {
 
         if (component === 'account_settings') {
             return(<AccountSettings/>)
+        }
+
+        if (component === 'intake_assessments') {
+            return(<IntakeAssessment/>)
         }
 
         return(<></>)

@@ -41,7 +41,8 @@ class IntakeAssessment < ApplicationRecord
       token: self.token,
       first_name: self.patient_first_name, # todo - either rename this to first_name or rename email to patient email, dob to patient dob, etc
       email: self.email,
-      status: self.completed_at ? 'completed': 'pending'
+      status: self.completed_at ? 'completed': 'pending',
+      current_step: self.current_step
     }.with_indifferent_access
   end
 
