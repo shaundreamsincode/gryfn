@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ApiService from "../../services/ApiService";
+import ApiService from "../../../services/ApiService";
 import {
     Typography,
     TextField,
@@ -10,6 +10,8 @@ import {
     Snackbar, CardContent, FormControl
 } from "@material-ui/core";
 import {Alert, AlertTitle} from "@mui/material";
+
+import PasswordForm from "./PasswordForm";
 
 const AccountSettings = () => {
     const [firstName, setFirstName] = useState(null);
@@ -81,25 +83,9 @@ const AccountSettings = () => {
     }
     // setDisableUpdateBasicInfo(false)
 
-    const onPasswordFormChange = () => {
-        debugger
-
-        if (password && passwordConfirmation && currentPassword) {
-            setDisableUpdatePassword(false)
-        } else {
-            setDisableUpdatePassword(true)
-        }
-    }
-
     return (
         <Container>
             <Typography variant="h4">Account Settings</Typography>
-            {/*{*/}
-            {/*    successMessage && <Snackbar>*/}
-            {/*        */}
-            {/*    </Snackbar>*/}
-            {/*}*/}
-            {/*{ successMessage && <Typography> { successMessage }</Typography> }*/}
             <Grid container spacing={2}>
                 {/* Basic Information Form */}
                 <Grid item xs={12} md={6}>
@@ -147,48 +133,7 @@ const AccountSettings = () => {
                 {/* Password Form */}
                 <Grid item xs={12} md={6}>
                     <Paper elevation={3} style={{ padding: "16px" }}>
-                        <Typography variant="h6">Password</Typography>
-                        <FormControl onChange={onPasswordFormChange}>
-                        {/*<form onChange={onPasswordFormChange} onSubmit={handlePasswordSubmit}>*/}
-                        {/*<form onChange={() => { setDisableUpdatePassword(false) && password && passwordConfirmation && currentPassword }} onSubmit={handlePasswordSubmit}>*/}
-                            <TextField
-                                label="Current Password" // New field
-                                variant="outlined"
-                                type="password"
-                                fullWidth
-                                value={currentPassword}
-                                onChange={(e) => setCurrentPassword(e.target.value)}
-                                margin="normal"
-                            />
-                            <TextField
-                                label="New Password"
-                                variant="outlined"
-                                type="password"
-                                fullWidth
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                margin="normal"
-                            />
-                            <TextField
-                                label="Confirm Password"
-                                variant="outlined"
-                                type="password"
-                                fullWidth
-                                value={passwordConfirmation}
-                                onChange={(e) => setPasswordConfirmation(e.target.value)}
-                                margin="normal"
-                            />
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                                fullWidth
-                                disabled={disableUpdatePasswordButton()}
-                                onClick={handlePasswordSubmit}
-                            >
-                                Update Password
-                            </Button>
-                        </FormControl>
+                        <PasswordForm/>
                     </Paper>
                 </Grid>
             </Grid>

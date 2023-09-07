@@ -30,7 +30,7 @@ import IntakeInsufficientIncorrectSpeechQuestionsFailure
     from "./intake/failures/IntakeInsufficientIncorrectSpeechQuestionsFailure";
 import Login from "./Login";
 import ApplicationRoute from "./ApplicationRoute";
-import AccountSettings from "./application/AccountSettings";
+import AccountSettings from "./application/account_settings/AccountSettings";
 
 export default (
     <Router>

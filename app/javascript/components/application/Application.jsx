@@ -2,7 +2,7 @@ import React from "react";
 import Dashboard from "./Dashboard";
 import ApplicationNavbar from "./ApplicationNavbar";
 import {Card, CardContent} from "@material-ui/core";
-import AccountSettings from "./AccountSettings";
+import AccountSettings from "./account_settings/AccountSettings";
 
 const Application = () => {
     const currentUrl = window.location.href;
