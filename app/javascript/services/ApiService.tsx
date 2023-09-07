@@ -15,6 +15,11 @@ class ApiService {
         return axios.get(`/api/current_account`,  { headers: { Authorization: `Bearer ${jwtToken}` } })
     }
 
+    static updateCurrentAccountBasicInfo(data) {
+        const jwtToken = localStorage.getItem('jwtToken')
+        return axios.put(`/api/current_account_basic_info`,data, { headers: { Authorization: `Bearer ${jwtToken}` } })
+    }
+
     static updateCurrentAccountPassword(data) {
         const jwtToken = localStorage.getItem('jwtToken')
         return axios.put(`/api/current_account_password`,data, { headers: { Authorization: `Bearer ${jwtToken}` } })

@@ -14,7 +14,17 @@ module Api
     def update_basic_info
       return render head: 404 if @account.blank?
 
-      basic_info_params = params.permit(:first_name, :last_name, :email)
+      unless basic_info_params[:email].match(/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i)
+        return render json: { error: 'Email format is invalid.' }, status: :unprocessable_entity
+      end
+
+      @account.update!(
+        first_name: basic_info_params[:first_name],
+        last_name: basic_info_params[:last_name],
+        email: basic_info_params[:email]
+      )
+
+      render json: @account
     end
 
     def update_password
@@ -41,8 +51,8 @@ module Api
       render json: {}, status: :ok
     end
 
-    private def account_params
-      params.permit(:email, :password, :password_confirmation).to_h
+    private def basic_info_params
+      params.permit(:first_name, :last_name, :email).to_h
     end
 
     private def password_params
