@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import ApiService from "../../../services/ApiService";
-import { AudioRecorder } from "react-audio-voice-recorder";
+import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 import {
     Button,
     Card,
@@ -12,6 +12,14 @@ import { Alert } from "@mui/material";
 
 const IntakeSpeechPracticeQuestion = (props) => {
     const { onSolveProp, assessmentToken } = props;
+    const recorderControls = useAudioRecorder()
+
+    useEffect(() => {
+        if (!recorderControls.recordingBlob) return;
+
+        debugger
+        // recordingBlob will be present at this point after 'stopRecording' has been called
+    }, [recorderControls.recordingBlob])
 
     const [isSaving, setIsSaving] = useState(false);
     const [questionAnswered, setQuestionAnswered] = useState(false);
@@ -22,7 +30,21 @@ const IntakeSpeechPracticeQuestion = (props) => {
         false
     );
 
+    const [timerExpired, setTimerExpired] = useState(false)
+
+    const handleStartRecording = () => {
+        recorderControls.startRecording()
+
+        setTimeout(() => {
+            setTimerExpired(true);
+            debugger
+            recorderControls.stopRecording()
+            // debugger
+        }, 3000)
+    }
+
     const onRecordingComplete = (blob) => {
+        debugger
         setIsSaving(true);
         const wavFromBlob = new File([blob], "test.wav");
 
@@ -74,7 +96,8 @@ const IntakeSpeechPracticeQuestion = (props) => {
                 {isSaving && <Typography>Saving...</Typography>}
 
                 {!isSaving && !questionAnswered && (
-                    <div onClick={() => setIsRecording(true)}>
+                    <div>
+                    {/*<div onClick={handleStartRecording}>*/}
                         <AudioRecorder
                             onRecordingComplete={onRecordingComplete}
                             audioTrackConstraints={{
@@ -82,7 +105,10 @@ const IntakeSpeechPracticeQuestion = (props) => {
                                 echoCancellation: true,
                             }}
                             downloadFileExtension="webm"
+                            recorderControls={recorderControls}
                         />
+
+                        <Button onClick={handleStartRecording}>Start Recording</Button>
                     </div>
                 )}
 

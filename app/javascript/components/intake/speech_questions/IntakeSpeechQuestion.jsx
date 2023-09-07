@@ -16,7 +16,8 @@ const IntakeSpeechQuestion = () => {
     const [isSaving, setIsSaving] = useState(false)
     const [question, setQuestion] = useState(null)
 
-    const [practiceQuestionSolved, setPracticeQuestionSolved] = useState(localStorage.getItem('speechPracticeQuestionSolved'))
+    const [practiceQuestionSolved, setPracticeQuestionSolved] = useState(false)
+    // const [practiceQuestionSolved, setPracticeQuestionSolved] = useState(localStorage.getItem('speechPracticeQuestionSolved'))
     const [instructionsRead, setInstructionsRead] = useState(localStorage.getItem('speechInstructionsRead'))
 
     const navigate = useNavigate()
