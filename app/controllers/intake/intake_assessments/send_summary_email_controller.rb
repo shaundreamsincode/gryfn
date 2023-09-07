@@ -1,6 +1,6 @@
-module Api
+module Intake
   module IntakeAssessments
-    class SendSummaryEmailController < ApplicationController
+    class SendSummaryEmailController < Intake::IntakeController
 
       # todo - switch to POST?
       def index

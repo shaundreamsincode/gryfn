@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import ApiService from "../../../services/ApiService";
+import IntakeService from "../../../services/IntakeService";
 import {AudioRecorder} from "react-audio-voice-recorder";
 import {Button, Card, CardContent} from "@material-ui/core";
 
@@ -32,11 +32,11 @@ const IntakeSpeechPracticeQuestion = (props) => {
         setIsSaving(true)
         setBlob(blog)
         const wavFromBlob = new File([blob], "test.wav")
-        ApiService.getPracticeSpeechQuestions(wavFromBlob).then((response) => {
+        IntakeService.getPracticeSpeechQuestions(wavFromBlob).then((response) => {
 
         })
 
-        // ApiService.upsertSpeechQuestionResponse(question, wavFromBlob).then((response) => {
+        // IntakeService.upsertSpeechQuestionResponse(question, wavFromBlob).then((response) => {
         //     setQuestionAnswered(true)
         //     setIsSaving(false)
         // }).catch((error) => {

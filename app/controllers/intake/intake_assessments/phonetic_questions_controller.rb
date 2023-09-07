@@ -1,6 +1,6 @@
-module Api
+module Intake
   module IntakeAssessments
-    class PhoneticQuestionsController < ApplicationController
+    class PhoneticQuestionsController < Intake::IntakeController
       def index
         intake_assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
 

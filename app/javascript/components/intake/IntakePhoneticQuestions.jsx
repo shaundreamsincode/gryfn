@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ApiService from "../../services/ApiService";
+import IntakeService from "../../services/IntakeService";
 import {Button, Card, CardContent} from "@material-ui/core";
 import IntakeSpellingQuestions from "./spelling_questions/IntakeSpellingQuestions";
 import {useNavigate} from "react-router-dom";
@@ -14,7 +14,7 @@ const IntakePhoneticQuestions = () => {
     const [readInstructions, setReadInstructions] = useState(false)
 
     useEffect(() => {
-        ApiService.getIntakePhoneticQuestions(assessmentToken).then((response) => {
+        IntakeService.getIntakePhoneticQuestions(assessmentToken).then((response) => {
             setQuestions(response.data)
         })
     }, [assessmentToken])
@@ -24,8 +24,8 @@ const IntakePhoneticQuestions = () => {
     }
 
     const handleFinish = () => {
-        ApiService.moveIntakeAssessmentToNextStep(assessmentToken).then(() => {
-            navigate(`/intake_assessments/${assessmentToken}`)
+        IntakeService.moveIntakeAssessmentToNextStep(assessmentToken).then(() => {
+            navigate(`/intake/intake_assessments/${assessmentToken}`)
         })
     }
 
@@ -49,7 +49,7 @@ const IntakePhoneticQuestions = () => {
                 onFinish={handleFinish}
                 title="Phonetic"
                 finishButtonText="Finish"
-                questionSaveEndpoint={ApiService.upsertIntakePhoneticQuestionResponse}
+                questionSaveEndpoint={IntakeService.upsertIntakePhoneticQuestionResponse}
             />
         </CardContent>
     )

@@ -10,7 +10,7 @@ import {
     Toolbar,
     Snackbar
 } from "@material-ui/core";
-import ApiService from "../../services/ApiService";
+import IntakeService from "../../services/IntakeService";
 import {useNavigate} from "react-router-dom";
 
 const IntakeSummary = () => {
@@ -32,7 +32,7 @@ const IntakeSummary = () => {
     const [snackbarMessage, setSnackbarMessage] = useState(null)
 
     useEffect(() => {
-        ApiService.getIntakeAssessmentSummary(assessmentToken).then((response) => {
+        IntakeService.getIntakeAssessmentSummary(assessmentToken).then((response) => {
             setLoading(false)
             // eidetic_assessment_level_as_label
             setSpeechQuestions(response.data.speech_questions)
@@ -52,7 +52,7 @@ const IntakeSummary = () => {
     }
 
     const handleEmailResults = () => {
-        ApiService.sendIntakeAssessmentSummaryEmail(assessmentToken).then((response) => {
+        IntakeService.sendIntakeAssessmentSummaryEmail(assessmentToken).then((response) => {
             setSnackbarMessage('Results sent! Check your spam inbox if you do not see an email.')
         })
     }

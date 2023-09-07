@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import ApiService from "../../services/ApiService";
+import IntakeService from "../../services/IntakeService";
 import {useNavigate} from "react-router-dom";
 
 const IntakeAssessment = () => {
@@ -8,9 +8,9 @@ const IntakeAssessment = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        ApiService.getIntakeAssessment(assessmentToken).then((response) => {
+        IntakeService.getIntakeAssessment(assessmentToken).then((response) => {
             const currentStep = response.data.current_step
-            navigate(`/intake_assessments/${assessmentToken}/${currentStep}`)
+            navigate(`/intake/intake_assessments/${assessmentToken}/${currentStep}`)
         });
     }, [assessmentToken]);
 };

@@ -1,3 +1,3 @@
 class ApplicationController < ActionController::Base
-  skip_before_action :verify_authenticity_token # TODO - fix
+  # skip_before_action :verify_authenticity_token # TODO - fix
 end

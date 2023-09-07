@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import ApiService from "../../../services/ApiService";
+import IntakeService from "../../../services/IntakeService";
 import {Button, Card, CardContent, Typography} from "@material-ui/core";
 import { AudioRecorder } from 'react-audio-voice-recorder';
 
@@ -14,7 +14,8 @@ const IntakeSpeechQuestion = () => {
     const [questionAnswered, setQuestionAnswered] = useState(false)
     const [isSaving, setIsSaving] = useState(false)
     const [question, setQuestion] = useState(null)
-    const [practiceQuestionSolved, setPracticeQuestionSolved] = useState(false)
+    const [practiceQuestionSolved, setPracticeQuestionSolved] = useState(true) // debugging
+    // const [practiceQuestionSolved, setPracticeQuestionSolved] = useState(false)
 
     const navigate = useNavigate()
 
@@ -32,7 +33,7 @@ const IntakeSpeechQuestion = () => {
     }
 
     useEffect(() => {
-        ApiService.getCurrentIntakeSpeechQuestion(assessmentToken).then((response) => {
+        IntakeService.getCurrentIntakeSpeechQuestion(assessmentToken).then((response) => {
             setQuestion(response.data)
         }).catch((error) => {
             console.log('error')
@@ -45,7 +46,7 @@ const IntakeSpeechQuestion = () => {
         setIsSaving(true)
         const wavFromBlob = new File([blob], "test.wav")
 
-        ApiService.upsertSpeechQuestionResponse(question, wavFromBlob).then((response) => {
+        IntakeService.upsertSpeechQuestionResponse(question, wavFromBlob).then((response) => {
             setQuestionAnswered(true)
             setIsSaving(false)
         }).catch((error) => {
@@ -92,7 +93,7 @@ const IntakeSpeechQuestion = () => {
                 </>
             }
             <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '40px' }}>
-                <Button style={{'margin-top': '30px'}}  color="primary" variant="contained" onClick={() => navigate(`/intake_assessments/${assessmentToken}`)} disabled={!questionAnswered}>Next</Button>
+                <Button style={{'margin-top': '30px'}}  color="primary" variant="contained" onClick={() => navigate(`/intake/intake_assessments/${assessmentToken}`)} disabled={!questionAnswered}>Next</Button>
             </div>
         </CardContent>
     </Card>)

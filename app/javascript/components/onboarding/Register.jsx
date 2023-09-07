@@ -49,7 +49,7 @@ const Register = () => {
 
         ApiService.createIntakeAssessment(params).then((response) => {
             setSaving(false);
-            navigate(`/intake_assessments/${response.data.intakeAssessmentToken}`);
+            navigate(`/intake/intake_assessments/${response.data.intakeAssessmentToken}`);
         });
     };
 
