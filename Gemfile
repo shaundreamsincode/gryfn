@@ -76,6 +76,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'timecop'
+  gem 'pry', '~> 0.14.2'
 end
 
 group :development do

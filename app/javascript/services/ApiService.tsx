@@ -10,9 +10,23 @@ class ApiService {
         return axios.post('/api/sessions', params)
     }
 
-    static getPracticeSpeechQuestions(wavFromBlob) {
-        return axios.get("/api/")
-        //wavFromBlob
+    // static upsertSpeechQuestionResponse(question, wavFromBlob) {
+    //     return axios.put(
+    //         `/api/intake_assessments/${question.assessment_token}/speech_questions/${question.token}`,
+    //         wavFromBlob,
+    //         {
+    //             headers: { "content-type": "audio/mpeg"}
+    //         })
+    // }
+
+    static practiceSpeechQuestions(token, wavFromBlob) {
+        return axios.post(
+            `/api/intake_assessments/${token}/practice_speech_questions`,
+            wavFromBlob,
+            {
+                headers: { "content-type": "audio/mpeg"}
+            }
+        )
     }
 
     static cancelIntakeAssessment(token) {
@@ -20,6 +34,7 @@ class ApiService {
         return axios.post(`/api/intake_assessments/${token}/cancel`)
         // return axios.post(`/api/current_account_create_intake_assessment`,  data, { headers: { Authorization: `Bearer ${jwtToken}` } })
     }
+
     static createIntakeAssessmentForCurrentAccount(data) {
         const jwtToken = localStorage.getItem('jwtToken')
         return axios.post(`/api/current_account_create_intake_assessment`,  data, { headers: { Authorization: `Bearer ${jwtToken}` } })

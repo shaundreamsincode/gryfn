@@ -5,6 +5,7 @@ import { AudioRecorder } from 'react-audio-voice-recorder';
 
 import { useNavigate } from "react-router-dom";
 import IntakeSpeechPracticeQuestion from "./IntakeSpeechPracticeQuestion";
+import IntakeQuestionInstructions from "../IntakeQuestionInstructions";
 
 const IntakeSpeechQuestion = () => {
     const currentUrl = window.location.href;
@@ -14,7 +15,9 @@ const IntakeSpeechQuestion = () => {
     const [questionAnswered, setQuestionAnswered] = useState(false)
     const [isSaving, setIsSaving] = useState(false)
     const [question, setQuestion] = useState(null)
-    const [practiceQuestionSolved, setPracticeQuestionSolved] = useState(false)
+
+    const [practiceQuestionSolved, setPracticeQuestionSolved] = useState(localStorage.getItem('speechPracticeQuestionSolved'))
+    const [instructionsRead, setInstructionsRead] = useState(localStorage.getItem('speechInstructionsRead'))
 
     const navigate = useNavigate()
 
@@ -55,12 +58,31 @@ const IntakeSpeechQuestion = () => {
         })
     }
 
+    const handleInstructionsRead = () => {
+        localStorage.setItem('speechInstructionsRead', true)
+        setInstructionsRead(true)
+    }
+
+    const handlePracticeProblemSolved = () => {
+        localStorage.setItem('speechPracticeQuestionSolved', true)
+        setPracticeQuestionSolved(true)
+    }
+
     if (!question) {
         return(<></>)
     }
 
+    if (!instructionsRead) {
+        return(
+            <IntakeQuestionInstructions
+                questionType="speech"
+                onContinue={handleInstructionsRead}
+            />
+        )
+    }
+
     if (!practiceQuestionSolved) {
-        return(<IntakeSpeechPracticeQuestion onSolveProp={() => setPracticeQuestionSolved(true)}/>)
+        return(<IntakeSpeechPracticeQuestion assessmentToken={assessmentToken} onSolveProp={handlePracticeProblemSolved}/>)
     }
 
     if (isSaving) {
