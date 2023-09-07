@@ -10,6 +10,11 @@ class ApiService {
         return axios.post('/api/sessions', params)
     }
 
+    static getPracticeSpeechQuestions(wavFromBlob) {
+        return axios.get("/api/")
+        //wavFromBlob
+    }
+
     static cancelIntakeAssessment(token) {
         // const jwtToken = localStorage.getItem('jwtToken')
         return axios.post(`/api/intake_assessments/${token}/cancel`)

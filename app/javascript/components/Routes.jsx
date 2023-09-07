@@ -17,7 +17,7 @@ import DyslexiaResources from "./app_toolbar/DyslexiaResources";
 import TermsOfService from "./app_toolbar/TermsOfService";
 import PrivacyPolicy from "./app_toolbar/PrivacyPolicy";
 
-import IntakeSpeechQuestion from "./intake/IntakeSpeechQuestion";
+import IntakeSpeechQuestion from "./intake/speech_questions/IntakeSpeechQuestion";
 
 // intake
 import IntakeAssessment from "./intake/IntakeAssessment";

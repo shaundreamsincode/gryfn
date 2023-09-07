@@ -16,6 +16,10 @@ class Api::IntakeAssessmentsController < ApplicationController
     render json: updated_assessment
   end
 
+  def practice_speech_question
+
+  end
+
   def cancel
     assessment = IntakeAssessment.find_by_token!(params[:intake_assessment_token])
   end

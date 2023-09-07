@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       get :current_speech_question
 
       resources :speech_questions, only: [:index, :update], param: :token, controller: 'intake_assessments/speech_questions'
+      resources :practice_speech_questions, only: :index, param: :token, controller: 'intake_assessments/practice_speech_questions'
       resources :eidetic_questions, only: [:index, :update], param: :token, controller: 'intake_assessments/eidetic_questions'
       resources :phonetic_questions, only: [:index, :update], param: :token, controller: 'intake_assessments/phonetic_questions'
 

@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from "react"
-import ApiService from "../../services/ApiService";
+import ApiService from "../../../services/ApiService";
 import {Button, Card, CardContent, Typography} from "@material-ui/core";
 import { AudioRecorder } from 'react-audio-voice-recorder';
 
 import { useNavigate } from "react-router-dom";
+import IntakeSpeechPracticeQuestion from "./IntakeSpeechPracticeQuestion";
 
 const IntakeSpeechQuestion = () => {
     const currentUrl = window.location.href;
@@ -13,6 +14,7 @@ const IntakeSpeechQuestion = () => {
     const [questionAnswered, setQuestionAnswered] = useState(false)
     const [isSaving, setIsSaving] = useState(false)
     const [question, setQuestion] = useState(null)
+    const [practiceQuestionSolved, setPracticeQuestionSolved] = useState(false)
 
     const navigate = useNavigate()
 
@@ -55,6 +57,10 @@ const IntakeSpeechQuestion = () => {
 
     if (!question) {
         return(<></>)
+    }
+
+    if (!practiceQuestionSolved) {
+        return(<IntakeSpeechPracticeQuestion onSolveProp={() => setPracticeQuestionSolved(true)}/>)
     }
 
     if (isSaving) {
