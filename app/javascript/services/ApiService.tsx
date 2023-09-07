@@ -10,6 +10,16 @@ class ApiService {
         return axios.post('/api/sessions', params)
     }
 
+    static createIntakeAssessmentForCurrentAccount(data) {
+        const jwtToken = localStorage.getItem('jwtToken')
+        return axios.post(`/api/current_account_create_intake_assessment`,  data, { headers: { Authorization: `Bearer ${jwtToken}` } })
+    }
+
+    static getCurrentAccountIntakeAssessments() {
+        const jwtToken = localStorage.getItem('jwtToken')
+        return axios.get(`/api/current_account_intake_assessments`,  { headers: { Authorization: `Bearer ${jwtToken}` } })
+    }
+
     static getCurrentAccount() {
         const jwtToken = localStorage.getItem('jwtToken')
         return axios.get(`/api/current_account`,  { headers: { Authorization: `Bearer ${jwtToken}` } })

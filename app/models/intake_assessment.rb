@@ -4,6 +4,7 @@ class IntakeAssessment < ApplicationRecord
     adt: 'adt'
   }.freeze
 
+  # TODO - check relation between these (org and account)
   belongs_to :organization
   belongs_to :created_by, foreign_key: :created_by_id, class_name: 'Account'
 
@@ -34,6 +35,15 @@ class IntakeAssessment < ApplicationRecord
     fail_insufficient_correct: 4,
     fail_insufficient_incorrect: 5
   }
+
+  def hashify
+    {
+      token: self.token,
+      first_name: self.patient_first_name, # todo - either rename this to first_name or rename email to patient email, dob to patient dob, etc
+      email: self.email,
+      status: self.completed_at ? 'completed': 'pending'
+    }.with_indifferent_access
+  end
 
   def current_speech_question
     speech_questions[current_speech_question_index]

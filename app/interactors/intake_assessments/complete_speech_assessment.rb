@@ -13,7 +13,8 @@ class IntakeAssessments::CompleteSpeechAssessment
     context.assessment.update!(
       speech_assessment_grade_level: grade,
       eidetic_assessment_level: grade + 1,
-      phonetic_assessment_level: calculate_phonetic_question_level
+      phonetic_assessment_level: calculate_phonetic_question_level,
+      completed_at: Time.zone.now
     )
 
     IntakeAssessments::MoveToNextStep.call(assessment: context.assessment)

@@ -11,6 +11,12 @@ module Api
       render json: @account.hashify
     end
 
+    def intake_assessments
+      return render head: 404 if @account.blank?
+
+      render json: @account.intake_assessments.map(&:hashify)
+    end
+
     def update_basic_info
       return render head: 404 if @account.blank?
 
@@ -51,12 +57,28 @@ module Api
       render json: {}, status: :ok
     end
 
+    def create_intake_assessment
+      return render head: 404 if @account.blank?
+
+      intake_assessment = ::IntakeAssessments::CreateIntakeAssessment.call(
+        account: @account,
+        patient_first_name: intake_assessment_params[:first_name],
+        email: intake_assessment_params[:email]
+        ).intake_assessment
+
+      render json: intake_assessment.hashify
+    end
+
     private def basic_info_params
       params.permit(:first_name, :last_name, :email).to_h
     end
 
     private def password_params
       params.permit(:password, :password_confirmation, :current_password)
+    end
+
+    private def intake_assessment_params
+      params.permit(:first_name, :email)
     end
   end
 end

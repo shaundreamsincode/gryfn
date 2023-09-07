@@ -1,5 +1,5 @@
 import React from "react";
-import Dashboard from "./Dashboard";
+import Dashboard from "./dashboard/Dashboard";
 import ApplicationNavbar from "./ApplicationNavbar";
 import {Card, CardContent} from "@material-ui/core";
 import AccountSettings from "./account_settings/AccountSettings";

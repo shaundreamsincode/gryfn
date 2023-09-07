@@ -2,6 +2,13 @@ class Account < ApplicationRecord
   has_secure_token
   has_secure_password
 
+  has_many :intake_assessments, foreign_key: :created_by_id
+  has_many :badges
+
+  def organization
+    badges.first.organization
+  end
+
   def hashify
     {
       first_name: first_name,

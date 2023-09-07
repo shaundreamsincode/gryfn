@@ -56,6 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_011547) do
   create_table "intake_assessments", force: :cascade do |t|
     t.string "token"
     t.bigint "organization_id"
+    t.datetime "completed_at"
     t.string "patient_first_name"
     t.string "email"
     t.integer "birth_year"
@@ -72,11 +73,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_011547) do
     t.integer "phonetic_assessment_level"
     t.integer "current_step", default: 0, null: false
     t.integer "assessment_type", default: 0, null: false
-    t.bigint "accounts_id"
+    t.bigint "account_id"
     t.bigint "created_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["accounts_id"], name: "index_intake_assessments_on_accounts_id"
+    t.index ["account_id"], name: "index_intake_assessments_on_account_id"
     t.index ["created_by_id"], name: "index_intake_assessments_on_created_by_id"
     t.index ["organization_id"], name: "index_intake_assessments_on_organization_id"
   end
@@ -142,7 +143,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_011547) do
 
   add_foreign_key "badges", "accounts"
   add_foreign_key "badges", "organizations"
-  add_foreign_key "intake_assessments", "accounts", column: "accounts_id"
+  add_foreign_key "intake_assessments", "accounts"
   add_foreign_key "intake_assessments", "accounts", column: "created_by_id"
   add_foreign_key "intake_assessments", "organizations"
   add_foreign_key "intake_speech_questions", "intake_assessments"
