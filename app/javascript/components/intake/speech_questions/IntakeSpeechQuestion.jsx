@@ -30,13 +30,11 @@ const IntakeSpeechQuestion = () => {
         ApiService.getCurrentIntakeSpeechQuestion(assessmentToken).then((response) => {
             setQuestion(response.data)
         }).catch((error) => {
-            console.log('error')
             console.log(error)
         })
     }, [assessmentToken])
 
     const timeoutStatus  = setTimeout( function(){
-        console.log("3 seconds timeout");
         handleStopRecording();
     }  , 3000);
 
