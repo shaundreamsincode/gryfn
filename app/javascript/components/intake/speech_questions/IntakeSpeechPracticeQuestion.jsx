@@ -10,16 +10,10 @@ import {
 } from "@material-ui/core";
 import { Alert } from "@mui/material";
 
+import SpeechRecorder from "./SpeechRecorder";
+
 const IntakeSpeechPracticeQuestion = (props) => {
     const { onSolveProp, assessmentToken } = props;
-    const recorderControls = useAudioRecorder()
-
-    useEffect(() => {
-        if (!recorderControls.recordingBlob) return;
-
-        debugger
-        // recordingBlob will be present at this point after 'stopRecording' has been called
-    }, [recorderControls.recordingBlob])
 
     const [isSaving, setIsSaving] = useState(false);
     const [questionAnswered, setQuestionAnswered] = useState(false);
@@ -42,8 +36,8 @@ const IntakeSpeechPracticeQuestion = (props) => {
     }
 
     const handleTimeout = () => {
-        setTimerExpired(true);
         recorderControls.stopRecording()
+        setTimerExpired(true);
     }
 
     const onRecordingComplete = (blob) => {
@@ -100,18 +94,19 @@ const IntakeSpeechPracticeQuestion = (props) => {
 
                 {!isSaving && !questionAnswered && (
                     <div>
+                        <SpeechRecorder assessmentToken={assessmentToken}/>
                     {/*<div onClick={handleStartRecording}>*/}
-                        <AudioRecorder
-                            onRecordingComplete={onRecordingComplete}
-                            audioTrackConstraints={{
-                                noiseSuppression: true,
-                                echoCancellation: true,
-                            }}
-                            downloadFileExtension="webm"
-                            recorderControls={recorderControls}
-                        />
+                    {/*    <AudioRecorder*/}
+                    {/*        onRecordingComplete={onRecordingComplete}*/}
+                    {/*        audioTrackConstraints={{*/}
+                    {/*            noiseSuppression: true,*/}
+                    {/*            echoCancellation: true,*/}
+                    {/*        }}*/}
+                    {/*        downloadFileExtension="webm"*/}
+                    {/*        recorderControls={recorderControls}*/}
+                    {/*    />*/}
 
-                        <Button onClick={handleStartRecording}>Start Recording</Button>
+                        {/*<Button onClick={handleStartRecording}>Start Recording</Button>*/}
                     </div>
                 )}
 
