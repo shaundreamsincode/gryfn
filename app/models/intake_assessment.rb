@@ -46,6 +46,10 @@ class IntakeAssessment < ApplicationRecord
     }.with_indifferent_access
   end
 
+  def speech_questions_answered_on_current_level
+    speech_questions.answered_on_level(speech_assessment_current_level)
+  end
+
   def current_speech_question
     speech_questions[current_speech_question_index]
   end

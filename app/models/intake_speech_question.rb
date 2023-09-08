@@ -2,6 +2,8 @@ class IntakeSpeechQuestion < ApplicationRecord
   belongs_to :intake_assessment
   alias_attribute :assessment, :intake_assessment
 
+  scope :answered_on_level, -> (level) {answered.where(level: level)}
+
   scope :answered, -> { where.not(answer: nil) }
   scope :unanswered, -> { where(answer: nil) }
 

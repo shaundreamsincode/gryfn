@@ -27,7 +27,6 @@ module IntakeAssessments
       end
 
       questions
-
     end
   end
 end
