@@ -6,78 +6,76 @@ import {
     Card,
     CardContent,
     Typography,
-    Snackbar,
+    Snackbar, Grid,
 } from "@material-ui/core";
 import { Alert } from "@mui/material";
-
-import SpeechRecorder from "./SpeechRecorder";
 
 const IntakeSpeechPracticeQuestion = (props) => {
     const { onSolveProp, assessmentToken } = props;
 
     const [isSaving, setIsSaving] = useState(false);
+    const { startRecording, stopRecording, recordingBlob, isRecording  } = useAudioRecorder()
+
     const [questionAnswered, setQuestionAnswered] = useState(false);
     const [recordingFailed, setRecordingFailed] = useState(false);
     const [recordingFailedCount, setRecordingFailedCount] = useState(0);
     const [incorrectAnswer, setIncorrectAnswer] = useState(null);
+    const [disableRecordButton, setDisableRecordButton] = useState(false)
+    const [recordButtonText, setRecordButtonText] = useState('Start Recording')
+
     const [showRecordingSuccessMessage, setShowRecordingSuccessMessage] = useState(
         false
     );
 
-    const [timerExpired, setTimerExpired] = useState(false)
+    const timeoutStatus  = setTimeout( function(){
+        console.log("3 seconds timeout");
+        handleStopRecording();
+    }  , 3000);
 
     const handleStartRecording = () => {
-        recorderControls.startRecording()
-
-        setTimeout(() => {
-            handleTimeout()
-            debugger
-        }, 3000)
+        setDisableRecordButton(true)
+        setRecordButtonText("Recording...")
+        startRecording()
     }
 
-    const handleTimeout = () => {
-        recorderControls.stopRecording()
-        setTimerExpired(true);
+    const handleStopRecording = () => {
+        window.clearTimeout(timeoutStatus);
+        stopRecording()
     }
 
-    const onRecordingComplete = (blob) => {
-        debugger
-        setIsSaving(true);
-        const wavFromBlob = new File([blob], "test.wav");
+    useEffect(() => {
+        if (!recordingBlob) return;
+        const wavFromBlob = new File([recordingBlob], "test.wav");
 
-        ApiService.practiceSpeechQuestions(assessmentToken, wavFromBlob)
-            .then((response) => {
-                setIsSaving(false);
-                setQuestionAnswered(true);
-                setShowRecordingSuccessMessage(true);
-            })
-            .catch((error) => {
-                setIsSaving(false);
+        setRecordButtonText("Decoding Speech...")
+        ApiService.practiceSpeechQuestions(assessmentToken, wavFromBlob).then((response) => {
+            setIsSaving(false);
+            setQuestionAnswered(true);
+            setShowRecordingSuccessMessage(true);
+            setRecordButtonText("Success")
 
-                const errorData = error.response.data;
-                const errorCode = errorData.error;
+        }).catch((error) => {
+            setIsSaving(false);
+            setRecordButtonText("Start Recording")
+            setDisableRecordButton(false)
 
-                if (errorCode === "incorrect_answer") {
-                    setIncorrectAnswer(errorData.decoded_answer);
-                }
+            const errorData = error.response.data;
+            const errorCode = errorData.error;
 
-                if (errorCode === "decode_failed") {
-                    setRecordingFailed(true);
-                    setRecordingFailedCount(recordingFailedCount + 1);
-                }
-            });
-    };
+            if (errorCode === "incorrect_answer") {
+                setIncorrectAnswer(errorData.decoded_answer);
+            }
 
-    const microphoneStyle = {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        textAlign: 'center',
-    };
+            if (errorCode === "decode_failed") {
+                setRecordingFailed(true);
+                setRecordingFailedCount(recordingFailedCount + 1);
+            }
+        })
+    }, [recordingBlob])
 
     return (
         <Card>
-            <CardContent style={microphoneStyle}>
+            <CardContent>
                 <Typography variant="h4">Practice Question</Typography>
                 <Typography>Say the word "map".</Typography>
 
@@ -94,7 +92,25 @@ const IntakeSpeechPracticeQuestion = (props) => {
 
                 {!isSaving && !questionAnswered && (
                     <div>
-                        <SpeechRecorder assessmentToken={assessmentToken}/>
+                        <Card style={{ backgroundColor: "pink" }}>
+
+                            <Button variant="contained" color="primary" disabled={disableRecordButton} onClick={handleStartRecording}>
+                                { recordButtonText }
+                            {/*<Button variant="contained" color="primary" disabled={isSaving || !questionAnswered} onClick={handleStartRecording}>*/}
+                            {/*    {*/}
+                            {/*        !isSaving && !questionAnswered && <>Start Recording</>*/}
+                            {/*    }*/}
+
+                            {/*    {*/}
+                            {/*        isSaving && <>Saving...</>*/}
+                            {/*    }*/}
+
+                            {/*    {*/}
+                            {/*        questionAnswered && <>Answer Saved!</>*/}
+                            {/*    }*/}
+                            </Button>
+                        </Card>
+                        {/*<SpeechRecorder assessmentToken={assessmentToken}/>*/}
                     {/*<div onClick={handleStartRecording}>*/}
                     {/*    <AudioRecorder*/}
                     {/*        onRecordingComplete={onRecordingComplete}*/}
