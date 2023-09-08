@@ -105,37 +105,27 @@ const IntakeSpeechQuestion = () => {
 
     return(<Card>
         <CardContent>
-            {
-                questionAnswered && <Typography>Question Answered!</Typography>
-            }
-            {
-                !questionAnswered && <>
-                    {
-                        recordingInProgress && <Typography>{ question.correct_answer }</Typography>
-                    }
-
-                    <Card style={{ backgroundColor: "pink" }}>
-
-                        <Button variant="contained" color="primary" disabled={disableRecordButton} onClick={handleStartRecording}>
-                            { recordButtonText }
-                        </Button>
-                    </Card>
-
-                    {/*<div onClick={() => { setIsRecording(true) }}>*/}
-                    {/*    <AudioRecorder*/}
-                    {/*        onRecordingComplete={onRecordingComplete}*/}
-                    {/*        audioTrackConstraints={{*/}
-                    {/*            noiseSuppression: true,*/}
-                    {/*            echoCancellation: true,*/}
-                    {/*        }}*/}
-                    {/*        downloadFileExtension="webm"*/}
-                    {/*    />*/}
-                    {/*</div>*/}
-
-                </>
-            }
+            <div className="div1" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                {
+                    questionAnswered && <Typography style={{ color: 'green' }}>Question Answered!</Typography>
+                }
+                {
+                    !questionAnswered && <div>
+                        <div>
+                            {
+                                recordingInProgress && <Typography style={{ textAlign: 'center' }} variant="h4">{ question.correct_answer }</Typography>
+                            }
+                        </div>
+                        <div>
+                            <Button style={{ marginTop: "20px" }} variant="contained" color="primary" disabled={disableRecordButton} onClick={handleStartRecording}>
+                                {recordButtonText}
+                            </Button>
+                        </div>
+                    </div>
+                }
+            </div>
             <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '40px' }}>
-                <Button style={{'margin-top': '30px'}}  color="primary" variant="contained" onClick={() => navigate(`/intake_assessments/${assessmentToken}`)} disabled={!questionAnswered}>Next</Button>
+                <Button style={{'margin-top': '30px'}} onClick={() => navigate(`/intake_assessments/${assessmentToken}`)} disabled={!questionAnswered}>Next Question</Button>
             </div>
         </CardContent>
     </Card>)
