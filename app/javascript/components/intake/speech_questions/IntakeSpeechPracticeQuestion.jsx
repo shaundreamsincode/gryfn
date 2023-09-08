@@ -53,6 +53,7 @@ const IntakeSpeechPracticeQuestion = (props) => {
             setQuestionAnswered(true);
             setShowRecordingSuccessMessage(true);
             setRecordButtonText("Success")
+            setRecordingFailedCount(0) // hack to get rid of the error message
 
         }).catch((error) => {
             setIsSaving(false);
@@ -77,49 +78,38 @@ const IntakeSpeechPracticeQuestion = (props) => {
         <Card>
             <CardContent>
                 <Typography variant="h4">Practice Question</Typography>
-                <Typography>Say the word "map".</Typography>
-
                 {recordingFailedCount > 4 && (
-                    <Typography style={{ color: "red" }}>
+                    <Typography style={{ color: "red", textAlign: 'center' }}>
                         Your microphone has failed quite a few times in a row. Perhaps you
                         should check it?
                     </Typography>
                 )}
-                {questionAnswered && (
-                    <Typography style={{ color: "green" }}>Question Answered!</Typography>
-                )}
-                {isSaving && <Typography>Saving...</Typography>}
 
-                {!isSaving && !questionAnswered && (
-                    <div>
-                        <Card style={{ backgroundColor: "pink" }}>
-
-                            <Button variant="contained" color="primary" disabled={disableRecordButton} onClick={handleStartRecording}>
-                                { recordButtonText }
-                            </Button>
-                        </Card>
-                        {/*<SpeechRecorder assessmentToken={assessmentToken}/>*/}
-                    {/*<div onClick={handleStartRecording}>*/}
-                    {/*    <AudioRecorder*/}
-                    {/*        onRecordingComplete={onRecordingComplete}*/}
-                    {/*        audioTrackConstraints={{*/}
-                    {/*            noiseSuppression: true,*/}
-                    {/*            echoCancellation: true,*/}
-                    {/*        }}*/}
-                    {/*        downloadFileExtension="webm"*/}
-                    {/*        recorderControls={recorderControls}*/}
-                    {/*    />*/}
-
-                        {/*<Button onClick={handleStartRecording}>Start Recording</Button>*/}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <div style={{ order: -1, marginTop: "20px" }}>
+                        {
+                            questionAnswered && <Typography style={{ color: "green" }}>Success!</Typography>
+                        }
+                        {
+                            !questionAnswered && <Typography>Say the word "<b>map</b>".</Typography>
+                        }
                     </div>
-                )}
 
-                <div style={{ marginTop: '40px' }}>
+                    <div>
+                        {!questionAnswered && (
+                            <div>
+                                <Button style={{ marginTop: "20px" }} variant="contained" color="primary" disabled={disableRecordButton} onClick={handleStartRecording}>
+                                    {recordButtonText}
+                                </Button>
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+                <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '40px' }}>
                     <Button
                         onClick={() => onSolveProp()}
                         disabled={!questionAnswered}
-                        color="primary"
-                        variant="contained"
                     >
                         Start Assessment
                     </Button>

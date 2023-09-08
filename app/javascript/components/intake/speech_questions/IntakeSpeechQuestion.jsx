@@ -21,8 +21,7 @@ const IntakeSpeechQuestion = () => {
     const [recordButtonText, setRecordButtonText] = useState('Start Recording')
     const [disableRecordButton, setDisableRecordButton] = useState(false)
 
-    const [practiceQuestionSolved, setPracticeQuestionSolved] = useState(true)
-    // const [practiceQuestionSolved, setPracticeQuestionSolved] = useState(localStorage.getItem('speechPracticeQuestionSolved'))
+    const [practiceQuestionSolved, setPracticeQuestionSolved] = useState(localStorage.getItem('speechPracticeQuestionSolved'))
     const [instructionsRead, setInstructionsRead] = useState(localStorage.getItem('speechInstructionsRead'))
 
     const navigate = useNavigate()
@@ -105,7 +104,7 @@ const IntakeSpeechQuestion = () => {
 
     return(<Card>
         <CardContent>
-            <div className="div1" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 {
                     questionAnswered && <Typography style={{ color: 'green' }}>Question Answered!</Typography>
                 }
