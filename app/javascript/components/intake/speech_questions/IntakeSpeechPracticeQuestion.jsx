@@ -36,11 +36,14 @@ const IntakeSpeechPracticeQuestion = (props) => {
         recorderControls.startRecording()
 
         setTimeout(() => {
-            setTimerExpired(true);
+            handleTimeout()
             debugger
-            recorderControls.stopRecording()
-            // debugger
         }, 3000)
+    }
+
+    const handleTimeout = () => {
+        setTimerExpired(true);
+        recorderControls.stopRecording()
     }
 
     const onRecordingComplete = (blob) => {
