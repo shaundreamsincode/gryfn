@@ -96,18 +96,6 @@ const IntakeSpeechPracticeQuestion = (props) => {
 
                             <Button variant="contained" color="primary" disabled={disableRecordButton} onClick={handleStartRecording}>
                                 { recordButtonText }
-                            {/*<Button variant="contained" color="primary" disabled={isSaving || !questionAnswered} onClick={handleStartRecording}>*/}
-                            {/*    {*/}
-                            {/*        !isSaving && !questionAnswered && <>Start Recording</>*/}
-                            {/*    }*/}
-
-                            {/*    {*/}
-                            {/*        isSaving && <>Saving...</>*/}
-                            {/*    }*/}
-
-                            {/*    {*/}
-                            {/*        questionAnswered && <>Answer Saved!</>*/}
-                            {/*    }*/}
                             </Button>
                         </Card>
                         {/*<SpeechRecorder assessmentToken={assessmentToken}/>*/}

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import ApiService from "../../../services/ApiService";
 import {Button, Card, CardContent, Typography} from "@material-ui/core";
-import { AudioRecorder } from 'react-audio-voice-recorder';
+import { useAudioRecorder } from 'react-audio-voice-recorder';
 
 import { useNavigate } from "react-router-dom";
 import IntakeSpeechPracticeQuestion from "./IntakeSpeechPracticeQuestion";
@@ -11,29 +11,21 @@ const IntakeSpeechQuestion = () => {
     const currentUrl = window.location.href;
     const assessmentToken = currentUrl.split("/")[4];
 
-    const [isRecording, setIsRecording] = useState(false)
+    const { startRecording, stopRecording, recordingBlob } = useAudioRecorder()
+
+    const [recordingInProgress, setRecordingInProgress] = useState(false)
+
     const [questionAnswered, setQuestionAnswered] = useState(false)
     const [isSaving, setIsSaving] = useState(false)
     const [question, setQuestion] = useState(null)
+    const [recordButtonText, setRecordButtonText] = useState('Start Recording')
+    const [disableRecordButton, setDisableRecordButton] = useState(false)
 
-    const [practiceQuestionSolved, setPracticeQuestionSolved] = useState(false)
+    const [practiceQuestionSolved, setPracticeQuestionSolved] = useState(true)
     // const [practiceQuestionSolved, setPracticeQuestionSolved] = useState(localStorage.getItem('speechPracticeQuestionSolved'))
     const [instructionsRead, setInstructionsRead] = useState(localStorage.getItem('speechInstructionsRead'))
 
     const navigate = useNavigate()
-
-    const microphoneStyle = () => {
-        const disabledMicrophoneStyle = {
-            "pointer-events": "none",
-            "opacity": "0.5"
-        }
-
-        if (questionAnswered) {
-            return disabledMicrophoneStyle
-        } else {
-            return {}
-        }
-    }
 
     useEffect(() => {
         ApiService.getCurrentIntakeSpeechQuestion(assessmentToken).then((response) => {
@@ -44,20 +36,41 @@ const IntakeSpeechQuestion = () => {
         })
     }, [assessmentToken])
 
-    const onRecordingComplete = (blob) => {
-        setIsRecording(false)
-        setIsSaving(true)
-        const wavFromBlob = new File([blob], "test.wav")
+    const timeoutStatus  = setTimeout( function(){
+        console.log("3 seconds timeout");
+        handleStopRecording();
+    }  , 3000);
+
+    const handleStartRecording = () => {
+        setRecordingInProgress(true)
+        setDisableRecordButton(true)
+        setRecordButtonText("Recording...")
+        startRecording()
+    }
+
+    const handleStopRecording = () => {
+        window.clearTimeout(timeoutStatus);
+        stopRecording()
+    }
+
+    useEffect(() => {
+        if (!recordingBlob) return;
+        const wavFromBlob = new File([recordingBlob], "test.wav");
+
+        setRecordButtonText("Decoding Speech...")
 
         ApiService.upsertSpeechQuestionResponse(question, wavFromBlob).then((response) => {
             setQuestionAnswered(true)
             setIsSaving(false)
+            setRecordButtonText("Success")
         }).catch((error) => {
             console.log(error)
             setQuestionAnswered(true)
             setIsSaving(false)
         })
-    }
+
+        setRecordingInProgress(false)
+    }, [recordingBlob])
 
     const handleInstructionsRead = () => {
         localStorage.setItem('speechInstructionsRead', true)
@@ -98,19 +111,26 @@ const IntakeSpeechQuestion = () => {
             {
                 !questionAnswered && <>
                     {
-                        isRecording && <Typography>{ question.correct_answer }</Typography>
+                        recordingInProgress && <Typography>{ question.correct_answer }</Typography>
                     }
 
-                    <div onClick={() => { setIsRecording(true) }} style={microphoneStyle()}>
-                        <AudioRecorder
-                            onRecordingComplete={onRecordingComplete}
-                            audioTrackConstraints={{
-                                noiseSuppression: true,
-                                echoCancellation: true,
-                            }}
-                            downloadFileExtension="webm"
-                        />
-                    </div>
+                    <Card style={{ backgroundColor: "pink" }}>
+
+                        <Button variant="contained" color="primary" disabled={disableRecordButton} onClick={handleStartRecording}>
+                            { recordButtonText }
+                        </Button>
+                    </Card>
+
+                    {/*<div onClick={() => { setIsRecording(true) }}>*/}
+                    {/*    <AudioRecorder*/}
+                    {/*        onRecordingComplete={onRecordingComplete}*/}
+                    {/*        audioTrackConstraints={{*/}
+                    {/*            noiseSuppression: true,*/}
+                    {/*            echoCancellation: true,*/}
+                    {/*        }}*/}
+                    {/*        downloadFileExtension="webm"*/}
+                    {/*    />*/}
+                    {/*</div>*/}
 
                 </>
             }
