@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import ApiService from "../../../services/ApiService";
+import IntakeService from "../../../services/IntakeService";
 import {Button, Card, CardContent, Typography} from "@material-ui/core";
 import { useAudioRecorder } from 'react-audio-voice-recorder';
 
@@ -27,7 +27,7 @@ const IntakeSpeechQuestion = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        ApiService.getCurrentIntakeSpeechQuestion(assessmentToken).then((response) => {
+        IntakeService.getCurrentIntakeSpeechQuestion(assessmentToken).then((response) => {
             setQuestion(response.data)
         }).catch((error) => {
             console.log(error)
@@ -56,7 +56,7 @@ const IntakeSpeechQuestion = () => {
 
         setRecordButtonText("Decoding Speech...")
 
-        ApiService.upsertSpeechQuestionResponse(question, wavFromBlob).then((response) => {
+        IntakeService.upsertSpeechQuestionResponse(question, wavFromBlob).then((response) => {
             setQuestionAnswered(true)
             setIsSaving(false)
             setRecordButtonText("Success")

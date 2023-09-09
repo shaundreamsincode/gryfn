@@ -1,6 +1,6 @@
-module Api
+module Unauthenticated
   module IntakeAssessments
-    class PracticeSpeechQuestionsController < ApplicationController
+    class PracticeSpeechQuestionsController < UnauthenticatedController
       def create
         audio_file = request.body.read
         decode_speech_result = DecodeSpeech.call(audio_file: audio_file)

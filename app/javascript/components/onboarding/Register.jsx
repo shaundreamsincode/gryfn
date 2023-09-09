@@ -15,7 +15,7 @@ import {
     MenuItem,
 } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-import ApiService from "../../services/ApiService";
+import IntakeService from "../../services/IntakeService";
 
 const Register = () => {
     const [name, setName] = useState("");
@@ -47,7 +47,7 @@ const Register = () => {
             level_of_education: levelOfEducation,
         };
 
-        ApiService.createIntakeAssessment(params).then((response) => {
+        IntakeService.createIntakeAssessment(params).then((response) => {
             setSaving(false);
             navigate(`/intake_assessments/${response.data.intakeAssessmentToken}`);
         });

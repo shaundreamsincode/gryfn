@@ -1,6 +1,6 @@
-module Api
+module Unauthenticated
   module IntakeAssessments
-    class PhoneticQuestionsController < ApplicationController
+    class PhoneticQuestionsController < UnauthenticatedController
       def index
         intake_assessment = IntakeAssessment.find_by!(token: params[:intake_assessment_token])
 

@@ -1,6 +1,6 @@
-module Api
+module Unauthenticated
   module IntakeAssessments
-    class SummaryController < ApplicationController
+    class SummaryController < UnauthenticatedController
       def index
         intake_assessment = IntakeAssessment.find_by_token!(params[:intake_assessment_token])
         render json: map_summary(intake_assessment)

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import ApiService from "../../../services/ApiService";
+import IntakeService from "../../../services/IntakeService";
 import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 import {
     Button,
@@ -48,7 +48,7 @@ const IntakeSpeechPracticeQuestion = (props) => {
         const wavFromBlob = new File([recordingBlob], "test.wav");
 
         setRecordButtonText("Decoding Speech...")
-        ApiService.practiceSpeechQuestions(assessmentToken, wavFromBlob).then((response) => {
+        IntakeService.practiceSpeechQuestions(assessmentToken, wavFromBlob).then((response) => {
             setIsSaving(false);
             setQuestionAnswered(true);
             setShowRecordingSuccessMessage(true);

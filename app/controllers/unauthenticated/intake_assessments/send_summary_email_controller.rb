@@ -1,6 +1,6 @@
-module Api
+module Unauthenticated
   module IntakeAssessments
-    class SendSummaryEmailController < ApplicationController
+    class SendSummaryEmailController < UnauthenticatedController
 
       # todo - switch to POST?
       def index

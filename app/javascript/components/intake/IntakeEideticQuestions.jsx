@@ -3,7 +3,7 @@ import {Button, CardContent} from "@material-ui/core";
 import IntakeSpellingQuestions from "./spelling_questions/IntakeSpellingQuestions";
 import IntakeQuestionInstructions from "./IntakeQuestionInstructions";
 
-import ApiService from "../../services/ApiService";
+import IntakeService from "../../services/IntakeService";
 import { useNavigate } from "react-router-dom";
 
 const IntakeEideticQuestions = () => {
@@ -19,13 +19,13 @@ const IntakeEideticQuestions = () => {
     }
 
     const handleFinish = () => {
-        ApiService.moveIntakeAssessmentToNextStep(assessmentToken).then((response) => {
+        IntakeService.moveIntakeAssessmentToNextStep(assessmentToken).then((response) => {
             navigate(`/intake_assessments/${assessmentToken}`)
         })
     }
 
     useEffect(() => {
-        ApiService.getIntakeEideticQuestions(assessmentToken).then((response) => {
+        IntakeService.getIntakeEideticQuestions(assessmentToken).then((response) => {
             setQuestions(response.data)
         })
     }, [assessmentToken])
@@ -47,7 +47,7 @@ const IntakeEideticQuestions = () => {
                     onFinish={handleFinish}
                     title="Eidetic"
                     finishButtonText="Next"
-                    questionSaveEndpoint={ApiService.upsertIntakeEideticQuestionResponse}
+                    questionSaveEndpoint={IntakeService.upsertIntakeEideticQuestionResponse}
                 />
             }
 

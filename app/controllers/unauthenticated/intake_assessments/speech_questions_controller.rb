@@ -1,6 +1,6 @@
-module Api
+module Unauthenticated
   module IntakeAssessments
-    class SpeechQuestionsController < ApplicationController
+    class SpeechQuestionsController < UnauthenticatedController
       def index
         intake_assessment = IntakeAssessment.find_by_token!(params[:intake_assessment_token])
         level = intake_assessment.speech_assessment_current_level
