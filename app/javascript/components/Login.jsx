@@ -45,7 +45,7 @@ const Login = () => {
 
         ApiService.login({ email: email, password: password }).then((response) => {
             // Save the token in local storage or a secure cookie
-            localStorage.setItem('jwtToken', response.data);
+            localStorage.setItem('jwtToken', response.data.token);
             // Redirect to a protected route
             navigate('/application/dashboard')
         }).catch(() => {
