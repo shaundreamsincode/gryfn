@@ -9,7 +9,7 @@ import IntakeQuestionInstructions from "../IntakeQuestionInstructions";
 
 const IntakeSpeechQuestion = () => {
     const currentUrl = window.location.href;
-    const assessmentToken = currentUrl.split("/")[4];
+    const assessmentToken = currentUrl.split("/")[5];
 
     const { startRecording, stopRecording, recordingBlob } = useAudioRecorder()
 

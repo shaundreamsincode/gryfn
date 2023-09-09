@@ -50,14 +50,14 @@ export default (
                 <Route exact path='/terms_of_service' element={<TermsOfService/>}/>
                 <Route exact path='/login' element={<Login/>}/>
 
-                <Route exact path='/intake_assessments/:intakeAssessmentToken' element={<IntakeAssessment/>}/>
-                <Route exact path='/intake_assessments/:intakeAssessmentToken/summary' element={<IntakeSummary/>}/>
+                <Route exact path='intake/intake_assessments/:intakeAssessmentToken' element={<IntakeAssessment/>}/>
+                <Route exact path='intake/intake_assessments/:intakeAssessmentToken/summary' element={<IntakeSummary/>}/>
 
-                <Route exact path='/intake_assessments/:intakeAssessmentToken/speech' element={<IntakeSpeechQuestion/>}/>
-                <Route exact path='/intake_assessments/:intakeAssessmentToken/eidetic' element={<IntakeEideticQuestions/>}/>
-                <Route exact path='/intake_assessments/:intakeAssessmentToken/phonetic' element={<IntakePhoneticQuestions/>}/>
-                <Route exact path='/intake_assessments/:intakeAssessmentToken/fail_insufficient_correct' element={<IntakeInsufficientCorrectSpeechQuestionsFailure/>}/>
-                <Route exact path='/intake_assessments/:intakeAssessmentToken/fail_insufficient_incorrect' element={<IntakeInsufficientIncorrectSpeechQuestionsFailure/>}/>
+                <Route exact path='intake/intake_assessments/:intakeAssessmentToken/speech' element={<IntakeSpeechQuestion/>}/>
+                <Route exact path='intake/intake_assessments/:intakeAssessmentToken/eidetic' element={<IntakeEideticQuestions/>}/>
+                <Route exact path='intake/intake_assessments/:intakeAssessmentToken/phonetic' element={<IntakePhoneticQuestions/>}/>
+                <Route exact path='intake/intake_assessments/:intakeAssessmentToken/fail_insufficient_correct' element={<IntakeInsufficientCorrectSpeechQuestionsFailure/>}/>
+                <Route exact path='intake/intake_assessments/:intakeAssessmentToken/fail_insufficient_incorrect' element={<IntakeInsufficientIncorrectSpeechQuestionsFailure/>}/>
 
                 {/*<Route exact path='/application' element={<ApplicationRoute/>}>*/}
                 {/*    <Route exact path='/application' element={<Application/>}/>*/}

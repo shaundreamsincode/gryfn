@@ -17,7 +17,7 @@ const IntakeSummary = () => {
     const navigate = useNavigate()
 
     const currentUrl = window.location.href
-    const assessmentToken = currentUrl.split("/")[4]
+    const assessmentToken = currentUrl.split("/")[5]
     const [loading, setLoading] = useState(true)
 
     const [speechQuestions, setSpeechQuestions] = useState(null)

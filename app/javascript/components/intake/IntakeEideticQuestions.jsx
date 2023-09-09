@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const IntakeEideticQuestions = () => {
     const currentUrl = window.location.href;
-    const assessmentToken = currentUrl.split("/")[4];
+    const assessmentToken = currentUrl.split("/")[5];
     const navigate = useNavigate()
 
     const [questions, setQuestions] = useState(null)
@@ -20,7 +20,7 @@ const IntakeEideticQuestions = () => {
 
     const handleFinish = () => {
         IntakeService.moveIntakeAssessmentToNextStep(assessmentToken).then((response) => {
-            navigate(`/intake_assessments/${assessmentToken}`)
+            navigate(`/intake/intake_assessments/${assessmentToken}`)
         })
     }
 

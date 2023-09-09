@@ -7,7 +7,7 @@ import IntakeQuestionInstructions from "./IntakeQuestionInstructions";
 
 const IntakePhoneticQuestions = () => {
     const currentUrl = window.location.href;
-    const assessmentToken = currentUrl.split("/")[4];
+    const assessmentToken = currentUrl.split("/")[5];
     const navigate = useNavigate()
 
     const [questions, setQuestions] = useState(null)
@@ -25,7 +25,7 @@ const IntakePhoneticQuestions = () => {
 
     const handleFinish = () => {
         IntakeService.moveIntakeAssessmentToNextStep(assessmentToken).then(() => {
-            navigate(`/intake_assessments/${assessmentToken}`)
+            navigate(`/intake/intake_assessments/${assessmentToken}`)
         })
     }
 
