@@ -1,5 +1,5 @@
 module Api
-  class SessionsController < ApplicationController
+  class SessionsController < ApiController
     def create
       account = Account.find_by(email: params[:email])
       return render json: { error: 'Invalid email or password' }, status: :unauthorized if account.nil?

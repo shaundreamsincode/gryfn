@@ -1,5 +1,5 @@
 module Api
-  class VerifyJwtController < ApplicationController
+  class VerifyJwtController < ApiController
     def index
       token = request.headers['Authorization']&.split&.last
 

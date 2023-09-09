@@ -34,6 +34,11 @@ const Register = () => {
     const [emailErrorMessage, setEmailErrorMessage] = useState("");
     const [isBirthYearValid, setIsBirthYearValid] = useState(true);
 
+    debugger
+
+    const token =
+        document.querySelector('[name=csrf-token]').content
+
     const handleSubmit = () => {
         setSaving(true);
 

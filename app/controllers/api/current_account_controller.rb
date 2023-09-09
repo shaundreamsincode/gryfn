@@ -1,5 +1,5 @@
 module Api
-  class CurrentAccountController < ApplicationController
+  class CurrentAccountController < ApiController
     before_action do
       token = request.headers['Authorization']&.split&.last
       @account = Account.from_jwt_token(token)

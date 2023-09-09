@@ -1,4 +1,4 @@
-class Api::IntakeAssessmentsController < ApplicationController
+class Api::IntakeAssessmentsController < Api::ApiController
   def show
     intake_assessment = IntakeAssessment.find_by_token!(params[:token])
     render json: intake_assessment.hashify
