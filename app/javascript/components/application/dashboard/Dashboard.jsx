@@ -17,7 +17,6 @@ import CreateIntakeAssessmentDialog from "./CreateIntakeAssessmentDialog";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-    debugger
     const navigate = useNavigate()
     const [intakeAssessments, setIntakeAssessments] = useState([]);
     const [dialogIsOpen, setDialogIsOpen] = useState(false)

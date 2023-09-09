@@ -9,7 +9,6 @@ module Api
         begin
           JWT.decode(token, ENV['SECRET_KEY_BASE'], true, algorithm: 'HS256')
           render json: { valid: true }, status: :ok
-
         rescue JWT::DecodeError, JWT::ExpiredSignature
           render json: { valid: false }, status: :unauthorized
         end
@@ -19,4 +18,3 @@ module Api
     end
   end
 end
-# request.headers.to_h
