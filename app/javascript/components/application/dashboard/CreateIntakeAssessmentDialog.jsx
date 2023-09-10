@@ -65,7 +65,7 @@ const CreateIntakeAssessmentDialog = (props) => {
     }, [firstName, email])
 
     return (
-        <Dialog open={isOpenProp} onClose={handleClose}>
+        <Dialog open={isOpenProp} onClose={() => {handleClose(null)}}>
             <DialogTitle>Create Intake Assessment</DialogTitle>
             <DialogContent>
                 {

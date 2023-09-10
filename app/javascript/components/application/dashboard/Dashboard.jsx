@@ -33,6 +33,7 @@ const Dashboard = () => {
 
     const onDialogClose = (newIntakeAssessment) => {
         setDialogIsOpen(false)
+
         if (newIntakeAssessment) {
             const newIntakeAssessments = Array.from(intakeAssessments)
             newIntakeAssessments.push(newIntakeAssessment)
@@ -55,6 +56,7 @@ const Dashboard = () => {
                             <TableCell>Email</TableCell>
                             <TableCell>First Name</TableCell>
                             <TableCell>Status</TableCell>
+                            <TableCell>Actions</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
