@@ -5,6 +5,8 @@ import Home from "../components/Home";
 import Application from "./application/Application";
 
 import Login from "./Login";
+import RequestAccess from "./RequestAccess";
+
 import ApplicationRoute from "./ApplicationRoute";
 
 // toolbar
@@ -34,6 +36,8 @@ export default (
         <Fragment>
             <Routes>
                 <Route exact path='/' element={<Home/>}/>
+                <Route exact path='/login' element={<Login/>}/>
+                <Route exact path='/request_access' element={<RequestAccess/>}/>
 
                 <Route exact path='/about' element={<About/>}/>
                 <Route exact path='/contact' element={<Contact/>}/>
@@ -41,7 +45,6 @@ export default (
                 <Route exact path='/dyslexia_resources' element={<DyslexiaResources/>}/>
                 <Route exact path='/privacy_policy' element={<PrivacyPolicy/>}/>
                 <Route exact path='/terms_of_service' element={<TermsOfService/>}/>
-                <Route exact path='/login' element={<Login/>}/>
 
                 <Route exact path='intake/intake_assessments/:intakeAssessmentToken' element={<IntakeAssessment/>}/>
 

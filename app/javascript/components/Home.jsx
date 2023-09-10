@@ -6,19 +6,23 @@ const Home = () => {
     const navigate = useNavigate();
 
     return (
-        <Grid container direction="column" alignItems="center" spacing={2}>
-            <Grid item>
+        <div>
+            <div>
                 <Typography align="center">
                     Gryfn is a comprehensive dyslexia screening and personalized support for reading and learning success.
                 </Typography>
-            </Grid>
+            </div>
 
-            <Grid item>
-                <Button variant="contained" color="primary" onClick={() => { navigate('/instructions') }}>
-                    Start
+            <div style={{display: 'flex', justifyContent: 'space-evenly', marginTop: '20px'}}>
+                <Button variant="contained" color="primary" onClick={() => { navigate('/request_access')}}>
+                    Request Access
                 </Button>
-            </Grid>
-        </Grid>
+
+                <Button variant="contained" color="primary" onClick={() => { navigate('/login') }}>
+                    Login
+                </Button>
+            </div>
+        </div>
     );
 };
 
