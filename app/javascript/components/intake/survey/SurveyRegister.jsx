@@ -15,9 +15,10 @@ import {
     MenuItem,
 } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-import IntakeService from "../../services/IntakeService";
+import IntakeService from "../../../services/IntakeService";
 
-const Register = () => {
+const SurveyRegister = (props) => {
+    const { assessmentToken, moveToNextStepProp } = props
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [birthYear, setBirthYear] = useState("");
@@ -34,11 +35,6 @@ const Register = () => {
     const [emailErrorMessage, setEmailErrorMessage] = useState("");
     const [isBirthYearValid, setIsBirthYearValid] = useState(true);
 
-    debugger
-
-    const token =
-        document.querySelector('[name=csrf-token]').content
-
     const handleSubmit = () => {
         setSaving(true);
 
@@ -52,9 +48,9 @@ const Register = () => {
             level_of_education: levelOfEducation,
         };
 
-        IntakeService.createIntakeAssessment(params).then((response) => {
-            setSaving(false);
-            navigate(`/intake/intake_assessments/${response.data.intakeAssessmentToken}`);
+
+        IntakeService.registerPatient(assessmentToken, params).then((response) => {
+            moveToNextStepProp()
         });
     };
 
@@ -198,4 +194,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default SurveyRegister;

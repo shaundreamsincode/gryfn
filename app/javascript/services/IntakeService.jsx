@@ -9,8 +9,8 @@ class IntakeService {
         axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('[name=csrf-token]').content;
     }
 
-    createIntakeAssessment(params) {
-        return axios.post('/unauthenticated/registrations', params);
+    registerPatient(assessmentToken, params) {
+        return axios.post(`/unauthenticated/intake_assessments/${assessmentToken}/registrations`, params);
     }
 
     getIntakeAssessment(token) {

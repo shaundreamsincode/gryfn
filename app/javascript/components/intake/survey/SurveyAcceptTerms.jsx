@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import {Button, CardContent, Checkbox, FormControlLabel, FormGroup, Link, Typography} from "@material-ui/core";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const AcceptTermsOfServiceAndPrivacyPolicy = () => {
+const SurveyAcceptTerms = (props) => {
+    const { moveToNextStepProp } = props
     const navigate = useNavigate()
     const [privacyPolicyAccepted, setPrivacyPolicyAccepted] = useState(false)
 
@@ -20,7 +21,7 @@ const AcceptTermsOfServiceAndPrivacyPolicy = () => {
                 />
             </FormGroup>
         <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "20px" }}>
-            <Button variant="contained" color="primary" disabled={!privacyPolicyAccepted} onClick={() => {navigate('/register')}}>
+            <Button variant="contained" color="primary" disabled={!privacyPolicyAccepted} onClick={moveToNextStepProp}>
                 Next
             </Button>
         </div>
@@ -28,4 +29,4 @@ const AcceptTermsOfServiceAndPrivacyPolicy = () => {
     </CardContent>)
 }
 
-export default AcceptTermsOfServiceAndPrivacyPolicy
+export default SurveyAcceptTerms

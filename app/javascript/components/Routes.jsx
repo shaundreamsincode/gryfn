@@ -2,12 +2,10 @@ import React, { Fragment } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "../components/Home";
-import Dashboard from "./application/dashboard/Dashboard";
 import Application from "./application/Application";
 
-import Register from "./onboarding/Register"
-import Instructions from "./onboarding/Instructions";
-import AcceptTermsOfServiceAndPrivacyPolicy from "./onboarding/AcceptTermsOfServiceAndPrivacyPolicy";
+import Login from "./Login";
+import ApplicationRoute from "./ApplicationRoute";
 
 // toolbar
 import About from "./app_toolbar/About";
@@ -17,7 +15,6 @@ import DyslexiaResources from "./app_toolbar/DyslexiaResources";
 import TermsOfService from "./app_toolbar/TermsOfService";
 import PrivacyPolicy from "./app_toolbar/PrivacyPolicy";
 
-import IntakeSpeechQuestion from "./intake/speech_questions/IntakeSpeechQuestion";
 
 // intake
 import IntakeAssessment from "./intake/IntakeAssessment";
@@ -28,19 +25,15 @@ import IntakeInsufficientCorrectSpeechQuestionsFailure
     from "./intake/failures/IntakeInsufficientCorrectSpeechQuestionsFailure";
 import IntakeInsufficientIncorrectSpeechQuestionsFailure
     from "./intake/failures/IntakeInsufficientIncorrectSpeechQuestionsFailure";
-import Login from "./Login";
-import ApplicationRoute from "./ApplicationRoute";
-import AccountSettings from "./application/account_settings/AccountSettings";
+import IntakeSpeechQuestion from "./intake/speech_questions/IntakeSpeechQuestion";
+
+import IntakeSurvey from "./intake/survey/IntakeSurvey";
 
 export default (
     <Router>
         <Fragment>
             <Routes>
                 <Route exact path='/' element={<Home/>}/>
-                <Route exact path='/register' element={<Register/>}/>
-                <Route exact path='/instructions' element={<Instructions/>}/>
-                <Route exact path='/accept_tos_and_privacy_policy' element={<AcceptTermsOfServiceAndPrivacyPolicy/>}/>
-
 
                 <Route exact path='/about' element={<About/>}/>
                 <Route exact path='/contact' element={<Contact/>}/>
@@ -51,6 +44,8 @@ export default (
                 <Route exact path='/login' element={<Login/>}/>
 
                 <Route exact path='intake/intake_assessments/:intakeAssessmentToken' element={<IntakeAssessment/>}/>
+
+                <Route exact path='intake/intake_assessments/:intakeAssessmentToken/survey' element={<IntakeSurvey/>}/>
                 <Route exact path='intake/intake_assessments/:intakeAssessmentToken/summary' element={<IntakeSummary/>}/>
 
                 <Route exact path='intake/intake_assessments/:intakeAssessmentToken/speech' element={<IntakeSpeechQuestion/>}/>

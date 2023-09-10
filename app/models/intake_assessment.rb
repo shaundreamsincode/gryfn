@@ -28,12 +28,13 @@ class IntakeAssessment < ApplicationRecord
   }
 
   enum current_step: {
-    speech: 0,
-    eidetic: 1,
-    phonetic: 2,
-    summary: 3,
-    fail_insufficient_correct: 4,
-    fail_insufficient_incorrect: 5
+    survey: 0,
+    speech: 1,
+    eidetic: 2,
+    phonetic: 3,
+    summary: 4,
+    fail_insufficient_correct: 5,
+    fail_insufficient_incorrect: 6
   }
 
   def hashify

@@ -43,16 +43,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_011547) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "documents", force: :cascade do |t|
-    t.text "body"
-    t.text "slug"
-  end
-
-  create_table "foos", force: :cascade do |t|
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-  end
-
   create_table "intake_assessments", force: :cascade do |t|
     t.string "token"
     t.bigint "organization_id"
@@ -64,9 +54,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_011547) do
     t.string "zip_code"
     t.string "level_of_education"
     t.boolean "previously_diagnosed"
-    t.integer "current_speech_question_index"
+    t.integer "current_speech_question_index", default: 0, null: false
     t.integer "speech_assessment_grade_level"
-    t.integer "speech_assessment_current_level"
+    t.integer "speech_assessment_current_level", default: 0, null: false
     t.string "speech_assessment_correct_words", default: [], null: false, array: true
     t.string "speech_assessment_incorrect_words", default: [], null: false, array: true
     t.integer "eidetic_assessment_level"
