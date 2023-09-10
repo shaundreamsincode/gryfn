@@ -66,34 +66,6 @@ const SurveyRegister = (props) => {
         <CardContent>
             <div>
                 <TextField
-                    value={name}
-                    label="First Name"
-                    onChange={(e) => setName(e.target.value)}
-                />
-            </div>
-            <div>
-                <TextField
-                    value={email}
-                    label="Email"
-                    required
-                    onChange={(e) => {
-                        const input = e.target.value;
-                        setEmail(input);
-                        if (emailRegex.test(input)) {
-                            setIsEmailValid(true);
-                            setEmailErrorMessage("");
-                        } else {
-                            setIsEmailValid(false);
-                            setEmailErrorMessage("Invalid email format");
-                        }
-                    }}
-                />
-                {!isEmailValid && (
-                    <Typography color="error">{emailErrorMessage}</Typography>
-                )}
-            </div>
-            <div>
-                <TextField
                     label="Birth Year"
                     value={birthYear}
                     required

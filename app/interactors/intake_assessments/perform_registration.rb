@@ -7,7 +7,6 @@ module IntakeAssessments
 
       intake_assessment.update!(
         assessment_type: calculate_assessment_type,
-        email: context.email,
         birth_year: context.birth_year,
         country: context.country,
         zip_code: context.zip_code,
@@ -17,14 +16,6 @@ module IntakeAssessments
 
       IntakeAssessments::CreateSpeechQuestions.call(assessment: intake_assessment)
       IntakeAssessments::MoveToNextStep.call(assessment: intake_assessment)
-    end
-
-    private def fetch_organization
-      @_organization ||= Organization.find_by!(name: 'ACME corp')
-    end
-
-    private def fetch_created_by
-      @_created_by ||= fetch_organization.accounts.first
     end
 
     private def calculate_assessment_type
