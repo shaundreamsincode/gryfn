@@ -45,13 +45,9 @@ const IntakeSurvey = () => {
     }
 
     return(<CardContent>
-
-        <Typography>Intake Survey</Typography>
-
         {
             fetchContent()
         }
-
     </CardContent>)
 }
 
