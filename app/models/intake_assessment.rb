@@ -51,6 +51,14 @@ class IntakeAssessment < ApplicationRecord
     speech_questions[current_speech_question_index]
   end
 
+  def speech_assessment_correct_words
+    speech_questions.select {|q| q.correct? }.map(&:correct_answer)
+  end
+
+  def speech_assessment_incorrect_words
+    speech_questions.reject {|q| q.correct? }.map(&:correct_answer)
+  end
+
   def dataset
     desd? ? Data::Desd : Data::Adt
   end

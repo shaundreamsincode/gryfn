@@ -9,8 +9,6 @@ module IntakeAssessments
       speech_questions = fetch_speech_questions(intake_assessment)
       validate_unanswered_questions(speech_questions)
 
-      update_correct_and_incorrect_words(intake_assessment, speech_questions)
-
       correct_incorrect_word_length = intake_assessment.desd? ? 4 : 5
       evaluate_assessment_progress(intake_assessment, correct_incorrect_word_length)
 
@@ -29,14 +27,6 @@ module IntakeAssessments
 
     private def validate_unanswered_questions(questions)
       context.fail!(error: :unanswered_questions) if questions.any? { |q| q.answer.blank? }
-    end
-
-    private def update_correct_and_incorrect_words(assessment, questions)
-      correct_words = questions.select(&:is_correct?).map(&:correct_answer)
-      incorrect_words = questions.reject(&:is_correct?).map(&:correct_answer)
-
-      assessment.speech_assessment_correct_words.concat(correct_words).flatten!
-      assessment.speech_assessment_incorrect_words.concat(incorrect_words).flatten!
     end
 
     private def evaluate_assessment_progress(assessment, correct_incorrect_word_length)
