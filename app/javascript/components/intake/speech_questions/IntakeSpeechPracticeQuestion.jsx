@@ -46,12 +46,18 @@ const IntakeSpeechPracticeQuestion = (props) => {
         setTimeout(() => {
             setCountdown(1)
         }, 2000)
+
+        setTimeout(() => {
+            setRecordingInProgress(false)
+        }, 3000)
+
+
     }
 
     const handleStopRecording = () => {
+        // setRecordingInProgress(false)
         window.clearTimeout(timeoutStatus);
         stopRecording()
-        setRecordingInProgress(false)
     }
 
     useEffect(() => {
