@@ -10,7 +10,7 @@ module Api
       @current_account = Account.from_jwt_token(token)
 
       # Check if authentication was successful, and raise an error if not
-      unless @current_account
+      if @current_account.blank?
         render json: { error: 'Unauthorized' }, status: :unauthorized
       end
     end

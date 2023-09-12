@@ -13,6 +13,8 @@ const ApplicationNavbar = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('jwtToken')
+        localStorage.removeItem('token')
+
         navigate('/login')
     }
 
