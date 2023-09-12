@@ -7,6 +7,10 @@ class IntakeAssessments::Speech::CompleteSpeechAssessment
     return if context.errors.present?
 
     grade = calculate_grade
+
+    # IntakeAssessments::CreateEideticQuestions.call
+    # IntakeAssessments::CreatePhoneticQuestions.call
+
     create_eidetic_questions!(grade)
     create_phonetic_questions!
 
