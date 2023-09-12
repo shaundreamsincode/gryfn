@@ -22,7 +22,7 @@ module Unauthenticated
       def update
         question = IntakeSpeechQuestion.find_by_token!(params[:token])
 
-        result = ::IntakeAssessments::AnswerSpeechQuestion.call(
+        result = ::IntakeAssessments::Speech::AnswerSpeechQuestion.call(
           question: question,
           audio_file: request.body.read
         )

@@ -14,7 +14,7 @@ module IntakeAssessments
         level_of_education: context.level_of_education,
       )
 
-      IntakeAssessments::CreateSpeechQuestions.call(assessment: intake_assessment)
+      IntakeAssessments::Speech::CreateSpeechQuestions.call(assessment: intake_assessment)
       IntakeAssessments::MoveToNextStep.call(assessment: intake_assessment)
     end
 

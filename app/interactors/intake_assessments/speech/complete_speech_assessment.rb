@@ -1,4 +1,4 @@
-class IntakeAssessments::CompleteSpeechAssessment
+class IntakeAssessments::Speech::CompleteSpeechAssessment
   include Interactor
 
   def call

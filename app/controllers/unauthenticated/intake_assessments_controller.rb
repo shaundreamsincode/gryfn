@@ -18,7 +18,7 @@ class Unauthenticated::IntakeAssessmentsController < Unauthenticated::Unauthenti
 
   def move_speech_assessment_to_next_level
     intake_assessment = IntakeAssessment.find_by_token!(params[:intake_assessment_token])
-    result = IntakeAssessments::MoveToNextSpeechAssessmentLevel.call(assessment: intake_assessment)
+    result = IntakeAssessments::Speech::MoveToNextSpeechLevel.call(assessment: intake_assessment)
 
     if result.error.present?
       # e.g. not_in_speech_state
