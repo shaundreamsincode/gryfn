@@ -21,7 +21,7 @@ class DecodeSpeech
     result = response.results.first
     context.fail!(error: :decode_error) if result.blank?
 
-    transcript = result.alternatives.first.transcript.downcase
+    transcript = result.alternatives.first.transcript.downcase.split(" ")[0]
     transcript = handle_edge_cases(transcript)
 
     # test to see if google gave us an integer (e.g. '1')
