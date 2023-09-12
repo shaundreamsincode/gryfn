@@ -76,9 +76,8 @@ const Dashboard = () => {
         }
     };
 
-    return (
-        <>
-            <Typography>Dashboard</Typography>
+    const buildTable = () => {
+        return(
             <TableContainer style={{ marginTop: '10px' }} component={Paper}>
                 <Table>
                     <TableHead>
@@ -102,6 +101,20 @@ const Dashboard = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+        )
+    }
+
+    return (
+        <>
+            <Typography>Dashboard</Typography>
+
+            {
+                intakeAssessments.length === 0 && <Typography>You don't have any intake assessments...yet.</Typography>
+            }
+
+            {
+                intakeAssessments.length > 0 && buildTable()
+            }
             <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "20px" }}>
                 <Button
                     onClick={() => { setDialogIsOpen(true) }}

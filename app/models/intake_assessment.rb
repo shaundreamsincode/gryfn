@@ -8,13 +8,13 @@ class IntakeAssessment < ApplicationRecord
   belongs_to :organization
   belongs_to :created_by, foreign_key: :created_by_id, class_name: 'Account'
 
-  has_many :intake_speech_questions
+  has_many :intake_speech_questions, dependent: :destroy
   alias_attribute :speech_questions, :intake_speech_questions
 
-  has_many :intake_eidetic_questions
+  has_many :intake_eidetic_questions, dependent: :destroy
   alias_attribute :eidetic_questions, :intake_eidetic_questions
 
-  has_many :intake_phonetic_questions
+  has_many :intake_phonetic_questions, dependent: :destroy
   alias_attribute :phonetic_questions, :intake_phonetic_questions
 
   enum :assessment_type, { desd: 0, adt: 1 }
