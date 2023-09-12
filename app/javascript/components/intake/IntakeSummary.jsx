@@ -15,7 +15,7 @@ import {useNavigate} from "react-router-dom";
 
 const IntakeSummary = () => {
     const navigate = useNavigate()
-
+    snackbarMessage
     const currentUrl = window.location.href
     const assessmentToken = currentUrl.split("/")[5]
     const [loading, setLoading] = useState(true)
