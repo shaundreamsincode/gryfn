@@ -11,6 +11,7 @@ OnboardOrganization.call(
   account_first_name: 'Corinne',
   account_last_name: 'Carland',
   account_email: 'corinne@gmail.com',
-  account_password: 'password',
-  account_password_confirmation: 'password'
+  account_password: 'Password123!',
+  account_password_confirmation: 'Password123!'
 )
+

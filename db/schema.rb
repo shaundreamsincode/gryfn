@@ -47,9 +47,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_011547) do
     t.string "token"
     t.bigint "organization_id"
     t.datetime "completed_at"
-    t.string "patient_first_name"
-    t.string "email"
-    t.integer "birth_year"
+    t.string "patient_first_name", null: false
+    t.string "email", null: false
+    t.datetime "date_of_birth"
     t.string "country"
     t.string "zip_code"
     t.string "level_of_education"

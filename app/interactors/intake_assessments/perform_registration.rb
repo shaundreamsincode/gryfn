@@ -7,7 +7,7 @@ module IntakeAssessments
 
       intake_assessment.update!(
         assessment_type: calculate_assessment_type,
-        birth_year: context.birth_year,
+        date_of_birth: context.date_of_birth,
         country: context.country,
         zip_code: context.zip_code,
         previously_diagnosed: context.previously_diagnosed,
@@ -19,11 +19,11 @@ module IntakeAssessments
     end
 
     private def calculate_assessment_type
-      if Time.now.year - context.birth_year.to_i < 18
-        return IntakeAssessment::ASSESSMENT_TYPES[:desd]
-      end
+      date_of_birth = context.date_of_birth
+      eighteenth_birthday = date_of_birth + 18 * 365  # Approximate, but will handle leap years
 
-      IntakeAssessment::ASSESSMENT_TYPES[:adt]
+      test_type = eighteenth_birthday <= Date.today ? :adt : :desd
+      IntakeAssessment::ASSESSMENT_TYPES[test_type]
     end
   end
 end

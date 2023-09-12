@@ -14,34 +14,22 @@ import {
     Select,
     MenuItem,
 } from "@material-ui/core";
-import { useNavigate } from "react-router-dom";
 import IntakeService from "../../../services/IntakeService";
 
 const SurveyRegister = (props) => {
     const { assessmentToken, moveToNextStepProp } = props
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [birthYear, setBirthYear] = useState("");
+    const [dateOfBirth, setDateOfBirth] = useState(null);
     const [country, setCountry] = useState("");
     const [zipCode, setZipCode] = useState("");
     const [previouslyDiagnosed, setPreviouslyDiagnosed] = useState(null);
     const [levelOfEducation, setLevelOfEducation] = useState(null);
     const [saving, setSaving] = useState(false);
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const navigate = useNavigate();
-
-    const [isEmailValid, setIsEmailValid] = useState(true);
-    const [emailErrorMessage, setEmailErrorMessage] = useState("");
-    const [isBirthYearValid, setIsBirthYearValid] = useState(true);
-
     const handleSubmit = () => {
         setSaving(true);
 
         const params = {
-            name: name,
-            email: email,
-            birth_year: birthYear,
+            date_of_birth: dateOfBirth,
             country: country,
             zip_code: zipCode,
             previously_diagnosed: previouslyDiagnosed,
@@ -59,30 +47,24 @@ const SurveyRegister = (props) => {
             return true;
         }
 
-        return !(email && isEmailValid && birthYear && isBirthYearValid);
+        return !(dateOfBirth);
     };
 
     return (
         <CardContent>
             <div>
                 <TextField
-                    label="Birth Year"
-                    value={birthYear}
                     required
-                    onChange={(e) => {
-                        const input = e.target.value;
-                        setBirthYear(input);
-
-                        const birthYearIsInteger = /^\d*$/.test(input)
-                        const birthYearIsValid = birthYearIsInteger && Number(input) > 1900 && Number(input) < 2024
-                        setIsBirthYearValid(birthYearIsValid)
+                    id="date"
+                    label="Birthday"
+                    type="date"
+                    inputFormat="MM-DD-YYYY"
+                    onChange={(e) => { setDateOfBirth(e.target.value) }}
+                    value={dateOfBirth}
+                    InputLabelProps={{
+                        shrink: true,
                     }}
                 />
-                {
-                    !isBirthYearValid && (
-                        <Typography color="error">Invalid Birth Year</Typography>
-                    )
-                }
             </div>
             <div>
                 <TextField

@@ -6,7 +6,7 @@ module Unauthenticated
 
         result = ::IntakeAssessments::PerformRegistration.call(
           intake_assessment: intake_assessment,
-          birth_year: params[:birth_year],
+          date_of_birth: Date.parse(params[:date_of_birth]),
           country: params[:country],
           zip_code: params[:zip_code],
           previously_diagnosed: params[:previously_diagnosed],
