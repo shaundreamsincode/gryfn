@@ -8,7 +8,7 @@ import {useNavigate} from "react-router";
 
 const IntakeSurvey = () => {
     const steps = ['welcome', 'instructions', 'accept_terms', 'register']
-    const [currentStepIndex, setCurrentStepIndex] = useState(3)
+    const [currentStepIndex, setCurrentStepIndex] = useState(0)
 
     const currentUrl = window.location.href;
     const assessmentToken = currentUrl.split("/")[5];
