@@ -6,7 +6,6 @@ import { useAudioRecorder } from 'react-audio-voice-recorder';
 import { useNavigate } from "react-router-dom";
 import IntakeSpeechPracticeQuestion from "./IntakeSpeechPracticeQuestion";
 import IntakeQuestionInstructions from "../IntakeQuestionInstructions";
-import Countdown from "react-countdown";
 
 const IntakeSpeechQuestion = () => {
     const currentUrl = window.location.href;
