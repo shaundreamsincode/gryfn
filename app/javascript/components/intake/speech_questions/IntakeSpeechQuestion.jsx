@@ -6,6 +6,7 @@ import { useAudioRecorder } from 'react-audio-voice-recorder';
 import { useNavigate } from "react-router-dom";
 import IntakeSpeechPracticeQuestion from "./IntakeSpeechPracticeQuestion";
 import IntakeQuestionInstructions from "../IntakeQuestionInstructions";
+import Countdown from "react-countdown";
 
 const IntakeSpeechQuestion = () => {
     const currentUrl = window.location.href;
@@ -18,12 +19,13 @@ const IntakeSpeechQuestion = () => {
     const [questionAnswered, setQuestionAnswered] = useState(false)
     const [isSaving, setIsSaving] = useState(false)
     const [question, setQuestion] = useState(null)
-    const [recordButtonText, setRecordButtonText] = useState('Start Recording')
+    const [recordButtonText, setRecordButtonText] = useState('Start')
     const [disableRecordButton, setDisableRecordButton] = useState(false)
 
     const [practiceQuestionSolved, setPracticeQuestionSolved] = useState(localStorage.getItem('speechPracticeQuestionSolved'))
     const [instructionsRead, setInstructionsRead] = useState(localStorage.getItem('speechInstructionsRead'))
 
+    const [countdown, setCountdown] = useState(3)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -34,6 +36,7 @@ const IntakeSpeechQuestion = () => {
         })
     }, [assessmentToken])
 
+
     const timeoutStatus  = setTimeout( function(){
         handleStopRecording();
     }  , 3000);
@@ -41,8 +44,16 @@ const IntakeSpeechQuestion = () => {
     const handleStartRecording = () => {
         setRecordingInProgress(true)
         setDisableRecordButton(true)
-        setRecordButtonText("Recording...")
+        setRecordButtonText("Talk Now")
         startRecording()
+
+        setTimeout(() => {
+                setCountdown(2)
+        }, 1000)
+
+        setTimeout(() => {
+                setCountdown(1)
+        }, 2000)
     }
 
     const handleStopRecording = () => {
@@ -52,14 +63,14 @@ const IntakeSpeechQuestion = () => {
 
     useEffect(() => {
         if (!recordingBlob) return;
-        const wavFromBlob = new File([recordingBlob], "test.wav");
+        const wavFromBlob = new File([recordingBlob], "speech.wav");
 
         setRecordButtonText("Decoding Speech...")
 
         IntakeService.upsertSpeechQuestionResponse(question, wavFromBlob).then((response) => {
             setQuestionAnswered(true)
             setIsSaving(false)
-            setRecordButtonText("Success")
+            setRecordButtonText("Answer Saved!")
         }).catch((error) => {
             console.log(error)
             setQuestionAnswered(true)
@@ -100,6 +111,7 @@ const IntakeSpeechQuestion = () => {
         return(<Card><CardContent>Saving...</CardContent></Card>)
     }
 
+
     return(<Card>
         <CardContent>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -114,15 +126,24 @@ const IntakeSpeechQuestion = () => {
                             }
                         </div>
                         <div>
-                            <Button style={{ marginTop: "20px" }} variant="contained" color="primary" disabled={disableRecordButton} onClick={handleStartRecording}>
-                                {recordButtonText}
-                            </Button>
+                            <div>
+                                <Button style={{ marginTop: "20px" }} variant="contained" color="primary" disabled={disableRecordButton} onClick={handleStartRecording}>
+                                    {recordButtonText}
+                                </Button>
+                            </div>
+                            {
+                                recordingInProgress && <div style={{ textAlign: 'center', marginTop: '30px' }}>
+                                    <Typography variant="h3">
+                                        {countdown}
+                                    </Typography>
+                                </div>
+                            }
                         </div>
                     </div>
                 }
             </div>
             <div style={{ 'display': 'flex', 'justify-content': 'flex-end', 'margin-top': '40px' }}>
-                <Button style={{'margin-top': '30px'}} onClick={() => navigate(`/intake_assessments/${assessmentToken}`)} disabled={!questionAnswered}>Next Question</Button>
+                <Button style={{'margin-top': '30px'}} onClick={() => navigate(`/intake/intake_assessments/${assessmentToken}`)} disabled={!questionAnswered}>Next Question</Button>
             </div>
         </CardContent>
     </Card>)

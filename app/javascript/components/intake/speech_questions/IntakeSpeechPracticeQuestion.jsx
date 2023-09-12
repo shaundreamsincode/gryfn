@@ -13,50 +13,59 @@ import { Alert } from "@mui/material";
 const IntakeSpeechPracticeQuestion = (props) => {
     const { onSolveProp, assessmentToken } = props;
 
-    const [isSaving, setIsSaving] = useState(false);
-    const { startRecording, stopRecording, recordingBlob, isRecording  } = useAudioRecorder()
+    const { startRecording, stopRecording, recordingBlob } = useAudioRecorder()
 
     const [questionAnswered, setQuestionAnswered] = useState(false);
     const [recordingFailed, setRecordingFailed] = useState(false);
     const [recordingFailedCount, setRecordingFailedCount] = useState(0);
     const [incorrectAnswer, setIncorrectAnswer] = useState(null);
     const [disableRecordButton, setDisableRecordButton] = useState(false)
-    const [recordButtonText, setRecordButtonText] = useState('Start Recording')
+    const [recordButtonText, setRecordButtonText] = useState('Start')
+
+    const [recordingInProgress, setRecordingInProgress] = useState(false)
+    const [countdown, setCountdown] = useState(3)
 
     const [showRecordingSuccessMessage, setShowRecordingSuccessMessage] = useState(
         false
     );
 
     const timeoutStatus  = setTimeout( function(){
-        console.log("3 seconds timeout");
         handleStopRecording();
     }  , 3000);
 
     const handleStartRecording = () => {
         setDisableRecordButton(true)
-        setRecordButtonText("Recording...")
+        setRecordingInProgress(true)
+        setRecordButtonText("Talk now")
         startRecording()
+
+        setTimeout(() => {
+            setCountdown(2)
+        }, 1000)
+
+        setTimeout(() => {
+            setCountdown(1)
+        }, 2000)
     }
 
     const handleStopRecording = () => {
         window.clearTimeout(timeoutStatus);
         stopRecording()
+        setRecordingInProgress(false)
     }
 
     useEffect(() => {
         if (!recordingBlob) return;
-        const wavFromBlob = new File([recordingBlob], "test.wav");
+        const wavFromBlob = new File([recordingBlob], "speech.wav");
 
         setRecordButtonText("Decoding Speech...")
         IntakeService.practiceSpeechQuestions(assessmentToken, wavFromBlob).then((response) => {
-            setIsSaving(false);
             setQuestionAnswered(true);
             setShowRecordingSuccessMessage(true);
             setRecordButtonText("Success")
             setRecordingFailedCount(0) // hack to get rid of the error message
 
         }).catch((error) => {
-            setIsSaving(false);
             setRecordButtonText("Start Recording")
             setDisableRecordButton(false)
 
@@ -71,6 +80,8 @@ const IntakeSpeechPracticeQuestion = (props) => {
                 setRecordingFailed(true);
                 setRecordingFailedCount(recordingFailedCount + 1);
             }
+
+            setCountdown(3)
         })
     }, [recordingBlob])
 
@@ -96,13 +107,23 @@ const IntakeSpeechPracticeQuestion = (props) => {
                     </div>
 
                     <div>
-                        {!questionAnswered && (
-                            <div>
-                                <Button style={{ marginTop: "20px" }} variant="contained" color="primary" disabled={disableRecordButton} onClick={handleStartRecording}>
-                                    {recordButtonText}
-                                </Button>
-                            </div>
-                        )}
+                        {
+                            !questionAnswered &&
+                                <div>
+                                    <div>
+                                        <Button style={{ marginTop: "20px" }} variant="contained" color="primary" disabled={disableRecordButton} onClick={handleStartRecording}>
+                                            {recordButtonText}
+                                        </Button>
+                                    </div>
+                                    {
+                                        recordingInProgress && <div style={{ textAlign: 'center', marginTop: '30px' }}>
+                                            <Typography variant="h3">
+                                                {countdown}
+                                            </Typography>
+                                        </div>
+                                    }
+                                </div>
+                        }
                     </div>
                 </div>
 
