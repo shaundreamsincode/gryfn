@@ -27,6 +27,8 @@ class IntakeAssessment < ApplicationRecord
     where(current_step: ['fail_insufficient_correct', 'fail_insufficient_incorrect'])
   }
 
+  scope :speech_questions_on_level
+
   enum current_step: {
     survey: 0,
     speech: 1,
@@ -63,6 +65,20 @@ class IntakeAssessment < ApplicationRecord
     desd? ? Data::Desd : Data::Adt
   end
 
+  def speech_questions_by_level(level)
+    speech_questions.where(level: level)
+  end
+
+  def speech_questions_on_current_level
+    speech_questions_by_level(speech_assessment_grade_level)
+  end
+
+
+  def should_move_to_next_speech_level?
+    speech_assessment_correct_words.count >= required_correct_speech_questions_count ||
+      speech_assessment_grade_level < level_count
+  end
+
   def words_by_level(level)
     desd? ? Data::Desd::WORDS_BY_LEVEL[level] : Data::Adt::WORDS_BY_LEVEL[level]
   end
@@ -85,6 +101,14 @@ class IntakeAssessment < ApplicationRecord
 
   def incorrect_speech_questions
     speech_questions.answered.reject { |question| question.is_correct? }
+  end
+
+  def correct_speech_questions_count
+    correct_speech_questions.count
+  end
+
+  def incorrect_speech_questions_count
+    incorrect_speech_questions.count
   end
 
   def speech_assessment_grade_level_as_label

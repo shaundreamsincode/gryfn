@@ -4,42 +4,63 @@ module IntakeAssessments
       include Interactor
 
       def call
-        intake_assessment = context.assessment
-        validate_current_step(intake_assessment)
+        assessment = context.intake_assessment
+        has_sufficient_correct = has_sufficient_correct?(assessment)
 
-        speech_questions = fetch_speech_questions(intake_assessment)
-        validate_unanswered_questions(speech_questions)
-
-        correct_incorrect_word_length = intake_assessment.desd? ? 4 : 5
-        evaluate_assessment_progress(intake_assessment, correct_incorrect_word_length)
-
-        intake_assessment.speech_assessment_current_level += 1
-        intake_assessment.save!
-        context.assessment = intake_assessment
-      end
-
-      private def validate_current_step(assessment)
-        context.fail!(error: :not_in_speech_state) unless assessment.current_step == 'speech'
-      end
-
-      private def fetch_speech_questions(assessment)
-        assessment.speech_questions.where(level: assessment.speech_assessment_current_level)
-      end
-
-      private def validate_unanswered_questions(questions)
-        context.fail!(error: :unanswered_questions) if questions.any? { |q| q.answer.blank? }
-      end
-
-      private def evaluate_assessment_progress(assessment, correct_incorrect_word_length)
-        if assessment.speech_assessment_correct_words.length > correct_incorrect_word_length &&
-          assessment.speech_assessment_incorrect_words.length > correct_incorrect_word_length
-          complete_speech_result = IntakeAssessments::CompleteSpeechAssessment.call(assessment: assessment)
-
-          context.fail!(error: complete_speech_result.error) if complete_speech_result.error.present?
+        if has_sufficient_correct
+          handle_has_sufficient_correct!(assessment)
         else
-          assessment.speech_assessment_current_level += 1
-          assessment.save!
+          handle_has_insufficient_correct!(assessment)
         end
+
+        context.intake_assessment = assessment.reload
+      end
+
+      private def handle_has_sufficient_correct!(assessment)
+        next_level = assessment.speech_assessment_grade_level + 1
+
+        if next_level < assessment.level_count
+          move_assessment_to_next_level!(assessment)
+        else
+          minimum_correct = desd? ? 5 : 7
+          correct_speech_questions_on_current_level = assessment.speech_questions_on_current_level.select {|q| q.is_correct }
+
+          if correct_speech_questions_on_current_level.count >= minimum_correct
+            IntakeAssessments::Speech::CompleteSpeechAssessment.call(intake_assessment: assessment)
+          else
+            assessment.update!(current_step: :fail_insufficient_incorrect)
+          end
+        end
+      end
+
+      private def handle_has_insufficient_correct!(assessment)
+        max_incorrect_questions_allowed = assessment.desd? ? 5 : 6
+        has_too_many_incorrect_questions = assessment.incorrect_speech_questions_count >= max_incorrect_questions_allowed
+
+        if has_too_many_incorrect_questions
+          assessment.update!(current_step: :fail_insufficient_correct)
+        else
+          IntakeAssessments::Speech::CompleteSpeechAssessment.call(intake_assessment: assessment)
+        end
+      end
+
+      ### HELPER METHODS
+
+      private def move_assessment_to_next_level!(assessment)
+        next_level = assessment.speech_assessment_grade_level + 1
+
+        if next_level >= assessment.level_count
+          assessment.update!(current_step: :fail_insufficient_incorrect)
+        else
+          assessment.update!(speech_assessment_grade_level: next_level)
+        end
+      end
+
+      private def has_sufficient_correct?(assessment)
+        correct_speech_questions_count = assessment.correct_speech_questions.count
+        required_speech_questions_count = assessment.required_correct_speech_questions_count
+
+        correct_speech_questions_count >= required_speech_questions_count
       end
     end
   end
