@@ -22,8 +22,9 @@ module IntakeAssessments
         if next_level < assessment.level_count
           move_assessment_to_next_level!(assessment)
         else
-          minimum_correct = desd? ? 5 : 7
+          minimum_incorrect = desd? ? 5 : 7
           correct_speech_questions_on_current_level = assessment.speech_questions_on_current_level.select {|q| q.is_correct }
+
 
           if correct_speech_questions_on_current_level.count >= minimum_correct
             IntakeAssessments::Speech::CompleteSpeechAssessment.call(intake_assessment: assessment)
@@ -35,12 +36,13 @@ module IntakeAssessments
 
       private def handle_has_insufficient_correct!(assessment)
         max_incorrect_questions_allowed = assessment.desd? ? 5 : 6
-        has_too_many_incorrect_questions = assessment.incorrect_speech_questions_count >= max_incorrect_questions_allowed
+        incorrect_speech_questions_on_current_level = speech_questions_on_current_level.reject { |q| q.is_correct? }
+        has_too_many_incorrect_questions = incorrect_speech_questions_on_current_level.count >= max_incorrect_questions_allowed
 
         if has_too_many_incorrect_questions
           assessment.update!(current_step: :fail_insufficient_correct)
         else
-          IntakeAssessments::Speech::CompleteSpeechAssessment.call(intake_assessment: assessment)
+          move_assessment_to_next_level!(assessment)
         end
       end
 
@@ -52,7 +54,7 @@ module IntakeAssessments
         if next_level >= assessment.level_count
           assessment.update!(current_step: :fail_insufficient_incorrect)
         else
-          assessment.update!(speech_assessment_grade_level: next_level)
+          assessment.update!(speech_assessment_current_level: next_level)
         end
       end
 

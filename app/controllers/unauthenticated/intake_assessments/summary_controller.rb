@@ -12,7 +12,7 @@ module Unauthenticated
           eidetic_questions: map_summary_questions(intake_assessment.eidetic_questions),
           phonetic_questions: map_summary_questions(intake_assessment.phonetic_questions),
 
-          speech_assessment_grade: intake_assessment.speech_assessment_grade_level_as_label,
+          speech_assessment_grade: intake_assessment.speech_assessment_grade_level_as_label, # todo - remove these
           eidetic_assessment_level: intake_assessment.eidetic_assessment_level_as_label,
           phonetic_assessment_level: intake_assessment.phonetic_assessment_level_as_label,
 

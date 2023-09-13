@@ -4,6 +4,7 @@ class IntakeAssessments::Speech::CompleteSpeechAssessment
   def call
     _assessment = context.assessment
     validate_assessment!(_assessment)
+    byebug
     return if context.errors.present?
 
     grade = calculate_grade
