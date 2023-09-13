@@ -1,5 +1,6 @@
 FactoryBot.define do
-  factory :intake_assessment do
+  factory :badge do
     organization { create(:organization) }
+    account { create(:account) }
   end
 end

@@ -77,6 +77,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'timecop'
   gem 'pry', '~> 0.14.2'
+  gem 'faker'
 end
 
 group :development do

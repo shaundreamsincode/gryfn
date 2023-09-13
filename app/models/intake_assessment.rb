@@ -27,8 +27,6 @@ class IntakeAssessment < ApplicationRecord
     where(current_step: ['fail_insufficient_correct', 'fail_insufficient_incorrect'])
   }
 
-  scope :speech_questions_on_level
-
   enum current_step: {
     survey: 0,
     speech: 1,
