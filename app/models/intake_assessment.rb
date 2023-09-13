@@ -68,7 +68,7 @@ class IntakeAssessment < ApplicationRecord
   end
 
   def speech_questions_on_current_level
-    speech_questions_by_level(speech_assessment_grade_level)
+    speech_questions_by_level(speech_assessment_current_level)
   end
 
 
