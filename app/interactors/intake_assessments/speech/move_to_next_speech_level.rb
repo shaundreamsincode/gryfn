@@ -71,7 +71,6 @@ module IntakeAssessments
 
       private def has_sufficient_correct?(assessment)
         correct_speech_questions = assessment.speech_questions_on_current_level.select { |q| q.is_correct? }
-        correct_speech_questions = assessment.speech_questions_on_current_level.select { |q| q.is_correct? }
         required_speech_questions_count = assessment.required_correct_speech_questions_count
 
         correct_speech_questions.count >= required_speech_questions_count
