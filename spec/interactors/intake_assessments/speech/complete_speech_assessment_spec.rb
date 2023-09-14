@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe IntakeAssessments::CompleteSpeechAssessment do
+RSpec.describe IntakeAssessments::Speech::CompleteSpeechAssessment do
   describe "#call" do
     context "when the assessment type is DESD" do
       let(:assessment_type) { 'desd' }
