@@ -25,8 +25,6 @@ const IntakeSummary = () => {
     const [phoneticQuestions, setPhoneticQuestions] = useState(null)
 
     const [speechAssessmentGrade, setSpeechAssessmentGrade] = useState(null)
-    const [eideticAssessmentLevel, setEideticAssessmentLevel] = useState(null)
-    const [phoneticAssessmentLevel, setPhoneticAssessmentLevel] = useState(null)
 
     const [canSendSummaryEmail, setCanSeeSummaryEmail] = useState(null)
     const [snackbarMessage, setSnackbarMessage] = useState(null)
@@ -40,9 +38,6 @@ const IntakeSummary = () => {
             setPhoneticQuestions(response.data.phonetic_questions)
 
             setSpeechAssessmentGrade(response.data.speech_assessment_grade)
-            setEideticAssessmentLevel(response.data.eidetic_assessment_level)
-            setPhoneticAssessmentLevel(response.data.phonetic_assessment_level)
-
             setCanSeeSummaryEmail(response.data.can_send_summary_email)
         })
     }, [assessmentToken])
@@ -63,14 +58,6 @@ const IntakeSummary = () => {
         <CardContent>
             <div>
                 <h2>Speech Assessment Grade: { speechAssessmentGrade }</h2>
-            </div>
-
-            <div>
-                <b>Eidetic Questions Level: { eideticAssessmentLevel }</b>
-            </div>
-
-            <div>
-                <b>Phonetic Questions Level: { phoneticAssessmentLevel }</b>
             </div>
 
             <h3 style={{ 'marginTop': '50px' }}>Speech Questions</h3>

@@ -38,7 +38,7 @@ OnboardOrganization.call(
   organization_name: "Shaun's Org",
   account_first_name: 'Shaun',
   account_last_name: 'Carland',
-  account_email: 'shauncarland@gmail.com',
+  account_email: 'shaun@gmail.com',
   account_password: 'passworded',
   account_password_confirmation: 'passworded'
 )

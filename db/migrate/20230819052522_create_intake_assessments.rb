@@ -19,9 +19,6 @@ class CreateIntakeAssessments < ActiveRecord::Migration[7.0]
       t.integer :speech_assessment_grade_level # todo - rename to just grade
       t.integer :speech_assessment_current_level, null: false, default: 0
 
-      t.integer :eidetic_assessment_level
-      t.integer :phonetic_assessment_level
-
       # enums
       t.integer :current_step, null: false, default: 0
       t.integer :assessment_type, null: false, default: 0

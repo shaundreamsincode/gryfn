@@ -15,15 +15,18 @@ module IntakeAssessments
 
       private def create_questions!(words_by_level_data)
         questions = []
+        index = 0
 
         words_by_level_data.each_with_index do |words, level|
-          words.each_with_index do |word, index|
+          words.each_with_index do |word|
             questions << IntakeSpeechQuestion.create!(
               correct_answer: word,
               index: index,
               assessment: context.assessment,
               level: level
             )
+
+            index += 1
           end
         end
 

@@ -34,8 +34,6 @@ RSpec.describe IntakeAssessments::Speech::CompleteSpeechAssessment do
 
         expect(assessment).to have_attributes(
                                        speech_assessment_grade_level: 1,
-                                       eidetic_assessment_level: 2,
-                                       phonetic_assessment_level: 3
                                      )
 
         expect(IntakeEideticQuestion.count).to eq(5)
@@ -131,8 +129,6 @@ RSpec.describe IntakeAssessments::Speech::CompleteSpeechAssessment do
 
         expect(assessment).to have_attributes(
                                        speech_assessment_grade_level: 1,
-                                       eidetic_assessment_level: 2,
-                                       phonetic_assessment_level: 3,
                                      )
 
         expect(IntakeEideticQuestion.count).to eq(7)

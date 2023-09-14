@@ -48,7 +48,7 @@ class IntakeAssessment < ApplicationRecord
   end
 
   def current_speech_question
-    speech_questions[current_speech_question_index]
+    speech_questions.sort_by(&:index)[current_speech_question_index]
   end
 
   def speech_assessment_correct_words
@@ -114,19 +114,5 @@ class IntakeAssessment < ApplicationRecord
 
     desd? ? Data::Desd::LEVEL_LABELS[speech_assessment_grade_level] :
       Data::Adt::LEVEL_LABELS[speech_assessment_grade_level]
-  end
-
-  def eidetic_assessment_level_as_label
-    return if eidetic_assessment_level.nil?
-
-    desd? ? Data::Desd::LEVEL_LABELS[eidetic_assessment_level] :
-      Data::Adt::LEVEL_LABELS[eidetic_assessment_level]
-  end
-
-  def phonetic_assessment_level_as_label
-    return if phonetic_assessment_level.nil?
-
-    desd? ? Data::Desd::LEVEL_LABELS[phonetic_assessment_level] :
-      Data::Adt::LEVEL_LABELS[phonetic_assessment_level]
   end
 end
