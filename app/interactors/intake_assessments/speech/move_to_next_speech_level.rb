@@ -16,20 +16,19 @@ module IntakeAssessments
         context.intake_assessment = assessment.reload
       end
 
+      # speech_questions_on_grade_level
       private def handle_has_sufficient_correct!(assessment)
         next_level = assessment.speech_assessment_current_level + 1
 
         if next_level < assessment.level_count
-          return move_assessment_to_next_level!(assessment)
+          return move_assessment_to_next_level_on_row_success!(assessment)
         end
 
-        minimum_incorrect = assessment.desd? ? 5 : 7
+        maximum_incorrect_allowed = assessment.desd? ? 5 : 7
+        incorrect_speech_questions_on_grade_level = assessment.speech_questions_on_grade_level.reject {|q| q.is_correct }
 
-        correct_speech_questions_on_current_level = assessment.speech_questions_on_current_level.select {|q| q.is_correct }
-
-        IntakeAssessments::Speech::CompleteSpeechAssessment.call(intake_assessment: assessment)
-
-        if correct_speech_questions_on_current_level.count >= minimum_correct
+        byebug
+        if incorrect_speech_questions_on_grade_level.count >= maximum_incorrect_allowed
           IntakeAssessments::Speech::CompleteSpeechAssessment.call(intake_assessment: assessment)
         else
           assessment.update!(current_step: :fail_insufficient_incorrect)
@@ -39,27 +38,29 @@ module IntakeAssessments
       private def handle_has_insufficient_correct!(assessment)
         max_incorrect_questions_allowed = assessment.desd? ? 5 : 7
         incorrect_questions_count = assessment.speech_questions.reject {|q| q.is_correct? }.count
-        failed_level = incorrect_questions_count >= max_incorrect_questions_allowed
+        failed = incorrect_questions_count >= max_incorrect_questions_allowed # todo - change this variable name...
 
-        if failed_level
-          min_correct_questions_allowed = assessment.desd? ? 5 : 7
+        if failed
+          min_correct_questions_required = assessment.desd? ? 5 : 7
           correct_questions_count = assessment.speech_questions.select {|q| q.is_correct? }.count
-          sufficient_questions_correct = correct_questions_count >= min_correct_questions_allowed
+          insufficient_correct_questions = correct_questions_count < min_correct_questions_required
 
-          if sufficient_questions_correct
+          if insufficient_correct_questions
+            return assessment.update!(current_step: :fail_insufficient_correct)
+          end
+
+          if assessment.speech_assessment_current_level >= assessment.level_count
             return IntakeAssessments::Speech::CompleteSpeechAssessment.call(assessment: assessment)
           end
 
-          return assessment.update!(current_step: :fail_insufficient_correct)
+          return assessment.update!(speech_assessment_current_level: assessment.speech_assessment_current_level + 1)
         end
 
-        move_assessment_to_next_level!(assessment)
+        move_assessment_to_next_level_on_row_success!(assessment)
       end
 
-
       ### HELPER METHODS
-
-      private def move_assessment_to_next_level!(assessment)
+      private def move_assessment_to_next_level_on_row_success!(assessment)
         next_level = assessment.speech_assessment_current_level + 1
 
         if next_level >= assessment.level_count
