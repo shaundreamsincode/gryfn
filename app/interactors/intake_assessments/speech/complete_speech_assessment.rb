@@ -7,11 +7,7 @@ class IntakeAssessments::Speech::CompleteSpeechAssessment
 
     grade = calculate_grade
 
-    context.assessment.update!(
-      speech_assessment_grade_level: grade,
-      eidetic_assessment_level: grade + 1,
-      completed_at: Time.zone.now
-    )
+    context.assessment.update!(speech_assessment_grade_level: grade, completed_at: Time.zone.now)
 
     IntakeAssessments::CreateEideticQuestions.call(assessment: _assessment)
     IntakeAssessments::CreatePhoneticQuestions.call(assessment: _assessment)

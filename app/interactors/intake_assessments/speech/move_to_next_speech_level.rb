@@ -39,9 +39,9 @@ module IntakeAssessments
       private def handle_has_insufficient_correct!(assessment)
         max_incorrect_questions_allowed = assessment.desd? ? 5 : 7
         incorrect_questions_count = assessment.speech_questions.reject {|q| q.is_correct? }.count
-        too_many_incorrect_questions = incorrect_questions_count >= max_incorrect_questions_allowed
+        failed_level = incorrect_questions_count >= max_incorrect_questions_allowed
 
-        if too_many_incorrect_questions
+        if failed_level
           min_correct_questions_allowed = assessment.desd? ? 5 : 7
           correct_questions_count = assessment.speech_questions.select {|q| q.is_correct? }.count
           sufficient_questions_correct = correct_questions_count >= min_correct_questions_allowed

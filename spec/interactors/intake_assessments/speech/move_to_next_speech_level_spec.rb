@@ -6,9 +6,6 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextSpeechLevel do
       organization = create(:organization)
       account = create(:account)
       _badge = create(:badge, account: account, organization: organization)
-      organization = create(:organization)
-      account = create(:account)
-      _badge = create(:badge, account: account, organization: organization)
       assessment = create(
         :intake_assessment, :desd,
         created_by: account,
@@ -123,6 +120,34 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextSpeechLevel do
       eidetic_questions = IntakeEideticQuestion.all
       expect(eidetic_questions.count).to eq(5)
       expect(eidetic_questions.sort_by(&:index).pluck(:correct_answer)).to eq(%w(story they girl doll good))
+    end
+
+    context "when all 5 questions on the first level are wrong" do
+      it "increments the assessment's speech level but doesn't change its current step" do
+        organization = create(:organization)
+        account = create(:account)
+        _badge = create(:badge, account: account, organization: organization)
+        assessment = create(
+          :intake_assessment, :desd,
+          created_by: account,
+          organization: organization,
+          current_step: 'speech',
+          speech_assessment_current_level: 0
+        )
+
+        _speech_questions_level_0 = [
+          create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'baby', level: 0),
+          create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'one', level: 0),
+          create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'boat', level: 0),
+          create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'do', level: 0),
+          create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'car', level: 0)
+        ]
+
+        IntakeAssessments::Speech::MoveToNextSpeechLevel.call(assessment: assessment)
+        assessment.reload
+        expect(assessment.speech_assessment_current_level).to eq(1)
+        expect(assessment.current_step).to eq('speech')
+      end
     end
 
     # context "when the assessment is at the last speech level and has a sufficient number of correct words" do
