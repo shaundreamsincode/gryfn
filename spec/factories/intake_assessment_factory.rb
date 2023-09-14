@@ -8,8 +8,6 @@ FactoryBot.define do
       intake_assessment.organization = organization
       intake_assessment.created_by = account
     end
-    # association :organization, factory: :organization
-    # association :created_by, factory: :account, organization: :organization
 
     patient_first_name { Faker::Name.first_name }
     email { Faker::Internet.email }
