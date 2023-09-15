@@ -21,7 +21,7 @@ module IntakeAssessments
         questions_answered = assessment.speech_questions.where.not(answer: nil).where(level: assessment.speech_current_level)
 
         if questions_answered.length === 5
-          IntakeAssessments::Speech::MoveToNextSpeechLevel.call(assessment: assessment)
+          IntakeAssessments::Speech::MoveToNextLevel.call(assessment: assessment)
         end
 
         context.question = question.reload

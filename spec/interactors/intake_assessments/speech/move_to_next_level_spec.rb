@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe IntakeAssessments::Speech::MoveToNextSpeechLevel do
+RSpec.describe IntakeAssessments::Speech::MoveToNextLevel do
   describe "desd" do
     it "moves the speech current level by 1" do
       organization = create(:organization)
@@ -25,7 +25,7 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextSpeechLevel do
         create(:intake_speech_question, :correct, assessment: assessment, answer: 'car', index: 4, level: 0)
       ]
 
-      IntakeAssessments::Speech::MoveToNextSpeechLevel.call(assessment: assessment)
+      IntakeAssessments::Speech::MoveToNextLevel.call(assessment: assessment)
       assessment.reload
       expect(assessment.speech_current_level).to eq(1)
       expect(assessment.current_step).to eq('speech')
@@ -67,7 +67,7 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextSpeechLevel do
         create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'some', index: 14, level: 2)
       ]
 
-      IntakeAssessments::Speech::MoveToNextSpeechLevel.call(assessment: assessment)
+      IntakeAssessments::Speech::MoveToNextLevel.call(assessment: assessment)
       assessment.reload
       expect(assessment.current_step).to eq('eidetic')
     end
@@ -116,7 +116,7 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextSpeechLevel do
         create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'wait', index: 19, level: 3)
       ]
 
-      IntakeAssessments::Speech::MoveToNextSpeechLevel.call(assessment: assessment)
+      IntakeAssessments::Speech::MoveToNextLevel.call(assessment: assessment)
       expect(assessment.reload.current_step).to eq('eidetic')
       expect(assessment.reload.speech_score).to eq(2)
 
@@ -146,7 +146,7 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextSpeechLevel do
           create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'car', index: 4, level: 0)
         ]
 
-        IntakeAssessments::Speech::MoveToNextSpeechLevel.call(assessment: assessment)
+        IntakeAssessments::Speech::MoveToNextLevel.call(assessment: assessment)
         assessment.reload
         expect(assessment.current_step).to eq('speech')
         expect(assessment.speech_current_level).to eq(1)
@@ -192,7 +192,7 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextSpeechLevel do
     #         create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'liquidate', level: 9)
     #       ]
     #
-    #       IntakeAssessments::Speech::MoveToNextSpeechLevel.call(assessment: assessment)
+    #       IntakeAssessments::Speech::MoveToNextLevel.call(assessment: assessment)
     #       assessment.reload
     #       byebug
     #     end
