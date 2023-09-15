@@ -54,9 +54,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_011547) do
     t.string "zip_code"
     t.string "level_of_education"
     t.boolean "previously_diagnosed"
-    t.integer "current_speech_question_index", default: 0, null: false
-    t.integer "speech_assessment_grade_level"
-    t.integer "speech_assessment_current_level", default: 0, null: false
+    t.integer "speech_question_index", default: 0, null: false
+    t.integer "speech_score"
+    t.integer "speech_current_level", default: 0, null: false
     t.integer "current_step", default: 0, null: false
     t.integer "assessment_type", default: 0, null: false
     t.bigint "account_id"

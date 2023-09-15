@@ -3,7 +3,7 @@ module Unauthenticated
     class SpeechQuestionsController < UnauthenticatedController
       def index
         intake_assessment = IntakeAssessment.find_by_token!(params[:intake_assessment_token])
-        level = intake_assessment.speech_assessment_current_level
+        level = intake_assessment.speech_current_level
         questions_scoped_by_level = intake_assessment.speech_questions.where(level: level).order(:index)
 
         json = questions_scoped_by_level.map do |question|

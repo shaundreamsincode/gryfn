@@ -49,7 +49,7 @@ RSpec.describe PerformRegistration do
     assessment = IntakeAssessment.first
 
     expect(assessment).to have_attributes(
-                         speech_assessment_current_level: 0,
+                         speech_current_level: 0,
                          patient_first_name: 'Spongebob',
                          email: 'spongebob@squarepants.com',
                          birth_year: birth_year,

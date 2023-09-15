@@ -8,7 +8,7 @@ class IntakeAssessments::Speech::CompleteSpeechAssessment
     grade = calculate_grade
 
     context.assessment.update!(
-      speech_assessment_grade_level: grade,
+      speech_score: grade,
       eidetic_assessment_level: grade + 1,
       completed_at: Time.zone.now
     )

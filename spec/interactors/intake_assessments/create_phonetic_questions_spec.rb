@@ -12,8 +12,8 @@ RSpec.describe IntakeAssessments::CreatePhoneticQuestions do
           created_by: account,
           organization: organization,
           current_step: 'speech',
-          speech_assessment_grade_level: 1,
-          speech_assessment_current_level: 2
+          speech_score: 1,
+          speech_current_level: 2
         )
 
         _speech_questions_level_0 = [

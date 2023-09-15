@@ -14,7 +14,7 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextSpeechLevel do
         created_by: account,
         organization: organization,
         current_step: 'speech',
-        speech_assessment_current_level: 0
+        speech_current_level: 0
       ) # todo - remove organization id?
 
       _speech_questions_level_0 = [
@@ -27,7 +27,7 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextSpeechLevel do
 
       IntakeAssessments::Speech::MoveToNextSpeechLevel.call(assessment: assessment)
       assessment.reload
-      expect(assessment.speech_assessment_current_level).to eq(1)
+      expect(assessment.speech_current_level).to eq(1)
       expect(assessment.current_step).to eq('speech')
     end
 
@@ -40,7 +40,7 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextSpeechLevel do
         created_by: account,
         organization: organization,
         current_step: 'speech',
-        speech_assessment_current_level: 2
+        speech_current_level: 2
       )
 
       _speech_questions_level_0 = [
@@ -81,7 +81,7 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextSpeechLevel do
         created_by: account,
         organization: organization,
         current_step: 'speech',
-        speech_assessment_current_level: 3
+        speech_current_level: 3
       )
 
       _speech_questions_level_0 = [
@@ -118,7 +118,7 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextSpeechLevel do
 
       IntakeAssessments::Speech::MoveToNextSpeechLevel.call(assessment: assessment)
       expect(assessment.reload.current_step).to eq('eidetic')
-      expect(assessment.reload.speech_assessment_grade_level).to eq(2)
+      expect(assessment.reload.speech_score).to eq(2)
 
       eidetic_questions = IntakeEideticQuestion.all
       expect(eidetic_questions.count).to eq(5)
@@ -136,7 +136,7 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextSpeechLevel do
     #         created_by: account,
     #         organization: organization,
     #         current_step: 'speech',
-    #         speech_assessment_current_level: 9
+    #         speech_current_level: 9
     #       )
     #
     #

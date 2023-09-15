@@ -4,15 +4,15 @@ require "rails_helper"
 RSpec.describe Api::IntakeAssessmentsController, type: :request do
   describe "#move_speech_assessment_to_next_level" do
     it do
-      intake_assessment = create(:intake_assessment, speech_assessment_current_level: 1)
+      intake_assessment = create(:intake_assessment, speech_current_level: 1)
 
       post "/api/intake_assessments/#{intake_assessment.token}/move_speech_assessment_to_next_level"
-      expect(intake_assessment.reload.speech_assessment_current_level).to eq(2)
+      expect(intake_assessment.reload.speech_current_level).to eq(2)
     end
 
     context "when there is a speech question at the current level that is unanswered" do
       it "is an unsuccessful request" do
-        intake_assessment = create(:intake_assessment, speech_assessment_current_level: 1)
+        intake_assessment = create(:intake_assessment, speech_current_level: 1)
         _unanswered_question = create(:intake_speech_question, assessment: intake_assessment, level: 1)
 
         post "/api/intake_assessments/#{intake_assessment.token}/move_speech_assessment_to_next_level"
@@ -27,7 +27,7 @@ RSpec.describe Api::IntakeAssessmentsController, type: :request do
           :intake_assessment,
           speech_assessment_correct_words: ['bear', 'baby', 'cow', 'deer', 'elf'],
           speech_assessment_incorrect_words: ['zebra', 'yay', 'x-ray', 'war', 'vet'],
-          speech_assessment_current_level: 1
+          speech_current_level: 1
         )
 
         post "/api/intake_assessments/#{intake_assessment.token}/move_speech_assessment_to_next_level"

@@ -17,7 +17,7 @@ module IntakeAssessments
       end
 
       private def handle_has_sufficient_correct!(assessment)
-        next_level = assessment.speech_assessment_current_level + 1
+        next_level = assessment.speech_current_level + 1
 
         if next_level < assessment.level_count
           return move_assessment_to_next_level!(assessment)
@@ -60,12 +60,12 @@ module IntakeAssessments
       ### HELPER METHODS
 
       private def move_assessment_to_next_level!(assessment)
-        next_level = assessment.speech_assessment_current_level + 1
+        next_level = assessment.speech_current_level + 1
 
         if next_level >= assessment.level_count
           assessment.update!(current_step: :fail_insufficient_incorrect)
         else
-          assessment.update!(speech_assessment_current_level: next_level)
+          assessment.update!(speech_current_level: next_level)
         end
       end
 

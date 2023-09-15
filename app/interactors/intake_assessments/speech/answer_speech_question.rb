@@ -15,10 +15,10 @@ module IntakeAssessments
         end
 
         assessment = question.assessment
-        assessment.current_speech_question_index += 1
+        assessment.speech_question_index += 1
         assessment.save!
 
-        questions_answered = assessment.speech_questions.where.not(answer: nil).where(level: assessment.speech_assessment_current_level)
+        questions_answered = assessment.speech_questions.where.not(answer: nil).where(level: assessment.speech_current_level)
 
         if questions_answered.length === 5
           IntakeAssessments::Speech::MoveToNextSpeechLevel.call(assessment: assessment)

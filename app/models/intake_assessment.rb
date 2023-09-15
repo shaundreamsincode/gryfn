@@ -48,7 +48,7 @@ class IntakeAssessment < ApplicationRecord
   end
 
   def current_speech_question
-    speech_questions.sort_by(&:index)[current_speech_question_index]
+    speech_questions.sort_by(&:index)[speech_question_index]
   end
 
   def speech_assessment_correct_words
@@ -68,13 +68,13 @@ class IntakeAssessment < ApplicationRecord
   end
 
   def speech_questions_on_current_level
-    speech_questions_by_level(speech_assessment_current_level)
+    speech_questions_by_level(speech_current_level)
   end
 
 
   def should_move_to_next_speech_level?
     speech_assessment_correct_words.count >= required_correct_speech_questions_count ||
-      speech_assessment_grade_level < level_count
+      speech_score < level_count
   end
 
   def words_by_level(level)
@@ -109,10 +109,10 @@ class IntakeAssessment < ApplicationRecord
     incorrect_speech_questions.count
   end
 
-  def speech_assessment_grade_level_as_label
-    return if speech_assessment_grade_level.nil?
+  def speech_score_as_label
+    return if speech_score.nil?
 
-    desd? ? Data::Desd::LEVEL_LABELS[speech_assessment_grade_level] :
-      Data::Adt::LEVEL_LABELS[speech_assessment_grade_level]
+    desd? ? Data::Desd::LEVEL_LABELS[speech_score] :
+      Data::Adt::LEVEL_LABELS[speech_score]
   end
 end

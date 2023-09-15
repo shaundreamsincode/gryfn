@@ -11,7 +11,7 @@ RSpec.describe IntakeAssessments::CreateEideticQuestions do
         created_by: account,
         organization: organization,
         current_step: 'speech',
-        speech_assessment_grade_level: 1
+        speech_score: 1
       )
 
       _speech_questions_level_0 = [

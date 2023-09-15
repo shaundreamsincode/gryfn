@@ -30,10 +30,10 @@ RSpec.describe IntakeAssessments::Speech::CompleteSpeechAssessment do
           IntakeAssessments::CompleteSpeechAssessment.call(assessment: assessment)
         }.to change { assessment.reload.current_step }.from('speech').to('eidetic')
 
-        expect(assessment.reload.speech_assessment_grade_level).to eq(1)
+        expect(assessment.reload.speech_score).to eq(1)
 
         expect(assessment).to have_attributes(
-                                       speech_assessment_grade_level: 1,
+                                       speech_score: 1,
                                      )
 
         expect(IntakeEideticQuestion.count).to eq(5)
@@ -128,7 +128,7 @@ RSpec.describe IntakeAssessments::Speech::CompleteSpeechAssessment do
         }.to change { assessment.reload.current_step }.from('speech').to('eidetic')
 
         expect(assessment).to have_attributes(
-                                       speech_assessment_grade_level: 1,
+                                       speech_score: 1,
                                      )
 
         expect(IntakeEideticQuestion.count).to eq(7)
