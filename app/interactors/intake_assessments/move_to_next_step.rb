@@ -24,4 +24,12 @@ class IntakeAssessments::MoveToNextStep
   private def handle_current_step_summary
     # no-op
   end
+
+  def handle_current_step_fail_insufficient_correct
+    # no-op
+  end
+
+  def handle_current_step_fail_insufficient_incorrect
+    # no-op
+  end
 end

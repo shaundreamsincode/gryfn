@@ -27,10 +27,12 @@ module IntakeAssessments
         next_level = assessment.speech_current_level + 1
 
         if next_level >= assessment.level_count
-          assessment.update!(current_step: :fail_insufficient_incorrect)
-        else
-          assessment.update!(speech_current_level: next_level)
+          return assessment.update!(current_step: :fail_insufficient_incorrect)
         end
+        assessment.update!(
+          speech_current_level: next_level,
+          speech_score: assessment.speech_score + 1
+        )
       end
     end
   end
