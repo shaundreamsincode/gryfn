@@ -15,7 +15,6 @@ import {useNavigate} from "react-router-dom";
 
 const IntakeSummary = () => {
     const navigate = useNavigate()
-    snackbarMessage
     const currentUrl = window.location.href
     const assessmentToken = currentUrl.split("/")[5]
     const [loading, setLoading] = useState(true)
@@ -24,7 +23,8 @@ const IntakeSummary = () => {
     const [eideticQuestions, setEideticQuestions] = useState(null)
     const [phoneticQuestions, setPhoneticQuestions] = useState(null)
 
-    const [speechAssessmentGrade, setSpeechAssessmentGrade] = useState(null)
+    const [speechScore, setSpeechScore] = useState(null)
+    const [speechCurrentLevel, setSpeechCurrentLevel] = useState(null)
 
     const [canSendSummaryEmail, setCanSeeSummaryEmail] = useState(null)
     const [snackbarMessage, setSnackbarMessage] = useState(null)
@@ -32,12 +32,12 @@ const IntakeSummary = () => {
     useEffect(() => {
         IntakeService.getIntakeAssessmentSummary(assessmentToken).then((response) => {
             setLoading(false)
-            // eidetic_assessment_level_as_label
             setSpeechQuestions(response.data.speech_questions)
             setEideticQuestions(response.data.eidetic_questions)
             setPhoneticQuestions(response.data.phonetic_questions)
 
-            setSpeechAssessmentGrade(response.data.speech_assessment_grade)
+            setSpeechScore(response.data.speech_score)
+            setSpeechCurrentLevel(response.data.speech_current_level)
             setCanSeeSummaryEmail(response.data.can_send_summary_email)
         })
     }, [assessmentToken])
@@ -57,7 +57,11 @@ const IntakeSummary = () => {
     return(
         <CardContent>
             <div>
-                <h2>Speech Assessment Grade: { speechAssessmentGrade }</h2>
+                <h3>Speech Assessment Grade: { speechScore }</h3>
+            </div>
+
+            <div>
+                <h3>Last Level Attempted: { speechCurrentLevel }</h3>
             </div>
 
             <h3 style={{ 'marginTop': '50px' }}>Speech Questions</h3>

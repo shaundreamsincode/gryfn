@@ -7,11 +7,18 @@ module Unauthenticated
       end
 
       private def map_summary(intake_assessment)
+        speech_score = intake_assessment.desd? ?  Data::Desd::LEVEL_LABELS[intake_assessment.speech_score] :
+                         Data::Adt::LEVEL_LABELS[intake_assessment.speech_score]
+
+        speech_current_level = intake_assessment.desd? ?  Data::Desd::LEVEL_LABELS[intake_assessment.speech_current_level] :
+                                 Data::Adt::LEVEL_LABELS[intake_assessment.speech_current_level]
         {
           speech_questions: map_summary_questions(intake_assessment.speech_questions),
           eidetic_questions: map_summary_questions(intake_assessment.eidetic_questions),
           phonetic_questions: map_summary_questions(intake_assessment.phonetic_questions),
-          can_send_summary_email: intake_assessment.email == 'test@gryfn.io'
+          can_send_summary_email: intake_assessment.email == 'test@gryfn.io',
+          speech_score: speech_score,
+          speech_current_level: speech_current_level
         }
       end
 

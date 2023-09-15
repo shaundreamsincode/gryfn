@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :intake_assessments, param: :token, only: :show do
       post :move_speech_assessment_to_next_level
       post :cancel
+      post :move_to_next_step
       get :current_speech_question
 
       # todo - try refactoring using a namespace?
