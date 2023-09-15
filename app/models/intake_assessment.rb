@@ -71,6 +71,9 @@ class IntakeAssessment < ApplicationRecord
     speech_questions_by_level(speech_current_level)
   end
 
+  def speech_questions_on_score_level
+    speech_questions_by_level(speech_score)
+  end
 
   def should_move_to_next_speech_level?
     speech_assessment_correct_words.count >= required_correct_speech_questions_count ||

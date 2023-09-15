@@ -5,24 +5,18 @@ class IntakeAssessments::Speech::CompleteSpeechAssessment
     _assessment = context.assessment
     return if context.errors.present?
 
-    grade = calculate_grade
-
-    context.assessment.update!(
-      speech_score: grade,
-      eidetic_assessment_level: grade + 1,
-      completed_at: Time.zone.now
-    )
+    score = calculate_score
+    context.assessment.update!(speech_score: score, completed_at: Time.zone.now)
 
     IntakeAssessments::CreateEideticQuestions.call(assessment: _assessment)
     IntakeAssessments::CreatePhoneticQuestions.call(assessment: _assessment)
 
-    IntakeAssessments::MoveToNextStep.call(assessment: context.assessment)
+    IntakeAssessments::MoveToNextStep.call(assessment: _assessment)
     context.assessment.reload
   end
 
-  # should return an integer
-  private def calculate_grade
-    grade = 0
+  private def calculate_score
+    score = 0
 
     context.assessment.level_count.times do |level|
       correct_at_level = IntakeSpeechQuestion.where(
@@ -31,9 +25,9 @@ class IntakeAssessments::Speech::CompleteSpeechAssessment
       ).select { |question| question.is_correct? }
 
       min_correct_required = context.assessment.desd? ? 3 : 4
-      grade = level if correct_at_level.count >= min_correct_required
+      score = level if correct_at_level.count >= min_correct_required
     end
 
-    grade
+    score
   end
 end

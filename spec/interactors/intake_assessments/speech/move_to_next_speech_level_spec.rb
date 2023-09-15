@@ -18,11 +18,11 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextSpeechLevel do
       ) # todo - remove organization id?
 
       _speech_questions_level_0 = [
-        create(:intake_speech_question, :correct, assessment: assessment, answer: 'baby', level: 0),
-        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'one', level: 0),
-        create(:intake_speech_question, :correct, assessment: assessment, answer: 'boat', level: 0),
-        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'do', level: 0),
-        create(:intake_speech_question, :correct, assessment: assessment, answer: 'car', level: 0)
+        create(:intake_speech_question, :correct, assessment: assessment, answer: 'baby', index: 0, level: 0),
+        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'one', index: 1, level: 0),
+        create(:intake_speech_question, :correct, assessment: assessment, answer: 'boat', index: 2, level: 0),
+        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'do', index: 3, level: 0),
+        create(:intake_speech_question, :correct, assessment: assessment, answer: 'car', index: 4, level: 0)
       ]
 
       IntakeAssessments::Speech::MoveToNextSpeechLevel.call(assessment: assessment)
@@ -44,27 +44,27 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextSpeechLevel do
       )
 
       _speech_questions_level_0 = [
-        create(:intake_speech_question, :correct, assessment: assessment, answer: 'baby', level: 0),
-        create(:intake_speech_question, :correct, assessment: assessment, answer: 'one', level: 0),
-        create(:intake_speech_question, :correct, assessment: assessment, answer: 'boat', level: 0),
-        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'do', level: 0),
-        create(:intake_speech_question, :correct, assessment: assessment, answer: 'car', level: 0)
+        create(:intake_speech_question, :correct, assessment: assessment, answer: 'baby', index: 0, level: 0),
+        create(:intake_speech_question, :correct, assessment: assessment, answer: 'one', index: 1, level: 0),
+        create(:intake_speech_question, :correct, assessment: assessment, answer: 'boat', index: 2, level: 0),
+        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'do', index: 3, level: 0),
+        create(:intake_speech_question, :correct, assessment: assessment, answer: 'car', index: 4, level: 0)
       ]
 
       _speech_questions_level_1 = [
-        create(:intake_speech_question, :correct, assessment: assessment, answer: 'was', level: 1),
-        create(:intake_speech_question, :correct, assessment: assessment, answer: 'daddy', level: 1),
-        create(:intake_speech_question, :correct, assessment: assessment, answer: 'book', level: 1),
-        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'good', level: 1),
-        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'doll',level: 1)
+        create(:intake_speech_question, :correct, assessment: assessment, answer: 'was', index: 5, level: 1),
+        create(:intake_speech_question, :correct, assessment: assessment, answer: 'daddy', index: 6, level: 1),
+        create(:intake_speech_question, :correct, assessment: assessment, answer: 'book', index: 7, level: 1),
+        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'good', index: 8, level: 1),
+        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'doll', index: 9, level: 1)
       ]
 
       _speech_questions_level_2 = [
-        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'girl', level: 2),
-        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'apple', level: 2),
-        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'they', level: 2),
-        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'story', level: 2),
-        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'some', level: 2)
+        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'girl', index: 10, level: 2),
+        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'apple', index: 11, level: 2),
+        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'they', index: 12, level: 2),
+        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'story', index: 13, level: 2),
+        create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'some', index: 14, level: 2)
       ]
 
       IntakeAssessments::Speech::MoveToNextSpeechLevel.call(assessment: assessment)
