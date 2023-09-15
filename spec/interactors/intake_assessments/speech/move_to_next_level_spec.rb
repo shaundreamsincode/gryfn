@@ -125,7 +125,6 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextLevel do
       expect(assessment.reload.current_step).to eq('eidetic')
 
       eidetic_questions = IntakeEideticQuestion.all
-      expect(eidetic_questions.count).to eq(5)
       expect(eidetic_questions.sort_by(&:index).pluck(:correct_answer)).to eq(%w(story they girl doll good))
     end
 
