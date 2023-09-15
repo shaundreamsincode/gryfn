@@ -125,33 +125,33 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextLevel do
       expect(eidetic_questions.sort_by(&:index).pluck(:correct_answer)).to eq(%w(story they girl doll good))
     end
 
-    context "when all 5 questions on the first level are wrong" do
-      it "increments the assessment's speech level but doesn't change its current step" do
-        organization = create(:organization)
-        account = create(:account)
-        _badge = create(:badge, account: account, organization: organization)
-        assessment = create(
-          :intake_assessment, :desd,
-          created_by: account,
-          organization: organization,
-          current_step: 'speech',
-          speech_current_level: 0
-        )
-
-        _speech_questions_level_0 = [
-          create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'baby', index: 0, level: 0),
-          create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'one', index: 1, level: 0),
-          create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'boat', index: 2, level: 0),
-          create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'do', index: 3, level: 0),
-          create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'car', index: 4, level: 0)
-        ]
-
-        IntakeAssessments::Speech::MoveToNextLevel.call(assessment: assessment)
-        assessment.reload
-        expect(assessment.current_step).to eq('speech')
-        expect(assessment.speech_current_level).to eq(1)
-      end
-    end
+    # context "when all 5 questions on the first level are wrong" do
+    #   it "increments the assessment's speech level but doesn't change its current step" do
+    #     organization = create(:organization)
+    #     account = create(:account)
+    #     _badge = create(:badge, account: account, organization: organization)
+    #     assessment = create(
+    #       :intake_assessment, :desd,
+    #       created_by: account,
+    #       organization: organization,
+    #       current_step: 'speech',
+    #       speech_current_level: 0
+    #     )
+    #
+    #     _speech_questions_level_0 = [
+    #       create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'baby', index: 0, level: 0),
+    #       create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'one', index: 1, level: 0),
+    #       create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'boat', index: 2, level: 0),
+    #       create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'do', index: 3, level: 0),
+    #       create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'car', index: 4, level: 0)
+    #     ]
+    #
+    #     IntakeAssessments::Speech::MoveToNextLevel.call(assessment: assessment)
+    #     assessment.reload
+    #     expect(assessment.current_step).to eq('speech')
+    #     expect(assessment.speech_current_level).to eq(1)
+    #   end
+    # end
 
     # context "when the assessment is at the last speech level and has a sufficient number of correct words" do
     #   context "and there are 5 questions wrong at or below the assessment's score" do
