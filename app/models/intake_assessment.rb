@@ -88,6 +88,10 @@ class IntakeAssessment < ApplicationRecord
     desd? ? Data::Desd::WORDS_BY_LEVEL.count : Data::Desd::WORDS_BY_LEVEL.count
   end
 
+  def is_on_last_speech_level?
+    speech_current_level == level_count - 1
+  end
+
   def required_correct_speech_questions_count
     desd? ? 3 : 4 # todo - put these in dataset
   end
