@@ -17,6 +17,13 @@ module IntakeAssessments
       private
 
       def move_assessment_to_next_level!(assessment)
+        if assessment.speech_current_level == 0
+          return assessment.update!(
+            speech_current_level: 1,
+            speech_score: 0
+          )
+        end
+
         next_level = assessment.speech_current_level + 1
 
         if next_level >= assessment.level_count

@@ -7,13 +7,40 @@ module IntakeAssessments
         assessment = context.assessment
 
         if assessment.speech_current_level == 0
-          context.assessment = fail_insufficient_correct(assessment)
-        elsif sufficient_correct_questions?(assessment)
-          context.assessment = complete_speech_assessment(assessment)
-        elsif maximum_incorrect_questions_reached?(assessment)
-          context.assessment = fail_insufficient_correct(assessment)
+          return handle_on_first_speech_level(assessment)
+        end
+
+        if sufficient_correct_questions?(assessment)
+          return complete_speech_assessment(assessment)
+        end
+
+        if maximum_incorrect_questions_reached?(assessment)
+          return fail_insufficient_correct(assessment)
+        end
+
+        update_assessment_level(assessment)
+      end
+
+      private def handle_on_first_speech_level(assessment)
+        correct_questions_required = assessment.desd? ? 3: 5
+        correct_questions_on_level = assessment.speech_questions_by_level(0).select { |q| q.is_correct? }
+
+        if correct_questions_on_level.count < correct_questions_required
+          fail_insufficient_correct(assessment)
         else
-          context.assessment = update_assessment_level(assessment)
+          update_assessment_level(assessment)
+        end
+      end
+
+      private def handle_insufficient_correct_questions(assessment)
+        if maximum_incorrect_questions_reached?(assessment)
+          return fail_insufficient_correct(assessment)
+        end
+
+        if assessment.speech_current_step >= level_count
+          fail_insufficient_correct(assessment)
+        else
+          update_assessment_level(assessment)
         end
       end
 

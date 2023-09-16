@@ -17,10 +17,10 @@ module IntakeAssessments
       end
 
       private def has_sufficient_correct?(assessment)
+        sufficient_correct = assessment.desd? ? 3 : 4
         correct_speech_questions = assessment.speech_questions_on_current_level.select { |q| q.is_correct? }
-        required_speech_questions_count = assessment.required_correct_speech_questions_count
 
-        correct_speech_questions.count >= required_speech_questions_count
+        correct_speech_questions.count >= sufficient_correct
       end
     end
   end
