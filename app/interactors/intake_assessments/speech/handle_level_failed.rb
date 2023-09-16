@@ -6,12 +6,14 @@ module IntakeAssessments
       def call
         assessment = context.assessment
 
-        if sufficient_correct_questions?(assessment)
+        if assessment.speech_current_level == 0
+          context.assessment = fail_insufficient_correct(assessment)
+        elsif sufficient_correct_questions?(assessment)
           context.assessment = complete_speech_assessment(assessment)
         elsif maximum_incorrect_questions_reached?(assessment)
           context.assessment = fail_insufficient_correct(assessment)
         else
-          update_assessment_level(assessment)
+          context.assessment = update_assessment_level(assessment)
         end
       end
 
@@ -42,7 +44,7 @@ module IntakeAssessments
           assessment.update!(speech_current_level: next_level) # do not update the score!
         end
 
-        context.assessment = assessment.reload
+        assessment
       end
 
       private def correct_questions_at_or_below_score(assessment)
