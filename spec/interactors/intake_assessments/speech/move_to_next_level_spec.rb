@@ -44,17 +44,16 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextLevel do
         speech_current_level: 2
       )
 
-      _speech_questions_level_0 = [
-        # 4 right
-        create(:intake_speech_question, :correct, assessment: assessment, answer: 'baby', index: 0, level: 0),
+      _speech_questions_level_0 = [ # 4 correct
+
+      create(:intake_speech_question, :correct, assessment: assessment, answer: 'baby', index: 0, level: 0),
         create(:intake_speech_question, :correct, assessment: assessment, answer: 'one', index: 1, level: 0),
         create(:intake_speech_question, :correct, assessment: assessment, answer: 'boat', index: 2, level: 0),
         create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'do', index: 3, level: 0),
         create(:intake_speech_question, :correct, assessment: assessment, answer: 'car', index: 4, level: 0)
       ]
 
-      _speech_questions_level_1 = [
-        # 3 right
+      _speech_questions_level_1 = [ # 3 correct
         create(:intake_speech_question, :correct, assessment: assessment, answer: 'was', index: 5, level: 1),
         create(:intake_speech_question, :correct, assessment: assessment, answer: 'daddy', index: 6, level: 1),
         create(:intake_speech_question, :correct, assessment: assessment, answer: 'book', index: 7, level: 1),
@@ -62,8 +61,7 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextLevel do
         create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'doll', index: 9, level: 1)
       ]
 
-      _speech_questions_level_2 = [
-        # 0 right
+      _speech_questions_level_2 = [ # 0 correct
         create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'girl', index: 10, level: 2),
         create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'apple', index: 11, level: 2),
         create(:intake_speech_question, :incorrect, assessment: assessment, answer: 'they', index: 12, level: 2),
@@ -74,7 +72,6 @@ RSpec.describe IntakeAssessments::Speech::MoveToNextLevel do
       IntakeAssessments::Speech::MoveToNextLevel.call(assessment: assessment)
       assessment.reload
       expect(assessment.current_step).to eq('eidetic')
-      # right now, getting speech
     end
 
     it "completes the assessment (test case 2)" do

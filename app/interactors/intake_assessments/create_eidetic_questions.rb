@@ -4,7 +4,7 @@ module IntakeAssessments
 
     def call
       _assessment = context.assessment
-      speech_score = _assessment.speech_score # 0
+      speech_score = _assessment.speech_score
       correct_questions_on_score_level = _assessment.speech_questions_by_level(speech_score).select { |q| q.is_correct? }
       last_correct_question_on_score_level = correct_questions_on_score_level.last
 
